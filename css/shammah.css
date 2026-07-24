@@ -3306,3 +3306,49 @@ body {
   font-size: 0.82rem;
   font-weight: 700;
 }
+
+.checkout-success-card {
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.checkout-success-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #4caf50;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+}
+
+.checkout-success-icon svg {
+  width: 30px;
+  height: 30px;
+}
+
+.checkout-success-card h3 {
+  margin-bottom: 8px;
+}
+
+.checkout-success-order-number {
+  font-family: var(--font-inter);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.checkout-success-order-number strong {
+  color: var(--text-primary);
+}
+
+.checkout-success-message {
+  font-family: var(--font-inter);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 380px;
+  margin: 0 auto 28px auto;
+}

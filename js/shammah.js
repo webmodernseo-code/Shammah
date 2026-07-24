@@ -882,6 +882,17 @@ if (trackingSubmitBtn && trackingInput && trackingStepsContainer) {
 
 let promoDiscount = 0; // Global discount amount
 
+function generateOrderNumber() {
+  return "SH-" + Math.floor(10000 + Math.random() * 90000);
+}
+
+function showOrderConfirmation() {
+  const orderNumberEl = document.getElementById("checkout-order-number");
+  if (orderNumberEl) orderNumberEl.textContent = generateOrderNumber();
+  setCheckoutStep(3);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
 function setCheckoutStep(stepNumber) {
   for (let i = 1; i <= 3; i++) {
     const node = document.getElementById(`step-node-${i}`);
@@ -972,6 +983,22 @@ if (checkoutBackBtn) {
     if (desktopHero) desktopHero.style.display = isDesktop() ? "block" : "none";
     if (checkoutScreen) checkoutScreen.style.display = "none";
     
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
+const checkoutContinueShoppingBtn = document.getElementById("checkout-continue-shopping-btn");
+if (checkoutContinueShoppingBtn) {
+  checkoutContinueShoppingBtn.addEventListener("click", () => {
+    const shopScreen = document.getElementById("shop-screen");
+    const desktopHero = document.getElementById("desktop-hero");
+    const checkoutScreen = document.getElementById("checkout-screen");
+
+    if (shopScreen) shopScreen.style.display = "block";
+    if (desktopHero) desktopHero.style.display = isDesktop() ? "block" : "none";
+    if (checkoutScreen) checkoutScreen.style.display = "none";
+
+    setCheckoutStep(1); // reset for the next visit
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
@@ -1211,18 +1238,7 @@ if (submitMomoBtn) {
       if (secondsLeft <= 0) {
         clearInterval(interval);
         if (momoSimModal) momoSimModal.style.display = "none";
-        
-        // Back to Boutique
-        const shopScreen = document.getElementById("shop-screen");
-        const desktopHero = document.getElementById("desktop-hero");
-        const checkoutScreen = document.getElementById("checkout-screen");
-        
-        if (shopScreen) shopScreen.style.display = "block";
-        if (desktopHero) desktopHero.style.display = isDesktop() ? "block" : "none";
-        if (checkoutScreen) checkoutScreen.style.display = "none";
-        
-        showToast("Félicitations ! Votre commande Shammah a bien été enregistrée.");
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        showOrderConfirmation();
       }
     }, 1000);
   });
@@ -1268,17 +1284,7 @@ if (submitCardBtn) {
       document.getElementById("card-cvv-display").textContent = "•••";
       
       updateCartBadges();
-      
-      const shopScreen = document.getElementById("shop-screen");
-      const desktopHero = document.getElementById("desktop-hero");
-      const checkoutScreen = document.getElementById("checkout-screen");
-      
-      if (shopScreen) shopScreen.style.display = "block";
-      if (desktopHero) desktopHero.style.display = isDesktop() ? "block" : "none";
-      if (checkoutScreen) checkoutScreen.style.display = "none";
-      
-      showToast("Félicitations ! Votre commande Shammah a bien été enregistrée.");
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      showOrderConfirmation();
     }, 2000);
   });
 }
