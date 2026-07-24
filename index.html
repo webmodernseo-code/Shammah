@@ -287,11 +287,11 @@
                       <label for="shipping-phone">Numéro de téléphone*</label>
                       <div class="phone-input-wrapper">
                         <select id="phone-country-prefix" class="country-prefix-select">
-                          <option value="+225">CIV +225</option>
-                          <option value="+229">BEN +229</option>
-                          <option value="+221">SEN +221</option>
-                          <option value="+33">FRA +33</option>
-                          <option value="+91">IND +91</option>
+                          <option value="+225">🇨🇮 CIV +225</option>
+                          <option value="+229">🇧🇯 BEN +229</option>
+                          <option value="+221">🇸🇳 SEN +221</option>
+                          <option value="+33">🇫🇷 FRA +33</option>
+                          <option value="+91">🇮🇳 IND +91</option>
                         </select>
                         <input type="tel" id="shipping-phone" placeholder="6377588843" required>
                       </div>
@@ -405,6 +405,14 @@
                     <input type="tel" id="momo-phone-number" placeholder="07 00 00 00 00" style="margin-top: 6px;">
                   </div>
 
+                  <label class="save-info-checkbox-row">
+                    <input type="checkbox" id="save-info-momo-checkbox" checked>
+                    <span>
+                      <strong>Enregistrer mes informations pour un paiement en 1 clic</strong>
+                      Payez plus vite la prochaine fois sur Shammah et partout où ce lien est accepté.
+                    </span>
+                  </label>
+
                   <button class="btn-checkout-submit" id="checkout-submit-momo-btn" style="margin-top: 24px;">
                     Valider le paiement Mobile Money
                   </button>
@@ -471,6 +479,14 @@
                       </div>
                     </div>
                   </div>
+
+                  <label class="save-info-checkbox-row">
+                    <input type="checkbox" id="save-info-card-checkbox" checked>
+                    <span>
+                      <strong>Enregistrer mes informations pour un paiement en 1 clic</strong>
+                      Payez plus vite la prochaine fois sur Shammah et partout où ce lien est accepté.
+                    </span>
+                  </label>
 
                   <button class="btn-checkout-submit" id="checkout-submit-card-btn" style="margin-top: 24px;">
                     Confirmer le paiement par carte
