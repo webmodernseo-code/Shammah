@@ -1225,7 +1225,7 @@ body {
   height: 52px;
   border: 1.5px solid var(--accent-light);
   border-radius: 16px;
-  background: #ffffff;
+  background: var(--bg-card);
   color: var(--text-secondary);
   font-family: var(--font-inter);
   font-size: 0.85rem;
