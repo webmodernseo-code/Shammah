@@ -1333,7 +1333,7 @@ function renderCheckoutSummary() {
       </div>
       <div class="checkout-item-info">
         <h4 class="checkout-item-title">${item.title}</h4>
-        <p class="checkout-item-subtitle">${item.variant.name} | ${item.size}</p>
+        <p class="checkout-item-subtitle">Taille: ${item.size} | ${item.variant.name}</p>
       </div>
       <span class="checkout-item-price">$${itemSubtotal.toFixed(2)}</span>
     `;
