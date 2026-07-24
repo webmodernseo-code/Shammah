@@ -367,9 +367,15 @@
               <div class="checkout-card">
                 <h3>Méthode de paiement</h3>
                 
-                <div class="payment-tabs-selector" style="display: flex; gap: 8px; background: var(--bg-primary); padding: 4px; border-radius: 24px; margin-bottom: 24px;">
-                  <button class="pay-tab-btn active" data-pay-type="momo" style="flex: 1; height: 38px; border: none; border-radius: 20px; font-family: var(--font-inter); font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: var(--transition-smooth);">Mobile Money</button>
-                  <button class="pay-tab-btn" data-pay-type="card" style="flex: 1; height: 38px; border: none; border-radius: 20px; font-family: var(--font-inter); font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: var(--transition-smooth); background: transparent; color: var(--text-secondary);">Carte Bancaire</button>
+                <div class="payment-method-selector">
+                  <button class="payment-method-card active" data-pay-type="momo">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 2h10a1 1 0 011 1v18a1 1 0 01-1 1H7a1 1 0 01-1-1V3a1 1 0 011-1zM11 18h2" /></svg>
+                    <span>Mobile Money</span>
+                  </button>
+                  <button class="payment-method-card" data-pay-type="card">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6a2 2 0 012-2h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V6z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 10h20" /></svg>
+                    <span>Carte Bancaire</span>
+                  </button>
                 </div>
 
                 <!-- Form Panel 1: Mobile Money -->

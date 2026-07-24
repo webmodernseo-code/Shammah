@@ -1057,22 +1057,16 @@ if (checkoutBackToStep1) {
 }
 
 // Tab Switching (Mobile Money / Card)
-const payTabBtns = document.querySelectorAll(".pay-tab-btn");
+const payTabBtns = document.querySelectorAll(".payment-method-card");
 payTabBtns.forEach(btn => {
   btn.addEventListener("click", () => {
-    payTabBtns.forEach(b => {
-      b.classList.remove("active");
-      b.style.background = "transparent";
-      b.style.color = "var(--text-secondary)";
-    });
+    payTabBtns.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
-    btn.style.background = "#ffffff";
-    btn.style.color = "var(--text-primary)";
-    
+
     const type = btn.getAttribute("data-pay-type");
     const panelMomo = document.getElementById("payment-panel-momo");
     const panelCard = document.getElementById("payment-panel-card");
-    
+
     if (type === "momo") {
       if (panelMomo) panelMomo.style.display = "block";
       if (panelCard) panelCard.style.display = "none";

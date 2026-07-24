@@ -1210,6 +1210,46 @@ body {
   letter-spacing: -0.3px;
 }
 
+.payment-method-selector {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.payment-method-card {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 52px;
+  border: 1.5px solid var(--accent-light);
+  border-radius: 16px;
+  background: #ffffff;
+  color: var(--text-secondary);
+  font-family: var(--font-inter);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.payment-method-card svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+}
+
+.payment-method-card:hover {
+  border-color: #bbbbbb;
+}
+
+.payment-method-card.active {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+  background: var(--bg-primary);
+}
+
 .checkout-form .form-row {
   display: flex;
   flex-direction: column;
