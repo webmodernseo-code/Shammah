@@ -235,10 +235,30 @@
           <!-- Left Column: Shipping & Payment Steps -->
           <div class="checkout-left-col">
             <!-- Breadcrumbs / Steps Indicator -->
-            <div class="checkout-breadcrumbs">
-              <span class="step-indicator active" id="indicator-step-1">1. Livraison</span>
-              <span class="separator">&gt;</span>
-              <span class="step-indicator" id="indicator-step-2">2. Paiement</span>
+            <div class="checkout-breadcrumbs" id="checkout-stepper">
+              <div class="step-node active" id="step-node-1">
+                <span class="step-circle">
+                  <svg class="step-check" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                  <span class="step-number">1</span>
+                </span>
+                <span class="step-label">Livraison</span>
+              </div>
+              <div class="step-connector"></div>
+              <div class="step-node" id="step-node-2">
+                <span class="step-circle">
+                  <svg class="step-check" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                  <span class="step-number">2</span>
+                </span>
+                <span class="step-label">Paiement</span>
+              </div>
+              <div class="step-connector"></div>
+              <div class="step-node" id="step-node-3">
+                <span class="step-circle">
+                  <svg class="step-check" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                  <span class="step-number">3</span>
+                </span>
+                <span class="step-label">Terminé</span>
+              </div>
             </div>
 
             <!-- STEP 1: SHIPPING INFORMATION -->

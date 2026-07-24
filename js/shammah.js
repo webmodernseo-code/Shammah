@@ -882,6 +882,26 @@ if (trackingSubmitBtn && trackingInput && trackingStepsContainer) {
 
 let promoDiscount = 0; // Global discount amount
 
+function setCheckoutStep(stepNumber) {
+  for (let i = 1; i <= 3; i++) {
+    const node = document.getElementById(`step-node-${i}`);
+    if (!node) continue;
+    node.classList.remove("active", "completed");
+    if (i < stepNumber) node.classList.add("completed");
+    else if (i === stepNumber) node.classList.add("active");
+  }
+  document.querySelectorAll(".step-connector").forEach((connector, idx) => {
+    connector.classList.toggle("completed", idx < stepNumber - 1);
+  });
+
+  const step1Content = document.getElementById("checkout-step-1-content");
+  const step2Content = document.getElementById("checkout-step-2-content");
+  const step3Content = document.getElementById("checkout-step-3-content");
+  if (step1Content) step1Content.style.display = stepNumber === 1 ? "block" : "none";
+  if (step2Content) step2Content.style.display = stepNumber === 2 ? "block" : "none";
+  if (step3Content) step3Content.style.display = stepNumber === 3 ? "block" : "none";
+}
+
 // Shared navigation used by both the cart drawer's checkout button and the
 // product detail "Buy now" button, so both paths land on the same checkout state.
 function goToCheckout() {
@@ -903,14 +923,7 @@ function goToCheckout() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 
   // Initialize step display
-  const step1Content = document.getElementById("checkout-step-1-content");
-  const step2Content = document.getElementById("checkout-step-2-content");
-  const indicatorStep1 = document.getElementById("indicator-step-1");
-  const indicatorStep2 = document.getElementById("indicator-step-2");
-  if (step1Content) step1Content.style.display = "block";
-  if (step2Content) step2Content.style.display = "none";
-  if (indicatorStep1) indicatorStep1.classList.add("active");
-  if (indicatorStep2) indicatorStep2.classList.remove("active");
+  setCheckoutStep(1);
 
   updateEstimatedDeliveryDate();
   renderCheckoutSummary();
@@ -1003,10 +1016,6 @@ if (promoCodeApplyBtn && promoCodeInput) {
 // --- Interactive 2-Step Checkout Event Handlers ---
 const checkoutToPaymentBtn = document.getElementById("checkout-to-payment-btn");
 const checkoutBackToStep1 = document.getElementById("checkout-back-to-step-1");
-const step1Content = document.getElementById("checkout-step-1-content");
-const step2Content = document.getElementById("checkout-step-2-content");
-const indicatorStep1 = document.getElementById("indicator-step-1");
-const indicatorStep2 = document.getElementById("indicator-step-2");
 const checkoutShippingForm = document.getElementById("checkout-shipping-form");
 
 if (checkoutToPaymentBtn) {
@@ -1035,26 +1044,14 @@ if (checkoutToPaymentBtn) {
     if (emailEl) emailEl.textContent = email;
     if (addressTextEl) addressTextEl.textContent = `${city}, ${state} ${zip} | Tél: ${prefix} ${phone}`;
     
-    // Switch panels
-    if (step1Content) step1Content.style.display = "none";
-    if (step2Content) step2Content.style.display = "block";
-    
-    // Update breadcrumbs
-    if (indicatorStep1) indicatorStep1.classList.remove("active");
-    if (indicatorStep2) indicatorStep2.classList.add("active");
-    
+    setCheckoutStep(2);
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
 
 if (checkoutBackToStep1) {
   checkoutBackToStep1.addEventListener("click", () => {
-    if (step1Content) step1Content.style.display = "block";
-    if (step2Content) step2Content.style.display = "none";
-    
-    if (indicatorStep1) indicatorStep1.classList.add("active");
-    if (indicatorStep2) indicatorStep2.classList.remove("active");
-    
+    setCheckoutStep(1);
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }

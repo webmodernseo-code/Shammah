@@ -1048,28 +1048,91 @@ body {
 .checkout-breadcrumbs {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--text-secondary);
   margin-bottom: 24px;
 }
 
-.step-indicator {
-  cursor: pointer;
+.step-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.step-circle {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-light);
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: var(--transition-smooth);
 }
 
-.step-indicator.active {
-  color: var(--text-primary);
-  border-bottom: 2px solid var(--text-primary);
-  padding-bottom: 2px;
+.step-number {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-secondary);
 }
 
-.checkout-breadcrumbs .separator {
-  opacity: 0.5;
+.step-check {
+  display: none;
+  width: 14px;
+  height: 14px;
+  color: #ffffff;
+}
+
+.step-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.step-node.active .step-circle {
+  border-color: var(--text-primary);
+  background: var(--text-primary);
+}
+
+.step-node.active .step-number {
+  color: #ffffff;
+}
+
+.step-node.active .step-label {
+  color: var(--text-primary);
+}
+
+.step-node.completed .step-circle {
+  border-color: #4caf50;
+  background: #4caf50;
+}
+
+.step-node.completed .step-number {
+  display: none;
+}
+
+.step-node.completed .step-check {
+  display: block;
+}
+
+.step-node.completed .step-label {
+  color: var(--text-primary);
+}
+
+.step-connector {
+  flex: 1;
+  height: 2px;
+  background: var(--accent-light);
+  margin: 0 10px 20px 10px;
+  transition: var(--transition-smooth);
+}
+
+.step-connector.completed {
+  background: #4caf50;
 }
 
 /* Glassmorphic Virtual Card Styling */
