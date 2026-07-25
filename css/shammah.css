@@ -1732,6 +1732,12 @@ body {
     border-color: rgba(255, 255, 255, 0.3);
   }
 
+  .payment-method-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
   .footer-logo {
     font-size: 1.6rem;
     font-weight: 800;
