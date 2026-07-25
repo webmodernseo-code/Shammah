@@ -327,117 +327,25 @@
           </div>
         </div>
 
-        <div class="panel-grid-2" style="grid-template-columns: 1.2fr 1fr;">
-          <!-- Creation Form -->
-          <div class="content-card">
-            <div class="content-card-header">
-              <h3 id="form-product-title-header">Nouveau Produit</h3>
-            </div>
-            <form class="content-card-body" id="form-add-product" onsubmit="return false;">
-              <!-- Basic info -->
-              <div style="display:grid; grid-template-columns: 1.5fr 1fr; gap:12px;">
-                <div class="form-group">
-                  <label for="prod-title">Nom de l'article*</label>
-                  <input type="text" id="prod-title" placeholder="Ex: Portefeuille Cuir Minimaliste" required>
-                </div>
-                <div class="form-group">
-                  <label for="prod-price">Prix de vente*</label>
-                  <input type="number" id="prod-price" placeholder="Ex: 18500" required>
-                </div>
-              </div>
+        <div class="panel-header" style="padding-bottom:0;">
+          <div></div>
+          <button class="btn-primary" id="btn-open-create-product-drawer">+ Nouveau produit</button>
+        </div>
 
-              <!-- Categories selection -->
-              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
-                <div class="form-group">
-                  <label for="prod-category">Catégorie Parente*</label>
-                  <select id="prod-category" required>
-                    <!-- Dynamically populated -->
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="prod-subcategory">Sous-Catégorie*</label>
-                  <select id="prod-subcategory" required>
-                    <!-- Dynamically populated based on category choice -->
-                  </select>
-                </div>
-              </div>
-
-              <!-- Description -->
-              <div class="form-group">
-                <label for="prod-desc">Description de l'article</label>
-                <textarea id="prod-desc" placeholder="Tissé en coton biologique..."></textarea>
-              </div>
-
-              <!-- Promo Code -->
-              <div class="form-group">
-                <label for="prod-promo">Code Promo Associé (Optionnel)</label>
-                <select id="prod-promo">
-                  <option value="">Aucun</option>
-                  <!-- Dynamically populated -->
-                </select>
-              </div>
-
-              <!-- Variants & Photos upload section -->
-              <div style="border-top:1px solid var(--border-light); padding-top:14px; margin-top:10px;">
-                <h4 style="margin:0 0 10px 0; font-size:0.75rem; font-weight:800; text-transform:uppercase; color:var(--text-secondary);">Variantes de couleur & Photos</h4>
-                
-                <div style="display:flex; gap:10px; align-items:center; margin-bottom:12px;">
-                  <div class="form-group" style="margin-bottom:0; flex:1;">
-                    <input type="text" id="variant-color-name" placeholder="Nom de la couleur (Ex: Noir Onyx)" style="height:32px; font-size:0.75rem;">
-                  </div>
-                  <div class="form-group" style="margin-bottom:0; width:60px;">
-                    <input type="color" id="variant-color-hex" value="#000000" style="height:32px; padding:0; cursor:pointer;">
-                  </div>
-                  <button class="btn-secondary" id="btn-add-color-variant" style="height:32px; padding:0 12px; font-size:0.7rem;">+ Couleur</button>
-                </div>
-
-                <!-- Active color variants list with their 3 photos slots -->
-                <div style="display:flex; flex-direction:column; gap:10px;" id="list-creation-variants">
-                  <!-- Injected dynamically as user adds colors -->
-                </div>
-              </div>
-
-              <div style="display:flex; gap:10px; margin-top:16px;">
-                <button class="btn-primary" id="btn-publish-product" style="flex:1; height:38px; justify-content:center;">Publier sur la boutique</button>
-                <button class="btn-secondary" id="btn-cancel-edit-product" style="display:none; height:38px; justify-content:center;">Annuler</button>
-              </div>
-            </form>
-          </div>
-
-          <!-- Column Right Wrapper -->
-          <div style="display: flex; flex-direction: column; gap: 20px;">
-            <!-- Active Promo Codes Summary Widget -->
-            <div class="content-card">
-              <div class="content-card-header" style="padding: 10px 16px; background: #f8fafc;">
-                <h3 style="font-size: 0.75rem; font-weight: 800; color: var(--text-primary);">Codes Promo Actifs</h3>
-                <button class="btn-secondary" style="padding: 2px 8px; font-size: 0.65rem; height: 22px; width: fit-content;" onclick="document.querySelector('[data-target=\'panel-promos\']').click();">Gérer</button>
-              </div>
-              <div class="content-card-body" style="padding: 12px;" id="quick-promo-list">
-                <!-- Dynamically populated -->
-              </div>
-            </div>
-
-            <!-- Inventory levels list -->
-            <div class="content-card">
-              <div class="content-card-header">
-                <h3>État des Stocks</h3>
-              </div>
-              <div class="content-card-body" style="padding:0; overflow-y:auto; max-height:480px;">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Article</th>
-                      <th>Catégorie</th>
-                      <th style="text-align:right; width:150px;">Stock</th>
-                      <th style="text-align:center; width:130px;">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody id="inventory-list-tbody">
-                    <!-- Injected dynamically -->
-                  </tbody>
-                </table>
-              </div>
-            </div>
+        <div class="content-card">
+          <div class="content-card-header"><h3>État des Stocks</h3></div>
+          <div class="content-card-body" style="padding:0; overflow-y:auto; max-height:640px;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Article</th>
+                  <th>Catégorie</th>
+                  <th style="text-align:right; width:230px;">Stock</th>
+                  <th style="text-align:center; width:130px;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="inventory-list-tbody"></tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -601,6 +509,7 @@
   <script src="js/dashboard.js"></script>
   <script src="js/categories.js"></script>
   <script src="js/promos.js"></script>
+  <script src="js/products.js"></script>
   <script src="admin.js"></script>
 </body>
 </html>
