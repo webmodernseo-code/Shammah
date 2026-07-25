@@ -790,3 +790,5 @@ tr:hover td {
 .inventory-inline-stock-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .inventory-inline-stock-input { width: 45px; height: 20px; text-align: center; border: 1px solid var(--border-medium); border-radius: 4px; font-family: inherit; font-size: 0.7rem; }
 .inventory-stock-total { display: flex; gap: 6px; align-items: center; margin-top: 4px; }
+
+.payment-method-pill { display: inline-flex; align-items: center; gap: 6px; }
