@@ -77,4 +77,45 @@
   }
 
   window.ConfirmModal = { open: openConfirm };
+
+  // ---------- Theme ----------
+  function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+  }
+
+  function initTheme() {
+    const saved = localStorage.getItem("shammah_admin_theme");
+    const theme = saved || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    applyTheme(theme);
+
+    const btn = document.getElementById("theme-toggle-btn");
+    if (btn) {
+      btn.addEventListener("click", () => {
+        const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        applyTheme(next);
+        localStorage.setItem("shammah_admin_theme", next);
+      });
+    }
+  }
+
+  // ---------- Sidebar collapse ----------
+  function initSidebarCollapse() {
+    const appContainer = document.querySelector(".app-container");
+    const btn = document.getElementById("sidebar-toggle-btn");
+    if (!appContainer || !btn) return;
+
+    if (localStorage.getItem("shammah_admin_sidebar_collapsed") === "true") {
+      appContainer.classList.add("sidebar-collapsed");
+    }
+
+    btn.addEventListener("click", () => {
+      appContainer.classList.toggle("sidebar-collapsed");
+      localStorage.setItem("shammah_admin_sidebar_collapsed", appContainer.classList.contains("sidebar-collapsed"));
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    initTheme();
+    initSidebarCollapse();
+  });
 })();
