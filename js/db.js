@@ -20,6 +20,13 @@ const DEFAULT_SUBCATEGORIES = [
   { category_slug: "gadget", name: "Accessoire", slug: "accessoire" }
 ];
 
+const DEFAULT_ORDERS = [
+  { id: "SH-09312", date: "20/07/2026", client: "Aïssatou Diallo", email: "aissatou.d@example.com", address: "Cocody Angré, Abidjan", phone: "+225 07 00 00 00 00", total: 18500, method: "MTN MoMo", status: "Payée", items: [] },
+  { id: "SH-09311", date: "19/07/2026", client: "Jean Kouassi", email: "jean.k@example.com", address: "Marcory, Abidjan", phone: "+225 05 00 00 00 00", total: 31200, method: "Orange Money", status: "En attente", items: [] },
+  { id: "SH-09310", date: "18/07/2026", client: "Fatou Bamba", email: "fatou.b@example.com", address: "Yopougon, Abidjan", phone: "+225 01 00 00 00 00", total: 8000, method: "Wave", status: "Payée", items: [] },
+  { id: "SH-09309", date: "17/07/2026", client: "Marc Dupont", email: "marc.d@example.com", address: "Plateau, Abidjan", phone: "+225 07 11 22 33 44", total: 66000, method: "Carte Bancaire", status: "Annulée", items: [] }
+];
+
 const DEFAULT_PRODUCTS = [
   // --- FEMME (6 Items) ---
   {
@@ -346,8 +353,10 @@ class ShammahDB {
     if (!localStorage.getItem("shammah_db_products")) {
       localStorage.setItem("shammah_db_products", JSON.stringify(DEFAULT_PRODUCTS));
     }
-    if (!localStorage.getItem("shammah_db_orders")) {
-      localStorage.setItem("shammah_db_orders", JSON.stringify([]));
+    const existingOrdersRaw = localStorage.getItem("shammah_db_orders");
+    const existingOrders = existingOrdersRaw ? JSON.parse(existingOrdersRaw) : [];
+    if (existingOrders.length === 0) {
+      localStorage.setItem("shammah_db_orders", JSON.stringify(DEFAULT_ORDERS));
     }
   }
 
@@ -402,6 +411,32 @@ class ShammahDB {
     const list = this.getOrders();
     list.push(order);
     localStorage.setItem("shammah_db_orders", JSON.stringify(list));
+  }
+
+  deleteProduct(id) {
+    const list = this.getProducts().filter(p => p.id !== id);
+    localStorage.setItem("shammah_db_products", JSON.stringify(list));
+  }
+
+  deleteCategory(slug) {
+    const categories = this.getCategories().filter(c => c.slug !== slug);
+    localStorage.setItem("shammah_db_categories", JSON.stringify(categories));
+    const subcategories = this.getSubcategories().filter(s => s.category_slug !== slug);
+    localStorage.setItem("shammah_db_subcategories", JSON.stringify(subcategories));
+  }
+
+  deleteSubcategory(categorySlug, slug) {
+    const list = this.getSubcategories().filter(s => !(s.category_slug === categorySlug && s.slug === slug));
+    localStorage.setItem("shammah_db_subcategories", JSON.stringify(list));
+  }
+
+  updateOrderStatus(orderId, status) {
+    const list = this.getOrders();
+    const order = list.find(o => o.id === orderId);
+    if (order) {
+      order.status = status;
+      localStorage.setItem("shammah_db_orders", JSON.stringify(list));
+    }
   }
 }
 
