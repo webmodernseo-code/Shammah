@@ -1136,7 +1136,7 @@ git commit -m "feat(admin): wire dashboard KPIs and new Commandes panel to real 
 - Create: `admin/js/categories.js`
 - Modify: `admin/admin.css`
 - Modify: `admin/index.html` (script tag)
-- Modify: `admin/admin.js` (retrait de `populateCategoryDropdowns` (partie sous-catégories), `loadCategoryTree`, `setupSettingsForms`, et de leurs appels)
+- Modify: `admin/admin.js` (retrait de `loadCategoryTree`, `setupSettingsForms`, et de leurs appels)
 - Test: `C:\tmp\shammah-checkout-tests\test-premium-task7-categories.js`
 
 **Interfaces:**
@@ -1340,7 +1340,7 @@ Expected: FAIL — `.category-tree-item` n'existe pas encore (l'ancien code util
 
 - [ ] **Step 5: Retirer la logique portée d'`admin/admin.js`**
 
-Supprimer `loadCategoryTree()` et `setupSettingsForms()` en entier, et la partie de `populateCategoryDropdowns()` qui remplissait `subcat-parent` (le reste de cette fonction, propre au formulaire produit, sera retiré à la Task 11). Retirer les appels `loadCategoryTree();` et `setupSettingsForms();` d'`initApp()`.
+Supprimer `loadCategoryTree()` et `setupSettingsForms()` en entier dans `admin/admin.js`, et retirer les appels `loadCategoryTree();` et `setupSettingsForms();` d'`initApp()`. Ne pas toucher à `populateCategoryDropdowns()`/`loadSubcategoryOptions()` : ces fonctions gèrent encore l'ancien formulaire produit inline (`#prod-category`/`#prod-subcategory`) qui n'est retiré qu'à la Task 11, et remplissent aussi `#subcat-parent` de façon redondante avec `categories.js` — une redondance sans impact fonctionnel (les deux écrivent les mêmes options), qui disparaît d'elle-même à la Task 11 quand ces fonctions sont supprimées en bloc. Éditer partiellement une fonction partagée par deux préoccupations serait plus risqué que cette redondance temporaire.
 
 - [ ] **Step 6: Charger `categories.js` dans `admin/index.html`**
 
@@ -2489,7 +2489,7 @@ Remplacer tout le contenu de `<div class="panel-grid-2" style="grid-template-col
 
 - [ ] **Step 6: Retirer toute la logique produits restante d'`admin/admin.js`**
 
-Supprimer : `activeVariants`/`editingProductId` (état module), `getSelectedProductSizes()`, `loadInventoryList()`, `window.updateVariantSizeStock`, `window.editProduct`, `window.deleteProduct`, `cancelProductEdit()`, le reste de `populateCategoryDropdowns()`/`loadSubcategoryOptions()` (parties `prod-category`/`prod-subcategory`), `renderActiveVariants()`, `setupVariantCreator()`, `window.removeVariantColor`, `window.uploadVariantImage`, `setupProductPublishForm()`. Retirer leurs appels dans `initApp()`. À ce stade, `initApp()` ne doit plus contenir que `setupNavigation();`.
+Supprimer entièrement : `activeVariants`/`editingProductId` (état module), `getSelectedProductSizes()`, `loadInventoryList()`, `window.updateVariantSizeStock`, `window.editProduct`, `window.deleteProduct`, `cancelProductEdit()`, `populateCategoryDropdowns()` (dans son intégralité — sa partie `#subcat-parent` est désormais couverte par `categories.js` depuis la Task 7), `loadSubcategoryOptions()`, `renderActiveVariants()`, `setupVariantCreator()`, `window.removeVariantColor`, `window.uploadVariantImage`, `setupProductPublishForm()`. Retirer leurs appels dans `initApp()`. À ce stade, `initApp()` ne doit plus contenir que `setupNavigation();`.
 
 - [ ] **Step 7: Charger `products.js` dans `admin/index.html`**
 
