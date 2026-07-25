@@ -16,8 +16,6 @@ function initApp() {
   renderQuickPromoList();
   setupVariantCreator();
   setupProductPublishForm();
-  setupSettingsForms();
-  loadCategoryTree();
   loadPromoCodes();
   setupPromoCodesForm();
 }
@@ -600,124 +598,6 @@ function setupProductPublishForm() {
     // Reload items lists
     if (window.Dashboard) window.Dashboard.refresh();
     loadInventoryList();
-  });
-}
-
-// 7. Dynamic Category and Subcategory Settings Forms
-function setupSettingsForms() {
-  const categoryFileInput = document.getElementById("cat-image-file");
-  const catUploaderBox = document.getElementById("cat-uploader-box");
-  const catUploadLabel = document.getElementById("cat-upload-label");
-  const btnSaveCategory = document.getElementById("btn-save-category");
-  const btnSaveSubcategory = document.getElementById("btn-save-subcategory");
-  
-  let categoryImageBase64 = "images/category_kid.png"; // default
-  
-  if (categoryFileInput && catUploaderBox && catUploadLabel) {
-    categoryFileInput.addEventListener("change", (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(evt) {
-          categoryImageBase64 = evt.target.result;
-          catUploadLabel.textContent = `Image sélectionnée : ${file.name}`;
-          catUploaderBox.style.borderColor = "var(--accent-green)";
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-  }
-  
-  // Save Category Action
-  if (btnSaveCategory) {
-    btnSaveCategory.addEventListener("click", () => {
-      const name = document.getElementById("cat-name").value.trim();
-      if (name === "") {
-        alert("Veuillez entrer le nom de la catégorie.");
-        return;
-      }
-      
-      const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-      
-      const newCat = {
-        slug: slug,
-        name: name,
-        image_url: categoryImageBase64
-      };
-      
-      window.db.saveCategory(newCat);
-      alert(`Catégorie "${name}" créée avec succès !`);
-      
-      // Reset form
-      document.getElementById("form-add-category").reset();
-      catUploadLabel.textContent = "Déposer la photo ou cliquer pour choisir";
-      catUploaderBox.style.borderColor = "var(--border-medium)";
-      categoryImageBase64 = "images/category_kid.png";
-      
-      // Reload UI
-      populateCategoryDropdowns();
-      loadCategoryTree();
-    });
-  }
-  
-  // Save Subcategory Action
-  if (btnSaveSubcategory) {
-    btnSaveSubcategory.addEventListener("click", () => {
-      const name = document.getElementById("subcat-name").value.trim();
-      const parent = document.getElementById("subcat-parent").value;
-      
-      if (name === "") {
-        alert("Veuillez entrer le nom de la sous-catégorie.");
-        return;
-      }
-      
-      const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-      
-      const newSub = {
-        category_slug: parent,
-        name: name,
-        slug: slug
-      };
-      
-      window.db.saveSubcategory(newSub);
-      alert(`Sous-catégorie "${name}" créée avec succès !`);
-      
-      // Reset form
-      document.getElementById("form-add-subcategory").reset();
-      
-      // Reload UI
-      populateCategoryDropdowns();
-      loadCategoryTree();
-    });
-  }
-}
-
-// 8. Load Category Tree list on right panel of Settings
-function loadCategoryTree() {
-  const container = document.getElementById("list-settings-categories");
-  if (!container) return;
-  
-  container.innerHTML = "";
-  
-  const categories = window.db.getCategories();
-  const subcategories = window.db.getSubcategories();
-  
-  categories.forEach(cat => {
-    const listSubs = subcategories.filter(s => s.category_slug === cat.slug).map(s => s.name).join(", ");
-    
-    const div = document.createElement("div");
-    div.style.cssText = "border: 1px solid var(--border-light); border-radius:8px; padding:10px 14px; display:flex; gap:12px; align-items:center; background:#ffffff; box-shadow:var(--shadow-sm); text-align:left;";
-    div.innerHTML = `
-      <div style="width:36px; height:36px; border-radius:50%; overflow:hidden; border:1px solid var(--border-light); flex-shrink:0;">
-        <img src="../${cat.image_url}" alt="${cat.name}" style="width:100%; height:100%; object-fit:cover;">
-      </div>
-      <div>
-        <span style="font-size:0.75rem; font-weight:800; color:var(--text-primary); display:block;">${cat.name}</span>
-        <span style="font-size:0.65rem; color:var(--text-secondary); display:block; margin-top:2px;">Sous-catégories : ${listSubs || "Aucune"}</span>
-      </div>
-    `;
-    
-    container.appendChild(div);
   });
 }
 
