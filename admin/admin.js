@@ -10,7 +10,6 @@ let editingProductId = null; // Stores the ID of the product currently being edi
 
 function initApp() {
   setupNavigation();
-  loadOverviewMetrics();
   loadInventoryList();
   populateCategoryDropdowns();
   populatePromoDropdown();
@@ -21,7 +20,6 @@ function initApp() {
   loadCategoryTree();
   loadPromoCodes();
   setupPromoCodesForm();
-  setupChartToggle();
 }
 
 // 1. SPA Tab switching
@@ -52,71 +50,6 @@ function getSelectedProductSizes() {
   if (cat === "gadget") return ["Taille Unique"];
   if (cat === "enfant") return ["2 ans", "4 ans", "6 ans", "8 ans"];
   return ["S", "M", "L", "XL"];
-}
-
-// 2. Load Overview metrics
-function loadOverviewMetrics() {
-  const products = window.db.getProducts();
-  const categories = window.db.getCategories();
-  
-  // Total catalogue models
-  const totalModelsEl = document.getElementById("val-stock");
-  if (totalModelsEl) totalModelsEl.textContent = `${products.length} Modèles`;
-
-  // Total stock inventory warning levels
-  let lowStockCount = 0;
-  products.forEach(p => {
-    if (p.stock < 3) lowStockCount++;
-  });
-  
-  // Simulate active orders
-  const orders = [
-    { id: "SH-09312", total: 18500, payType: "MTN MoMo", status: "success", statusText: "Payé" },
-    { id: "SH-09311", total: 52.00, payType: "Orange MoMo", status: "info", statusText: "En cours" },
-    { id: "SH-09310", total: 8000, payType: "Wave", status: "success", statusText: "Payé" },
-    { id: "SH-09309", total: 110.00, payType: "Carte Bancaire", status: "warning", statusText: "Attente" }
-  ];
-  
-  const ordersEl = document.getElementById("val-orders");
-  if (ordersEl) ordersEl.textContent = `${orders.length} Commandes`;
-
-  // Calculate revenue
-  let totalRevenue = 0;
-  orders.forEach(o => {
-    if (o.status === "success") {
-      // Simple normalized sum in FCFA for display (convert $ to FCFA for calculation)
-      const value = o.total < 1000 ? o.total * 600 : o.total;
-      totalRevenue += value;
-    }
-  });
-  
-  const revenueEl = document.getElementById("val-revenue");
-  if (revenueEl) revenueEl.textContent = formatPrice(totalRevenue);
-
-  // Average basket
-  const basketEl = document.getElementById("val-basket");
-  if (basketEl && orders.length > 0) {
-    const avg = totalRevenue / orders.filter(o => o.status === "success").length;
-    basketEl.textContent = formatPrice(avg);
-  }
-
-  // Load orders table
-  const tbody = document.getElementById("dashboard-recent-orders");
-  if (tbody) {
-    tbody.innerHTML = "";
-    orders.forEach(o => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td style="padding:10px 14px; font-weight:700;">${o.id}</td>
-        <td style="padding:10px 14px;">${formatPrice(o.total)}</td>
-        <td style="padding:10px 14px;">${o.payType}</td>
-        <td style="padding:10px 14px; text-align:right;">
-          <span class="badge-status ${o.status}"><span class="bullet-dot"></span> ${o.statusText}</span>
-        </td>
-      `;
-      tbody.appendChild(tr);
-    });
-  }
 }
 
 // 3. Load products inventory list on right panel of Products manager
@@ -248,7 +181,7 @@ window.updateVariantSizeStock = function(productId, colorName, size, newQty) {
       p.stock = pStock;
 
       window.db.saveProduct(p);
-      loadOverviewMetrics();
+      if (window.Dashboard) window.Dashboard.refresh();
       loadInventoryList();
     }
   }
@@ -339,7 +272,7 @@ window.deleteProduct = function(id) {
       cancelProductEdit();
     }
     
-    loadOverviewMetrics();
+    if (window.Dashboard) window.Dashboard.refresh();
     loadInventoryList();
     alert("L'article a été supprimé avec succès.");
   }
@@ -665,7 +598,7 @@ function setupProductPublishForm() {
     }
     
     // Reload items lists
-    loadOverviewMetrics();
+    if (window.Dashboard) window.Dashboard.refresh();
     loadInventoryList();
   });
 }
@@ -903,86 +836,4 @@ function renderQuickPromoList() {
   });
   html += `</div>`;
   container.innerHTML = html;
-}
-
-function setupChartToggle() {
-  const btnWeek = document.getElementById("btn-chart-week");
-  const btnMonth = document.getElementById("btn-chart-month");
-  
-  if (!btnWeek || !btnMonth) return;
-  
-  const curvePath = document.getElementById("chart-curve-path");
-  const areaPath = document.getElementById("chart-area-path");
-  const cursorLine = document.getElementById("chart-cursor-line");
-  const glowDot = document.getElementById("chart-glow-dot");
-  const innerDot = document.getElementById("chart-inner-dot");
-  const tooltipGroup = document.getElementById("chart-tooltip-group");
-  const tooltipText = document.getElementById("chart-tooltip-text");
-  const trendBadge = document.getElementById("chart-trend-badge");
-  
-  const lbl1 = document.getElementById("chart-label-1");
-  const lbl2 = document.getElementById("chart-label-2");
-  const lbl3 = document.getElementById("chart-label-3");
-  const lbl4 = document.getElementById("chart-label-4");
-  
-  const weeklyData = {
-    curve: "M 20 105 C 70 105, 70 85, 120 85 C 180 85, 190 45, 240 45 C 290 45, 290 75, 330 75",
-    area: "M 20 105 C 70 105, 70 85, 120 85 C 180 85, 190 45, 240 45 C 290 45, 290 75, 330 75 L 330 110 L 20 110 Z",
-    cx: 240,
-    cy: 45,
-    tooltipTranslate: "translate(200, 7)",
-    tooltipValue: "245 000 FCFA",
-    trend: "+12.5% vs semaine dernière",
-    labels: ["Lun", "Mer", "Ven", "Dim"]
-  };
-  
-  const monthlyData = {
-    curve: "M 20 95 C 70 95, 70 105, 120 105 C 180 105, 190 35, 240 35 C 290 35, 290 55, 330 55",
-    area: "M 20 95 C 70 95, 70 105, 120 105 C 180 105, 190 35, 240 35 C 290 35, 290 55, 330 55 L 330 110 L 20 110 Z",
-    cx: 240,
-    cy: 35,
-    tooltipTranslate: "translate(200, -3)",
-    tooltipValue: "1 050 000 FCFA",
-    trend: "+18.3% vs mois dernier",
-    labels: ["Sem 1", "Sem 2", "Sem 3", "Sem 4"]
-  };
-  
-  function updateChart(data) {
-    if (curvePath) curvePath.setAttribute("d", data.curve);
-    if (areaPath) areaPath.setAttribute("d", data.area);
-    
-    if (cursorLine) {
-      cursorLine.setAttribute("x1", data.cx);
-      cursorLine.setAttribute("x2", data.cx);
-    }
-    if (glowDot) {
-      glowDot.setAttribute("cx", data.cx);
-      glowDot.setAttribute("cy", data.cy);
-    }
-    if (innerDot) {
-      innerDot.setAttribute("cx", data.cx);
-      innerDot.setAttribute("cy", data.cy);
-    }
-    
-    if (tooltipGroup) tooltipGroup.setAttribute("transform", data.tooltipTranslate);
-    if (tooltipText) tooltipText.textContent = data.tooltipValue;
-    if (trendBadge) trendBadge.textContent = data.trend;
-    
-    if (lbl1) lbl1.textContent = data.labels[0];
-    if (lbl2) lbl2.textContent = data.labels[1];
-    if (lbl3) lbl3.textContent = data.labels[2];
-    if (lbl4) lbl4.textContent = data.labels[3];
-  }
-  
-  btnWeek.addEventListener("click", () => {
-    btnWeek.classList.add("active");
-    btnMonth.classList.remove("active");
-    updateChart(weeklyData);
-  });
-  
-  btnMonth.addEventListener("click", () => {
-    btnMonth.classList.add("active");
-    btnWeek.classList.remove("active");
-    updateChart(monthlyData);
-  });
 }

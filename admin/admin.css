@@ -692,3 +692,9 @@ tr:hover td {
 }
 .command-palette-item:hover { background: var(--bg-primary); }
 .command-palette-empty { padding: 16px; font-size: 0.8rem; color: var(--text-secondary); text-align: center; }
+
+.order-status-select {
+  height: 30px; border: 1px solid var(--border-medium); border-radius: 6px; padding: 0 8px;
+  font-family: inherit; font-size: 0.75rem; background: var(--bg-panel); color: var(--text-primary);
+}
+.empty-state { display: flex; align-items: center; justify-content: center; padding: 40px 20px; color: var(--text-secondary); font-size: 0.85rem; }
