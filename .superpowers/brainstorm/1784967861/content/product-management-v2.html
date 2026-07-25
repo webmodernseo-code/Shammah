@@ -1,0 +1,128 @@
+<h2>Gestion des Stocks, Photos & Variantes</h2>
+<p class="subtitle">Mise à jour du formulaire avec une zone de téléversement (Upload) de photos pour l'image principale et les variantes.</p>
+
+<div style="background: #f1f5f9; border: 1px solid #cbd5e1; padding: 24px; border-radius: 20px; font-family: 'Inter', sans-serif; color: #0f172a; margin-top: 20px; box-sizing: border-box;">
+  
+  <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; text-align: left;">
+    
+    <!-- LEFT PANEL: "Ajouter un Produit" Form with Upload -->
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); display:flex; flex-direction:column; gap:14px;">
+      <h3 style="margin:0; font-size:1rem; font-weight:800; border-bottom: 1px solid #f1f5f9; padding-bottom:8px; display:flex; align-items:center; gap:8px;">
+        <svg style="width:16px; height:16px; color:#2563eb;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        Nouveau Produit avec Photos
+      </h3>
+      
+      <!-- Basic Fields Group -->
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+        <div>
+          <label style="font-size:0.65rem; font-weight:700; color:#64748b; text-transform:uppercase; display:block; margin-bottom:4px;">Nom du produit</label>
+          <input type="text" value="Portefeuille Cuir Minimaliste" style="width:100%; height:32px; border:1px solid #cbd5e1; border-radius:6px; padding:0 10px; font-size:0.75rem; box-sizing:border-box;" readonly>
+        </div>
+        <div>
+          <label style="font-size:0.65rem; font-weight:700; color:#64748b; text-transform:uppercase; display:block; margin-bottom:4px;">Prix (FCFA)</label>
+          <input type="text" value="18 500" style="width:100%; height:32px; border:1px solid #cbd5e1; border-radius:6px; padding:0 10px; font-size:0.75rem; box-sizing:border-box;" readonly>
+        </div>
+      </div>
+
+      <!-- Categories Group -->
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+        <div>
+          <label style="font-size:0.65rem; font-weight:700; color:#64748b; text-transform:uppercase; display:block; margin-bottom:4px;">Catégorie (Fixe)</label>
+          <select style="width:100%; height:32px; border:1px solid #cbd5e1; border-radius:6px; padding:0 6px; font-size:0.75rem; background:#ffffff; box-sizing:border-box;" disabled>
+            <option>Gadget</option>
+            <option>Femme</option>
+            <option>Homme</option>
+            <option>Enfant</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:0.65rem; font-weight:700; color:#64748b; text-transform:uppercase; display:block; margin-bottom:4px;">Sous-catégorie (Variable)</label>
+          <input type="text" value="Maroquinerie" style="width:100%; height:32px; border:1px solid #cbd5e1; border-radius:6px; padding:0 10px; font-size:0.75rem; box-sizing:border-box;" readonly>
+        </div>
+      </div>
+
+      <!-- Image Drag & Drop Upload Zone (Main Image) -->
+      <div>
+        <label style="font-size:0.65rem; font-weight:700; color:#64748b; text-transform:uppercase; display:block; margin-bottom:4px;">Image Principale (Vitrine)</label>
+        <div style="border: 2px dashed #cbd5e1; border-radius: 8px; padding: 16px; text-align: center; background: #f8fafc; cursor: pointer; transition: border-color 0.2s;" onmouseover="this.style.borderColor='#2563eb';" onmouseout="this.style.borderColor='#cbd5e1';">
+          <svg style="width:24px; height:24px; color:#64748b; margin:0 auto 8px auto;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <span style="font-size:0.7rem; font-weight:600; color:#475569; display:block;">Déposez la photo ici ou cliquez pour choisir</span>
+          <span style="font-size:0.58rem; color:#94a3b8; display:block; margin-top:2px;">PNG, JPG (Recommandé : Format Carré 800x800)</span>
+        </div>
+      </div>
+
+      <!-- Variants: Colors with individual Variant Photos -->
+      <div>
+        <label style="font-size:0.65rem; font-weight:700; color:#64748b; text-transform:uppercase; display:block; margin-bottom:4px;">Couleurs & Photos de variantes</label>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <!-- Variant 1 Chocolat -->
+          <div style="display:flex; align-items:center; justify-content:space-between; background:#f8fafc; border:1px solid #e2e8f0; padding:8px; border-radius:6px;">
+            <div style="display:flex; align-items:center; gap:6px; font-size:0.7rem; font-weight:700;">
+              <span style="width:12px; height:12px; background:#1c1917; border-radius:50%; border:1px solid #cbd5e1;"></span> Chocolat
+            </div>
+            <!-- Small Uploaded Thumb or Add Button -->
+            <div style="display:flex; align-items:center; gap:6px; font-size:0.65rem; color:#2563eb; cursor:pointer;">
+              <svg style="width:14px; height:14px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+              Photo Variante Chocolat
+            </div>
+          </div>
+          <!-- Variant 2 Noir -->
+          <div style="display:flex; align-items:center; justify-content:space-between; background:#f8fafc; border:1px solid #e2e8f0; padding:8px; border-radius:6px;">
+            <div style="display:flex; align-items:center; gap:6px; font-size:0.7rem; font-weight:700;">
+              <span style="width:12px; height:12px; background:#000000; border-radius:50%; border:1px solid #cbd5e1;"></span> Noir
+            </div>
+            <!-- Small Uploaded Thumb or Add Button -->
+            <div style="display:flex; align-items:center; gap:6px; font-size:0.65rem; color:#2563eb; cursor:pointer;">
+              <svg style="width:14px; height:14px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+              Photo Variante Noir
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button style="width:100%; height:36px; background:#10b981; border:none; color:#ffffff; border-radius:6px; font-weight:700; font-size:0.8rem; cursor:pointer; margin-top:4px;">Publier le produit</button>
+    </div>
+
+    <!-- RIGHT PANEL: Visual representation of how it shows on the user side -->
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); display:flex; flex-direction:column; gap:14px;">
+      <h3 style="margin:0; font-size:1rem; font-weight:800; border-bottom: 1px solid #f1f5f9; padding-bottom:8px;">
+        Rendu Visuel Boutique
+      </h3>
+
+      <!-- Mini product card mockup representing how uploaded photos render -->
+      <div style="border: 1px solid #e2e8f0; border-radius: 8px; overflow:hidden; background:#ffffff;">
+        <div style="height:150px; background:#f5f6f8; position:relative; display:flex; align-items:center; justify-content:center;">
+          <!-- Mock Wallet Image -->
+          <svg style="width:60px; height:60px; color:#cbd5e1;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+          </svg>
+          <span style="position:absolute; top:8px; left:8px; background:#a855f7; color:#ffffff; font-size:0.55rem; font-weight:800; padding:2px 6px; border-radius:3px; text-transform:uppercase;">Gadget</span>
+        </div>
+        <div style="padding:12px; text-align:left;">
+          <h4 style="margin:0; font-size:0.8rem; font-weight:800; color:#0f172a;">Portefeuille Cuir Minimaliste</h4>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+            <span style="font-size:0.75rem; font-weight:800; color:#0f172a;">18 500 FCFA</span>
+            <div style="display:flex; gap:4px;">
+              <span style="width:8px; height:8px; background:#1c1917; border-radius:50%; display:inline-block; border:1px solid #e2e8f0;"></span>
+              <span style="width:8px; height:8px; background:#000000; border-radius:50%; display:inline-block; border:1px solid #e2e8f0;"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px; border-radius:6px; font-size:0.65rem; color:#64748b; line-height:1.4;">
+        ℹ️ <strong>Stockage local/Supabase</strong> : Lors de la publication, le dashboard envoie les fichiers d'images vers le bucket de stockage (Storage) de Supabase pour générer des URLs publiques, puis enregistre l'article dans la base de données.
+      </div>
+    </div>
+
+  </div>
+
+</div>

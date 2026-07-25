@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHAMMAH - Dashboard Administration</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <!-- Logo -->
+        <a href="../index.html" class="sidebar-logo">
+          <svg style="width: 22px; height: 22px; color: var(--text-primary);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.905 0-5.54-1.037-7.602-2.766M19.843 7.582A8.998 8.998 0 0112 12a8.998 8.998 0 01-7.843-4.418" />
+          </svg>
+          <span>SHAMMAH</span>
+        </a>
+
+        <!-- Search shortcut -->
+        <div class="search-box">
+          <input type="text" placeholder="Rechercher... ⌘K" readonly>
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+
+        <!-- Links -->
+        <nav class="nav-links">
+          <div class="nav-item active" data-target="panel-dashboard">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z" />
+            </svg>
+            Vue d'ensemble
+          </div>
+          
+          <div class="nav-item" data-target="panel-products">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+            </svg>
+            Gestion Articles
+          </div>
+
+          <div class="nav-item" data-target="panel-settings">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            Configuration
+          </div>
+        </nav>
+      </div>
+
+      <!-- User footer info -->
+      <div class="user-card">
+        <div class="user-avatar">A</div>
+        <div class="user-info">
+          <span class="user-name">Administrateur</span>
+          <span class="user-email">admin@shammah.com</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- RIGHT MAIN WORKSPACE -->
+    <main class="main-workspace">
+      
+      <!-- ==================== PANEL 1: DASHBOARD OVERVIEW ==================== -->
+      <div class="workspace-panel active" id="panel-dashboard">
+        <div class="panel-header">
+          <div>
+            <h2>Operations Center</h2>
+            <p>Indicateurs de performance de la boutique en temps réel.</p>
+          </div>
+          <button class="btn-primary" onclick="window.location.reload();">Actualiser</button>
+        </div>
+
+        <!-- Metrics cards row -->
+        <div class="metrics-grid">
+          <!-- Revenues (Green) -->
+          <div class="metric-card green">
+            <div class="metric-icon-wrapper">
+              <svg style="width:22px; height:22px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <span class="metric-title">Chiffre d'Affaires</span>
+              <div class="metric-value" id="val-revenue">1 245 000 FCFA</div>
+            </div>
+          </div>
+          
+          <!-- Active orders (Blue) -->
+          <div class="metric-card blue">
+            <div class="metric-icon-wrapper">
+              <svg style="width:22px; height:22px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+              </svg>
+            </div>
+            <div>
+              <span class="metric-title">Commandes Actives</span>
+              <div class="metric-value" id="val-orders">4 Commandes</div>
+            </div>
+          </div>
+
+          <!-- Average Basket (Gold) -->
+          <div class="metric-card gold">
+            <div class="metric-icon-wrapper">
+              <svg style="width:22px; height:22px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <div>
+              <span class="metric-title">Panier Moyen</span>
+              <div class="metric-value" id="val-basket">51 875 FCFA</div>
+            </div>
+          </div>
+
+          <!-- Total Catalogue stock items (Red) -->
+          <div class="metric-card red">
+            <div class="metric-icon-wrapper">
+              <svg style="width:22px; height:22px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+              </svg>
+            </div>
+            <div>
+              <span class="metric-title">Articles Catalogue</span>
+              <div class="metric-value" id="val-stock">19 Modèles</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weekly performance and recent orders list -->
+        <div class="panel-grid-2">
+          <!-- Spline Line chart weekly performance -->
+          <div class="content-card">
+            <div class="content-card-header">
+              <h3>Courbe de Performance</h3>
+            </div>
+            <div class="content-card-body" style="display:flex; align-items:center; justify-content:center; height: 100%;">
+              <svg viewBox="0 0 350 140" style="width: 100%; height: 100%;">
+                <defs>
+                  <linearGradient id="splineGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#10B981" stop-opacity="0.15"/>
+                    <stop offset="100%" stop-color="#10B981" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <line x1="0" y1="20" x2="350" y2="20" stroke="#f1f5f9" stroke-width="1" />
+                <line x1="0" y1="70" x2="350" y2="70" stroke="#f1f5f9" stroke-width="1" />
+                <line x1="0" y1="120" x2="350" y2="120" stroke="#f1f5f9" stroke-width="1" />
+                
+                <path d="M 0 120 Q 60 50 120 90 T 240 30 T 350 60 L 350 140 L 0 140 Z" fill="url(#splineGrad)" />
+                <path d="M 0 120 Q 60 50 120 90 T 240 30 T 350 60" fill="none" stroke="#10B981" stroke-width="3" stroke-linecap="round" />
+                
+                <circle cx="240" cy="30" r="4" fill="#10B981" />
+                <circle cx="240" cy="30" r="8" fill="#10B981" fill-opacity="0.2" />
+                
+                <text x="5" y="135" font-family="sans-serif" font-size="7" fill="#94a3b8">Lun</text>
+                <text x="120" y="135" font-family="sans-serif" font-size="7" fill="#94a3b8">Mer</text>
+                <text x="240" y="135" font-family="sans-serif" font-size="7" fill="#94a3b8">Ven</text>
+                <text x="325" y="135" font-family="sans-serif" font-size="7" fill="#94a3b8">Dim</text>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Recent Orders table/list -->
+          <div class="content-card">
+            <div class="content-card-header">
+              <h3>Dernières Commandes</h3>
+            </div>
+            <div class="content-card-body" style="padding:0; overflow-y:auto; max-height:220px;">
+              <table style="font-size:0.7rem;">
+                <thead>
+                  <tr>
+                    <th style="padding:10px 14px;">N° Commande</th>
+                    <th style="padding:10px 14px;">Total</th>
+                    <th style="padding:10px 14px;">Moyen</th>
+                    <th style="padding:10px 14px; text-align:right;">Statut</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboard-recent-orders">
+                  <!-- Injected dynamically -->
+                  <tr>
+                    <td style="padding:10px 14px; font-weight:700;">SH-09312</td>
+                    <td style="padding:10px 14px;">18 500 FCFA</td>
+                    <td style="padding:10px 14px;">MTN MoMo</td>
+                    <td style="padding:10px 14px; text-align:right;">
+                      <span class="badge-status success"><span class="bullet-dot"></span> Payé</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:10px 14px; font-weight:700;">SH-09311</td>
+                    <td style="padding:10px 14px;">52.00 $</td>
+                    <td style="padding:10px 14px;">Orange MoMo</td>
+                    <td style="padding:10px 14px; text-align:right;">
+                      <span class="badge-status info"><span class="bullet-dot"></span> En cours</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== PANEL 2: PRODUCT MANAGEMENT ==================== -->
+      <div class="workspace-panel" id="panel-products">
+        <div class="panel-header">
+          <div>
+            <h2>Gestion du Catalogue</h2>
+            <p>Ajoutez des articles et gérez les niveaux de stock par variante.</p>
+          </div>
+        </div>
+
+        <div class="panel-grid-2" style="grid-template-columns: 1.2fr 1fr;">
+          <!-- Creation Form -->
+          <div class="content-card">
+            <div class="content-card-header">
+              <h3>Nouveau Produit</h3>
+            </div>
+            <form class="content-card-body" id="form-add-product" onsubmit="return false;">
+              <!-- Basic info -->
+              <div style="display:grid; grid-template-columns: 1.5fr 1fr; gap:12px;">
+                <div class="form-group">
+                  <label for="prod-title">Nom de l'article*</label>
+                  <input type="text" id="prod-title" placeholder="Ex: Portefeuille Cuir Minimaliste" required>
+                </div>
+                <div class="form-group">
+                  <label for="prod-price">Prix de vente*</label>
+                  <input type="number" id="prod-price" placeholder="Ex: 18500" required>
+                </div>
+              </div>
+
+              <!-- Categories selection -->
+              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+                <div class="form-group">
+                  <label for="prod-category">Catégorie Parente*</label>
+                  <select id="prod-category" required>
+                    <!-- Dynamically populated -->
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="prod-subcategory">Sous-Catégorie*</label>
+                  <select id="prod-subcategory" required>
+                    <!-- Dynamically populated based on category choice -->
+                  </select>
+                </div>
+              </div>
+
+              <!-- Description -->
+              <div class="form-group">
+                <label for="prod-desc">Description de l'article</label>
+                <textarea id="prod-desc" placeholder="Tissé en coton biologique..."></textarea>
+              </div>
+
+              <!-- Variants & Photos upload section -->
+              <div style="border-top:1px solid var(--border-light); padding-top:14px; margin-top:10px;">
+                <h4 style="margin:0 0 10px 0; font-size:0.75rem; font-weight:800; text-transform:uppercase; color:var(--text-secondary);">Variantes de couleur & Photos</h4>
+                
+                <div style="display:flex; gap:10px; align-items:center; margin-bottom:12px;">
+                  <div class="form-group" style="margin-bottom:0; flex:1;">
+                    <input type="text" id="variant-color-name" placeholder="Nom de la couleur (Ex: Noir Onyx)" style="height:32px; font-size:0.75rem;">
+                  </div>
+                  <div class="form-group" style="margin-bottom:0; width:60px;">
+                    <input type="color" id="variant-color-hex" value="#000000" style="height:32px; padding:0; cursor:pointer;">
+                  </div>
+                  <button class="btn-secondary" id="btn-add-color-variant" style="height:32px; padding:0 12px; font-size:0.7rem;">+ Couleur</button>
+                </div>
+
+                <!-- Active color variants list with their 3 photos slots -->
+                <div style="display:flex; flex-direction:column; gap:10px;" id="list-creation-variants">
+                  <!-- Injected dynamically as user adds colors -->
+                </div>
+              </div>
+
+              <button class="btn-primary" id="btn-publish-product" style="width:100%; height:38px; margin-top:16px; justify-content:center;">Publier sur la boutique</button>
+            </form>
+          </div>
+
+          <!-- Inventory levels list -->
+          <div class="content-card">
+            <div class="content-card-header">
+              <h3>État des Stocks</h3>
+            </div>
+            <div class="content-card-body" style="padding:0; overflow-y:auto; max-height:480px;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Article</th>
+                    <th>Catégorie</th>
+                    <th style="text-align:right;">Stock</th>
+                  </tr>
+                </thead>
+                <tbody id="inventory-list-tbody">
+                  <!-- Injected dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== PANEL 3: SETTINGS & DYNAMIC CATEGORIES ==================== -->
+      <div class="workspace-panel" id="panel-settings">
+        <div class="panel-header">
+          <div>
+            <h2>Paramètres & Catégories</h2>
+            <p>Ajoutez des catégories dynamiques avec photo et des sous-catégories associées.</p>
+          </div>
+        </div>
+
+        <div class="panel-grid-2">
+          <!-- Creation Forms -->
+          <div style="display:flex; flex-direction:column; gap:20px;">
+            
+            <!-- Category Form -->
+            <div class="content-card">
+              <div class="content-card-header">
+                <h3>Nouvelle Catégorie</h3>
+              </div>
+              <form class="content-card-body" id="form-add-category" onsubmit="return false;">
+                <div class="form-group">
+                  <label for="cat-name">Nom de la Catégorie*</label>
+                  <input type="text" id="cat-name" placeholder="Ex: Accessoires, Luxe, Bijoux" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="cat-image-file">Photo de couverture de la Catégorie*</label>
+                  <input type="file" id="cat-image-file" style="display:none;" accept="image/*">
+                  <div class="photo-uploader-label" onclick="document.getElementById('cat-image-file').click();" id="cat-uploader-box">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span id="cat-upload-label">Déposer la photo ou cliquer pour choisir</span>
+                  </div>
+                </div>
+
+                <button class="btn-primary" id="btn-save-category" style="width:100%; justify-content:center;">Créer la catégorie</button>
+              </form>
+            </div>
+
+            <!-- Subcategory Form -->
+            <div class="content-card">
+              <div class="content-card-header">
+                <h3>Nouvelle Sous-Catégorie</h3>
+              </div>
+              <form class="content-card-body" id="form-add-subcategory" onsubmit="return false;">
+                <div style="display:grid; grid-template-columns:1.2fr 1fr; gap:12px;">
+                  <div class="form-group">
+                    <label for="subcat-name">Nom de la Sous-Catégorie*</label>
+                    <input type="text" id="subcat-name" placeholder="Ex: Maroquinerie, Chaussures" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="subcat-parent">Catégorie Parente*</label>
+                    <select id="subcat-parent" required>
+                      <!-- Dynamically populated -->
+                    </select>
+                  </div>
+                </div>
+
+                <button class="btn-primary" id="btn-save-subcategory" style="width:100%; justify-content:center;">Créer la sous-catégorie</button>
+              </form>
+            </div>
+
+          </div>
+
+          <!-- Current category structure tree -->
+          <div class="content-card">
+            <div class="content-card-header">
+              <h3>Structure des Catégories</h3>
+            </div>
+            <div class="content-card-body" style="overflow-y:auto; max-height:480px; display:flex; flex-direction:column; gap:12px;" id="list-settings-categories">
+              <!-- Injected dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Load Database and Dashboard JS -->
+  <script src="../js/db.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

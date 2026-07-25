@@ -83,12 +83,15 @@
           </button>
           <a href="#" class="mobile-logo">SHAMMAH</a>
           <div class="mobile-header-actions">
-            <button class="mobile-action-btn" id="mobile-search-toggle-btn">
+            <!-- Suivi de colis (truck icon) -->
+            <button class="mobile-action-btn" id="mobile-tracking-toggle-btn">
               <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10h10zm0 0h4l4-4v-4h-8v8z" />
               </svg>
             </button>
-            <button class="mobile-action-btn" id="mobile-cart-toggle-btn">
+            <!-- Panier (cart icon) -->
+            <button class="mobile-action-btn" id="mobile-cart-toggle-btn" style="position: relative;">
               <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
               </svg>
@@ -98,33 +101,16 @@
         </header>
       </div>
 
-      <!-- Mobile-only search bar -->
-      <div class="search-container mobile-only">
-        <div class="search-wrapper">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-          <input type="text" class="search-input" placeholder="Rechercher des vêtements..." id="mobile-search">
-        </div>
-        <button class="filter-btn" id="mobile-filter-btn">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-          </svg>
-        </button>
-      </div>
-
       <!-- Catalogue Section Header (Desktop only) -->
       <div class="catalog-header-desktop desktop-only" id="catalog-section">
         <h2>Notre Collection</h2>
         <p>Des designs exclusifs et minimalistes pour hommes et femmes.</p>
       </div>
 
-      <!-- Categories Navigation (Adapts between horizontal list on mobile & centered filter on PC) -->
-      <div class="categories-container">
-        <div class="categories-scroll">
-          <button class="category-tab active" data-category="femme">Femme</button>
-          <button class="category-tab" data-category="homme">Homme</button>
-          <button class="category-tab" data-category="enfant">Enfant</button>
+      <!-- Categories Navigation (Centered filters with circular brand face portraits) -->
+      <div class="categories-container" style="display: flex; align-items: center; justify-content: center; width: 100%; margin: 24px 0; padding: 0 16px; box-sizing: border-box;">
+        <div class="categories-scroll" id="dynamic-category-tabs" style="display: flex; gap: 20px; align-items: center; justify-content: center; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; width: 100%; max-width: 600px;">
+          <!-- Dynamically populated by JS -->
         </div>
       </div>
 
@@ -134,80 +120,158 @@
           <div class="product-grid" id="product-list-container">
             <!-- Dynamic products injected here by JS -->
           </div>
+          <!-- "Voir plus" button container -->
+          <div id="load-more-container" style="display: none; justify-content: center; margin-top: 40px;">
+            <button id="load-more-btn" style="padding: 12px 36px; border-radius: 24px; border: 1.5px solid var(--text-primary); background: transparent; color: var(--text-primary); font-family: var(--font-inter); font-size: 0.95rem; font-weight: bold; cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.background='var(--text-primary)'; this.style.color='#ffffff';" onmouseout="this.style.background='transparent'; this.style.color='var(--text-primary)';">Voir plus</button>
+          </div>
         </div>
+
+        <!-- ==================== PROMO BANNER SECTION (Desktop Only) ==================== -->
+        <section class="desktop-only" style="background: #111111; color: #ffffff; padding: 60px 40px; margin-top: 80px; border-radius: 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 24px; box-sizing: border-box; max-width: 1200px; width: 90%; margin-left: auto; margin-right: auto; border: 1px solid #222222; position: relative; overflow: hidden; background-image: radial-gradient(circle at 80% 20%, #1e1b4b 0%, #111111 60%);">
+          <div style="position: absolute; top: 12px; right: 16px; background: var(--accent-red); color: #ffffff; font-family: var(--font-inter); font-size: 0.65rem; font-weight: 800; text-transform: uppercase; padding: 4px 10px; border-radius: 12px; letter-spacing: 0.5px;">Offre Limitée</div>
+          
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <h3 style="font-family: var(--font-inter); font-size: 1.6rem; font-weight: 800; margin: 0; letter-spacing: -0.5px;">OFFRE DE SAISON SHAMMAH</h3>
+            <p style="font-family: var(--font-inter); font-size: 0.9rem; color: #a1a1aa; margin: 0;">Profitez de 15% de réduction immédiate sur toute la collection artisanale.</p>
+          </div>
+
+          <!-- Promo Code display -->
+          <div style="background: #18181b; border: 1px dashed #3f3f46; border-radius: 16px; padding: 14px 28px; display: inline-flex; align-items: center; gap: 12px;">
+            <span style="font-family: var(--font-inter); font-size: 0.75rem; text-transform: uppercase; color: #71717a; font-weight: 700; letter-spacing: 1px;">Votre Code :</span>
+            <strong style="font-family: var(--font-inter); font-size: 1.2rem; color: #ffffff; letter-spacing: 2px; font-weight: 800;">SHAMMAH15</strong>
+          </div>
+
+          <!-- Timer countdown display -->
+          <div style="display: flex; flex-direction: column; gap: 8px; align-items: center;">
+            <span style="font-family: var(--font-inter); font-size: 0.65rem; color: #71717a; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">Temps restant :</span>
+            <div id="promo-timer" style="font-family: monospace; font-size: 1.8rem; font-weight: 800; color: #ffffff; letter-spacing: 1px;">00:00:00</div>
+          </div>
+        </section>
+
+        <!-- ==================== FAQ SECTION (Desktop Only) ==================== -->
+        <section class="desktop-only" style="max-width: 800px; width: 90%; margin: 80px auto 40px auto; padding: 0 24px; box-sizing: border-box;">
+          <h3 style="font-family: var(--font-inter); font-size: 1.4rem; font-weight: 800; text-align: center; margin-bottom: 30px; letter-spacing: -0.5px; text-transform: uppercase; color: var(--text-primary);">Questions Fréquentes (FAQ)</h3>
+          
+          <div class="faq-container">
+            <div class="faq-item">
+              <div class="faq-question">
+                <h4>Comment fonctionne la livraison ?</h4>
+                <span class="faq-icon">+</span>
+              </div>
+              <div class="faq-answer">
+                <p>Vos commandes sont expédiées sous 48 à 72 heures. Vous recevez un numéro de suivi par e-mail ou SMS dès l'expédition pour suivre l'acheminement de votre colis en temps réel.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item">
+              <div class="faq-question">
+                <h4>Quels sont les moyens de paiement acceptés ?</h4>
+                <span class="faq-icon">+</span>
+              </div>
+              <div class="faq-answer">
+                <p>Nous acceptons les paiements mobiles les plus courants (Orange Money, MTN MoMo, Wave) ainsi que les cartes bancaires internationales (Visa, Mastercard) pour des transactions 100% sécurisées.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <h4>Puis-je retourner un produit si la taille ne me convient pas ?</h4>
+                <span class="faq-icon">+</span>
+              </div>
+              <div class="faq-answer">
+                <p>Oui, absolument. Vous disposez d'un délai légal de 14 jours après réception de votre colis pour nous renvoyer l'article dans son état neuf et d'origine pour obtenir un échange ou un remboursement.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <h4>Comment choisir la taille idéale pour mes enfants ?</h4>
+                <span class="faq-icon">+</span>
+              </div>
+              <div class="faq-answer">
+                <p>Lors de la sélection d'un produit pour enfant, vous pouvez soit choisir les tailles standard en S, M, L, soit saisir l'âge exact de l'enfant dans le champ dédié pour que nos ateliers ajustent la pièce sur-mesure.</p>
+              </div>
+            </div>
+          </div>
+        </section>
         
         <!-- ==================== FOOTER ==================== -->
-        <footer class="desktop-footer">
-          <div class="footer-container">
-            <div class="footer-col brand-col">
-              <a href="#" class="footer-logo">SHAMMAH</a>
-              <p>Atelier créatif concevant des vêtements durables de qualité premium aux designs minimalistes et contemporains.</p>
-              <div class="social-icons">
-                <a href="#">Instagram</a>
-                <a href="#">Pinterest</a>
-              </div>
-            </div>
-            <div class="footer-col links-col">
-              <h4>Collection</h4>
-              <a href="#catalog-section" class="category-filter-link" data-category="femme">Femme</a>
-              <a href="#catalog-section" class="category-filter-link" data-category="homme">Homme</a>
-              <a href="#catalog-section" class="category-filter-link" data-category="enfant">Enfant</a>
-            </div>
-            <div class="footer-col links-col">
-              <h4>Atelier & Aide</h4>
-              <a href="#" id="desktop-about-link">Notre Histoire</a>
-              <a href="#">Livraison & Retours</a>
-              <a href="#">Contact</a>
-            </div>
-            <div class="footer-col newsletter-col">
-              <h4>Newsletter</h4>
-              <p>Abonnez-vous pour recevoir des aperçus exclusifs de nos collections à tirage limité.</p>
-              <div class="newsletter-input-box">
-                <input type="email" placeholder="Votre adresse e-mail" id="newsletter-email">
-                <button id="newsletter-submit-btn">Rejoindre</button>
-              </div>
-            </div>
+        <footer class="desktop-footer" style="background: #111111 !important; color: #ffffff !important; padding: 60px 24px; margin-top: auto !important; border-top: 1px solid #222222 !important; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 32px;">
+          
+          <!-- Brand Header -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <a href="#" style="font-size: 1.15rem; letter-spacing: 4px; font-weight: 800; color: #ffffff !important; text-decoration: none;">SHAMMAH</a>
+            <span style="font-family: var(--font-inter); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; color: #71717a;">Minimalisme & Raffinement</span>
           </div>
-          <div class="footer-bottom">
-            <p>&copy; 2026 SHAMMAH. Tous droits réservés. Conçu avec soin pour Inter sans-serif.</p>
-            <div class="footer-payments" style="display: flex; gap: 8px; justify-content: center; align-items: center; margin-top: 16px; flex-wrap: wrap;">
-              <span style="font-size: 0.75rem; color: #8a8a93; margin-right: 4px;">Paiements :</span>
-              <span class="pay-badge">Orange Money</span>
-              <span class="pay-badge">MTN MoMo</span>
-              <span class="pay-badge">Wave</span>
-              <span class="pay-badge">Visa</span>
-              <span class="pay-badge">Mastercard</span>
-            </div>
+
+          <!-- Divider -->
+          <div style="width: 40px; height: 1px; background-color: #27272a;"></div>
+
+          <!-- Political & Legal Links -->
+          <div style="display: flex; gap: 28px; justify-content: center; align-items: center; flex-wrap: wrap;">
+            <a href="privacy.html" style="font-family: var(--font-inter); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1px; color: #a1a1aa; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#a1a1aa'">Politique de Confidentialité</a>
+            <a href="terms.html" style="font-family: var(--font-inter); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1px; color: #a1a1aa; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#a1a1aa'">Conditions Générales de Vente</a>
+            <a href="legal.html" style="font-family: var(--font-inter); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1px; color: #a1a1aa; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#a1a1aa'">Mentions Légales</a>
           </div>
+
+          <!-- Social Icons (TikTok, Instagram, Facebook) -->
+          <div style="display: flex; gap: 24px; justify-content: center; align-items: center;">
+            <!-- TikTok -->
+            <a href="#" style="color: #ffffff; opacity: 0.7; transition: all 0.2s; display: inline-flex;" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.1)';" onmouseout="this.style.opacity='0.7'; this.style.transform='scale(1)';">
+              <svg fill="currentColor" viewBox="0 0 24 24" style="width: 18px; height: 18px;">
+                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.74-3.99-1.72-.08-.07-.15-.15-.24-.22v6.52c-.03 2.32-.87 4.67-2.61 6.2-1.92 1.76-4.76 2.34-7.22 1.62-2.88-.8-5.08-3.41-5.32-6.42-.31-3.62 2.12-7.14 5.71-7.79.92-.17 1.87-.14 2.79.08V12.2c-.89-.25-1.89-.13-2.67.38-.97.62-1.5 1.76-1.4 2.89.09 1.48 1.25 2.74 2.73 2.84 1.5.11 2.94-1.01 3.07-2.51.04-1.42.02-2.85.03-4.28V0h.01z"/>
+              </svg>
+            </a>
+            <!-- Instagram -->
+            <a href="#" style="color: #ffffff; opacity: 0.7; transition: all 0.2s; display: inline-flex;" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.1)';" onmouseout="this.style.opacity='0.7'; this.style.transform='scale(1)';">
+              <svg fill="currentColor" viewBox="0 0 24 24" style="width: 18px; height: 18px;">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+              </svg>
+            </a>
+            <!-- Facebook -->
+            <a href="#" style="color: #ffffff; opacity: 0.7; transition: all 0.2s; display: inline-flex;" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.1)';" onmouseout="this.style.opacity='0.7'; this.style.transform='scale(1)';">
+              <svg fill="currentColor" viewBox="0 0 24 24" style="width: 18px; height: 18px;">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Payment Methods & Secure Label -->
+          <div style="display: flex; flex-direction: column; gap: 12px; align-items: center; justify-content: center;">
+            <div style="display: flex; gap: 8px; justify-content: center; align-items: center; flex-wrap: wrap;">
+              <span style="font-family: var(--font-inter); font-size: 0.68rem; color: #d4d4d8; border: 1px solid #27272a; background: #18181b; padding: 4px 10px; border-radius: 6px; font-weight: 600; letter-spacing: 0.2px;">Orange Money</span>
+              <span style="font-family: var(--font-inter); font-size: 0.68rem; color: #d4d4d8; border: 1px solid #27272a; background: #18181b; padding: 4px 10px; border-radius: 6px; font-weight: 600; letter-spacing: 0.2px;">MTN MoMo</span>
+              <span style="font-family: var(--font-inter); font-size: 0.68rem; color: #d4d4d8; border: 1px solid #27272a; background: #18181b; padding: 4px 10px; border-radius: 6px; font-weight: 600; letter-spacing: 0.2px;">Wave</span>
+              <span style="font-family: var(--font-inter); font-size: 0.68rem; color: #d4d4d8; border: 1px solid #27272a; background: #18181b; padding: 4px 10px; border-radius: 6px; font-weight: 600; letter-spacing: 0.2px;">Visa</span>
+              <span style="font-family: var(--font-inter); font-size: 0.68rem; color: #d4d4d8; border: 1px solid #27272a; background: #18181b; padding: 4px 10px; border-radius: 6px; font-weight: 600; letter-spacing: 0.2px;">Mastercard</span>
+            </div>
+            <span style="font-family: var(--font-inter); font-size: 0.62rem; color: #52525b; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">Paiement Sécurisé</span>
+          </div>
+
+          <!-- Copyright -->
+          <p style="font-family: var(--font-inter); font-size: 0.65rem; color: #52525b; margin: 0; letter-spacing: 0.5px;">&copy; 2026 SHAMMAH. Tous droits réservés.</p>
         </footer>
       </div>
 
       <!-- Floating Bottom Navigation (Mobile) -->
-      <nav class="bottom-nav-bar mobile-only" id="bottom-nav-bar">
+      <nav class="bottom-nav-bar mobile-only" id="bottom-nav-bar" style="display: grid; grid-template-columns: repeat(3, 1fr); justify-items: center; align-items: center;">
         <button class="nav-item active" id="nav-home-btn">
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V10" />
           </svg>
-          <span class="nav-label">Boutique</span>
+          <span class="nav-label">Home</span>
+        </button>
+        <button class="nav-item" id="nav-search-btn">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <span class="nav-label">Recherche</span>
         </button>
         <button class="nav-item" id="nav-favorites-btn">
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
           </svg>
           <span class="nav-label">Favoris</span>
-        </button>
-        <button class="nav-item" id="nav-tracking-btn">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-          </svg>
-          <span class="nav-label">Suivi</span>
-        </button>
-        <button class="nav-item" id="open-cart-btn">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-          </svg>
-          <span class="nav-label">Panier</span>
-          <span class="nav-cart-badge" id="cart-counter-badge">0</span>
         </button>
       </nav>
 
@@ -268,55 +332,19 @@
               <div class="checkout-card">
                 <h3>Adresse de livraison</h3>
                 <form id="checkout-shipping-form" class="checkout-form">
-                  <div class="form-row two-cols">
-                    <div class="form-group">
-                      <label for="shipping-firstname">Prénom*</label>
-                      <input type="text" id="shipping-firstname" placeholder="Ex: Divyansh" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="shipping-lastname">Nom de famille*</label>
-                      <input type="text" id="shipping-lastname" placeholder="Ex: Agarwal" required>
-                    </div>
+                  <div class="form-group" style="margin-bottom: 12px;">
+                    <label for="shipping-fullname">Nom et Prénom*</label>
+                    <input type="text" id="shipping-fullname" placeholder="Ex: Koffi Mensah" required>
                   </div>
 
-                  <div class="form-row two-cols">
-                    <div class="form-group">
-                      <label for="shipping-email">E-mail*</label>
-                      <input type="email" id="shipping-email" placeholder="divyansh@webyansh.com" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="shipping-phone">Numéro de téléphone*</label>
-                      <div class="phone-input-wrapper">
-                        <select id="phone-country-prefix" class="country-prefix-select">
-                          <option value="+225">🇨🇮 CIV +225</option>
-                          <option value="+229">🇧🇯 BEN +229</option>
-                          <option value="+221">🇸🇳 SEN +221</option>
-                          <option value="+33">🇫🇷 FRA +33</option>
-                          <option value="+91">🇮🇳 IND +91</option>
-                        </select>
-                        <input type="tel" id="shipping-phone" placeholder="6377588843" required>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="form-row three-cols">
-                    <div class="form-group">
-                      <label for="shipping-city">Ville*</label>
-                      <input type="text" id="shipping-city" placeholder="Abidjan" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="shipping-state">Région/État*</label>
-                      <input type="text" id="shipping-state" placeholder="Lagunes" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="shipping-zip">Code Postal*</label>
-                      <input type="text" id="shipping-zip" placeholder="00225" required>
-                    </div>
+                  <div class="form-group" style="margin-bottom: 12px;">
+                    <label for="shipping-email">E-mail*</label>
+                    <input type="email" id="shipping-email" placeholder="koffi.mensah@outlook.com" required>
                   </div>
 
                   <div class="form-group">
-                    <label for="shipping-desc">Instructions de livraison (Optionnel)</label>
-                    <textarea id="shipping-desc" rows="3" placeholder="Saisir des précisions pour le livreur (code d'immeuble, etc.)..."></textarea>
+                    <label for="shipping-address">Adresse complète (Rue, Code Postal, Ville, Pays)*</label>
+                    <input type="text" id="shipping-address" placeholder="Ex: 12 Rue de la Paix, 75002 Paris, France" required>
                   </div>
                 </form>
               </div>
@@ -365,7 +393,7 @@
               </div>
 
               <!-- Payment Form Card -->
-              <div class="checkout-card">
+              <div class="checkout-card" id="payment-card">
                 <h3>Méthode de paiement</h3>
                 
                 <div class="payment-method-selector">
@@ -384,19 +412,31 @@
                   <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px;">Sélectionnez votre opérateur Mobile Money local pour finaliser la commande.</p>
                   
                   <div class="momo-operators-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px;">
-                    <label class="momo-op-card active" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--accent-light); border-radius: 16px; padding: 16px 8px; cursor: pointer; transition: var(--transition-smooth); background: #ffffff; text-align: center;">
+                    <label class="momo-op-card active op-orange">
                       <input type="radio" name="momo_operator" value="Orange" checked style="display: none;">
-                      <span style="width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--text-secondary); display: inline-block; position: relative;" class="custom-momo-radio"></span>
+                      <svg viewBox="0 0 40 40" width="36" height="36" style="border-radius: 8px; flex-shrink: 0; margin-bottom: 4px;">
+                        <rect width="40" height="40" rx="8" fill="#FF7900" />
+                        <path d="M12 28h16V12H12v16zm2-14h12v12H14V14z" fill="#ffffff"/>
+                        <path d="M17 19h6v2h-6zm0 4h6v2h-6z" fill="#ffffff"/>
+                      </svg>
                       <span style="font-size: 0.8rem; font-weight: 700;">Orange Money</span>
                     </label>
-                    <label class="momo-op-card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--accent-light); border-radius: 16px; padding: 16px 8px; cursor: pointer; transition: var(--transition-smooth); background: #ffffff; text-align: center; color: var(--text-secondary);">
+                    <label class="momo-op-card op-mtn">
                       <input type="radio" name="momo_operator" value="MTN" style="display: none;">
-                      <span style="width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--text-secondary); display: inline-block; position: relative;" class="custom-momo-radio"></span>
+                      <svg viewBox="0 0 40 40" width="36" height="36" style="border-radius: 8px; flex-shrink: 0; margin-bottom: 4px;">
+                        <rect width="40" height="40" rx="8" fill="#FFCC00" />
+                        <ellipse cx="20" cy="20" rx="14" ry="10" fill="#003399" />
+                        <text x="20" y="23" dominant-baseline="middle" text-anchor="middle" fill="#FFCC00" font-family="sans-serif" font-weight="900" font-size="8">MTN</text>
+                      </svg>
                       <span style="font-size: 0.8rem; font-weight: 700;">MTN MoMo</span>
                     </label>
-                    <label class="momo-op-card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--accent-light); border-radius: 16px; padding: 16px 8px; cursor: pointer; transition: var(--transition-smooth); background: #ffffff; text-align: center; color: var(--text-secondary);">
+                    <label class="momo-op-card op-wave">
                       <input type="radio" name="momo_operator" value="Wave" style="display: none;">
-                      <span style="width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--text-secondary); display: inline-block; position: relative;" class="custom-momo-radio"></span>
+                      <svg viewBox="0 0 40 40" width="36" height="36" style="border-radius: 8px; flex-shrink: 0; margin-bottom: 4px;">
+                        <rect width="40" height="40" rx="8" fill="#1B4ECF" />
+                        <path d="M10 24c4-6 6-6 10 0s6 6 10 0" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" fill="none"/>
+                        <path d="M10 18c4-6 6-6 10 0s6 6 10 0" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                      </svg>
                       <span style="font-size: 0.8rem; font-weight: 700;">Wave</span>
                     </label>
                   </div>
@@ -429,8 +469,20 @@
                       <!-- Front Side -->
                       <div class="virtual-card-side card-front" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; padding: 24px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
                         <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                          <div class="card-chip" style="width: 44px; height: 34px; background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%); border-radius: 6px;"></div>
-                          <span style="font-weight: bold; font-style: italic; font-size: 1.1rem; letter-spacing: 1px;">SHAMMAH</span>
+                          <div class="card-chip" style="width: 44px; height: 32px; background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%); border-radius: 6px; position: relative; overflow: hidden; border: 0.5px solid rgba(0,0,0,0.1); box-shadow: inset 0 1px 2px rgba(255,255,255,0.4); flex-shrink: 0;">
+                            <!-- Chip lines for realism -->
+                            <div style="position: absolute; top: 0; left: 50%; width: 1px; height: 100%; background: rgba(0,0,0,0.25);"></div>
+                            <div style="position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background: rgba(0,0,0,0.25);"></div>
+                            <div style="position: absolute; top: 25%; left: 0; width: 100%; height: 1px; background: rgba(0,0,0,0.25);"></div>
+                            <div style="position: absolute; top: 75%; left: 0; width: 100%; height: 1px; background: rgba(0,0,0,0.25);"></div>
+                            <div style="position: absolute; top: 25%; left: 25%; width: 50%; height: 50%; border-radius: 2px; border: 1px solid rgba(0,0,0,0.25); background: transparent;"></div>
+                          </div>
+                          <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px; line-height: 1;">
+                            <span style="font-weight: bold; font-style: italic; font-size: 1.1rem; letter-spacing: 1px;">SHAMMAH</span>
+                            <svg viewBox="0 0 100 32" width="44" height="14" fill="#ffffff" style="margin-top: 2px; opacity: 0.95;">
+                              <path d="M38 0l-7.3 22h-4.8l4.4-17c.5-2.1.2-3.1-1.3-3.1-1.1 0-2.3.4-3.5 1 l.7-2.9c1.2-.5 2.7-.9 4.3-.9 3.5 0 4.9 1.8 4.2 5zm24.8 11.5c.3-4.8-6.1-5.2-5.9-8.4.1-1 1-2.1 3.2-2.1 1.6 0 2.9.3 4.1.7l-.7 2.9c-1-.4-2-.6-3-.6-1.1 0-1.8.5-1.9 1 .1 1.8 5.4 2 5 7.1-.2 2.6-2.5 4.4-6.2 4.4-2.8 0-4.6-.6-5.8-1.1l.8-2.9c1.1.5 2.6.9 4.2.9 1.8.1 2.3-.9 2.3-2zm22.4 10.5h-4l-3-14.5c-.2-.7-.5-1.1-1.2-1.5-1.1-.6-3-1.1-4.7-1.5l.1-.6h7.6c1.1 0 1.9.7 2.1 1.8l2.6 12.3c.1-.1 4.5-12.3 4.5-12.3.1-.7.6-1.8 2.1-1.8h3.9l-6 18.1zm-32-15c-.2-.6-.9-1.2-2-1.2-2.5 0-5.1 2.7-6.2 5.5l.1-.4h-4.4l3.1 14.5h4.8l2.9-13.4s1.7 0 1.7 0l2.2 13.4h4.3L64.8 0h-4l-7.6 7z" />
+                            </svg>
+                          </div>
                         </div>
                         <div class="card-number-disp" id="card-num-display" style="font-size: 1.15rem; letter-spacing: 2px; text-shadow: 1px 1px 2px rgba(0,0,0,0.4); margin: 16px 0 0 0;">•••• •••• •••• ••••</div>
                         <div style="display: flex; justify-content: space-between; align-items: flex-end;">
@@ -494,6 +546,26 @@
                   </button>
                 </div>
               </div>
+
+              <!-- INLINE PAYMENT PROCESSING STATE (Hidden initially) -->
+              <div class="checkout-card" id="payment-processing-panel" style="display: none; text-align: center; padding: 48px 32px; flex-direction: column; align-items: center; justify-content: center; gap: 24px; min-height: 380px;">
+                <!-- Animated Circle Spinner and Timer -->
+                <div style="position: relative; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px auto;">
+                  <!-- Outer Spinner Ring -->
+                  <div id="payment-processing-spinner" style="position: absolute; width: 100%; height: 100%; border: 4px solid var(--accent-light); border-top-color: var(--text-primary); border-radius: 50%; animation: spin 1s infinite linear;"></div>
+                  
+                  <!-- Inner Success Checkmark SVG -->
+                  <div id="payment-processing-success-icon" style="display: none; width: 100%; height: 100%; border-radius: 50%; background: #4caf50; align-items: center; justify-content: center; color: #ffffff;">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 40px; height: 40px; stroke-width: 3; stroke: #ffffff;"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                  </div>
+                  
+                  <!-- Timer text -->
+                  <span id="payment-processing-timer" style="font-size: 0.95rem; font-weight: 800; color: var(--text-primary); font-family: var(--font-inter);">5s</span>
+                </div>
+                
+                <h4 id="payment-processing-title" style="font-family: var(--font-inter); font-size: 1.25rem; font-weight: 800; margin: 0; color: var(--text-primary);">Traitement de votre paiement...</h4>
+                <p id="payment-processing-text" style="font-family: var(--font-inter); font-size: 0.9rem; color: var(--text-secondary); margin: 0; line-height: 1.6; max-width: 320px;">Veuillez confirmer la transaction sur votre appareil mobile.</p>
+              </div>
             </div>
 
             <!-- STEP 3: ORDER CONFIRMATION (Hidden initially) -->
@@ -554,21 +626,6 @@
         </div>
       </div>
 
-      <!-- MOMO SIMULATION POPUP OVERLAY -->
-      <div class="momo-modal-backdrop" id="momo-simulation-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); z-index: 2000; align-items: center; justify-content: center; font-family: var(--font-inter);">
-        <div class="momo-modal-card" style="background: #ffffff; border-radius: 28px; padding: 40px; text-align: center; max-width: 380px; width: 90%; box-shadow: 0 20px 50px rgba(0,0,0,0.3); display: flex; flex-direction: column; align-items: center; gap: 20px; box-sizing: border-box; border: 1px solid var(--accent-light);">
-          
-          <!-- Animated Spinner -->
-          <div class="momo-sim-spinner" id="momo-sim-spinner" style="width: 50px; height: 50px; border: 4px solid var(--accent-light); border-top-color: var(--text-primary); border-radius: 50%; animation: spin 1s infinite linear;"></div>
-          
-          <!-- Animated Success Icon -->
-          <div class="momo-sim-success-icon" id="momo-sim-success-icon" style="display: none; width: 50px; height: 50px; border-radius: 50%; background: #4caf50; color: #ffffff; font-size: 1.8rem; line-height: 50px; font-weight: bold; text-align: center;">✓</div>
-          
-          <h4 id="momo-sim-title" style="font-size: 1.15rem; font-weight: 800; margin: 0; color: var(--text-primary);">En attente de validation</h4>
-          <p id="momo-sim-text" style="font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">Veuillez confirmer la demande de paiement reçue sur votre téléphone Mobile Money.</p>
-          <span class="momo-sim-timer" id="momo-sim-timer" style="font-size: 0.8rem; font-weight: 800; color: #ff3b30; background: rgba(255,59,48,0.08); padding: 4px 12px; border-radius: 12px;">15s</span>
-        </div>
-      </div>
     </section>
 
     <!-- 3. PRODUCT DETAIL SCREEN (MODAL ON PC, SLIDE-IN ON MOBILE) -->
@@ -691,7 +748,10 @@
     <div class="cart-drawer-backdrop" id="cart-backdrop"></div>
     <div class="cart-drawer" id="cart-panel">
       <div class="cart-drawer-header">
-        <h3>Mon Panier</h3>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <h3>Mon Panier</h3>
+          <button id="clear-cart-btn" style="background: transparent; border: none; font-family: var(--font-inter); font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; text-decoration: underline; padding: 4px 8px; border-radius: 6px; transition: all 0.2s ease; display: none;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-secondary)'">Vider</button>
+        </div>
         <button class="close-btn" id="close-cart-btn">
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -764,10 +824,11 @@
           </div>
         </div>
       </div>
+    </div>
 
-    <!-- 6. FILTER DRAWER OVERLAY (SLIDE UP BOTTOM DRAWER ON MOBILE) -->
+    <!-- 6. FILTER DRAWER OVERLAY (SLIDE FROM RIGHT) -->
     <div class="cart-drawer-backdrop" id="filter-backdrop"></div>
-    <div class="cart-drawer" id="filter-panel" style="height: auto; max-height: 50%;">
+    <div class="cart-drawer" id="filter-panel">
       <div class="cart-drawer-header">
         <h3>Filtrer la collection</h3>
         <button class="close-btn" id="close-filter-btn">
@@ -778,6 +839,14 @@
       </div>
       
       <div class="filter-content" style="padding: 20px 0; display: flex; flex-direction: column; gap: 24px;">
+        <!-- Dynamic Subcategories -->
+        <div>
+          <h5 class="option-title" style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 12px; letter-spacing: 0.5px;">Sous-catégories</h5>
+          <div class="option-pills" id="filter-subcategories-container" style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
         <div>
           <h5 class="option-title" style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 12px; letter-spacing: 0.5px;">Trier par prix</h5>
           <div class="option-pills" id="filter-sort-options" style="display: flex; gap: 8px; flex-wrap: wrap;">
@@ -797,20 +866,81 @@
     <div class="nav-drawer-backdrop" id="nav-drawer-backdrop"></div>
     <div class="nav-drawer" id="nav-drawer">
       <div class="nav-drawer-header">
-        <span class="logo">SHAMMAH</span>
+        <div style="display: flex; flex-direction: column; gap: 4px; text-align: left;">
+          <span class="logo" style="letter-spacing: 2px;">SHAMMAH</span>
+          <span style="font-family: var(--font-inter); font-size: 0.65rem; color: var(--text-secondary); text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px;">Minimalisme & Raffinement</span>
+        </div>
         <button class="close-btn" id="close-nav-drawer-btn">
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
-      <div class="nav-drawer-content">
-        <a href="#" class="nav-drawer-link active" data-category="femme">Femme</a>
-        <a href="#" class="nav-drawer-link" data-category="homme">Homme</a>
-        <a href="#" class="nav-drawer-link" data-category="enfant">Enfant</a>
-        <div class="nav-drawer-divider"></div>
-        <a href="#" class="nav-drawer-link" id="mobile-tracking-link">Suivi de colis</a>
+      
+      <div class="nav-drawer-content" style="display: flex; flex-direction: column; justify-content: space-between; height: calc(100% - 70px); padding-bottom: 24px;">
+        <div style="overflow-y: auto; flex: 1; padding-right: 4px; margin-bottom: 16px;">
+          <!-- Accordion Categories in Drawer -->
+          <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 12px;" class="drawer-menu-accordion" id="dynamic-drawer-accordion">
+            <!-- Dynamically populated by JS -->
+          </div>
+
+          <div class="nav-drawer-divider" style="margin: 16px 0;"></div>
+
+          <!-- Utility Links -->
+          <a href="#" class="nav-drawer-link" id="mobile-tracking-link" style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-weight: 600; color: var(--text-primary); text-decoration: none;">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 18px; height: 18px; stroke-width: 2;"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            <span>Suivi de colis</span>
+          </a>
+          <a href="#" class="nav-drawer-link" style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-weight: 600; color: var(--text-primary); text-decoration: none;">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 18px; height: 18px; stroke-width: 2;"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+            <span>Support & FAQ</span>
+          </a>
+          <a href="#" class="nav-drawer-link" style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-weight: 600; color: var(--text-primary); text-decoration: none;">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 18px; height: 18px; stroke-width: 2;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+            <span>Contact</span>
+          </a>
+
+          <!-- Footer-inherited Links -->
+          <div style="margin-top: 16px; padding: 0 4px; display: flex; flex-direction: column; gap: 8px;">
+            <strong style="font-family: var(--font-inter); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-primary);">Aide & Information</strong>
+            <a href="#" style="font-family: var(--font-inter); font-size: 0.8rem; color: var(--text-secondary); text-decoration: none;">Livraison & Retours</a>
+            <a href="#" style="font-family: var(--font-inter); font-size: 0.8rem; color: var(--text-secondary); text-decoration: none;">Nos Boutiques</a>
+            <a href="legal.html" style="font-family: var(--font-inter); font-size: 0.8rem; color: var(--text-secondary); text-decoration: none;">Mentions Légales</a>
+          </div>
+        </div>
+
+        <!-- Currency and Language Selector -->
+        <div class="nav-drawer-settings" style="margin-top: 10px; display: flex; gap: 12px; padding: 0 12px; margin-bottom: 16px;">
+          <div style="flex: 1; position: relative;">
+            <select id="drawer-lang" style="width: 100%; padding: 8px 12px; border: 1.5px solid var(--accent-light); border-radius: 10px; font-family: var(--font-inter); font-size: 0.8rem; background: #ffffff; color: var(--text-primary); cursor: pointer; outline: none; -webkit-appearance: none;">
+              <option value="fr" selected>FR - Français</option>
+              <option value="en">EN - English</option>
+            </select>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; pointer-events: none; color: var(--text-secondary);"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" /></svg>
+          </div>
+          <div style="flex: 1; position: relative;">
+            <select id="drawer-currency" style="width: 100%; padding: 8px 12px; border: 1.5px solid var(--accent-light); border-radius: 10px; font-family: var(--font-inter); font-size: 0.8rem; background: #ffffff; color: var(--text-primary); cursor: pointer; outline: none; -webkit-appearance: none;">
+              <option value="eur" selected>EUR (€)</option>
+              <option value="usd">USD ($)</option>
+              <option value="cfa">XOF (FCFA)</option>
+            </select>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; pointer-events: none; color: var(--text-secondary);"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" /></svg>
+          </div>
+        </div>
       </div>
+    </div>
+    <!-- ==================== MOBILE SEARCH OVERLAY ==================== -->
+    <div id="search-overlay" class="search-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.98); z-index: 1500; flex-direction: column; padding: 24px; box-sizing: border-box; backdrop-filter: blur(10px);">
+      <div style="display: flex; justify-content: flex-end; margin-bottom: 24px;">
+        <button id="close-search-overlay-btn" style="background: transparent; border: none; cursor: pointer; color: var(--text-primary);">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 28px; height: 28px; stroke-width: 2;"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+      <div style="display: flex; align-items: center; border-bottom: 2px solid var(--text-primary); padding: 8px 0; margin-top: 40px;">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 24px; height: 24px; color: var(--text-secondary); margin-right: 12px; stroke-width: 2.5;"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+        <input type="text" id="mobile-search" placeholder="Rechercher un vêtement..." style="border: none; background: transparent; font-family: var(--font-inter); font-size: 1.3rem; font-weight: 600; width: 100%; outline: none; color: var(--text-primary);">
+      </div>
+      <p style="font-family: var(--font-inter); font-size: 0.8rem; color: var(--text-secondary); margin-top: 12px;">Appuyez sur Entrée pour rechercher. Ex: bonnet, casquette, pull, tee shirt...</p>
     </div>
 
     <!-- Toast Notification Popup -->
@@ -819,6 +949,7 @@
 
 
 
+  <script src="js/db.js"></script>
   <script src="js/shammah.js?v=2.4"></script>
 </body>
 </html>

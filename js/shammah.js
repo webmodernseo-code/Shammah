@@ -1,247 +1,46 @@
 // SHAMMAH - E-commerce SPA Responsive Logic
 
-// 1. PRODUCT DATABASE (16 Premium Items: 6 Femme, 6 Homme, 4 Enfant)
-const PRODUCTS = [
-  // --- FEMME (6 Items) ---
-  {
-    id: "velora-dress",
-    title: "Robe Minimale Velora",
-    categories: ["femme", "casual"],
-    price: 52.00,
-    oldPrice: 62.00,
-    desc: "Coupe minimaliste et de haute précision alliant confort absolu et esthétique moderne. Fabriquée dans un atelier d'exception avec un souci obsessionnel du détail et des finitions durables.",
-    image: "images/product_grey.png",
-    variants: [
-      { img: "images/product_grey.png", color: "#2b2b2a", name: "Gris Herringbone" },
-      { img: "images/product_brown.png", color: "#d1b89d", name: "Camel Classique" },
-      { img: "images/product_orange.png", color: "#df8a60", name: "Orange Rouille" },
-      { img: "images/product_dark.png", color: "#3b4d4b", name: "Anthracite" }
-    ],
-    sizes: ["S", "M", "L"]
-  },
-  {
-    id: "classic-trench",
-    title: "Trench Coat Intemporel",
-    categories: ["femme", "casual"],
-    price: 110.00,
-    oldPrice: 135.00,
-    desc: "Trench coat croisé classique en coton imperméable. Doté d'une ceinture ajustable et de pattes d'épaules traditionnelles. La pièce parfaite de mi-saison.",
-    image: "images/trench_beige.png",
-    variants: [
-      { img: "images/trench_beige.png", color: "#d2b48c", name: "Beige Mastic" },
-      { img: "images/trench_black.png", color: "#1c1c1c", name: "Noir Onyx" }
-    ],
-    sizes: ["XS", "S", "M", "L"]
-  },
-  {
-    id: "linen-set",
-    title: "Ensemble d'Été en Lin",
-    categories: ["femme", "casual"],
-    price: 85.00,
-    oldPrice: 98.00,
-    desc: "Blouse légère et pantalon large assorti 100% lin lavé. Frais, respirant et d'une élégance naturelle et décontractée pour les journées chaudes.",
-    image: "images/linen_sable.png",
-    variants: [
-      { img: "images/linen_sable.png", color: "#eedcb2", name: "Sable Fin" },
-      { img: "images/linen_slate.png", color: "#708090", name: "Gris Ardoise" }
-    ],
-    sizes: ["XS", "S", "M", "L"]
-  },
-  {
-    id: "silk-dress",
-    title: "Robe Portefeuille en Soie",
-    categories: ["femme", "casual"],
-    price: 145.00,
-    oldPrice: 175.00,
-    desc: "Créée en soie de mûrier fluide avec une coupe portefeuille flatteuse et un ourlet asymétrique subtil. Idéale pour les grandes occasions.",
-    image: "images/silk_emerald.png",
-    variants: [
-      { img: "images/silk_emerald.png", color: "#004930", name: "Vert Émeraude" },
-      { img: "images/silk_ruby.png", color: "#a22b3e", name: "Rouge Rubis" }
-    ],
-    sizes: ["S", "M", "L"]
-  },
-  {
-    id: "cargo-joggers",
-    title: "Pantalon Cargo Urbain",
-    categories: ["femme", "streetwear"],
-    price: 65.00,
-    oldPrice: 78.00,
-    desc: "Pantalon de jogging style cargo en coton croisé robuste. Taille haute élastique, chevilles ajustées et multiples poches fonctionnelles pour un look urbain affirmé.",
-    image: "images/cargo_kaki.png",
-    variants: [
-      { img: "images/cargo_kaki.png", color: "#556b2f", name: "Vert Kaki" },
-      { img: "images/cargo_soot.png", color: "#252525", name: "Noir Suie" }
-    ],
-    sizes: ["XS", "S", "M", "L"]
-  },
-  {
-    id: "cable-knit",
-    title: "Pull en Torsades Court",
-    categories: ["femme", "streetwear"],
-    price: 55.00,
-    oldPrice: 65.00,
-    desc: "Pull court à col roulé et torsades tricoté dans un mélange de laine ultra-doux. Volume moderne et design contemporain.",
-    image: "images/cable_cream.png",
-    variants: [
-      { img: "images/cable_cream.png", color: "#f9f6f0", name: "Blanc Crème" },
-      { img: "images/cable_pink.png", color: "#d8b2d1", name: "Vieux Rose" }
-    ],
-    sizes: ["S", "M", "L"]
-  },
+const PRODUCTS = window.db.getProducts();
 
-  // --- HOMME (6 Items) ---
-  {
-    id: "signature-knit",
-    title: "Pull Signature Shammah",
-    categories: ["homme", "streetwear"],
-    price: 75.00,
-    oldPrice: 90.00,
-    desc: "Pull en tricot épais de coton premium d'inspiration urbaine. Coupe décontractée oversize, épaules tombantes et maille respirante pour un style signature intemporel et moderne.",
-    image: "images/product_male.png",
-    variants: [
-      { img: "images/product_male.png", color: "#f5f3ef", name: "Crème Surdimensionné" }
-    ],
-    sizes: ["M", "L", "XL"]
-  },
-  {
-    id: "leather-jacket",
-    title: "Blouson Bombardier Cuir",
-    categories: ["homme", "streetwear"],
-    price: 199.00,
-    oldPrice: 245.00,
-    desc: "Veste en cuir d'agneau pleine fleur au fini texturé. Coupe pilote avec col en peau lainée amovible et doublure satinée.",
-    image: "images/leather_black.png",
-    variants: [
-      { img: "images/leather_black.png", color: "#1a1a1a", name: "Noir Profond" },
-      { img: "images/leather_chocolate.png", color: "#4b2f1d", name: "Chocolat" }
-    ],
-    sizes: ["S", "M", "L", "XL", "XXL"]
-  },
-  {
-    id: "oversized-hoodie",
-    title: "Hoodie Molleton Oversize",
-    categories: ["homme", "streetwear"],
-    price: 60.00,
-    oldPrice: 75.00,
-    desc: "Sweatshirt à capuche confectionné en molleton lourd gratté. Poche kangourou et broderie minimaliste Shammah ton sur ton sur la poitrine.",
-    image: "images/hoodie_pebble.png",
-    variants: [
-      { img: "images/hoodie_pebble.png", color: "#e3dfd5", name: "Galet" },
-      { img: "images/hoodie_sage.png", color: "#5a6358", name: "Sauge" }
-    ],
-    sizes: ["S", "M", "L", "XL"]
-  },
-  {
-    id: "tailored-chino",
-    title: "Pantalon Chino Ajusté",
-    categories: ["homme", "casual"],
-    price: 70.00,
-    oldPrice: 85.00,
-    desc: "Pantalon en gabardine de coton stretch doux. Coupe ajustée contemporaine et poches passepoilées élégantes pour un look habillé ou décontracté.",
-    image: "images/chino_sand.png",
-    variants: [
-      { img: "images/chino_sand.png", color: "#c5b398", name: "Sable Doré" },
-      { img: "images/chino_navy.png", color: "#192231", name: "Bleu Marine" }
-    ],
-    sizes: ["30", "32", "34", "36"]
-  },
-  {
-    id: "denim-jacket",
-    title: "Veste Denim Brut",
-    categories: ["homme", "casual"],
-    price: 95.00,
-    oldPrice: 115.00,
-    desc: "Veste en jean classique en coton brut épais. Coutures contrastantes cuivrées et boutons métalliques gravés.",
-    image: "images/denim_raw.png",
-    variants: [
-      { img: "images/denim_raw.png", color: "#22354c", name: "Indigo Brut" },
-      { img: "images/denim_grey.png", color: "#1c1c1c", name: "Gris Brut" }
-    ],
-    sizes: ["M", "L", "XL"]
-  },
-  {
-    id: "wool-blazer",
-    title: "Blazer en Laine Structuré",
-    categories: ["homme", "casual"],
-    price: 160.00,
-    oldPrice: 195.00,
-    desc: "Veste tailleur structurée en fine laine mélangée. Col à revers crantés, fermeture à deux boutons et fente d'aisance au dos.",
-    image: "images/blazer_anthracite.png",
-    variants: [
-      { img: "images/blazer_anthracite.png", color: "#2d2d30", name: "Anthracite" },
-      { img: "images/blazer_camel.png", color: "#c19a6b", name: "Camel" }
-    ],
-    sizes: ["S", "M", "L", "XL"]
-  },
-
-  // --- ENFANT (4 Items) ---
-  {
-    id: "teddy-fleece",
-    title: "Ensemble Polaire Teddy",
-    categories: ["enfant", "casual"],
-    price: 45.00,
-    oldPrice: 55.00,
-    desc: "Sweat-shirt et jogging assortis en polaire teddy ultra-moelleuse. Chauffe instantanément pour un maximum de confort au parc ou à la maison.",
-    image: "images/teddy_brown.png",
-    variants: [
-      { img: "images/teddy_brown.png", color: "#8b5a2b", name: "Brun Nounours" },
-      { img: "images/teddy_celadon.png", color: "#acbaa1", name: "Céladon" }
-    ],
-    sizes: ["2 ans", "4 ans", "6 ans"]
-  },
-  {
-    id: "kids-dungarees",
-    title: "Salopette en Denim Souple",
-    categories: ["enfant", "casual"],
-    price: 38.00,
-    oldPrice: 48.00,
-    desc: "Salopette classique pour enfant en denim de coton souple lavé. Bretelles ajustables et boutons pressions pour un habillage simple.",
-    image: "images/dungarees_blue.png",
-    variants: [
-      { img: "images/dungarees_blue.png", color: "#3a6073", name: "Bleu Denim" },
-      { img: "images/dungarees_pink.png", color: "#e8a7b5", name: "Rose Pâle" }
-    ],
-    sizes: ["2 ans", "3 ans", "4 ans", "5 ans"]
-  },
-  {
-    id: "kids-striped-jumper",
-    title: "Pull en Maille Rayé",
-    categories: ["enfant", "casual"],
-    price: 34.00,
-    oldPrice: 42.00,
-    desc: "Pull à col rond en maille de coton douillette avec motif rayé classique. Parfait pour les journées d'école fraîches.",
-    image: "images/kids_jumper.png",
-    variants: [
-      { img: "images/kids_jumper.png", color: "#df7356", name: "Rayures Multi" }
-    ],
-    sizes: ["4 ans", "6 ans", "8 ans"]
-  },
-  {
-    id: "linen-romper",
-    title: "Barboteuse en Lin Bébé",
-    categories: ["enfant", "casual"],
-    price: 29.00,
-    oldPrice: 35.00,
-    desc: "Barboteuse d'été légère sans manches boutonnée à l'avant, fabriquée en lin et coton biologique respirant.",
-    image: "images/product_orange.png",
-    variants: [
-      { img: "images/product_orange.png", color: "#dca738", name: "Moutarde" },
-      { img: "images/product_grey.png", color: "#e2dacf", name: "Écru" }
-    ],
-    sizes: ["12 mois", "18 mois", "2 ans"]
+function formatPrice(val) {
+  if (val >= 1000) {
+    return val.toLocaleString('fr-FR') + " FCFA";
+  } else {
+    return "$" + val.toFixed(2);
   }
-];
+}
 
 // 2. STATE MANAGEMENT
 let cart = [];
 let activeProduct = PRODUCTS[0];
 let activeVariantIndex = 0;
 let activeSize = "M";
-let currentCategory = "femme"; // Default to femme
+let currentCategory = ""; // Default to show all products on load
+let currentSubcategory = ""; // Default empty subcategory
 let searchQuery = "";
 let currentSort = "default"; // Sorting state: default, low-high, high-low
 let favorites = new Set(); // Product IDs the user has favorited (shared between grid & detail view)
+
+// Desktop load more & filter tracking
+let desktopProductLimit = 9;
+let lastCategory = "";
+let lastSubcategory = "";
+let lastSearchQuery = "";
+let lastSort = "default";
+
+// Load state from localStorage
+try {
+  const savedCart = localStorage.getItem("shammah_cart");
+  if (savedCart) {
+    cart = JSON.parse(savedCart);
+  }
+  const savedFavs = localStorage.getItem("shammah_favorites");
+  if (savedFavs) {
+    favorites = new Set(JSON.parse(savedFavs));
+  }
+} catch (e) {
+  console.error("Failed to load from localStorage", e);
+}
 
 // DOM Elements
 const shopScreen = document.getElementById("shop-screen");
@@ -298,10 +97,35 @@ function renderProducts() {
   if (!productListContainer) return;
   productListContainer.innerHTML = "";
   
-  // Filter products by category ("favoris" is a pseudo-category showing only favorited items)
-  let filtered = currentCategory === "favoris"
-    ? PRODUCTS.filter(p => favorites.has(p.id))
-    : PRODUCTS.filter(p => p.categories.includes(currentCategory));
+  // Reset limit if filters changed
+  if (currentCategory !== lastCategory || 
+      currentSubcategory !== lastSubcategory || 
+      searchQuery !== lastSearchQuery || 
+      currentSort !== lastSort) {
+    desktopProductLimit = 9;
+    
+    // Save last states
+    lastCategory = currentCategory;
+    lastSubcategory = currentSubcategory;
+    lastSearchQuery = searchQuery;
+    lastSort = currentSort;
+  }
+  
+  console.log("renderProducts called:", { currentCategory, currentSubcategory, searchQuery, productsLength: PRODUCTS.length });
+  
+  // Filter products by category & subcategory
+  let filtered = PRODUCTS.filter(p => {
+    const matchesCategory = !currentCategory
+      ? true
+      : (currentCategory === "favoris" ? favorites.has(p.id) : p.categories.includes(currentCategory));
+      
+    if (!matchesCategory) return false;
+    
+    if (currentSubcategory) {
+      return p.subcategory === currentSubcategory;
+    }
+    return true;
+  });
 
   // Sort by price if requested
   if (currentSort === "low-high") {
@@ -319,7 +143,34 @@ function renderProducts() {
     );
   }
 
-  if (filtered.length === 0) {
+  // Interweave categories ONLY on default catalog load
+  if (!currentCategory && !currentSubcategory && !searchQuery && currentSort === "default") {
+    const cats = window.db.getCategories();
+    const catBuckets = cats.map(c => PRODUCTS.filter(p => p.categories.includes(c.slug)));
+    
+    let interwoven = [];
+    const maxLen = Math.max(...catBuckets.map(b => b.length));
+    for (let i = 0; i < maxLen; i++) {
+      for (let j = 0; j < catBuckets.length; j++) {
+        if (i < catBuckets[j].length) {
+          interwoven.push(catBuckets[j][i]);
+        }
+      }
+    }
+    filtered = interwoven;
+  }
+
+  // Desktop pagination limit logic
+  const loadMoreContainer = document.getElementById("load-more-container");
+  let displayProducts = filtered;
+  if (isDesktop() && filtered.length > desktopProductLimit) {
+    if (loadMoreContainer) loadMoreContainer.style.display = "flex";
+    displayProducts = filtered.slice(0, desktopProductLimit);
+  } else {
+    if (loadMoreContainer) loadMoreContainer.style.display = "none";
+  }
+
+  if (displayProducts.length === 0) {
     productListContainer.innerHTML = `
       <div class="cart-empty-state" style="grid-column: 1 / -1; padding: 60px 0; text-align: center;">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 48px; height: 48px; margin: 0 auto 16px auto; display: block; stroke: var(--text-secondary);">
@@ -331,7 +182,7 @@ function renderProducts() {
     return;
   }
 
-  filtered.forEach(product => {
+  displayProducts.forEach(product => {
     const card = document.createElement("div");
     card.className = "product-card";
     
@@ -350,8 +201,8 @@ function renderProducts() {
           <div class="product-info-texts">
             <h3>${product.title}</h3>
             <div class="product-prices">
-              <span class="current-price">$${product.price.toFixed(2)}</span>
-              <span class="old-price">$${product.oldPrice.toFixed(2)}</span>
+              <span class="current-price">${formatPrice(product.price)}</span>
+              <span class="old-price">${formatPrice(product.oldPrice)}</span>
             </div>
           </div>
           <button class="add-cart-fast-btn" data-id="${product.id}">
@@ -374,7 +225,21 @@ function renderProducts() {
     // Directly adds to cart from catalog card
     card.querySelector(".add-cart-fast-btn").addEventListener("click", (e) => {
       e.stopPropagation();
+      const btn = e.currentTarget;
       addToCart(product, product.variants[0], product.sizes[0] || "M");
+      
+      // Visual feedback: green checkmark
+      btn.classList.add("added");
+      const originalSvg = btn.innerHTML;
+      btn.innerHTML = `
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" style="stroke: #ffffff; width: 14px; height: 14px;">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+        </svg>
+      `;
+      setTimeout(() => {
+        btn.classList.remove("added");
+        btn.innerHTML = originalSvg;
+      }, 1500);
     });
 
     // Favorite toggle button
@@ -386,6 +251,13 @@ function renderProducts() {
         favorites.add(product.id);
       } else {
         favorites.delete(product.id);
+      }
+
+      // Save favorites to localStorage
+      try {
+        localStorage.setItem("shammah_favorites", JSON.stringify(Array.from(favorites)));
+      } catch (err) {
+        console.error(err);
       }
 
       // In the "Favoris" view, unfavoriting should drop the card from the list immediately
@@ -407,32 +279,181 @@ function renderProducts() {
   });
 }
 
-// Category Tabs Selection Handlers
-document.querySelectorAll(".category-tab").forEach(tab => {
-  tab.addEventListener("click", (e) => {
-    e.preventDefault();
-    const category = e.target.getAttribute("data-category");
+// Dynamic Categories and Subcategories Rendering System
+function renderCategoryTabs() {
+  const container = document.getElementById("dynamic-category-tabs");
+  if (!container) return;
+  
+  const categories = window.db.getCategories();
+  container.innerHTML = "";
+  
+  categories.forEach(cat => {
+    const btn = document.createElement("button");
+    btn.className = "category-tab";
+    if (currentCategory === cat.slug) {
+      btn.classList.add("active");
+    }
+    btn.setAttribute("data-category", cat.slug);
+    btn.style.outline = "none";
     
-    // Sync category active classes across all groups (mobile tab, desktop tab)
-    document.querySelectorAll(".category-tab").forEach(t => {
-      t.classList.toggle("active", t.getAttribute("data-category") === category);
+    btn.innerHTML = `
+      <div class="category-circle-img">
+        <img src="${cat.image_url}" alt="${cat.name}">
+      </div>
+      <span>${cat.name}</span>
+    `;
+    
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const category = cat.slug;
+      
+      currentSubcategory = "";
+      searchQuery = "";
+      const mSearchInput = document.getElementById("mobile-search");
+      if (mSearchInput) mSearchInput.value = "";
+      const dSearchInput = document.getElementById("desktop-search");
+      if (dSearchInput) dSearchInput.value = "";
+      
+      // Update active tabs
+      document.querySelectorAll(".category-tab").forEach(t => {
+        t.classList.toggle("active", t.getAttribute("data-category") === category);
+      });
+      
+      // Sync desktop header links
+      document.querySelectorAll(".desktop-nav .nav-link").forEach(link => {
+        link.classList.toggle("active", link.getAttribute("data-category") === category);
+      });
+      
+      currentCategory = category;
+      setActiveBottomNavItem("nav-home-btn");
+      renderProducts();
+      
+      if (isDesktop()) {
+        const catSec = document.getElementById("catalog-section");
+        if (catSec) catSec.scrollIntoView({ behavior: "smooth" });
+      }
     });
+    
+    container.appendChild(btn);
+  });
+}
 
-    // Sync desktop header links
-    document.querySelectorAll(".desktop-nav .nav-link").forEach(link => {
-      link.classList.toggle("active", link.getAttribute("data-category") === category);
+function renderDrawerAccordion() {
+  const container = document.getElementById("dynamic-drawer-accordion");
+  if (!container) return;
+  
+  const categories = window.db.getCategories();
+  const subcategories = window.db.getSubcategories();
+  container.innerHTML = "";
+  
+  categories.forEach(cat => {
+    const catSubs = subcategories.filter(s => s.category_slug === cat.slug);
+    
+    const item = document.createElement("div");
+    item.className = "accordion-item";
+    item.style.borderBottom = "1.5px solid var(--accent-light)";
+    item.style.paddingBottom = "6px";
+    
+    // Header button
+    const header = document.createElement("button");
+    header.className = "accordion-header";
+    header.style.cssText = "display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 0; background: transparent; border: none; font-weight: 700; font-family: var(--font-inter); font-size: 0.95rem; color: var(--text-primary); cursor: pointer; text-align: left;";
+    header.innerHTML = `
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <img src="${cat.image_url}" alt="${cat.name}" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+        <span>${cat.name}</span>
+      </div>
+      <svg class="chevron-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 14px; height: 14px; transition: transform 0.25s ease; color: var(--text-secondary);"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" /></svg>
+    `;
+    
+    // Accordion Content (links)
+    const content = document.createElement("div");
+    content.className = "accordion-content";
+    content.style.cssText = "display: none; flex-direction: column; padding-left: 44px; gap: 10px; margin-top: 4px; margin-bottom: 8px;";
+    
+    // "Tous les articles" Link
+    const allLink = document.createElement("a");
+    allLink.href = "#";
+    allLink.className = "nav-drawer-link sub-link";
+    allLink.setAttribute("data-category", cat.slug);
+    allLink.setAttribute("data-sub", "");
+    allLink.style.cssText = "font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); text-decoration: none; padding: 4px 0; display: block;";
+    allLink.textContent = "Tous les articles";
+    content.appendChild(allLink);
+    
+    // Subcategories Links
+    catSubs.forEach(sub => {
+      const link = document.createElement("a");
+      link.href = "#";
+      link.className = "nav-drawer-link sub-link";
+      link.setAttribute("data-category", cat.slug);
+      link.setAttribute("data-sub", sub.slug);
+      link.style.cssText = "font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); text-decoration: none; padding: 4px 0; display: block;";
+      link.textContent = sub.name;
+      content.appendChild(link);
     });
+    
+    // Accordion header click toggles display
+    header.addEventListener("click", () => {
+      const isOpen = content.style.display === "flex";
+      // Close other accordion content blocks
+      document.querySelectorAll(".drawer-menu-accordion .accordion-content").forEach(c => c.style.display = "none");
+      document.querySelectorAll(".drawer-menu-accordion .chevron-icon").forEach(ch => ch.style.transform = "none");
+      
+      if (!isOpen) {
+        content.style.display = "flex";
+        const icon = header.querySelector(".chevron-icon");
+        if (icon) {
+          icon.style.transform = "rotate(180deg)";
+        }
+      }
+    });
+    
+    item.appendChild(header);
+    item.appendChild(content);
+    container.appendChild(item);
+  });
+  
+  bindSubLinkClickHandlers();
+}
 
-    currentCategory = category;
-    setActiveBottomNavItem("nav-home-btn");
-    renderProducts();
-
-    if (isDesktop() && e.target.closest(".desktop-header")) {
+function bindSubLinkClickHandlers() {
+  document.querySelectorAll(".sub-link").forEach(link => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const category = link.getAttribute("data-category");
+      const sub = link.getAttribute("data-sub");
+      currentCategory = category;
+      currentSubcategory = sub;
+      searchQuery = "";
+      const mSearchInput = document.getElementById("mobile-search");
+      if (mSearchInput) mSearchInput.value = "";
+      const dSearchInput = document.getElementById("desktop-search");
+      if (dSearchInput) dSearchInput.value = "";
+      
+      document.querySelectorAll(".sub-link").forEach(l => l.classList.remove("active"));
+      link.classList.add("active");
+      
+      // Sync homepage category tabs
+      document.querySelectorAll(".category-tab").forEach(t => {
+        t.classList.toggle("active", t.getAttribute("data-category") === category);
+      });
+      
+      // Sync desktop nav links
+      document.querySelectorAll(".desktop-nav .nav-link").forEach(l => {
+        l.classList.toggle("active", l.getAttribute("data-category") === category);
+      });
+      
+      toggleNavDrawer(false);
+      setActiveBottomNavItem("nav-home-btn");
+      renderProducts();
+      
       const catSec = document.getElementById("catalog-section");
       if (catSec) catSec.scrollIntoView({ behavior: "smooth" });
-    }
+    });
   });
-});
+}
+
 
 // Sync desktop header links
 document.querySelectorAll(".desktop-nav .nav-link").forEach(link => {
@@ -508,8 +529,8 @@ function openProductDetails(product) {
   // Specs bindings
   document.getElementById("detail-title").textContent = product.title;
   document.getElementById("detail-category").textContent = capitalizeFirst(product.categories[0]);
-  document.getElementById("detail-current-price").textContent = `$${product.price.toFixed(2)}`;
-  document.getElementById("detail-old-price").textContent = `$${product.oldPrice.toFixed(2)}`;
+  document.getElementById("detail-current-price").textContent = formatPrice(product.price);
+  document.getElementById("detail-old-price").textContent = formatPrice(product.oldPrice);
   document.getElementById("detail-desc").textContent = product.desc;
   
   // Set Main gallery image
@@ -647,6 +668,13 @@ if (detailFavBtn) {
     }
     detailFavBtn.classList.toggle("active", isActive);
 
+    // Save favorites to localStorage
+    try {
+      localStorage.setItem("shammah_favorites", JSON.stringify(Array.from(favorites)));
+    } catch (err) {
+      console.error(err);
+    }
+
     // Keep the matching catalog card heart in sync if it's currently rendered
     const gridFavBtn = document.querySelector(`.fav-btn[data-id="${activeProduct.id}"]`);
     if (gridFavBtn) gridFavBtn.classList.toggle("active", isActive);
@@ -701,6 +729,21 @@ function addToCart(product, variant, size) {
   }
 
   updateCartBadges();
+  renderCart();
+  
+  // Open cart drawer automatically on add
+  toggleCartDrawer(true);
+  
+  // Bounce the cart buttons in header
+  const cartBtns = [document.getElementById("desktop-cart-btn"), document.getElementById("open-cart-btn")];
+  cartBtns.forEach(btn => {
+    if (btn) {
+      btn.classList.remove("cart-btn-bounce");
+      void btn.offsetWidth; // force reflow
+      btn.classList.add("cart-btn-bounce");
+    }
+  });
+
   showToast(`${product.title} (${size}) ajouté au panier !`);
 }
 
@@ -722,11 +765,33 @@ function updateCartBadges() {
     cartBadgeDesktop.textContent = totalQty;
     cartBadgeDesktop.style.display = totalQty > 0 ? "flex" : "none";
   }
+
+  // Save to localStorage
+  try {
+    localStorage.setItem("shammah_cart", JSON.stringify(cart));
+  } catch (e) {
+    console.error(e);
+  }
+
+  // Animate badges
+  const badges = [mobileCartBadgeDot, cartBadgeMobile, cartBadgeDesktop];
+  badges.forEach(badge => {
+    if (badge && totalQty > 0) {
+      badge.classList.remove("cart-badge-bounce");
+      void badge.offsetWidth; // force reflow
+      badge.classList.add("cart-badge-bounce");
+    }
+  });
 }
 
 function renderCart() {
   if (!cartItemsContainer) return;
   cartItemsContainer.innerHTML = "";
+
+  const clearCartBtn = document.getElementById("clear-cart-btn");
+  if (clearCartBtn) {
+    clearCartBtn.style.display = cart.length > 0 ? "inline-block" : "none";
+  }
 
   if (cart.length === 0) {
     cartItemsContainer.innerHTML = `
@@ -759,7 +824,7 @@ function renderCart() {
           <h4 class="cart-item-name">${item.title}</h4>
           <p class="cart-item-meta">Taille: ${item.size} | ${item.variant.name}</p>
         </div>
-        <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+        <div class="cart-item-price">${formatPrice(item.price)}</div>
       </div>
       <div class="cart-item-actions">
         <button class="cart-item-remove" data-index="${index}">
@@ -778,7 +843,7 @@ function renderCart() {
     cartItemsContainer.appendChild(itemEl);
   });
 
-  cartTotalValue.textContent = `$${total.toFixed(2)}`;
+  cartTotalValue.textContent = formatPrice(total);
 
   // Bind Adjust Quantity Buttons
   document.querySelectorAll(".quantity-btn.dec").forEach(btn => {
@@ -887,8 +952,58 @@ function generateOrderNumber() {
 }
 
 function showOrderConfirmation() {
+  const orderNumber = generateOrderNumber();
   const orderNumberEl = document.getElementById("checkout-order-number");
-  if (orderNumberEl) orderNumberEl.textContent = generateOrderNumber();
+  if (orderNumberEl) orderNumberEl.textContent = orderNumber;
+  
+  // Read shipping details
+  const fullnameInput = document.getElementById("shipping-fullname");
+  const emailInput = document.getElementById("shipping-email");
+  const addressInput = document.getElementById("shipping-address");
+  const prefixSelect = document.getElementById("phone-country-prefix");
+  const phoneInput = document.getElementById("shipping-phone");
+  
+  const fullname = fullnameInput ? fullnameInput.value : "Client Démo";
+  const email = emailInput ? emailInput.value : "";
+  const address = addressInput ? addressInput.value : "";
+  const phone = (prefixSelect ? prefixSelect.value : "") + " " + (phoneInput ? phoneInput.value : "");
+  
+  // Calculate total price
+  let subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  let shippingCost = 0;
+  if (document.getElementById("ship-method-express") && document.getElementById("ship-method-express").checked) {
+    shippingCost = (subtotal >= 1000) ? 5400 : 9.00;
+  }
+  const estimatedTax = (subtotal >= 1000) ? 3000 : 5.00;
+  let activePromoDiscount = promoDiscount;
+  if (subtotal >= 1000 && promoDiscount > 0 && promoDiscount < 1000) {
+    activePromoDiscount = promoDiscount * 600;
+  }
+  const total = subtotal + shippingCost + estimatedTax - activePromoDiscount;
+  
+  // Get active payment method
+  const activeMethodBtn = document.querySelector(".payment-method-card.active");
+  const method = activeMethodBtn ? activeMethodBtn.textContent.trim() : "Mobile Money";
+
+  // Create order object
+  const order = {
+    id: orderNumber,
+    date: new Date().toLocaleDateString('fr-FR'),
+    client: fullname,
+    email: email,
+    address: address,
+    phone: phone.trim() || "N/A",
+    total: total,
+    method: method,
+    status: "En attente",
+    items: [...cart]
+  };
+
+  // Save to DB
+  if (window.db) {
+    window.db.saveOrder(order);
+  }
+
   setCheckoutStep(3);
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -913,6 +1028,42 @@ function setCheckoutStep(stepNumber) {
   if (step3Content) step3Content.style.display = stepNumber === 3 ? "block" : "none";
 }
 
+// Hash Routing for SPA screens
+function handleRouting() {
+  const hash = window.location.hash || '#boutique';
+  const shopScreen = document.getElementById("shop-screen");
+  const desktopHero = document.getElementById("desktop-hero");
+  const checkoutScreen = document.getElementById("checkout-screen");
+  
+  if (hash === '#checkout') {
+    if (cart.length === 0) {
+      window.location.hash = "boutique";
+      return;
+    }
+    if (shopScreen) shopScreen.style.display = "none";
+    if (desktopHero) desktopHero.style.display = "none";
+    if (checkoutScreen) checkoutScreen.style.display = "block";
+    
+    setCheckoutStep(1);
+    updateEstimatedDeliveryDate();
+    renderCheckoutSummary();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
+    // Default to boutique/shop
+    if (shopScreen) shopScreen.style.display = "block";
+    if (desktopHero) desktopHero.style.display = isDesktop() ? "block" : "none";
+    if (checkoutScreen) checkoutScreen.style.display = "none";
+    
+    // Reset stepper state when leaving checkout
+    setCheckoutStep(1);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
+// Bind routing listeners
+window.addEventListener("hashchange", handleRouting);
+window.addEventListener("load", handleRouting);
+
 // Shared navigation used by both the cart drawer's checkout button and the
 // product detail "Buy now" button, so both paths land on the same checkout state.
 function goToCheckout() {
@@ -920,24 +1071,8 @@ function goToCheckout() {
     showToast("Votre panier est vide.");
     return;
   }
-  // Transition to Checkout Screen
   toggleCartDrawer(false);
-
-  const shopScreen = document.getElementById("shop-screen");
-  const desktopHero = document.getElementById("desktop-hero");
-  const checkoutScreen = document.getElementById("checkout-screen");
-
-  if (shopScreen) shopScreen.style.display = "none";
-  if (desktopHero) desktopHero.style.display = "none";
-  if (checkoutScreen) checkoutScreen.style.display = "block";
-
-  window.scrollTo({ top: 0, behavior: "smooth" });
-
-  // Initialize step display
-  setCheckoutStep(1);
-
-  updateEstimatedDeliveryDate();
-  renderCheckoutSummary();
+  window.location.hash = "checkout";
 }
 
 document.getElementById("checkout-action-btn").addEventListener("click", goToCheckout);
@@ -975,33 +1110,19 @@ function updateEstimatedDeliveryDate() {
 const checkoutBackBtn = document.getElementById("checkout-back-btn");
 if (checkoutBackBtn) {
   checkoutBackBtn.addEventListener("click", () => {
-    const shopScreen = document.getElementById("shop-screen");
-    const desktopHero = document.getElementById("desktop-hero");
-    const checkoutScreen = document.getElementById("checkout-screen");
-    
-    if (shopScreen) shopScreen.style.display = "block";
-    if (desktopHero) desktopHero.style.display = isDesktop() ? "block" : "none";
-    if (checkoutScreen) checkoutScreen.style.display = "none";
-    
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.location.hash = "boutique";
+    handleRouting();
   });
 }
 
 const checkoutContinueShoppingBtn = document.getElementById("checkout-continue-shopping-btn");
 if (checkoutContinueShoppingBtn) {
   checkoutContinueShoppingBtn.addEventListener("click", () => {
-    const shopScreen = document.getElementById("shop-screen");
-    const desktopHero = document.getElementById("desktop-hero");
-    const checkoutScreen = document.getElementById("checkout-screen");
-
-    if (shopScreen) shopScreen.style.display = "block";
-    if (desktopHero) desktopHero.style.display = isDesktop() ? "block" : "none";
-    if (checkoutScreen) checkoutScreen.style.display = "none";
-
-    setCheckoutStep(1); // reset for the next visit
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.location.hash = "boutique";
+    handleRouting();
   });
 }
+
 
 // Shipping method change handlers
 const shipMethodFree = document.getElementById("ship-method-free");
@@ -1040,10 +1161,39 @@ if (promoCodeApplyBtn && promoCodeInput) {
   });
 }
 
+function isEuropeanAddress(address) {
+  const normalized = address.toLowerCase();
+  
+  // List of European countries / terms in French and English
+  const europeanKeywords = [
+    "france", "belgique", "belgium", "belgie", "suisse", "switzerland", "schweiz", 
+    "luxembourg", "allemagne", "germany", "deutschland", "espagne", "spain", "espana", 
+    "italie", "italy", "italia", "portugal", "royaume-uni", "united kingdom", "uk", 
+    "pays-bas", "netherlands", "nederland", "irlande", "ireland", "autriche", "austria", 
+    "suede", "sweden", "norvege", "norway", "danemark", "denmark", "finlande", "finland",
+    "grece", "greece", "pologne", "poland", "europe"
+  ];
+  
+  const hasEuroCountry = europeanKeywords.some(keyword => normalized.includes(keyword));
+  const postalCodeRegex = /\b\d{4,5}\b/i;
+  const ukPostalCodeRegex = /\b[a-z]{1,2}\d[a-z\d]?\s*\d[a-z]{2}\b/i;
+  const hasPostalCode = postalCodeRegex.test(normalized) || ukPostalCodeRegex.test(normalized);
+  
+  return hasEuroCountry && hasPostalCode;
+}
+
 // --- Interactive 2-Step Checkout Event Handlers ---
 const checkoutToPaymentBtn = document.getElementById("checkout-to-payment-btn");
 const checkoutBackToStep1 = document.getElementById("checkout-back-to-step-1");
 const checkoutShippingForm = document.getElementById("checkout-shipping-form");
+
+// Clear custom validation message on input
+const addressInput = document.getElementById("shipping-address");
+if (addressInput) {
+  addressInput.addEventListener("input", () => {
+    addressInput.setCustomValidity("");
+  });
+}
 
 if (checkoutToPaymentBtn) {
   checkoutToPaymentBtn.addEventListener("click", (e) => {
@@ -1053,23 +1203,29 @@ if (checkoutToPaymentBtn) {
       return;
     }
     
+    const addressInput = document.getElementById("shipping-address");
+    if (addressInput) {
+      if (!isEuropeanAddress(addressInput.value)) {
+        addressInput.setCustomValidity("Veuillez indiquer une adresse européenne complète (ex: 75002 Paris, France).");
+        addressInput.reportValidity();
+        return;
+      } else {
+        addressInput.setCustomValidity("");
+      }
+    }
+    
     // Read values
-    const fname = document.getElementById("shipping-firstname").value;
-    const lname = document.getElementById("shipping-lastname").value;
+    const fullname = document.getElementById("shipping-fullname").value;
     const email = document.getElementById("shipping-email").value;
-    const prefix = document.getElementById("phone-country-prefix").value;
-    const phone = document.getElementById("shipping-phone").value;
-    const city = document.getElementById("shipping-city").value;
-    const state = document.getElementById("shipping-state").value;
-    const zip = document.getElementById("shipping-zip").value;
+    const address = document.getElementById("shipping-address").value;
     
     const fullnameEl = document.getElementById("recap-fullname");
     const emailEl = document.getElementById("recap-email");
     const addressTextEl = document.getElementById("recap-address-text");
     
-    if (fullnameEl) fullnameEl.textContent = `${fname} ${lname}`;
+    if (fullnameEl) fullnameEl.textContent = fullname;
     if (emailEl) emailEl.textContent = email;
-    if (addressTextEl) addressTextEl.textContent = `${city}, ${state} ${zip} | Tél: ${prefix} ${phone}`;
+    if (addressTextEl) addressTextEl.textContent = address;
     
     setCheckoutStep(2);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -1110,12 +1266,8 @@ momoOpCards.forEach(card => {
   card.addEventListener("click", () => {
     momoOpCards.forEach(c => {
       c.classList.remove("active");
-      c.style.color = "var(--text-secondary)";
-      c.style.borderColor = "var(--accent-light)";
     });
     card.classList.add("active");
-    card.style.color = "var(--text-primary)";
-    card.style.borderColor = "var(--text-primary)";
     
     const radio = card.querySelector('input[type="radio"]');
     if (radio) radio.checked = true;
@@ -1182,10 +1334,58 @@ if (cardInputCvv) {
   });
 }
 
+// Inline payment processing simulator
+function runInlinePaymentProcessing(titleText, detailsText, onComplete) {
+  const paymentCard = document.getElementById("payment-card");
+  const processingPanel = document.getElementById("payment-processing-panel");
+  const simSpinner = document.getElementById("payment-processing-spinner");
+  const simSuccess = document.getElementById("payment-processing-success-icon");
+  const simTitle = document.getElementById("payment-processing-title");
+  const simText = document.getElementById("payment-processing-text");
+  const simTimer = document.getElementById("payment-processing-timer");
+  
+  if (!paymentCard || !processingPanel) {
+    onComplete();
+    return;
+  }
+  
+  if (simTitle) simTitle.textContent = titleText;
+  if (simText) simText.textContent = detailsText;
+  if (simSpinner) simSpinner.style.display = "block";
+  if (simSuccess) simSuccess.style.display = "none";
+  if (simTimer) {
+    simTimer.textContent = "5s";
+    simTimer.style.display = "inline-block";
+  }
+  
+  paymentCard.style.display = "none";
+  processingPanel.style.display = "flex";
+  
+  let secondsLeft = 5;
+  const interval = setInterval(() => {
+    secondsLeft--;
+    if (simTimer) simTimer.textContent = `${secondsLeft}s`;
+    
+    if (secondsLeft === 2) {
+      if (simSpinner) simSpinner.style.display = "none";
+      if (simSuccess) simSuccess.style.display = "flex";
+      if (simTitle) simTitle.textContent = "Paiement validé !";
+      if (simText) simText.textContent = "Votre transaction a été validée avec succès. Préparation de votre commande...";
+      if (simTimer) simTimer.style.display = "none";
+    }
+    
+    if (secondsLeft <= 0) {
+      clearInterval(interval);
+      processingPanel.style.display = "none";
+      paymentCard.style.display = "block"; // Reset state for future
+      onComplete();
+    }
+  }, 1000);
+}
+
 // MoMo simulated payment popup
 const submitMomoBtn = document.getElementById("checkout-submit-momo-btn");
 const momoPhoneInput = document.getElementById("momo-phone-number");
-const momoSimModal = document.getElementById("momo-simulation-modal");
 
 if (submitMomoBtn) {
   submitMomoBtn.addEventListener("click", () => {
@@ -1197,35 +1397,10 @@ if (submitMomoBtn) {
     const operator = document.querySelector('input[name="momo_operator"]:checked').value;
     const phone = momoPhoneInput.value;
     
-    const simTitle = document.getElementById("momo-sim-title");
-    const simText = document.getElementById("momo-sim-text");
-    const simTimer = document.getElementById("momo-sim-timer");
-    const simSpinner = document.getElementById("momo-sim-spinner");
-    const simSuccess = document.getElementById("momo-sim-success-icon");
-    
-    if (simTitle) simTitle.textContent = "En attente de validation";
-    if (simText) simText.textContent = `Veuillez accepter la transaction de débit sur votre mobile ${operator} (${phone}).`;
-    if (simTimer) {
-      simTimer.textContent = "15s";
-      simTimer.style.display = "inline-block";
-    }
-    if (simSpinner) simSpinner.style.display = "block";
-    if (simSuccess) simSuccess.style.display = "none";
-    if (momoSimModal) momoSimModal.style.display = "flex";
-    
-    let secondsLeft = 15;
-    const interval = setInterval(() => {
-      secondsLeft--;
-      if (simTimer) simTimer.textContent = `${secondsLeft}s`;
-      
-      // Auto-validate after 3 seconds
-      if (secondsLeft === 12) {
-        if (simSpinner) simSpinner.style.display = "none";
-        if (simSuccess) simSuccess.style.display = "block";
-        if (simTitle) simTitle.textContent = "Paiement validé !";
-        if (simText) simText.textContent = "Votre transaction a été validée avec succès. Préparation de votre commande...";
-        if (simTimer) simTimer.style.display = "none";
-        
+    runInlinePaymentProcessing(
+      "En attente de validation",
+      `Veuillez confirmer la transaction sur votre mobile ${operator} (${phone}).`,
+      () => {
         // Reset Cart & Form state
         cart = [];
         promoDiscount = 0;
@@ -1233,14 +1408,9 @@ if (submitMomoBtn) {
         if (checkoutShippingForm) checkoutShippingForm.reset();
         if (momoPhoneInput) momoPhoneInput.value = "";
         updateCartBadges();
-      }
-      
-      if (secondsLeft <= 0) {
-        clearInterval(interval);
-        if (momoSimModal) momoSimModal.style.display = "none";
         showOrderConfirmation();
       }
-    }, 1000);
+    );
   });
 }
 
@@ -1258,34 +1428,30 @@ if (submitCardBtn) {
       return;
     }
     
-    showToast("Traitement du paiement par carte bancaire...");
-    submitCardBtn.disabled = true;
-    submitCardBtn.textContent = "Traitement en cours...";
-    
-    setTimeout(() => {
-      showToast("Paiement par carte validé !");
-      submitCardBtn.disabled = false;
-      submitCardBtn.textContent = "Confirmer le paiement par carte";
-      
-      // Reset State
-      cart = [];
-      promoDiscount = 0;
-      if (promoCodeInput) promoCodeInput.value = "";
-      if (checkoutShippingForm) checkoutShippingForm.reset();
-      
-      // Reset inputs card
-      document.getElementById("card-input-number").value = "";
-      document.getElementById("card-input-name").value = "";
-      document.getElementById("card-input-expiry").value = "";
-      document.getElementById("card-input-cvv").value = "";
-      document.getElementById("card-num-display").textContent = "•••• •••• •••• ••••";
-      document.getElementById("card-holder-display").textContent = "NOM COMPLET";
-      document.getElementById("card-exp-display").textContent = "MM/AA";
-      document.getElementById("card-cvv-display").textContent = "•••";
-      
-      updateCartBadges();
-      showOrderConfirmation();
-    }, 2000);
+    runInlinePaymentProcessing(
+      "Sécurisation de la transaction...",
+      "Vérification des détails de la carte bancaire auprès de votre établissement financier...",
+      () => {
+        // Reset State
+        cart = [];
+        promoDiscount = 0;
+        if (promoCodeInput) promoCodeInput.value = "";
+        if (checkoutShippingForm) checkoutShippingForm.reset();
+        
+        // Reset inputs card
+        document.getElementById("card-input-number").value = "";
+        document.getElementById("card-input-name").value = "";
+        document.getElementById("card-input-expiry").value = "";
+        document.getElementById("card-input-cvv").value = "";
+        document.getElementById("card-num-display").textContent = "•••• •••• •••• ••••";
+        document.getElementById("card-holder-display").textContent = "NOM COMPLET";
+        document.getElementById("card-exp-display").textContent = "MM/AA";
+        document.getElementById("card-cvv-display").textContent = "•••";
+        
+        updateCartBadges();
+        showOrderConfirmation();
+      }
+    );
   });
 }
 
@@ -1294,21 +1460,15 @@ const demoAutofillBtn = document.getElementById("demo-autofill-btn");
 if (demoAutofillBtn) {
   demoAutofillBtn.addEventListener("click", () => {
     const addresses = [
-      { fname: "Moussa", lname: "Diabaté", email: "moussa.dia@gmail.com", prefix: "+225", phone: "0758493021", city: "Abidjan", state: "Cocody", zip: "00225" },
-      { fname: "Fatou", lname: "N'Diaye", email: "fatou.nd@yahoo.fr", prefix: "+221", phone: "776594830", city: "Dakar", state: "Plateau", zip: "00221" },
-      { fname: "Koffi", lname: "Mensah", email: "koffi.mensah@outlook.com", prefix: "+229", phone: "95684730", city: "Cotonou", state: "Littoral", zip: "00229" }
+      { fullname: "Moussa Diabaté", email: "moussa.dia@gmail.com", address: "45 Avenue Louise, 1050 Bruxelles, Belgique" },
+      { fullname: "Fatou N'Diaye", email: "fatou.nd@yahoo.fr", address: "Rue du Stand 60, 1204 Genève, Suisse" },
+      { fullname: "Koffi Mensah", email: "koffi.mensah@outlook.com", address: "12 Rue de la Paix, 75002 Paris, France" }
     ];
     const addr = addresses[Math.floor(Math.random() * addresses.length)];
     
-    document.getElementById("shipping-firstname").value = addr.fname;
-    document.getElementById("shipping-lastname").value = addr.lname;
+    document.getElementById("shipping-fullname").value = addr.fullname;
     document.getElementById("shipping-email").value = addr.email;
-    document.getElementById("phone-country-prefix").value = addr.prefix;
-    document.getElementById("shipping-phone").value = addr.phone;
-    document.getElementById("shipping-city").value = addr.city;
-    document.getElementById("shipping-state").value = addr.state;
-    document.getElementById("shipping-zip").value = addr.zip;
-    document.getElementById("shipping-desc").value = "Livrer à la réception, merci.";
+    document.getElementById("shipping-address").value = addr.address;
     
     showToast("⚡ Formulaire pré-rempli avec des données de démonstration !");
   });
@@ -1335,7 +1495,7 @@ function renderCheckoutSummary() {
         <h4 class="checkout-item-title">${item.title}</h4>
         <p class="checkout-item-subtitle">Taille: ${item.size} | ${item.variant.name}</p>
       </div>
-      <span class="checkout-item-price">$${itemSubtotal.toFixed(2)}</span>
+      <span class="checkout-item-price">${formatPrice(itemSubtotal)}</span>
     `;
     checkoutItemsList.appendChild(itemEl);
   });
@@ -1343,14 +1503,20 @@ function renderCheckoutSummary() {
   // Shipping calculation
   let shippingCost = 0;
   if (shipMethodExpress && shipMethodExpress.checked) {
-    shippingCost = 9.00;
+    shippingCost = (subtotal >= 1000) ? 5400 : 9.00;
   }
 
   // Taxes
-  const estimatedTax = 5.00;
+  const estimatedTax = (subtotal >= 1000) ? 3000 : 5.00;
+
+  // Adjusted promo discount
+  let activePromoDiscount = promoDiscount;
+  if (subtotal >= 1000 && promoDiscount > 0 && promoDiscount < 1000) {
+    activePromoDiscount = promoDiscount * 600;
+  }
 
   // Total
-  const total = subtotal + shippingCost + estimatedTax - promoDiscount;
+  const total = subtotal + shippingCost + estimatedTax - activePromoDiscount;
 
   // Bind UI breakdown
   const subtotalValueEl = document.getElementById("checkout-subtotal-value");
@@ -1358,15 +1524,15 @@ function renderCheckoutSummary() {
   const taxValueEl = document.getElementById("checkout-tax-value");
   const totalValueEl = document.getElementById("checkout-total-value");
 
-  if (subtotalValueEl) subtotalValueEl.textContent = `$${subtotal.toFixed(2)}`;
-  if (shippingValueEl) shippingValueEl.textContent = `$${shippingCost.toFixed(2)}`;
-  if (taxValueEl) taxValueEl.textContent = `$${estimatedTax.toFixed(2)}`;
+  if (subtotalValueEl) subtotalValueEl.textContent = formatPrice(subtotal);
+  if (shippingValueEl) shippingValueEl.textContent = formatPrice(shippingCost);
+  if (taxValueEl) taxValueEl.textContent = formatPrice(estimatedTax);
   
   if (totalValueEl) {
-    if (promoDiscount > 0) {
-      totalValueEl.innerHTML = `<span style="font-size: 0.8rem; text-decoration: line-through; color: var(--text-secondary); margin-right: 6px;">$${(subtotal + shippingCost + estimatedTax).toFixed(2)}</span>$${total.toFixed(2)}`;
+    if (activePromoDiscount > 0) {
+      totalValueEl.innerHTML = `<span style="font-size: 0.8rem; text-decoration: line-through; color: var(--text-secondary); margin-right: 6px;">${formatPrice(subtotal + shippingCost + estimatedTax)}</span>${formatPrice(total)}`;
     } else {
-      totalValueEl.textContent = `$${total.toFixed(2)}`;
+      totalValueEl.textContent = formatPrice(total);
     }
   }
 }
@@ -1407,10 +1573,58 @@ const closeFilterBtn = document.getElementById("close-filter-btn");
 const applyFiltersBtn = document.getElementById("apply-filters-btn");
 const sortOptions = document.querySelectorAll("#filter-sort-options .size-pill");
 
+// Subcategory definitions per main category
+const SUBCATEGORIES = {
+  femme: ["écharpe", "bonnet", "bracelet", "pull"],
+  homme: ["casquette", "pantalon", "polo", "tee shirt", "bonnet"],
+  enfant: ["bonnet", "tee shirt"]
+};
+
+let filterSelectedSubcategory = ""; // Local state inside filter panel
+
+function renderFilterSubcategories() {
+  const container = document.getElementById("filter-subcategories-container");
+  if (!container) return;
+  container.innerHTML = "";
+  
+  // Get active main category sub-items (fallback to femme if currentCategory is favoris)
+  const catKey = (currentCategory === "favoris") ? "femme" : currentCategory;
+  const list = SUBCATEGORIES[catKey] || [];
+  
+  // Set default selection based on current global state when drawer opens
+  filterSelectedSubcategory = currentSubcategory;
+  
+  // Add "Tous" (All) pill
+  const allPill = document.createElement("button");
+  allPill.className = `size-pill${!filterSelectedSubcategory ? " active" : ""}`;
+  allPill.textContent = "Tous";
+  allPill.style.cssText = "width: auto; height: 38px; border-radius: 19px; padding: 0 16px; border: 1px solid var(--accent-light); background: transparent; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 600;";
+  allPill.addEventListener("click", () => {
+    filterSelectedSubcategory = "";
+    container.querySelectorAll(".size-pill").forEach(p => p.classList.remove("active"));
+    allPill.classList.add("active");
+  });
+  container.appendChild(allPill);
+  
+  list.forEach(sub => {
+    const pill = document.createElement("button");
+    pill.className = `size-pill${filterSelectedSubcategory === sub ? " active" : ""}`;
+    pill.textContent = capitalizeFirst(sub);
+    pill.style.cssText = "width: auto; height: 38px; border-radius: 19px; padding: 0 16px; border: 1px solid var(--accent-light); background: transparent; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 600;";
+    pill.addEventListener("click", () => {
+      filterSelectedSubcategory = sub;
+      container.querySelectorAll(".size-pill").forEach(p => p.classList.remove("active"));
+      pill.classList.add("active");
+    });
+    container.appendChild(pill);
+  });
+}
+
 function toggleFilterDrawer(open) {
   if (open) {
     if (filterBackdrop) filterBackdrop.classList.add("active");
     if (filterPanel) filterPanel.classList.add("active");
+    renderFilterSubcategories();
   } else {
     if (filterBackdrop) filterBackdrop.classList.remove("active");
     if (filterPanel) filterPanel.classList.remove("active");
@@ -1435,6 +1649,16 @@ if (applyFiltersBtn) {
     if (activeSortPill) {
       currentSort = activeSortPill.getAttribute("data-sort");
     }
+    
+    currentSubcategory = filterSelectedSubcategory;
+    
+    // Sync sub-link active state in left menu drawer
+    document.querySelectorAll(".sub-link").forEach(l => {
+      const matchesCategory = l.getAttribute("data-category") === currentCategory;
+      const matchesSub = l.getAttribute("data-sub") === currentSubcategory;
+      l.classList.toggle("active", matchesCategory && matchesSub);
+    });
+    
     renderProducts();
     toggleFilterDrawer(false);
     showToast("Filtres appliqués.");
@@ -1484,47 +1708,7 @@ if (mobileSearchToggleBtn) {
   });
 }
 
-// Drawer link click handlers
-document.querySelectorAll(".nav-drawer-link").forEach(link => {
-  link.addEventListener("click", (e) => {
-    const category = e.target.getAttribute("data-category");
-    if (category) {
-      e.preventDefault();
-      
-      // Update active state in drawer links
-      document.querySelectorAll(".nav-drawer-link").forEach(l => l.classList.remove("active"));
-      link.classList.add("active");
-      
-      // Sync bottom category tabs
-      document.querySelectorAll(".category-tab").forEach(t => {
-        t.classList.toggle("active", t.getAttribute("data-category") === category);
-      });
-      
-      // Sync desktop navigation links
-      document.querySelectorAll(".desktop-nav .nav-link").forEach(l => {
-        l.classList.toggle("active", l.getAttribute("data-category") === category);
-      });
 
-      currentCategory = category;
-      setActiveBottomNavItem("nav-home-btn");
-      renderProducts();
-      toggleNavDrawer(false);
-
-      // Scroll to catalog section
-      const catSec = document.getElementById("catalog-section");
-      if (catSec) catSec.scrollIntoView({ behavior: "smooth" });
-    }
-  });
-});
-
-const mobileAboutLink = document.getElementById("mobile-about-link");
-if (mobileAboutLink) {
-  mobileAboutLink.addEventListener("click", (e) => {
-    e.preventDefault();
-    toggleNavDrawer(false);
-    showToast("Shammah : Une marque née du minimalisme et du raffinement.");
-  });
-}
 
 const mobileTrackingLink = document.getElementById("mobile-tracking-link");
 if (mobileTrackingLink) {
@@ -1547,26 +1731,32 @@ function scrollShopContentToTop() {
   if (activeScreenContent) activeScreenContent.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// "Boutique" - leaves favorites view (if active) and scrolls back to the top of the shop
+// "Boutique" - leaves favorites view and resets subcategory
 const navHomeBtn = document.getElementById("nav-home-btn");
 if (navHomeBtn) {
   navHomeBtn.addEventListener("click", () => {
+    currentSubcategory = "";
     if (currentCategory === "favoris") {
       currentCategory = "femme";
-      document.querySelectorAll(".category-tab").forEach(t => t.classList.toggle("active", t.getAttribute("data-category") === "femme"));
-      document.querySelectorAll(".desktop-nav .nav-link").forEach(l => l.classList.toggle("active", l.getAttribute("data-category") === "femme"));
-      renderProducts();
     }
+    // Remove sub-link active highlights
+    document.querySelectorAll(".sub-link").forEach(l => l.classList.remove("active"));
+    document.querySelectorAll(".category-tab").forEach(t => t.classList.toggle("active", t.getAttribute("data-category") === currentCategory));
+    document.querySelectorAll(".desktop-nav .nav-link").forEach(l => l.classList.toggle("active", l.getAttribute("data-category") === currentCategory));
+    
     setActiveBottomNavItem("nav-home-btn");
+    renderProducts();
     scrollShopContentToTop();
   });
 }
 
-// "Favoris" - shows only the products the user has favorited, across all categories
+// "Favoris" - shows only favorited products
 const navFavoritesBtn = document.getElementById("nav-favorites-btn");
 if (navFavoritesBtn) {
   navFavoritesBtn.addEventListener("click", () => {
     currentCategory = "favoris";
+    currentSubcategory = "";
+    document.querySelectorAll(".sub-link").forEach(l => l.classList.remove("active"));
     document.querySelectorAll(".category-tab").forEach(t => t.classList.remove("active"));
     document.querySelectorAll(".desktop-nav .nav-link").forEach(l => l.classList.remove("active"));
     setActiveBottomNavItem("nav-favorites-btn");
@@ -1575,10 +1765,77 @@ if (navFavoritesBtn) {
   });
 }
 
-// "Suivi" - opens the existing order tracking drawer
-const navTrackingBtn = document.getElementById("nav-tracking-btn");
-if (navTrackingBtn) {
-  navTrackingBtn.addEventListener("click", () => toggleTrackingDrawer(true));
+// "Recherche" - opens search overlay
+const navSearchBtn = document.getElementById("nav-search-btn");
+const searchOverlay = document.getElementById("search-overlay");
+const closeSearchOverlayBtn = document.getElementById("close-search-overlay-btn");
+
+function toggleSearchOverlay(open) {
+  if (!searchOverlay) return;
+  if (open) {
+    searchOverlay.style.display = "flex";
+    if (mobileSearchInput) {
+      setTimeout(() => {
+        mobileSearchInput.value = searchQuery;
+        mobileSearchInput.focus();
+      }, 100);
+    }
+  } else {
+    searchOverlay.style.display = "none";
+  }
+}
+
+if (navSearchBtn) {
+  navSearchBtn.addEventListener("click", () => {
+    window.location.hash = "boutique";
+    setActiveBottomNavItem("nav-search-btn");
+    toggleSearchOverlay(true);
+  });
+}
+
+if (closeSearchOverlayBtn) {
+  closeSearchOverlayBtn.addEventListener("click", () => toggleSearchOverlay(false));
+}
+
+if (mobileSearchInput) {
+  mobileSearchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      searchQuery = mobileSearchInput.value;
+      toggleSearchOverlay(false);
+      renderProducts();
+      scrollShopContentToTop();
+    }
+  });
+  mobileSearchInput.addEventListener("input", () => {
+    searchQuery = mobileSearchInput.value;
+    renderProducts();
+  });
+}
+
+// "Suivi de colis" (mobile header)
+const mobileTrackingToggleBtn = document.getElementById("mobile-tracking-toggle-btn");
+if (mobileTrackingToggleBtn) {
+  mobileTrackingToggleBtn.addEventListener("click", () => toggleTrackingDrawer(true));
+}
+
+// Inline filter button click
+const inlineFilterBtn = document.getElementById("inline-filter-btn");
+if (inlineFilterBtn) {
+  inlineFilterBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    toggleFilterDrawer(true);
+  });
+}
+
+// Clear cart button click listener
+const clearCartBtn = document.getElementById("clear-cart-btn");
+if (clearCartBtn) {
+  clearCartBtn.addEventListener("click", () => {
+    cart = [];
+    updateCartBadges();
+    renderCart();
+    showToast("Votre panier a été vidé.");
+  });
 }
 
 // Window resize updates
@@ -1586,8 +1843,79 @@ window.addEventListener("resize", () => {
   handleViewportSetup();
 });
 
+// Countdown Timer for Promo Code
+function startPromoCountdown() {
+  const timerElement = document.getElementById("promo-timer");
+  if (!timerElement) return;
+
+  function updateTimer() {
+    const now = new Date();
+    const midnight = new Date();
+    midnight.setHours(24, 0, 0, 0); // Next midnight
+    
+    const diff = midnight - now;
+    if (diff <= 0) {
+      timerElement.textContent = "00:00:00";
+      return;
+    }
+
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    const pad = (num) => String(num).padStart(2, '0');
+    timerElement.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+  }
+
+  updateTimer();
+  setInterval(updateTimer, 1000);
+}
+
+// FAQ Accordion Toggle
+function setupFaqAccordion() {
+  const faqItems = document.querySelectorAll(".faq-item");
+  faqItems.forEach(item => {
+    const header = item.querySelector(".faq-question");
+    if (header) {
+      header.addEventListener("click", () => {
+        const isActive = item.classList.contains("active");
+        
+        // Close all
+        faqItems.forEach(i => {
+          i.classList.remove("active");
+          const ans = i.querySelector(".faq-answer");
+          if (ans) ans.style.maxHeight = null;
+          const icon = i.querySelector(".faq-icon");
+          if (icon) icon.style.transform = "rotate(0deg)";
+        });
+
+        if (!isActive) {
+          item.classList.add("active");
+          const answer = item.querySelector(".faq-answer");
+          if (answer) answer.style.maxHeight = answer.scrollHeight + "px";
+          const icon = item.querySelector(".faq-icon");
+          if (icon) icon.style.transform = "rotate(45deg)";
+        }
+      });
+    }
+  });
+}
+
 // Initialize on DOM ready
 window.addEventListener("DOMContentLoaded", () => {
+  renderCategoryTabs();
+  renderDrawerAccordion();
   handleViewportSetup();
   updateCartBadges();
+  startPromoCountdown();
+  setupFaqAccordion();
+
+  // Load more button listener
+  const loadMoreBtn = document.getElementById("load-more-btn");
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener("click", () => {
+      desktopProductLimit = 999; // Expand limit to show all
+      renderProducts();
+    });
+  }
 });

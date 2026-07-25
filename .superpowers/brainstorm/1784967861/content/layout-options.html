@@ -1,0 +1,91 @@
+<h2>Direction Esthétique pour le Dashboard Shammah</h2>
+<p class="subtitle">Sélectionnez l'identité visuelle qui correspond le mieux à la marque Shammah.</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Midnight Classic (Sombre)</h3>
+      <p>Noir profond (#09090B), bordures charbon fines, typographie blanche et accents dorés ou blancs. Très axé luxe et haut de gamme.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Atelier Clean (Clair)</h3>
+      <p>Blanc chaud (#FAFAFA) avec des lignes de division grises très fines, ombres douces et contrastes typographiques élevés. Spacieux et fonctionnel pour de longues heures de gestion.</p>
+    </div>
+  </div>
+</div>
+
+<div class="split" style="margin-top: 30px;">
+  <!-- Mockup A (Dark) -->
+  <div class="mockup" style="background: #09090b; color: #f4f4f5; border: 1px solid #27272a; padding: 20px; border-radius: 12px; font-family: 'Inter', sans-serif;">
+    <div style="display:flex; justify-content:between; align-items:center; border-bottom: 1px solid #27272a; padding-bottom:10px; margin-bottom:15px;">
+      <span style="font-weight: 800; font-size:0.75rem; letter-spacing:2px; color:#ffffff;">SHAMMAH ADMIN</span>
+      <span style="font-size:0.65rem; color:#a1a1aa; border: 1px solid #27272a; padding: 2px 6px; border-radius:4px;">Mode Sombre</span>
+    </div>
+    <div style="display:grid; grid-template-columns: 1fr 2.5fr; gap:15px; text-align:left;">
+      <!-- Sidebar -->
+      <div style="border-right: 1px solid #27272a; padding-right:10px; display:flex; flex-direction:column; gap:10px;">
+        <div style="height:10px; background:#ffffff; border-radius:2px; width:80%;"></div>
+        <div style="height:10px; background:#27272a; border-radius:2px; width:70%;"></div>
+        <div style="height:10px; background:#27272a; border-radius:2px; width:75%;"></div>
+        <div style="height:10px; background:#27272a; border-radius:2px; width:60%;"></div>
+      </div>
+      <!-- Main -->
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+          <div style="background:#18181b; border: 1px solid #27272a; padding:10px; border-radius:8px; text-align:center;">
+            <div style="font-size:0.6rem; color:#71717a; text-transform:uppercase;">Ventes</div>
+            <div style="font-size:0.95rem; font-weight:800; color:#d4af37; margin-top:2px;">$1,420.00</div>
+          </div>
+          <div style="background:#18181b; border: 1px solid #27272a; padding:10px; border-radius:8px; text-align:center;">
+            <div style="font-size:0.6rem; color:#71717a; text-transform:uppercase;">Commandes</div>
+            <div style="font-size:0.95rem; font-weight:800; color:#ffffff; margin-top:2px;">12</div>
+          </div>
+        </div>
+        <div style="background:#18181b; border: 1px solid #27272a; border-radius:8px; padding:10px; display:flex; flex-direction:column; gap:6px;">
+          <div style="height:8px; background:#27272a; border-radius:2px; width:40%;"></div>
+          <div style="height:6px; background:#27272a; border-radius:2px; width:80%;"></div>
+          <div style="height:6px; background:#27272a; border-radius:2px; width:65%;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mockup B (Light) -->
+  <div class="mockup" style="background: #fafafa; color: #18181b; border: 1px solid #e4e4e7; padding: 20px; border-radius: 12px; font-family: 'Inter', sans-serif;">
+    <div style="display:flex; justify-content:between; align-items:center; border-bottom: 1px solid #e4e4e7; padding-bottom:10px; margin-bottom:15px;">
+      <span style="font-weight: 800; font-size:0.75rem; letter-spacing:2px; color:#18181b;">SHAMMAH ADMIN</span>
+      <span style="font-size:0.65rem; color:#71717a; border: 1px solid #e4e4e7; padding: 2px 6px; border-radius:4px;">Mode Clair</span>
+    </div>
+    <div style="display:grid; grid-template-columns: 1fr 2.5fr; gap:15px; text-align:left;">
+      <!-- Sidebar -->
+      <div style="border-right: 1px solid #e4e4e7; padding-right:10px; display:flex; flex-direction:column; gap:10px;">
+        <div style="height:10px; background:#18181b; border-radius:2px; width:80%;"></div>
+        <div style="height:10px; background:#e4e4e7; border-radius:2px; width:70%;"></div>
+        <div style="height:10px; background:#e4e4e7; border-radius:2px; width:75%;"></div>
+        <div style="height:10px; background:#e4e4e7; border-radius:2px; width:60%;"></div>
+      </div>
+      <!-- Main -->
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+          <div style="background:#ffffff; border: 1px solid #e4e4e7; padding:10px; border-radius:8px; text-align:center; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+            <div style="font-size:0.6rem; color:#71717a; text-transform:uppercase;">Ventes</div>
+            <div style="font-size:0.95rem; font-weight:800; color:#18181b; margin-top:2px;">$1,420.00</div>
+          </div>
+          <div style="background:#ffffff; border: 1px solid #e4e4e7; padding:10px; border-radius:8px; text-align:center; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+            <div style="font-size:0.6rem; color:#71717a; text-transform:uppercase;">Commandes</div>
+            <div style="font-size:0.95rem; font-weight:800; color:#18181b; margin-top:2px;">12</div>
+          </div>
+        </div>
+        <div style="background:#ffffff; border: 1px solid #e4e4e7; border-radius:8px; padding:10px; display:flex; flex-direction:column; gap:6px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+          <div style="height:8px; background:#e4e4e7; border-radius:2px; width:40%;"></div>
+          <div style="height:6px; background:#e4e4e7; border-radius:2px; width:80%;"></div>
+          <div style="height:6px; background:#e4e4e7; border-radius:2px; width:65%;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

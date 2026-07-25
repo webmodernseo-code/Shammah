@@ -1,0 +1,160 @@
+<h2>Description, Couleurs & Galeries de Variantes (Max 3 Photos)</h2>
+<p class="subtitle">Aperçu du formulaire final de création intégrant la description de l'article et la gestion de 3 photos max par couleur.</p>
+
+<div style="background: #f1f5f9; border: 1px solid #cbd5e1; padding: 24px; border-radius: 20px; font-family: 'Inter', sans-serif; color: #0f172a; margin-top: 20px; box-sizing: border-box;">
+  
+  <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; text-align: left;">
+    
+    <!-- LEFT PANEL: High Fidelity Creation Form -->
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); display:flex; flex-direction:column; gap:14px; max-height: 520px; overflow-y: auto;">
+      <h3 style="margin:0; font-size:1rem; font-weight:800; border-bottom: 1px solid #f1f5f9; padding-bottom:8px; display:flex; align-items:center; gap:8px;">
+        <svg style="width:16px; height:16px; color:#2563eb;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        Fiche Produit Complète
+      </h3>
+      
+      <!-- Basic Info -->
+      <div style="display:grid; grid-template-columns: 1.5fr 1fr; gap:10px;">
+        <div>
+          <label style="font-size:0.65rem; font-weight:700; color:#64748b; text-transform:uppercase; display:block; margin-bottom:4px;">Nom du produit</label>
+          <input type="text" value="Portefeuille Cuir Minimaliste" style="width:100%; height:32px; border:1px solid #cbd5e1; border-radius:6px; padding:0 10px; font-size:0.75rem; box-sizing:border-box;" readonly>
+        </div>
+        <div>
+          <label style="font-size:0.65rem; font-weight:700; color:#64748b; text-transform:uppercase; display:block; margin-bottom:4px;">Prix (FCFA)</label>
+          <input type="text" value="18 500" style="width:100%; height:32px; border:1px solid #cbd5e1; border-radius:6px; padding:0 10px; font-size:0.75rem; box-sizing:border-box;" readonly>
+        </div>
+      </div>
+
+      <!-- Categories & Subcategories -->
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+        <div>
+          <label style="font-size:0.65rem; font-weight:700; color:#64748b; text-transform:uppercase; display:block; margin-bottom:4px;">Catégorie (Fixe)</label>
+          <select style="width:100%; height:32px; border:1px solid #cbd5e1; border-radius:6px; padding:0 6px; font-size:0.75rem; background:#ffffff; box-sizing:border-box;" disabled>
+            <option>Gadget</option>
+            <option>Femme</option>
+            <option>Homme</option>
+            <option>Enfant</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:0.65rem; font-weight:700; color:#64748b; text-transform:uppercase; display:block; margin-bottom:4px;">Sous-catégorie (Variable)</label>
+          <input type="text" value="Maroquinerie" style="width:100%; height:32px; border:1px solid #cbd5e1; border-radius:6px; padding:0 10px; font-size:0.75rem; box-sizing:border-box;" readonly>
+        </div>
+      </div>
+
+      <!-- Product Description (Textarea) -->
+      <div>
+        <label style="font-size:0.65rem; font-weight:700; color:#64748b; text-transform:uppercase; display:block; margin-bottom:4px;">Description du Produit</label>
+        <textarea style="width:100%; height:60px; border:1px solid #cbd5e1; border-radius:6px; padding:8px 10px; font-size:0.75rem; font-family:inherit; box-sizing:border-box; resize:none;" readonly>Portefeuille ultra-fin conçu en cuir véritable tanné végétal. Comprend 4 fentes pour cartes et un compartiment à billets central. Finitions faites main.</textarea>
+      </div>
+
+      <!-- Color Variants with up to 3 Photos Upload slots per color -->
+      <div>
+        <label style="font-size:0.65rem; font-weight:700; color:#64748b; text-transform:uppercase; display:block; margin-bottom:6px;">Variantes de Couleur & Galeries (Max 3 photos/couleur)</label>
+        
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          
+          <!-- Variant 1: Chocolat -->
+          <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px; border-radius:8px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <span style="font-size:0.7rem; font-weight:700; display:flex; align-items:center; gap:6px;">
+                <span style="width:12px; height:12px; background:#1c1917; border-radius:50%; border:1px solid #cbd5e1;"></span> Chocolat
+              </span>
+              <span style="font-size:0.6rem; color:#64748b;">(2 photos téléversées)</span>
+            </div>
+            
+            <!-- 3 Photo Slots for Chocolat -->
+            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:8px;">
+              <!-- Photo Slot 1 (Uploaded) -->
+              <div style="border:1px solid #cbd5e1; height:60px; border-radius:4px; display:flex; align-items:center; justify-content:center; background:#ffffff; position:relative; overflow:hidden;">
+                <svg style="width:20px; height:20px; color:#a855f7;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                </svg>
+                <span style="position:absolute; bottom:2px; left:2px; font-size:0.5rem; background:rgba(0,0,0,0.6); color:#fff; padding:1px 3px; border-radius:2px;">Face</span>
+              </div>
+              <!-- Photo Slot 2 (Uploaded) -->
+              <div style="border:1px solid #cbd5e1; height:60px; border-radius:4px; display:flex; align-items:center; justify-content:center; background:#ffffff; position:relative; overflow:hidden;">
+                <svg style="width:20px; height:20px; color:#cbd5e1;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                </svg>
+                <span style="position:absolute; bottom:2px; left:2px; font-size:0.5rem; background:rgba(0,0,0,0.6); color:#fff; padding:1px 3px; border-radius:2px;">Intérieur</span>
+              </div>
+              <!-- Photo Slot 3 (Empty) -->
+              <div style="border:1px dashed #cbd5e1; height:60px; border-radius:4px; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#ffffff; cursor:pointer; color:#64748b;" onmouseover="this.style.borderColor='#2563eb';" onmouseout="this.style.borderColor='#cbd5e1';">
+                <svg style="width:14px; height:14px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+                <span style="font-size:0.5rem; margin-top:2px;">Photo 3</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Variant 2: Noir -->
+          <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px; border-radius:8px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <span style="font-size:0.7rem; font-weight:700; display:flex; align-items:center; gap:6px;">
+                <span style="width:12px; height:12px; background:#000000; border-radius:50%; border:1px solid #cbd5e1;"></span> Noir
+              </span>
+              <span style="font-size:0.6rem; color:#64748b;">(0 photos téléversées)</span>
+            </div>
+            
+            <!-- 3 Empty Photo Slots for Noir -->
+            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:8px;">
+              <div style="border:1px dashed #cbd5e1; height:60px; border-radius:4px; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#ffffff; cursor:pointer; color:#64748b;" onmouseover="this.style.borderColor='#2563eb';" onmouseout="this.style.borderColor='#cbd5e1';">
+                <svg style="width:14px; height:14px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+                <span style="font-size:0.5rem; margin-top:2px;">Photo 1</span>
+              </div>
+              <div style="border:1px dashed #cbd5e1; height:60px; border-radius:4px; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#ffffff; cursor:pointer; color:#64748b;" onmouseover="this.style.borderColor='#2563eb';" onmouseout="this.style.borderColor='#cbd5e1';">
+                <svg style="width:14px; height:14px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+                <span style="font-size:0.5rem; margin-top:2px;">Photo 2</span>
+              </div>
+              <div style="border:1px dashed #cbd5e1; height:60px; border-radius:4px; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#ffffff; cursor:pointer; color:#64748b;" onmouseover="this.style.borderColor='#2563eb';" onmouseout="this.style.borderColor='#cbd5e1';">
+                <svg style="width:14px; height:14px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+                <span style="font-size:0.5rem; margin-top:2px;">Photo 3</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <button style="width:100%; height:36px; background:#10b981; border:none; color:#ffffff; border-radius:6px; font-weight:700; font-size:0.8rem; cursor:pointer;">Enregistrer & Publier l'article</button>
+    </div>
+
+    <!-- RIGHT PANEL: Visual representation of how it shows on the user side with multiple thumbnail photos -->
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); display:flex; flex-direction:column; gap:14px; text-align:left;">
+      <h3 style="margin:0; font-size:1rem; font-weight:800; border-bottom: 1px solid #f1f5f9; padding-bottom:8px;">
+        Rendu sur la Fiche Produit (Vitrine)
+      </h3>
+
+      <!-- Mockup Detail view gallery showing thumbnail previews -->
+      <div style="border: 1px solid #e2e8f0; border-radius: 8px; overflow:hidden; background:#ffffff;">
+        <!-- Main Image -->
+        <div style="height:140px; background:#f5f6f8; position:relative; display:flex; align-items:center; justify-content:center;">
+          <svg style="width:50px; height:50px; color:#cbd5e1;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+          </svg>
+        </div>
+        <!-- Thumbnail Row (representing the uploaded photos for the current color variant) -->
+        <div style="display:flex; justify-content:center; gap:8px; padding:10px; border-top:1px solid #e2e8f0; background:#f8fafc;">
+          <div style="width:30px; height:30px; border:2px solid #a855f7; border-radius:4px; background:#ffffff; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+            <span style="font-size:0.5rem; font-weight:800;">F</span>
+          </div>
+          <div style="width:30px; height:30px; border:1px solid #cbd5e1; border-radius:4px; background:#ffffff; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+            <span style="font-size:0.5rem; font-weight:800;">I</span>
+          </div>
+          <div style="width:30px; height:30px; border:1px dashed #cbd5e1; border-radius:4px; display:flex; align-items:center; justify-content:center; color:#94a3b8;">
+            <span style="font-size:0.6rem;">+</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#f3e8ff; border:1px solid #d8b4fe; padding:10px; border-radius:6px; font-size:0.65rem; color:#6b21a8; line-height:1.4;">
+        ℹ️ <strong>Photos multiples</strong> : Les utilisateurs de la boutique pourront cliquer sur les vignettes sous l'image principale pour faire défiler les différentes photos de la variante de couleur sélectionnée (Face, Intérieur, Zoom).
+      </div>
+    </div>
+
+  </div>
+
+</div>
