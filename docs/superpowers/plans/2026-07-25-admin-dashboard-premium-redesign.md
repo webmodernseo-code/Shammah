@@ -1107,7 +1107,9 @@ Expected: FAIL — le widget affiche encore les commandes fictives codées en du
 
 - [ ] **Step 5: Retirer la logique fictive d'`admin/admin.js`**
 
-Supprimer entièrement la fonction `loadOverviewMetrics()` (données de commandes codées en dur) et la fonction `setupChartToggle()` de `admin/admin.js`, ainsi que leurs appels `loadOverviewMetrics();` et `setupChartToggle();` dans `initApp()`.
+Supprimer entièrement la fonction `loadOverviewMetrics()` (données de commandes codées en dur) et la fonction `setupChartToggle()` de `admin/admin.js`, ainsi que leur appel `loadOverviewMetrics();`/`setupChartToggle();` dans `initApp()`.
+
+**Important** : `loadOverviewMetrics()` est aussi appelée à 3 autres endroits dans `admin/admin.js`, à l'intérieur de fonctions qui gèrent encore l'ancien panneau produit inline (non retiré avant la Task 11) : dans `window.updateVariantSizeStock` (juste après `window.db.saveProduct(p);`), dans `window.deleteProduct` (juste après avoir retiré le produit du localStorage), et dans le gestionnaire de clic de `setupProductPublishForm` (sous le commentaire `// Reload items lists`). Si la fonction `loadOverviewMetrics` est supprimée sans toucher ces 3 appels, modifier un stock, supprimer ou publier un produit via l'ancien formulaire lèvera une `ReferenceError` jusqu'à la Task 11. Remplacer chacun de ces 3 appels `loadOverviewMetrics();` par `if (window.Dashboard) window.Dashboard.refresh();` (ces lignes seront de toute façon supprimées en bloc à la Task 11 avec le reste de l'ancien code produit — ce correctif n'est qu'un pont temporaire).
 
 - [ ] **Step 6: Charger `dashboard.js` dans `admin/index.html`**
 
