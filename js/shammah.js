@@ -186,10 +186,16 @@ function renderProducts() {
     const card = document.createElement("div");
     card.className = "product-card";
     
+    let promoBadgeHTML = "";
+    if (product.promoCode) {
+      promoBadgeHTML = `<span class="badge-tag" style="background-color: var(--accent-red); color: white; left: 16px; top: 46px; font-weight: 700; text-transform: uppercase;">Code: ${product.promoCode}</span>`;
+    }
+    
     card.innerHTML = `
       <div class="product-image-container">
         <img src="${product.image}" alt="${product.title}">
         <span class="badge-tag">${capitalizeFirst(product.categories[0])}</span>
+        ${promoBadgeHTML}
         <button class="fav-btn${favorites.has(product.id) ? ' active' : ''}" data-id="${product.id}">
           <svg fill="none" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -532,6 +538,20 @@ function openProductDetails(product) {
   document.getElementById("detail-current-price").textContent = formatPrice(product.price);
   document.getElementById("detail-old-price").textContent = formatPrice(product.oldPrice);
   document.getElementById("detail-desc").textContent = product.desc;
+  
+  // Render promo code badge if associated
+  const promoContainer = document.getElementById("detail-promo-badge-container");
+  if (promoContainer) {
+    if (product.promoCode) {
+      promoContainer.innerHTML = `
+        <span class="badge-tag" style="background-color: var(--accent-red); color: white; border-radius: 4px; padding: 2px 8px; font-size: 0.65rem; font-weight: 700; text-transform: uppercase;">
+          Code: ${product.promoCode}
+        </span>
+      `;
+    } else {
+      promoContainer.innerHTML = "";
+    }
+  }
   
   // Set Main gallery image
   document.getElementById("detail-main-img").src = product.image;
@@ -1147,16 +1167,27 @@ const promoCodeApplyBtn = document.getElementById("promo-code-apply-btn");
 const promoCodeInput = document.getElementById("promo-code-input");
 if (promoCodeApplyBtn && promoCodeInput) {
   promoCodeApplyBtn.addEventListener("click", () => {
-    const code = promoCodeInput.value.trim().toUpperCase();
-    if (code === "SHAMMAH10") {
-      const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-      promoDiscount = subtotal * 0.1; // 10% off
-      showToast("Code promo SHAMMAH10 appliqué ! (-10%)");
-      renderCheckoutSummary();
-    } else if (code === "") {
+    const codeStr = promoCodeInput.value.trim().toUpperCase();
+    if (codeStr === "") {
       showToast("Veuillez saisir un code promo.");
+      return;
+    }
+    
+    const promos = window.db ? window.db.getPromoCodes() : [];
+    const promo = promos.find(p => p.code.toUpperCase() === codeStr && p.active);
+    
+    if (promo) {
+      const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+      if (promo.type === "percent") {
+        promoDiscount = subtotal * (parseFloat(promo.value) / 100);
+        showToast(`Code promo ${promo.code} appliqué ! (-${promo.value}%)`);
+      } else {
+        promoDiscount = parseFloat(promo.value);
+        showToast(`Code promo ${promo.code} appliqué ! (-${formatPrice(promoDiscount)})`);
+      }
+      renderCheckoutSummary();
     } else {
-      showToast("Code promo invalide.");
+      showToast("Code promo invalide ou expiré.");
     }
   });
 }

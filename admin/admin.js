@@ -13,10 +13,15 @@ function initApp() {
   loadOverviewMetrics();
   loadInventoryList();
   populateCategoryDropdowns();
+  populatePromoDropdown();
+  renderQuickPromoList();
   setupVariantCreator();
   setupProductPublishForm();
   setupSettingsForms();
   loadCategoryTree();
+  loadPromoCodes();
+  setupPromoCodesForm();
+  setupChartToggle();
 }
 
 // 1. SPA Tab switching
@@ -177,6 +182,11 @@ function loadInventoryList() {
     });
     inlineStocksHTML += `</div>`;
 
+    let promoBadgeHTML = "";
+    if (p.promoCode) {
+      promoBadgeHTML = `<span class="badge-status info" style="font-size:0.6rem; padding:1px 6px; margin-top:2px; display:inline-block; max-width:fit-content; border-radius:4px; font-weight:700; text-transform:uppercase;">Promo: ${p.promoCode}</span>`;
+    }
+
     tr.innerHTML = `
       <td style="padding:12px 16px; font-weight:700; text-align:left; vertical-align:top;">
         <div style="display:flex; align-items:center; gap:10px;">
@@ -184,6 +194,7 @@ function loadInventoryList() {
           <div>
             <span style="display:block;">${p.title}</span>
             <span style="font-size:0.65rem; color:var(--text-secondary); font-weight:500;">Prix : ${formatPrice(p.price)}</span>
+            ${promoBadgeHTML}
           </div>
         </div>
       </td>
@@ -197,7 +208,7 @@ function loadInventoryList() {
           </div>
         </div>
       </td>
-      <td style="padding:12px 16px; text-align:center; vertical-align:middle;">
+      <td style="padding:12px 16px; text-align:center; vertical-align:top;">
         <div style="display:flex; justify-content:center; gap:6px; flex-direction:column;">
           <button class="btn-secondary" style="padding:2px 8px; font-size:0.7rem; height:24px; width:80px; justify-content:center;" onclick="editProduct('${p.id}')">Modifier</button>
           <button class="btn-secondary" style="padding:2px 8px; font-size:0.7rem; height:24px; width:80px; justify-content:center; color:var(--color-danger); border-color:var(--color-danger);" onclick="deleteProduct('${p.id}')">Supprimer</button>
@@ -268,6 +279,7 @@ window.editProduct = function(id) {
   document.getElementById("prod-price").value = p.price;
   document.getElementById("prod-desc").value = p.desc || "";
   document.getElementById("prod-category").value = p.categories[0] || "";
+  document.getElementById("prod-promo").value = p.promoCode || "";
 
   // Populate subcategory options and set value
   loadSubcategoryOptions();
@@ -568,6 +580,7 @@ function setupProductPublishForm() {
     const desc = document.getElementById("prod-desc").value.trim();
     const category = document.getElementById("prod-category").value;
     const subcategory = document.getElementById("prod-subcategory").value;
+    const promoCode = document.getElementById("prod-promo").value;
     
     if (title === "" || isNaN(price)) {
       alert("Veuillez renseigner un titre et un prix corrects.");
@@ -637,7 +650,8 @@ function setupProductPublishForm() {
       image: formattedVariants[0].img, // main thumbnail
       variants: formattedVariants,
       sizes: sizes,
-      stock: productStock // total stock
+      stock: productStock, // total stock
+      promoCode: promoCode || ""
     };
     
     window.db.saveProduct(newProduct);
@@ -771,5 +785,204 @@ function loadCategoryTree() {
     `;
     
     container.appendChild(div);
+  });
+}
+
+// 9. Promo Codes Management
+function loadPromoCodes() {
+  const tbody = document.getElementById("promo-list-tbody");
+  if (!tbody) return;
+  tbody.innerHTML = "";
+  
+  const promos = window.db.getPromoCodes();
+  
+  promos.forEach(p => {
+    const tr = document.createElement("tr");
+    
+    // Status Badge
+    let statusStatus = `<span class="badge-status success"><span class="bullet-dot"></span> Actif</span>`;
+    if (!p.active || p.active === "false" || p.active === false) {
+      statusStatus = `<span class="badge-status warning" style="color:var(--text-secondary); background:var(--background-light);"><span class="bullet-dot" style="background-color:var(--text-secondary);"></span> Inactif</span>`;
+    }
+    
+    const typeLabel = p.type === "percent" ? "Pourcentage" : "Montant Fixe";
+    const valLabel = p.type === "percent" ? `${p.value}%` : formatPrice(p.value);
+    
+    tr.innerHTML = `
+      <td style="padding:12px 16px; font-weight:700; text-align:left;">${p.code}</td>
+      <td style="padding:12px 16px;">${typeLabel}</td>
+      <td style="padding:12px 16px; font-weight:800;">${valLabel}</td>
+      <td style="padding:12px 16px;">${statusStatus}</td>
+      <td style="padding:12px 16px; text-align:center;">
+        <button class="btn-secondary" style="padding:2px 8px; font-size:0.7rem; height:24px; color:var(--color-danger); border-color:var(--color-danger);" onclick="deletePromoCode('${p.code}')">Supprimer</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function setupPromoCodesForm() {
+  const btnSave = document.getElementById("btn-save-promo");
+  if (!btnSave) return;
+  
+  btnSave.addEventListener("click", () => {
+    const code = document.getElementById("promo-code").value.trim().toUpperCase();
+    const type = document.getElementById("promo-type").value;
+    const value = parseFloat(document.getElementById("promo-value").value);
+    const active = document.getElementById("promo-active").value === "true";
+    
+    if (code === "" || isNaN(value) || value < 0) {
+      alert("Veuillez remplir correctement les champs.");
+      return;
+    }
+    
+    const newPromo = {
+      code: code,
+      type: type,
+      value: value,
+      active: active
+    };
+    
+    window.db.savePromoCode(newPromo);
+    alert(`Code promo "${code}" enregistré avec succès !`);
+    
+    // Reset form
+    document.getElementById("form-add-promo").reset();
+    
+    // Reload UI
+    loadPromoCodes();
+    populatePromoDropdown();
+    renderQuickPromoList();
+  });
+}
+
+window.deletePromoCode = function(code) {
+  if (confirm(`Voulez-vous vraiment supprimer le code promo "${code}" ?`)) {
+    window.db.deletePromoCode(code);
+    loadPromoCodes();
+    populatePromoDropdown();
+    renderQuickPromoList();
+    alert(`Code promo "${code}" supprimé.`);
+  }
+};
+
+function populatePromoDropdown() {
+  const select = document.getElementById("prod-promo");
+  if (!select) return;
+  
+  select.innerHTML = '<option value="">Aucun</option>';
+  const promos = window.db.getPromoCodes().filter(p => p.active);
+  promos.forEach(p => {
+    const opt = document.createElement("option");
+    opt.value = p.code;
+    const valLabel = p.type === "percent" ? `${p.value}%` : formatPrice(p.value);
+    opt.textContent = `${p.code} (${valLabel})`;
+    select.appendChild(opt);
+  });
+}
+
+function renderQuickPromoList() {
+  const container = document.getElementById("quick-promo-list");
+  if (!container) return;
+  
+  const promos = window.db.getPromoCodes().filter(p => p.active);
+  if (promos.length === 0) {
+    container.innerHTML = `<span style="color: var(--text-secondary); font-style: italic; font-size: 0.75rem;">Aucun code promo actif.</span>`;
+    return;
+  }
+  
+  let html = `<div style="display: flex; flex-wrap: wrap; gap: 8px;">`;
+  promos.forEach(p => {
+    const valLabel = p.type === "percent" ? `-${p.value}%` : `-${formatPrice(p.value)}`;
+    html += `
+      <div style="background: var(--bg-primary); border: 1px solid var(--border-light); padding: 4px 8px; border-radius: 6px; display: flex; align-items: center; gap: 6px; font-size: 0.7rem; font-weight: 500;">
+        <strong style="color: var(--text-primary); font-family: monospace; font-size: 0.75rem;">${p.code}</strong>
+        <span class="badge-status success" style="font-size: 0.6rem; padding: 1px 4px; border-radius: 4px;">${valLabel}</span>
+      </div>
+    `;
+  });
+  html += `</div>`;
+  container.innerHTML = html;
+}
+
+function setupChartToggle() {
+  const btnWeek = document.getElementById("btn-chart-week");
+  const btnMonth = document.getElementById("btn-chart-month");
+  
+  if (!btnWeek || !btnMonth) return;
+  
+  const curvePath = document.getElementById("chart-curve-path");
+  const areaPath = document.getElementById("chart-area-path");
+  const cursorLine = document.getElementById("chart-cursor-line");
+  const glowDot = document.getElementById("chart-glow-dot");
+  const innerDot = document.getElementById("chart-inner-dot");
+  const tooltipGroup = document.getElementById("chart-tooltip-group");
+  const tooltipText = document.getElementById("chart-tooltip-text");
+  const trendBadge = document.getElementById("chart-trend-badge");
+  
+  const lbl1 = document.getElementById("chart-label-1");
+  const lbl2 = document.getElementById("chart-label-2");
+  const lbl3 = document.getElementById("chart-label-3");
+  const lbl4 = document.getElementById("chart-label-4");
+  
+  const weeklyData = {
+    curve: "M 20 105 C 70 105, 70 85, 120 85 C 180 85, 190 45, 240 45 C 290 45, 290 75, 330 75",
+    area: "M 20 105 C 70 105, 70 85, 120 85 C 180 85, 190 45, 240 45 C 290 45, 290 75, 330 75 L 330 110 L 20 110 Z",
+    cx: 240,
+    cy: 45,
+    tooltipTranslate: "translate(200, 7)",
+    tooltipValue: "245 000 FCFA",
+    trend: "+12.5% vs semaine dernière",
+    labels: ["Lun", "Mer", "Ven", "Dim"]
+  };
+  
+  const monthlyData = {
+    curve: "M 20 95 C 70 95, 70 105, 120 105 C 180 105, 190 35, 240 35 C 290 35, 290 55, 330 55",
+    area: "M 20 95 C 70 95, 70 105, 120 105 C 180 105, 190 35, 240 35 C 290 35, 290 55, 330 55 L 330 110 L 20 110 Z",
+    cx: 240,
+    cy: 35,
+    tooltipTranslate: "translate(200, -3)",
+    tooltipValue: "1 050 000 FCFA",
+    trend: "+18.3% vs mois dernier",
+    labels: ["Sem 1", "Sem 2", "Sem 3", "Sem 4"]
+  };
+  
+  function updateChart(data) {
+    if (curvePath) curvePath.setAttribute("d", data.curve);
+    if (areaPath) areaPath.setAttribute("d", data.area);
+    
+    if (cursorLine) {
+      cursorLine.setAttribute("x1", data.cx);
+      cursorLine.setAttribute("x2", data.cx);
+    }
+    if (glowDot) {
+      glowDot.setAttribute("cx", data.cx);
+      glowDot.setAttribute("cy", data.cy);
+    }
+    if (innerDot) {
+      innerDot.setAttribute("cx", data.cx);
+      innerDot.setAttribute("cy", data.cy);
+    }
+    
+    if (tooltipGroup) tooltipGroup.setAttribute("transform", data.tooltipTranslate);
+    if (tooltipText) tooltipText.textContent = data.tooltipValue;
+    if (trendBadge) trendBadge.textContent = data.trend;
+    
+    if (lbl1) lbl1.textContent = data.labels[0];
+    if (lbl2) lbl2.textContent = data.labels[1];
+    if (lbl3) lbl3.textContent = data.labels[2];
+    if (lbl4) lbl4.textContent = data.labels[3];
+  }
+  
+  btnWeek.addEventListener("click", () => {
+    btnWeek.classList.add("active");
+    btnMonth.classList.remove("active");
+    updateChart(weeklyData);
+  });
+  
+  btnMonth.addEventListener("click", () => {
+    btnMonth.classList.add("active");
+    btnWeek.classList.remove("active");
+    updateChart(monthlyData);
   });
 }

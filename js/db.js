@@ -43,7 +43,8 @@ const DEFAULT_PRODUCTS = [
       { img: "images/cable_pink.png", color: "#d8b2d1", name: "Vieux Rose" }
     ],
     sizes: ["S", "M", "L"],
-    stock: 2
+    stock: 2,
+    promoCode: "SHAMMAH10"
   },
   {
     id: "echarpe-cachemire",
@@ -338,6 +339,12 @@ const DEFAULT_PRODUCTS = [
   }
 ];
 
+const DEFAULT_PROMO_CODES = [
+  { code: "SHAMMAH10", type: "percent", value: 10, active: true },
+  { code: "BIENVENUE5", type: "percent", value: 5, active: true },
+  { code: "SHAMMAH15", type: "percent", value: 15, active: true }
+];
+
 class ShammahDB {
   constructor() {
     this.init();
@@ -357,6 +364,9 @@ class ShammahDB {
     const existingOrders = existingOrdersRaw ? JSON.parse(existingOrdersRaw) : [];
     if (existingOrders.length === 0) {
       localStorage.setItem("shammah_db_orders", JSON.stringify(DEFAULT_ORDERS));
+    }
+    if (!localStorage.getItem("shammah_db_promos")) {
+      localStorage.setItem("shammah_db_promos", JSON.stringify(DEFAULT_PROMO_CODES));
     }
   }
 
@@ -437,6 +447,27 @@ class ShammahDB {
       order.status = status;
       localStorage.setItem("shammah_db_orders", JSON.stringify(list));
     }
+  }
+
+  getPromoCodes() {
+    return JSON.parse(localStorage.getItem("shammah_db_promos") || "[]");
+  }
+
+  savePromoCode(promo) {
+    const list = this.getPromoCodes();
+    const idx = list.findIndex(p => p.code === promo.code);
+    if (idx !== -1) {
+      list[idx] = promo;
+    } else {
+      list.push(promo);
+    }
+    localStorage.setItem("shammah_db_promos", JSON.stringify(list));
+  }
+
+  deletePromoCode(code) {
+    let list = this.getPromoCodes();
+    list = list.filter(p => p.code !== code);
+    localStorage.setItem("shammah_db_promos", JSON.stringify(list));
   }
 }
 
