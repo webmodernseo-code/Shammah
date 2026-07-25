@@ -55,16 +55,32 @@
     };
   }
 
+  // Fill in a real default (5) for any size in `sizes` that the variant's sizesStock
+  // doesn't already have an entry for. This must run whenever a color is created or
+  // the active size list changes, so the value shown in the stock inputs (which falls
+  // back to 5 for display only) is also actually committed to the data model — otherwise
+  // a color published without anyone touching the stock fields silently saves as empty.
+  function ensureSizesStock(variant, sizes) {
+    variant.sizesStock = variant.sizesStock || {};
+    sizes.forEach(size => {
+      if (variant.sizesStock[size] === undefined) variant.sizesStock[size] = 5;
+    });
+  }
+
   function mount(container, options) {
     options = options || {};
     const initialSizes = options.sizes && options.sizes.length ? options.sizes.slice() : ["S", "M", "L", "XL"];
-    const variants = (options.variants || []).map(v => ({
-      id: "var-" + Date.now() + "-" + Math.random().toString(36).slice(2, 7),
-      name: v.name || "",
-      color: v.color || "#000000",
-      images: (v.images || []).slice(0, 3).concat([null, null, null]).slice(0, 3),
-      sizesStock: Object.assign({}, v.sizesStock || {})
-    }));
+    const variants = (options.variants || []).map(v => {
+      const variant = {
+        id: "var-" + Date.now() + "-" + Math.random().toString(36).slice(2, 7),
+        name: v.name || "",
+        color: v.color || "#000000",
+        images: (v.images || []).slice(0, 3).concat([null, null, null]).slice(0, 3),
+        sizesStock: Object.assign({}, v.sizesStock || {})
+      };
+      ensureSizesStock(variant, initialSizes);
+      return variant;
+    });
     const onChange = typeof options.onChange === "function" ? options.onChange : function () {};
 
     container.innerHTML = "";
@@ -84,6 +100,8 @@
     }
 
     const chipsApi = createChipsEditor(sizesSection, initialSizes, () => {
+      const currentSizes = chipsApi.getSizes();
+      variants.forEach(v => ensureSizesStock(v, currentSizes));
       renderVariantsSection();
       emitChange();
     });
@@ -213,7 +231,9 @@
         };
       },
       addColor(name, color) {
-        variants.push({ id: "var-" + Date.now() + "-" + Math.random().toString(36).slice(2, 7), name: name, color: color, images: [null, null, null], sizesStock: {} });
+        const newVariant = { id: "var-" + Date.now() + "-" + Math.random().toString(36).slice(2, 7), name: name, color: color, images: [null, null, null], sizesStock: {} };
+        ensureSizesStock(newVariant, chipsApi.getSizes());
+        variants.push(newVariant);
         renderVariantsSection();
         emitChange();
       },
