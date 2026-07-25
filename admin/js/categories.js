@@ -60,9 +60,18 @@
 
     container.querySelectorAll(".category-subcat-remove").forEach(btn => {
       btn.addEventListener("click", () => {
-        window.db.deleteSubcategory(btn.dataset.cat, btn.dataset.sub);
-        window.Toast.show("Sous-catégorie supprimée.", "success");
-        loadCategoryTree();
+        const subcatName = btn.parentElement.textContent.replace("×", "").trim();
+        window.ConfirmModal.open({
+          title: "Supprimer la sous-catégorie",
+          message: "Voulez-vous vraiment supprimer la sous-catégorie \"" + subcatName + "\" ?",
+          confirmLabel: "Supprimer",
+          danger: true
+        }).then(confirmed => {
+          if (!confirmed) return;
+          window.db.deleteSubcategory(btn.dataset.cat, btn.dataset.sub);
+          window.Toast.show("Sous-catégorie supprimée.", "success");
+          loadCategoryTree();
+        });
       });
     });
   }
