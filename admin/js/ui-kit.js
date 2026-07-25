@@ -118,4 +118,95 @@
     initTheme();
     initSidebarCollapse();
   });
+
+  // ---------- Command Palette ----------
+  const NAV_TARGETS = [
+    { label: "Vue d'ensemble", target: "panel-dashboard" },
+    { label: "Commandes", target: "panel-orders" },
+    { label: "Gestion Articles", target: "panel-products" },
+    { label: "Codes Promo", target: "panel-promos" },
+    { label: "Configuration", target: "panel-settings" }
+  ];
+
+  function goToPanel(target) {
+    const navItem = document.querySelector('.nav-item[data-target="' + target + '"]');
+    if (navItem) navItem.click();
+  }
+
+  function openCommandPalette() {
+    if (document.getElementById("command-palette-overlay")) return;
+
+    const overlay = document.createElement("div");
+    overlay.className = "command-palette-overlay";
+    overlay.id = "command-palette-overlay";
+    overlay.innerHTML =
+      '<div class="command-palette">' +
+        '<input type="text" id="command-palette-input" placeholder="Rechercher un produit ou naviguer...">' +
+        '<div class="command-palette-results" id="command-palette-results"></div>' +
+      '</div>';
+    document.body.appendChild(overlay);
+
+    function closePalette() {
+      overlay.remove();
+      document.removeEventListener("keydown", onPaletteKeydown);
+    }
+
+    function onPaletteKeydown(e) {
+      if (e.key === "Escape") closePalette();
+    }
+
+    function renderResults(query) {
+      const resultsEl = overlay.querySelector("#command-palette-results");
+      const q = query.trim().toLowerCase();
+      resultsEl.innerHTML = "";
+
+      NAV_TARGETS.filter(n => n.label.toLowerCase().includes(q)).forEach(n => {
+        const item = document.createElement("div");
+        item.className = "command-palette-item";
+        item.innerHTML = "<span></span><span>Navigation</span>";
+        item.querySelector("span").textContent = n.label;
+        item.addEventListener("click", () => { closePalette(); goToPanel(n.target); });
+        resultsEl.appendChild(item);
+      });
+
+      if (q.length >= 2 && window.db) {
+        window.db.getProducts().filter(p => p.title.toLowerCase().includes(q)).slice(0, 6).forEach(p => {
+          const item = document.createElement("div");
+          item.className = "command-palette-item";
+          item.innerHTML = "<span></span><span>Produit</span>";
+          item.querySelector("span").textContent = p.title;
+          item.addEventListener("click", () => {
+            closePalette();
+            goToPanel("panel-products");
+            if (window.ProductsPanel) window.ProductsPanel.openEditDrawer(p.id);
+          });
+          resultsEl.appendChild(item);
+        });
+      }
+
+      if (!resultsEl.children.length) {
+        resultsEl.innerHTML = '<div class="command-palette-empty">Aucun résultat</div>';
+      }
+    }
+
+    renderResults("");
+    overlay.querySelector("#command-palette-input").addEventListener("input", (e) => renderResults(e.target.value));
+    overlay.addEventListener("click", (e) => { if (e.target === overlay) closePalette(); });
+    document.addEventListener("keydown", onPaletteKeydown);
+    overlay.querySelector("#command-palette-input").focus();
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+      e.preventDefault();
+      openCommandPalette();
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchBox = document.querySelector(".search-box input");
+    if (searchBox) searchBox.addEventListener("click", openCommandPalette);
+  });
+
+  window.CommandPalette = { open: openCommandPalette };
 })();
