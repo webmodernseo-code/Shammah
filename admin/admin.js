@@ -41,15 +41,6 @@ function setupNavigation() {
   });
 }
 
-// Helper to format currency
-function formatPrice(val) {
-  if (val >= 1000) {
-    return val.toLocaleString('fr-FR') + " FCFA";
-  } else {
-    return "$" + val.toFixed(2);
-  }
-}
-
 // Helper to detect category sizes
 function getSelectedProductSizes() {
   const cat = document.getElementById("prod-category").value;
