@@ -44,11 +44,15 @@
     // sont donc les plus récents, contrairement à un tri par id (les id sont générés aléatoirement).
     orders.slice(-5).reverse().forEach(o => {
       const tr = document.createElement("tr");
+      // o.id comes from the customer checkout form (js/shammah.js), unlike promo/category/product
+      // names which are admin-entered — build the skeleton via innerHTML then assign it via
+      // .textContent so it can never be interpreted as markup.
       tr.innerHTML =
-        "<td style=\"padding:10px 14px; font-weight:700;\">" + o.id + "</td>" +
+        "<td style=\"padding:10px 14px; font-weight:700;\" data-cell=\"id\"></td>" +
         "<td style=\"padding:10px 14px;\">" + window.formatPrice(o.total) + "</td>" +
         "<td style=\"padding:10px 14px;\">" + methodDisplay(o.method) + "</td>" +
         "<td style=\"padding:10px 14px; text-align:right;\"><span class=\"badge-status " + statusBadgeClass(o.status) + "\"><span class=\"bullet-dot\"></span> " + o.status + "</span></td>";
+      tr.querySelector('[data-cell="id"]').textContent = o.id;
       tbody.appendChild(tr);
     });
   }
@@ -64,10 +68,13 @@
 
     orders.forEach(o => {
       const tr = document.createElement("tr");
+      // o.id/o.client/o.date come straight from the customer checkout form (js/shammah.js) —
+      // unlike admin-entered category/product/promo names, this is customer-submitted text, so
+      // build the row skeleton via innerHTML then assign these three fields via .textContent.
       tr.innerHTML =
-        "<td>" + o.id + "</td>" +
-        "<td>" + o.client + "</td>" +
-        "<td>" + o.date + "</td>" +
+        "<td data-cell=\"id\"></td>" +
+        "<td data-cell=\"client\"></td>" +
+        "<td data-cell=\"date\"></td>" +
         "<td>" + window.formatPrice(o.total) + "</td>" +
         "<td>" + methodDisplay(o.method) + "</td>" +
         "<td><select class=\"order-status-select\" data-id=\"" + o.id + "\">" +
@@ -75,6 +82,9 @@
             "<option value=\"" + s + "\"" + (s === o.status ? " selected" : "") + ">" + s + "</option>"
           ).join("") +
         "</select></td>";
+      tr.querySelector('[data-cell="id"]').textContent = o.id;
+      tr.querySelector('[data-cell="client"]').textContent = o.client;
+      tr.querySelector('[data-cell="date"]').textContent = o.date;
       tbody.appendChild(tr);
     });
 
