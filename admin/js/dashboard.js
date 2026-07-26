@@ -12,6 +12,83 @@
     return window.PaymentIcons ? window.PaymentIcons.forMethodLabel(method) : method;
   }
 
+  // ---------- Order detail overlay ----------
+  let orderDetailKeydownHandler = null;
+
+  function closeOrderDetail() {
+    const overlay = document.getElementById("order-detail-overlay");
+    if (overlay) overlay.remove();
+    if (orderDetailKeydownHandler) {
+      document.removeEventListener("keydown", orderDetailKeydownHandler);
+      orderDetailKeydownHandler = null;
+    }
+  }
+
+  function openOrderDetail(order) {
+    // Guard against stacking a second overlay if a "Détail" button is clicked again fast,
+    // same spirit as the product drawer duplicate-overlay fix in products.js.
+    closeOrderDetail();
+
+    const overlay = document.createElement("div");
+    overlay.className = "order-detail-overlay";
+    overlay.id = "order-detail-overlay";
+    overlay.innerHTML =
+      '<div class="order-detail-modal">' +
+        '<div class="order-detail-header"><h3></h3><button type="button" class="order-detail-close" aria-label="Fermer">&times;</button></div>' +
+        '<div class="order-detail-body">' +
+          '<section class="order-detail-section"><h4>Client</h4>' +
+            '<p class="order-detail-field"><strong>Email</strong><span class="order-detail-email"></span></p>' +
+            '<p class="order-detail-field"><strong>Téléphone</strong><span class="order-detail-phone"></span></p>' +
+            '<p class="order-detail-field"><strong>Adresse</strong><span class="order-detail-address"></span></p>' +
+          '</section>' +
+          '<section class="order-detail-section"><h4>Articles</h4><div class="order-detail-items"></div></section>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(overlay);
+
+    // Every field below is customer-submitted checkout data (js/shammah.js), same trust
+    // boundary as the order id/client/date fixed in loadOrdersPanel — always .textContent.
+    overlay.querySelector("h3").textContent = "Commande " + order.id;
+    overlay.querySelector(".order-detail-email").textContent = order.email || "—";
+    overlay.querySelector(".order-detail-phone").textContent = order.phone || "—";
+    overlay.querySelector(".order-detail-address").textContent = order.address || "—";
+
+    const itemsContainer = overlay.querySelector(".order-detail-items");
+    const items = order.items || [];
+    if (items.length === 0) {
+      const empty = document.createElement("p");
+      empty.className = "order-detail-empty";
+      empty.textContent = "Aucun article enregistré pour cette commande.";
+      itemsContainer.appendChild(empty);
+    } else {
+      items.forEach(item => {
+        const row = document.createElement("div");
+        row.className = "order-detail-item";
+        row.innerHTML =
+          '<span class="order-detail-item-title"></span>' +
+          '<span class="order-detail-item-meta"></span>' +
+          '<span class="order-detail-item-qty"></span>' +
+          '<span class="order-detail-item-price"></span>';
+        row.querySelector(".order-detail-item-title").textContent = item.title || "Article";
+        const colorName = (item.variant && item.variant.name) ? item.variant.name : "";
+        const metaParts = [];
+        if (item.size) metaParts.push("Taille : " + item.size);
+        if (colorName) metaParts.push(colorName);
+        row.querySelector(".order-detail-item-meta").textContent = metaParts.join(" · ");
+        row.querySelector(".order-detail-item-qty").textContent = "x" + (item.qty || 1);
+        row.querySelector(".order-detail-item-price").textContent = (item.price !== undefined && item.price !== null) ? window.formatPrice(item.price) : "";
+        itemsContainer.appendChild(row);
+      });
+    }
+
+    function onKeydown(e) { if (e.key === "Escape") closeOrderDetail(); }
+    orderDetailKeydownHandler = onKeydown;
+    document.addEventListener("keydown", onKeydown);
+
+    overlay.addEventListener("click", (e) => { if (e.target === overlay) closeOrderDetail(); });
+    overlay.querySelector(".order-detail-close").addEventListener("click", closeOrderDetail);
+  }
+
   function loadOverviewMetrics() {
     const orders = window.db.getOrders();
     const products = window.db.getProducts();
@@ -81,7 +158,8 @@
           ["En attente", "Payée", "Expédiée", "Annulée"].map(s =>
             "<option value=\"" + s + "\"" + (s === o.status ? " selected" : "") + ">" + s + "</option>"
           ).join("") +
-        "</select></td>";
+        "</select></td>" +
+        "<td><button type=\"button\" class=\"btn-secondary order-detail-btn\" data-id=\"" + o.id + "\">Détail</button></td>";
       tr.querySelector('[data-cell="id"]').textContent = o.id;
       tr.querySelector('[data-cell="client"]').textContent = o.client;
       tr.querySelector('[data-cell="date"]').textContent = o.date;
@@ -93,6 +171,13 @@
         window.db.updateOrderStatus(select.dataset.id, select.value);
         window.Toast.show("Statut de la commande " + select.dataset.id + " mis à jour.", "success");
         refresh();
+      });
+    });
+
+    tbody.querySelectorAll(".order-detail-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const order = window.db.getOrders().find(o => o.id === btn.dataset.id);
+        if (order) openOrderDetail(order);
       });
     });
   }
