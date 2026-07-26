@@ -205,6 +205,13 @@
   }
 
   function openDrawer(product) {
+    // The ⌘K command palette can call openEditDrawer() even while a drawer is already open
+    // (e.g. create drawer open, then a product is picked from the palette). Without this guard
+    // a second overlay would be created sharing the same id, silently overwriting
+    // variantEditorHandle and leaving closeDrawer() only able to remove one of the two via
+    // getElementById.
+    if (document.getElementById("product-drawer-overlay")) closeDrawer();
+
     editingProduct = product;
 
     const overlay = document.createElement("div");
