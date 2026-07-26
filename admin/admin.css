@@ -93,7 +93,7 @@ body {
 
 .search-box input:focus {
   border-color: var(--text-primary);
-  background: #ffffff;
+  background: var(--bg-panel);
 }
 
 .search-box svg {
@@ -262,7 +262,7 @@ button:active, .btn-primary:active, .btn-secondary:active, .nav-item:active {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #ffffff;
+  background: var(--bg-panel);
   color: var(--text-secondary);
   border: 1px solid var(--border-light);
   border-radius: 8px;
@@ -393,7 +393,7 @@ button:active, .btn-primary:active, .btn-secondary:active, .nav-item:active {
   color: var(--text-primary);
   box-sizing: border-box;
   outline: none;
-  background: #ffffff;
+  background: var(--bg-panel);
   transition: var(--transition-smooth);
 }
 
@@ -424,7 +424,7 @@ button:active, .btn-primary:active, .btn-secondary:active, .nav-item:active {
 
 .photo-uploader-label:hover {
   border-color: var(--accent-blue);
-  background: #ffffff;
+  background: var(--bg-panel);
 }
 
 .photo-uploader-label svg {
@@ -665,10 +665,10 @@ tr:hover td {
 }
 
 .chart-toggle-btn.active {
-  background: #ffffff !important;
-  color: var(--text-primary) !important;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
-  font-weight: 700 !important;
+  background: var(--bg-panel);
+  color: var(--text-primary);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  font-weight: 700;
 }
 
 /* Command Palette */
@@ -744,7 +744,7 @@ tr:hover td {
   position: relative; height: 72px; border: 1.5px dashed var(--border-medium); border-radius: 8px;
   display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; background: var(--bg-panel);
 }
-.variant-photo-dropzone.drag-over { border-color: var(--accent-blue); background: #eff6ff; }
+.variant-photo-dropzone.drag-over { border-color: var(--accent-blue); background: rgba(59, 130, 246, 0.12); }
 .variant-photo-dropzone img { width: 100%; height: 100%; object-fit: cover; }
 .variant-photo-placeholder { font-size: 0.65rem; color: var(--text-secondary); }
 .variant-photo-remove {
@@ -774,7 +774,7 @@ tr:hover td {
 .live-preview-image-wrap { position: relative; height: 160px; background: var(--bg-primary); }
 .live-preview-image-wrap img { width: 100%; height: 100%; object-fit: cover; }
 .live-preview-image-wrap .badge-tag {
-  position: absolute; top: 8px; left: 8px; background: #ffffff; color: var(--text-primary);
+  position: absolute; top: 8px; left: 8px; background: var(--bg-panel); color: var(--text-primary);
   font-size: 0.6rem; font-weight: 700; text-transform: capitalize; padding: 2px 8px; border-radius: 4px;
 }
 .live-preview-image-wrap .live-preview-promo { top: auto; bottom: 8px; left: 8px; background: var(--accent-red); color: #fff; }
