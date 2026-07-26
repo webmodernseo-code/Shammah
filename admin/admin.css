@@ -13,7 +13,12 @@
   --accent-gold: #f59e0b;
   --accent-red: #ef4444;
   --accent-purple: #a855f7;
-  
+
+  /* Theme-invariant "inverted" CTA pair (buttons, toasts) — must stay
+     legible regardless of --text-primary flipping in dark mode. */
+  --cta-bg: #0f172a;
+  --cta-text: #ffffff;
+
   --font-inter: 'Inter', sans-serif;
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.01);
   --shadow-md: 0 4px 20px rgba(0,0,0,0.02);
@@ -242,9 +247,9 @@ button:active, .btn-primary:active, .btn-secondary:active, .nav-item:active {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--text-primary);
-  color: #ffffff;
-  border: 1px solid var(--text-primary);
+  background: var(--cta-bg);
+  color: var(--cta-text);
+  border: 1px solid var(--cta-bg);
   border-radius: 8px;
   padding: 8px 16px;
   font-family: inherit;
@@ -518,8 +523,8 @@ tr:hover td {
 }
 
 .toast {
-  background: var(--text-primary);
-  color: #ffffff;
+  background: var(--cta-bg);
+  color: var(--cta-text);
   padding: 12px 16px;
   border-radius: 8px;
   font-size: 0.8rem;
@@ -535,7 +540,7 @@ tr:hover td {
 .toast-hiding { opacity: 0; }
 .toast-success { background: #047857; }
 .toast-error { background: #b91c1c; }
-.toast-info { background: var(--text-primary); }
+.toast-info { background: var(--cta-bg); }
 
 /* Confirm modal */
 .confirm-overlay {
