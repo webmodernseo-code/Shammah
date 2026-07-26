@@ -125,8 +125,13 @@
 
       const dropzonesHTML = [0, 1, 2].map(i => {
         const img = v.images[i];
+        // Stored product photos are relative paths like "images/foo.png" (relative to the site
+        // root); rendered from /admin/index.html they need a "../" prefix. Freshly-picked files
+        // are data: URLs and must be left untouched. Mirrors the same ternary already used for
+        // the live preview image in products.js's updateLivePreview().
+        const imgSrc = img ? (img.startsWith("data:") ? img : "../" + img) : null;
         return '<div class="variant-photo-dropzone" data-slot="' + i + '">' +
-          (img ? '<img src="' + img + '" alt="Photo ' + (i + 1) + '"><button type="button" class="variant-photo-remove" data-slot="' + i + '">&times;</button>' : '<span class="variant-photo-placeholder">Photo ' + (i + 1) + '</span>') +
+          (imgSrc ? '<img src="' + imgSrc + '" alt="Photo ' + (i + 1) + '"><button type="button" class="variant-photo-remove" data-slot="' + i + '">&times;</button>' : '<span class="variant-photo-placeholder">Photo ' + (i + 1) + '</span>') +
           '<input type="file" accept="image/*" class="variant-photo-input" data-slot="' + i + '" hidden></div>';
       }).join("");
 
