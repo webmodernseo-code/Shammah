@@ -3,6 +3,7 @@
 
   let variantEditorHandle = null;
   let editingProduct = null;
+  let drawerKeydownHandler = null;
 
   function getCategorySuggestedSizes(categorySlug) {
     if (categorySlug === "gadget") return ["Taille Unique"];
@@ -312,6 +313,16 @@
       }).then(confirmed => { if (confirmed) closeDrawer(); });
     }
 
+    // Same Escape-to-close pattern as ConfirmModal/CommandPalette in ui-kit.js: added on open,
+    // removed on close so listeners never leak across repeated drawer opens. Skipped while a
+    // ConfirmModal is on top (e.g. the "close without saving?" prompt this very handler can
+    // trigger) so Escape cancels that dialog instead of stacking a second one.
+    function onDrawerKeydown(e) {
+      if (e.key === "Escape" && !document.querySelector(".confirm-overlay")) requestClose();
+    }
+    drawerKeydownHandler = onDrawerKeydown;
+    document.addEventListener("keydown", onDrawerKeydown);
+
     overlay.addEventListener("click", (e) => { if (e.target === overlay) requestClose(); });
     overlay.querySelector(".drawer-close").addEventListener("click", requestClose);
     overlay.querySelector("#drawer-cancel-btn").addEventListener("click", requestClose);
@@ -324,6 +335,10 @@
     if (variantEditorHandle) variantEditorHandle.destroy();
     variantEditorHandle = null;
     editingProduct = null;
+    if (drawerKeydownHandler) {
+      document.removeEventListener("keydown", drawerKeydownHandler);
+      drawerKeydownHandler = null;
+    }
   }
 
   function handlePublish(overlay, existingProduct) {
