@@ -125,6 +125,21 @@
   }
 
   // ---------- Drawer ----------
+  // If `value` isn't among the options already populated in `selectEl`, append an extra
+  // option carrying that exact value/label so it displays and is preserved as-is, instead of
+  // the <select> silently falling back to selectedIndex -1 / value "" (which would blank the
+  // product's real stored category/subcategory/promo on the next save).
+  function ensureSelectedOptionExists(selectEl, value, label) {
+    if (!value) return;
+    const exists = Array.from(selectEl.options).some(o => o.value === value);
+    if (!exists) {
+      const opt = document.createElement("option");
+      opt.value = value;
+      opt.textContent = label !== undefined ? label : value;
+      selectEl.appendChild(opt);
+    }
+  }
+
   function buildCategoryOptions(selectEl, selectedSlug) {
     selectEl.innerHTML = "";
     window.db.getCategories().forEach(cat => {
@@ -133,6 +148,7 @@
       opt.textContent = cat.name;
       selectEl.appendChild(opt);
     });
+    ensureSelectedOptionExists(selectEl, selectedSlug);
     if (selectedSlug) selectEl.value = selectedSlug;
   }
 
@@ -144,6 +160,7 @@
       opt.textContent = sub.name;
       selectEl.appendChild(opt);
     });
+    ensureSelectedOptionExists(selectEl, selectedSlug);
     if (selectedSlug) selectEl.value = selectedSlug;
   }
 
@@ -156,6 +173,7 @@
       opt.textContent = pr.code + " (" + valLabel + ")";
       selectEl.appendChild(opt);
     });
+    ensureSelectedOptionExists(selectEl, selectedCode);
     if (selectedCode) selectEl.value = selectedCode;
   }
 
