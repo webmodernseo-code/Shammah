@@ -5,6 +5,13 @@
     return window.PaymentIcons ? window.PaymentIcons.forMethodLabel(method) : method;
   }
 
+  function statusBadgeClass(status) {
+    if (status === "Payée") return "success";
+    if (status === "Expédiée") return "info";
+    if (status === "Annulée") return "danger";
+    return "warning";
+  }
+
   // ---------- Date range filtering ----------
   let currentRangeKey = "7d";
 
@@ -177,6 +184,173 @@
     ]);
   }
 
+  function buildThumbElement(firstItem) {
+    if (firstItem && firstItem.variant && firstItem.variant.img) {
+      const img = document.createElement("img");
+      img.className = "recent-order-thumb";
+      img.src = firstItem.variant.img; // product catalog data (admin-controlled), safe as a src
+      img.alt = "";
+      return img;
+    }
+    const placeholder = document.createElement("div");
+    placeholder.className = "recent-order-thumb recent-order-thumb-empty";
+    placeholder.innerHTML =
+      '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+      '<path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M14 8h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />' +
+      "</svg>";
+    return placeholder;
+  }
+
+  function renderRecentOrdersPreview() {
+    const container = document.getElementById("recent-orders-body");
+    if (!container) return;
+    const orders = window.db.getOrders();
+
+    if (orders.length === 0) {
+      container.innerHTML = '<p class="empty-state-panel">Aucune commande pour le moment.</p>';
+      return;
+    }
+
+    const table = document.createElement("table");
+    table.innerHTML =
+      "<thead><tr><th>Article</th><th>Client</th><th>Date</th><th>Montant</th><th style=\"text-align:right;\">Statut</th></tr></thead><tbody></tbody>";
+    const tbody = table.querySelector("tbody");
+
+    orders.slice(-5).reverse().forEach(o => {
+      const items = o.items || [];
+      const firstItem = items[0];
+      const extraCount = items.length - 1;
+
+      const itemCell = document.createElement("td");
+      const itemWrap = document.createElement("div");
+      itemWrap.className = "recent-order-item-cell";
+      itemWrap.appendChild(buildThumbElement(firstItem));
+
+      const textWrap = document.createElement("div");
+      const titleEl = document.createElement("span");
+      titleEl.className = "recent-order-title";
+      // item.title comes from the product catalog (admin-controlled), but we still use
+      // textContent (never innerHTML interpolation) to match this file's established convention.
+      titleEl.textContent = firstItem ? firstItem.title : "Commande vide";
+      textWrap.appendChild(titleEl);
+      if (extraCount > 0) {
+        const extraEl = document.createElement("span");
+        extraEl.className = "recent-order-extra";
+        extraEl.textContent = "+" + extraCount + " autres articles";
+        textWrap.appendChild(document.createElement("br"));
+        textWrap.appendChild(extraEl);
+      }
+      itemWrap.appendChild(textWrap);
+      itemCell.appendChild(itemWrap);
+
+      const clientCell = document.createElement("td");
+      clientCell.textContent = o.client; // customer-submitted (js/shammah.js) -> textContent only
+
+      const dateCell = document.createElement("td");
+      dateCell.textContent = o.date;
+
+      const totalCell = document.createElement("td");
+      totalCell.textContent = window.formatPrice(o.total);
+
+      const statusCell = document.createElement("td");
+      statusCell.style.textAlign = "right";
+      const badge = document.createElement("span");
+      badge.className = "badge-status " + statusBadgeClass(o.status);
+      const dot = document.createElement("span");
+      dot.className = "bullet-dot";
+      badge.appendChild(dot);
+      badge.appendChild(document.createTextNode(" " + o.status));
+      statusCell.appendChild(badge);
+
+      const tr = document.createElement("tr");
+      tr.appendChild(itemCell);
+      tr.appendChild(clientCell);
+      tr.appendChild(dateCell);
+      tr.appendChild(totalCell);
+      tr.appendChild(statusCell);
+      tbody.appendChild(tr);
+    });
+
+    container.innerHTML = "";
+    container.appendChild(table);
+  }
+
+  function computeSalesOverview(allOrders, rangeKey) {
+    const current = filterByRange(allOrders, rangeKey);
+    const total = current.length || 1;
+
+    const successful = current.filter(o => o.status === "Payée" || o.status === "Expédiée").length;
+    const pending = current.filter(o => o.status === "En attente").length;
+    const cancelled = current.filter(o => o.status === "Annulée").length;
+
+    const breakdown = [
+      { label: "Réussies", key: "success", percent: (successful / total) * 100 },
+      { label: "En attente", key: "pending", percent: (pending / total) * 100 },
+      { label: "Annulées", key: "cancelled", percent: (cancelled / total) * 100 }
+    ];
+
+    const productTotals = {};
+    current.forEach(o => {
+      (o.items || []).forEach(item => {
+        const title = item.title || "Article";
+        const lineTotal = (parseFloat(item.price) || 0) * (parseInt(item.qty, 10) || 1);
+        productTotals[title] = (productTotals[title] || 0) + lineTotal;
+      });
+    });
+
+    const grandTotal = Object.values(productTotals).reduce((s, v) => s + v, 0) || 1;
+    const topProducts = Object.keys(productTotals)
+      .map(title => ({ title: title, earnings: productTotals[title], percent: (productTotals[title] / grandTotal) * 100 }))
+      .sort((a, b) => b.earnings - a.earnings)
+      .slice(0, 4);
+
+    return { breakdown: breakdown, topProducts: topProducts };
+  }
+
+  function renderSalesOverview() {
+    const container = document.getElementById("sales-overview-body");
+    if (!container) return;
+    const orders = window.db.getOrders();
+    const data = computeSalesOverview(orders, currentRangeKey);
+
+    const legendHTML = data.breakdown.map(b =>
+      '<div class="sales-legend-item"><span class="sales-legend-dot ' + b.key + '"></span><span class="sales-legend-label"></span><strong class="sales-legend-percent"></strong></div>'
+    ).join("");
+
+    const barsHTML = data.breakdown.map(b => {
+      const ticks = Math.round(b.percent / 2); // ~50 ticks total across all 3 categories
+      let ticksHTML = "";
+      for (let i = 0; i < ticks; i++) {
+        ticksHTML += '<span class="sales-breakdown-bar ' + b.key + '"></span>';
+      }
+      return ticksHTML;
+    }).join("");
+
+    const rowsHTML = data.topProducts.map(() =>
+      '<tr><td class="top-product-name"></td><td class="top-product-percent"></td><td class="top-product-earnings"></td></tr>'
+    ).join("");
+
+    container.innerHTML =
+      '<div class="sales-legend">' + legendHTML + '</div>' +
+      '<div class="sales-breakdown-row">' + barsHTML + '</div>' +
+      '<table class="sales-top-products"><thead><tr><th>Produit</th><th>Part</th><th>Gains</th></tr></thead><tbody>' + rowsHTML + '</tbody></table>';
+
+    container.querySelectorAll(".sales-legend-item").forEach((el, i) => {
+      el.querySelector(".sales-legend-label").textContent = data.breakdown[i].label;
+      el.querySelector(".sales-legend-percent").textContent = data.breakdown[i].percent.toFixed(1) + "%";
+    });
+
+    if (data.topProducts.length === 0) {
+      container.querySelector(".sales-top-products tbody").innerHTML = '<tr><td colspan="3" class="empty-state-panel">Aucun article vendu sur cette période.</td></tr>';
+    } else {
+      container.querySelectorAll(".sales-top-products tbody tr").forEach((row, i) => {
+        row.querySelector(".top-product-name").textContent = data.topProducts[i].title;
+        row.querySelector(".top-product-percent").textContent = data.topProducts[i].percent.toFixed(0) + "%";
+        row.querySelector(".top-product-earnings").textContent = window.formatPrice(data.topProducts[i].earnings);
+      });
+    }
+  }
+
   function loadOverviewMetrics() {
     const orders = window.db.getOrders();
     const kpis = computeKPIs(orders, currentRangeKey);
@@ -198,6 +372,8 @@
     renderTrend("kpi-refunds-trend", kpis.refunds.trend);
 
     renderSuccessGauge();
+    renderRecentOrdersPreview();
+    renderSalesOverview();
   }
 
   function loadOrdersPanel() {

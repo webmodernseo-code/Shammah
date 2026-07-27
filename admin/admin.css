@@ -841,3 +841,28 @@ tr:hover td {
 .order-detail-item-qty { color: var(--text-secondary); font-weight: 600; }
 .order-detail-item-price { font-weight: 700; color: var(--text-primary); }
 .order-detail-empty { font-size: 0.8rem; color: var(--text-secondary); margin: 0; }
+
+.sales-legend { display: flex; gap: 20px; padding: 16px 20px 0; }
+.sales-legend-item { display: flex; align-items: center; gap: 6px; flex-direction: column; align-items: flex-start; }
+.sales-legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.sales-legend-dot.success { background: var(--status-green); }
+.sales-legend-dot.pending { background: var(--status-amber); }
+.sales-legend-dot.cancelled { background: var(--status-red); }
+.sales-legend-label { font-size: 0.7rem; color: var(--text-body); }
+.sales-legend-percent { font-size: 1.1rem; font-weight: 800; color: var(--text-heading); }
+
+.sales-breakdown-row { display: flex; gap: 2px; align-items: flex-end; padding: 16px 20px; height: 40px; }
+.sales-breakdown-bar { width: 4px; height: 100%; border-radius: 2px; display: inline-block; }
+.sales-breakdown-bar.success { background: var(--status-green); }
+.sales-breakdown-bar.pending { background: var(--status-amber); }
+.sales-breakdown-bar.cancelled { background: var(--status-red); }
+
+.sales-top-products { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+.sales-top-products th { text-align: left; padding: 10px 20px; color: var(--text-body); font-weight: 600; border-top: 1px solid var(--border-light); }
+.sales-top-products td { padding: 8px 20px; border-top: 1px solid var(--border-light); }
+
+.recent-order-item-cell { display: flex; align-items: center; gap: 10px; }
+.recent-order-thumb { width: 36px; height: 36px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+.recent-order-thumb-empty { display: flex; align-items: center; justify-content: center; background: var(--page-bg); color: var(--text-body); }
+.recent-order-title { font-size: 0.8rem; font-weight: 600; color: var(--text-heading); }
+.recent-order-extra { font-size: 0.7rem; color: var(--text-body); }
