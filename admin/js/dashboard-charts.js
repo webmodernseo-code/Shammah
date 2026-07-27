@@ -70,8 +70,21 @@
     tooltip.querySelector(".tooltip-count").textContent = bucket.count + " commande(s)";
     tooltip.querySelector(".tooltip-total").textContent = window.formatPrice(bucket.total);
     tooltip.style.left = (x / 560 * 100) + "%";
-    tooltip.style.top = Math.max(0, y - 60) + "px";
     container.appendChild(tooltip);
+
+    // `y` is expressed in the <svg>'s own coordinate space, whose origin sits at the
+    // container's content-box top edge. `tooltip.style.top`, however, is resolved against
+    // the container's padding box (the containing block established by the container's own
+    // `position: relative`), which starts `paddingTop` px higher. Read that real padding
+    // instead of assuming it, then lift the tooltip fully above the bar's own top edge by
+    // the tooltip's *actual measured* height (not a hardcoded pixel guess) plus a small
+    // fixed gap. Because a bar's height can never exceed the chart's drawable height, `y`
+    // is always >= the chart's internal top padding - so this stays positive for every
+    // bucket and never needs clamping, which means it never collapses distinct bar heights
+    // to the same tooltip position.
+    const containerPaddingTop = parseFloat(getComputedStyle(container).paddingTop) || 0;
+    const gap = 8;
+    tooltip.style.top = (containerPaddingTop + y - tooltip.offsetHeight - gap) + "px";
   }
 
   function hideTooltip(container) {
