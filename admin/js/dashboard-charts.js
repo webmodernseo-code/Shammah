@@ -46,7 +46,7 @@
       label.textContent = bucket.label;
       svg.appendChild(label);
 
-      rect.addEventListener("mouseenter", () => showTooltip(container, bucket, x + barWidth / 2, y));
+      rect.addEventListener("mouseenter", () => showTooltip(container, bucket, rect));
       rect.addEventListener("mouseleave", () => hideTooltip(container));
     });
 
@@ -60,7 +60,7 @@
     }
   }
 
-  function showTooltip(container, bucket, x, y) {
+  function showTooltip(container, bucket, rect) {
     hideTooltip(container);
     const tooltip = document.createElement("div");
     tooltip.className = "revenue-bar-tooltip";
@@ -69,24 +69,26 @@
     tooltip.querySelector("strong").textContent = bucket.dateLabel;
     tooltip.querySelector(".tooltip-count").textContent = bucket.count + " commande(s)";
     tooltip.querySelector(".tooltip-total").textContent = window.formatPrice(bucket.total);
-    tooltip.style.left = (x / 560 * 100) + "%";
     container.appendChild(tooltip);
 
-    // `y` is expressed in the <svg>'s own coordinate space, whose origin sits at the
-    // container's content-box top edge. `tooltip.style.top`, however, is resolved against
-    // the container's padding box (the containing block established by the container's own
-    // `position: relative`), which starts `paddingTop` px higher. Read that real padding
-    // instead of assuming it, then lift the tooltip fully above the bar's own top edge by
-    // the tooltip's *actual measured* height (not a hardcoded pixel guess) plus a small
-    // fixed gap. For tall bars near the chart's max height, this can compute to a negative
-    // offset (escaping above the container into the card header), so clamp the final
-    // result to a small positive minimum - the tooltip then sits pinned near the top of
-    // the container instead of overlapping the header, while every other bar (where there
-    // is room above it) keeps its accurate, distinct position.
-    const containerPaddingTop = parseFloat(getComputedStyle(container).paddingTop) || 0;
+    // Use real rendered geometry instead of SVG viewBox arithmetic. The viewBox is 560 units
+    // wide but with the default preserveAspectRatio ("xMidYMid meet") and height as the
+    // constraining dimension, the content is letterboxed and centered inside the container -
+    // so `x / 560 * 100%` only lines up with reality for the one bar sitting exactly at the
+    // horizontal center; every other bar was off by up to ~1.4 bar-widths. Likewise, deriving
+    // the vertical position from the hovered <rect>'s own getBoundingClientRect() (rather than
+    // a hardcoded floor tuned against a single extreme-outlier fixture) means the fallback
+    // below only engages for bars that are genuinely too tall to fit a tooltip above them, and
+    // it falls back relative to *that* bar's own position - not a shared constant that pins
+    // every close-together bar to an identical spot.
+    const b = rect.getBoundingClientRect();
+    const c = container.getBoundingClientRect();
+    tooltip.style.left = (b.left + b.width / 2 - c.left) + "px";
     const gap = 8;
-    const computedTop = containerPaddingTop + y - tooltip.offsetHeight - gap;
-    tooltip.style.top = Math.max(4, computedTop) + "px";
+    const above = b.top - c.top - tooltip.offsetHeight - gap;
+    // Falls inside the bar's own top edge only when there's truly no room above - safe
+    // because it only fires for genuinely tall bars, never overlapping the card header.
+    tooltip.style.top = (above >= 4 ? above : b.top - c.top + gap) + "px";
   }
 
   function hideTooltip(container) {
@@ -139,7 +141,7 @@
 
     const subLabel = document.createElement("div");
     subLabel.className = "gauge-sublabel";
-    subLabel.textContent = "Croissance des ventes";
+    subLabel.textContent = "Commandes réussies";
     wrap.appendChild(subLabel);
 
     container.appendChild(wrap);

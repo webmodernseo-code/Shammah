@@ -14,6 +14,7 @@
 
   // ---------- Date range filtering ----------
   let currentRangeKey = "7d";
+  let currentChartMode = "week";
 
   function parseOrderDate(dateStr) {
     // order.date is always produced by `new Date().toLocaleDateString('fr-FR')` -> "dd/mm/yyyy"
@@ -52,7 +53,7 @@
     return ((current - previous) / previous) * 100;
   }
 
-  function renderTrend(elId, value) {
+  function renderTrend(elId, value, inverse) {
     const el = document.getElementById(elId);
     if (!el) return;
     if (value === null || value === undefined || !isFinite(value)) {
@@ -62,7 +63,10 @@
     el.style.display = "";
     const sign = value >= 0 ? "+" : "";
     el.textContent = sign + value.toFixed(1) + "%";
-    el.className = "metric-trend " + (value >= 0 ? "up" : "down");
+    // For most KPIs, a rise is good (green/"up"). For "inverse" metrics like refunds, a rise
+    // is bad, so flip which class gets applied - the sign of the displayed number is unchanged.
+    const isGood = inverse ? value < 0 : value >= 0;
+    el.className = "metric-trend " + (isGood ? "up" : "down");
   }
 
   // ---------- Order detail overlay ----------
@@ -184,14 +188,7 @@
     ]);
   }
 
-  function buildThumbElement(firstItem) {
-    if (firstItem && firstItem.variant && firstItem.variant.img) {
-      const img = document.createElement("img");
-      img.className = "recent-order-thumb";
-      img.src = firstItem.variant.img; // product catalog data (admin-controlled), safe as a src
-      img.alt = "";
-      return img;
-    }
+  function buildPlaceholderThumb() {
     const placeholder = document.createElement("div");
     placeholder.className = "recent-order-thumb recent-order-thumb-empty";
     placeholder.innerHTML =
@@ -201,10 +198,32 @@
     return placeholder;
   }
 
+  function buildThumbElement(firstItem) {
+    if (firstItem && firstItem.variant && firstItem.variant.img) {
+      const raw = firstItem.variant.img;
+      // Stored product photos are relative paths like "images/foo.png" (relative to the site
+      // root); rendered from /admin/index.html they need a "../" prefix. Freshly-picked files
+      // are data: URLs and must be left untouched. Same resolution as variant-editor.js:132
+      // and products.js:193 (fixed in 95ec26d for the edit drawer) - this dashboard thumbnail
+      // was using the raw catalog path and 404ing under /admin/images/... before this fix.
+      const img = document.createElement("img");
+      img.className = "recent-order-thumb";
+      img.src = raw.startsWith("data:") ? raw : "../" + raw;
+      img.alt = "";
+      // This exact field has proven fragile before (95ec26d) - fall back to the placeholder
+      // if the resolved path still 404s instead of showing a broken-image icon.
+      img.onerror = () => { img.replaceWith(buildPlaceholderThumb()); };
+      return img;
+    }
+    return buildPlaceholderThumb();
+  }
+
   function renderRecentOrdersPreview() {
     const container = document.getElementById("recent-orders-body");
     if (!container) return;
-    const orders = window.db.getOrders();
+    // Respect the date-range selector, same as the KPI cards, gauge and sales overview,
+    // so a 20-day-old order can't appear here while the "7 derniers jours" range is active.
+    const orders = filterByRange(window.db.getOrders(), currentRangeKey);
 
     if (orders.length === 0) {
       container.innerHTML = '<p class="empty-state-panel">Aucune commande pour le moment.</p>';
@@ -369,7 +388,7 @@
 
     const refundsEl = document.getElementById("val-refunds");
     if (refundsEl) refundsEl.textContent = kpis.refunds.value;
-    renderTrend("kpi-refunds-trend", kpis.refunds.trend);
+    renderTrend("kpi-refunds-trend", kpis.refunds.trend, true); // inverse: more refunds is bad
 
     renderSuccessGauge();
     renderRecentOrdersPreview();
@@ -427,6 +446,7 @@
   function refresh() {
     loadOverviewMetrics();
     loadOrdersPanel();
+    renderRevenueChart(currentChartMode);
   }
 
   function buildWeeklyBuckets(orders) {
@@ -511,17 +531,19 @@
     const btnMonth = document.getElementById("btn-chart-month");
     if (!btnWeek || !btnMonth) return;
 
-    renderRevenueChart("week");
+    renderRevenueChart(currentChartMode);
 
     btnWeek.addEventListener("click", () => {
+      currentChartMode = "week";
       btnWeek.classList.add("active");
       btnMonth.classList.remove("active");
-      renderRevenueChart("week");
+      renderRevenueChart(currentChartMode);
     });
     btnMonth.addEventListener("click", () => {
+      currentChartMode = "month";
       btnMonth.classList.add("active");
       btnWeek.classList.remove("active");
-      renderRevenueChart("month");
+      renderRevenueChart(currentChartMode);
     });
   }
 
@@ -542,20 +564,35 @@
     return str;
   }
 
+  function rangeLabel(rangeKey) {
+    if (rangeKey === "30d") return "30 derniers jours";
+    if (rangeKey === "all") return "Tout";
+    return "7 derniers jours";
+  }
+
   function buildReportCSV() {
     const orders = window.db.getOrders();
     const kpis = computeKPIs(orders, currentRangeKey);
 
     const lines = [];
-    lines.push("Indicateur,Valeur");
-    lines.push(csvEscape("Ventes Totales") + "," + csvEscape(kpis.sales.value));
-    lines.push(csvEscape("Chiffre d'Affaires") + "," + csvEscape(window.formatPrice(kpis.revenue.value)));
-    lines.push(csvEscape("Clients Actifs") + "," + csvEscape(kpis.customers.value));
-    lines.push(csvEscape("Demandes de Remboursement") + "," + csvEscape(kpis.refunds.value));
+    lines.push(csvEscape("Période") + "," + csvEscape(rangeLabel(currentRangeKey)));
     lines.push("");
-    lines.push("Commande,Client,Date,Total,Statut");
-    orders.slice(-5).reverse().forEach(o => {
-      lines.push([o.id, o.client, o.date, window.formatPrice(o.total), o.status].map(csvEscape).join(","));
+    // "Valeur (numérique)" repeats "Valeur" as a plain number for rows that are already
+    // numeric, and gives Chiffre d'Affaires (the only formatted-string row here, e.g.
+    // "125 000 FCFA") a clean numeric counterpart - so a spreadsheet can sum/chart the
+    // column without parsing the formatted text.
+    lines.push("Indicateur,Valeur,Valeur (numérique)");
+    lines.push(csvEscape("Ventes Totales") + "," + csvEscape(kpis.sales.value) + "," + csvEscape(kpis.sales.value));
+    lines.push(csvEscape("Chiffre d'Affaires") + "," + csvEscape(window.formatPrice(kpis.revenue.value)) + "," + csvEscape(kpis.revenue.value));
+    lines.push(csvEscape("Clients Actifs") + "," + csvEscape(kpis.customers.value) + "," + csvEscape(kpis.customers.value));
+    lines.push(csvEscape("Demandes de Remboursement") + "," + csvEscape(kpis.refunds.value) + "," + csvEscape(kpis.refunds.value));
+    lines.push("");
+    lines.push("Commande,Client,Date,Total,Statut,Total (numérique)");
+    // Filtered through the same currentRangeKey as the KPIs above, so the exported orders
+    // reconcile with the exported KPI period instead of silently covering all-time data.
+    filterByRange(orders, currentRangeKey).slice(-5).reverse().forEach(o => {
+      const rawTotal = parseFloat(o.total) || 0;
+      lines.push([o.id, o.client, o.date, window.formatPrice(o.total), o.status, rawTotal].map(csvEscape).join(","));
     });
 
     return lines.join("\n");
@@ -566,7 +603,9 @@
     if (!btn) return;
     btn.addEventListener("click", () => {
       const csv = buildReportCSV();
-      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      // Prepend a UTF-8 BOM so Excel on Windows decodes accented characters (e.g. "Expédiée")
+      // correctly instead of mangling them (e.g. "ExpÃ©diÃ©e").
+      const blob = new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8;" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       const today = new Date().toISOString().slice(0, 10);

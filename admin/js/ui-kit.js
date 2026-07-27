@@ -4,8 +4,10 @@
   // ---------- formatPrice ----------
   window.formatPrice = function formatPrice(val) {
     const num = parseFloat(val) || 0;
-    if (num >= 1000) return num.toLocaleString('fr-FR') + " FCFA";
-    return "$" + num.toFixed(2);
+    // Always FCFA - there is no scenario in this codebase where USD formatting is correct.
+    // The dashboard's default "7 derniers jours" range makes a quiet-week $0.00 revenue card
+    // newly likely/visible, so amounts under 1000 must also render as FCFA, not USD.
+    return num.toLocaleString('fr-FR') + " FCFA";
   };
 
   // ---------- Toast ----------

@@ -87,6 +87,13 @@ body {
   align-items: center;
   gap: 4px;
   flex: 1;
+  /* Without this, the tab row's intrinsic content width forces the top-nav wider than the
+     viewport below ~1200px, pushing the bell/user-menu actions out past the visible area -
+     and since `body { overflow: hidden }` disables scrolling entirely, they become genuinely
+     unreachable, not just visually cramped. Letting the row shrink and, if needed, scroll
+     horizontally keeps the actions on-screen at any width. */
+  min-width: 0;
+  overflow-x: auto;
 }
 
 .nav-tabs .nav-item {
