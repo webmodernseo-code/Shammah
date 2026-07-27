@@ -4,6 +4,7 @@
   function renderRevenueBarChart(container, buckets, options) {
     options = options || {};
     container.innerHTML = "";
+    container.style.position = "relative";
 
     const maxTotal = Math.max(1, ...buckets.map(b => b.total));
     const width = 560;
@@ -68,9 +69,8 @@
     tooltip.querySelector("strong").textContent = bucket.dateLabel;
     tooltip.querySelector(".tooltip-count").textContent = bucket.count + " commande(s)";
     tooltip.querySelector(".tooltip-total").textContent = window.formatPrice(bucket.total);
-    container.style.position = "relative";
     tooltip.style.left = (x / 560 * 100) + "%";
-    tooltip.style.top = "0px";
+    tooltip.style.top = Math.max(0, y - 60) + "px";
     container.appendChild(tooltip);
   }
 
