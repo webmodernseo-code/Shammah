@@ -1115,11 +1115,8 @@ Replace the entire `setupChartToggle` function with:
     const buckets = mode === "month" ? buildMonthlyBuckets(orders) : buildWeeklyBuckets(orders);
 
     const currentTotal = buckets.reduce((s, b) => s + b.total, 0);
-    // Trend vs the immediately preceding equivalent window, using the same bucket builders
-    // shifted back by their own span, so the badge reflects the same granularity being viewed.
-    const shiftedOrders = orders; // filtering happens by absolute date inside the builder, so
-    // compute the previous window's total by re-running the same builder logic against a
-    // synthetic "now" shifted back — simplest correct approach: sum orders in the prior window directly.
+    // Trend vs the immediately preceding equivalent window — computed by summing orders
+    // that fall in the prior window directly, rather than re-running the bucket builders.
     const now = new Date();
     const spanDays = mode === "month" ? 35 : 7;
     const prevStart = new Date(now); prevStart.setDate(prevStart.getDate() - spanDays * 2);
