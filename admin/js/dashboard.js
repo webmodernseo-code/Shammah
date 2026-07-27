@@ -534,10 +534,57 @@
     });
   }
 
+  function csvEscape(value) {
+    const str = String(value === undefined || value === null ? "" : value);
+    if (str.includes(",") || str.includes("\"") || str.includes("\n")) {
+      return "\"" + str.replace(/"/g, "\"\"") + "\"";
+    }
+    return str;
+  }
+
+  function buildReportCSV() {
+    const orders = window.db.getOrders();
+    const kpis = computeKPIs(orders, currentRangeKey);
+
+    const lines = [];
+    lines.push("Indicateur,Valeur");
+    lines.push(csvEscape("Ventes Totales") + "," + csvEscape(kpis.sales.value));
+    lines.push(csvEscape("Chiffre d'Affaires") + "," + csvEscape(window.formatPrice(kpis.revenue.value)));
+    lines.push(csvEscape("Clients Actifs") + "," + csvEscape(kpis.customers.value));
+    lines.push(csvEscape("Demandes de Remboursement") + "," + csvEscape(kpis.refunds.value));
+    lines.push("");
+    lines.push("Commande,Client,Date,Total,Statut");
+    orders.slice(-5).reverse().forEach(o => {
+      lines.push([o.id, o.client, o.date, window.formatPrice(o.total), o.status].map(csvEscape).join(","));
+    });
+
+    return lines.join("\n");
+  }
+
+  function setupExportButton() {
+    const btn = document.getElementById("btn-export-report");
+    if (!btn) return;
+    btn.addEventListener("click", () => {
+      const csv = buildReportCSV();
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      const today = new Date().toISOString().slice(0, 10);
+      a.href = url;
+      a.download = "rapport-shammah-" + today + ".csv";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      window.Toast.show("Rapport exporté.", "success");
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     refresh();
     setupChartToggle();
     setupDateRangeSelector();
+    setupExportButton();
   });
 
   window.Dashboard = { refresh: refresh };
