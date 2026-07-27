@@ -78,13 +78,15 @@
     // `position: relative`), which starts `paddingTop` px higher. Read that real padding
     // instead of assuming it, then lift the tooltip fully above the bar's own top edge by
     // the tooltip's *actual measured* height (not a hardcoded pixel guess) plus a small
-    // fixed gap. Because a bar's height can never exceed the chart's drawable height, `y`
-    // is always >= the chart's internal top padding - so this stays positive for every
-    // bucket and never needs clamping, which means it never collapses distinct bar heights
-    // to the same tooltip position.
+    // fixed gap. For tall bars near the chart's max height, this can compute to a negative
+    // offset (escaping above the container into the card header), so clamp the final
+    // result to a small positive minimum - the tooltip then sits pinned near the top of
+    // the container instead of overlapping the header, while every other bar (where there
+    // is room above it) keeps its accurate, distinct position.
     const containerPaddingTop = parseFloat(getComputedStyle(container).paddingTop) || 0;
     const gap = 8;
-    tooltip.style.top = (containerPaddingTop + y - tooltip.offsetHeight - gap) + "px";
+    const computedTop = containerPaddingTop + y - tooltip.offsetHeight - gap;
+    tooltip.style.top = Math.max(4, computedTop) + "px";
   }
 
   function hideTooltip(container) {
