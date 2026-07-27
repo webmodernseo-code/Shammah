@@ -667,6 +667,24 @@ tr:hover td {
   right: 16px;
 }
 
+/* Success Rate Gauge */
+.gauge-wrap { position: relative; display: flex; flex-direction: column; align-items: center; }
+.gauge-percent { font-size: 1.6rem; font-weight: 800; color: var(--text-heading); margin-top: -30px; }
+.gauge-sublabel { font-size: 0.75rem; color: var(--text-body); }
+.gauge-mini-stats { display: flex; gap: 12px; margin-top: 16px; width: 100%; }
+.gauge-mini-stat {
+  flex: 1;
+  background: var(--page-bg);
+  border-radius: 10px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.gauge-mini-stat-label { font-size: 0.65rem; color: var(--text-body); text-transform: uppercase; }
+.gauge-mini-stat-value { font-size: 0.9rem; font-weight: 700; color: var(--text-heading); }
+#success-gauge-body { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
 /* Command Palette */
 .command-palette-overlay {
   position: fixed; inset: 0; background: rgba(15,23,42,0.5);

@@ -94,5 +94,71 @@
     if (existing) existing.remove();
   }
 
-  window.DashboardCharts = { renderRevenueBarChart: renderRevenueBarChart };
+  function renderSuccessGauge(container, percent, stats) {
+    container.innerHTML = "";
+
+    const svgNS = "http://www.w3.org/2000/svg";
+    const size = 180;
+    const radius = 70;
+    const cx = size / 2;
+    const cy = size / 2 + 10;
+    const totalSegments = 24;
+    const filledSegments = Math.round((percent / 100) * totalSegments);
+
+    const svg = document.createElementNS(svgNS, "svg");
+    svg.setAttribute("viewBox", "0 0 " + size + " " + (size / 2 + 30));
+    svg.setAttribute("width", "160");
+    svg.setAttribute("height", "110");
+
+    for (let i = 0; i < totalSegments; i++) {
+      const angle = Math.PI + (i / (totalSegments - 1)) * Math.PI;
+      const x1 = cx + Math.cos(angle) * (radius - 8);
+      const y1 = cy + Math.sin(angle) * (radius - 8);
+      const x2 = cx + Math.cos(angle) * radius;
+      const y2 = cy + Math.sin(angle) * radius;
+
+      const line = document.createElementNS(svgNS, "line");
+      line.setAttribute("x1", x1);
+      line.setAttribute("y1", y1);
+      line.setAttribute("x2", x2);
+      line.setAttribute("y2", y2);
+      line.setAttribute("stroke", i < filledSegments ? "var(--accent-primary)" : "var(--border-light)");
+      line.setAttribute("stroke-width", "5");
+      line.setAttribute("stroke-linecap", "round");
+      svg.appendChild(line);
+    }
+
+    const wrap = document.createElement("div");
+    wrap.className = "gauge-wrap";
+    wrap.appendChild(svg);
+
+    const percentLabel = document.createElement("div");
+    percentLabel.className = "gauge-percent";
+    percentLabel.textContent = percent.toFixed(1) + "%";
+    wrap.appendChild(percentLabel);
+
+    const subLabel = document.createElement("div");
+    subLabel.className = "gauge-sublabel";
+    subLabel.textContent = "Croissance des ventes";
+    wrap.appendChild(subLabel);
+
+    container.appendChild(wrap);
+
+    const statsRow = document.createElement("div");
+    statsRow.className = "gauge-mini-stats";
+    (stats || []).forEach(s => {
+      const card = document.createElement("div");
+      card.className = "gauge-mini-stat";
+      card.innerHTML = '<span class="gauge-mini-stat-label"></span><span class="gauge-mini-stat-value"></span>';
+      card.querySelector(".gauge-mini-stat-label").textContent = s.label;
+      card.querySelector(".gauge-mini-stat-value").textContent = s.value;
+      statsRow.appendChild(card);
+    });
+    container.appendChild(statsRow);
+  }
+
+  window.DashboardCharts = {
+    renderRevenueBarChart: renderRevenueBarChart,
+    renderSuccessGauge: renderSuccessGauge
+  };
 })();

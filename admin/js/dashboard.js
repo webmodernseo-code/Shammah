@@ -159,6 +159,24 @@
     };
   }
 
+  function computeSuccessRate(allOrders, rangeKey) {
+    const current = filterByRange(allOrders, rangeKey).filter(o => o.status !== "Annulée");
+    const successful = current.filter(o => o.status === "Payée" || o.status === "Expédiée");
+    const percent = current.length ? (successful.length / current.length) * 100 : 0;
+    return { percent: percent, successfulCount: successful.length, successfulRevenue: successful.reduce((s, o) => s + (parseFloat(o.total) || 0), 0) };
+  }
+
+  function renderSuccessGauge() {
+    const container = document.getElementById("success-gauge-body");
+    if (!container || !window.DashboardCharts) return;
+    const orders = window.db.getOrders();
+    const result = computeSuccessRate(orders, currentRangeKey);
+    window.DashboardCharts.renderSuccessGauge(container, result.percent, [
+      { label: "Ventes", value: result.successfulCount },
+      { label: "Chiffre d'Affaires", value: window.formatPrice(result.successfulRevenue) }
+    ]);
+  }
+
   function loadOverviewMetrics() {
     const orders = window.db.getOrders();
     const kpis = computeKPIs(orders, currentRangeKey);
@@ -178,6 +196,8 @@
     const refundsEl = document.getElementById("val-refunds");
     if (refundsEl) refundsEl.textContent = kpis.refunds.value;
     renderTrend("kpi-refunds-trend", kpis.refunds.trend);
+
+    renderSuccessGauge();
   }
 
   function loadOrdersPanel() {
