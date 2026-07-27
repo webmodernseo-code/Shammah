@@ -1,15 +1,61 @@
 (function () {
   "use strict";
 
-  function statusBadgeClass(status) {
-    if (status === "Payée") return "success";
-    if (status === "Expédiée") return "info";
-    if (status === "Annulée") return "danger";
-    return "warning";
-  }
-
   function methodDisplay(method) {
     return window.PaymentIcons ? window.PaymentIcons.forMethodLabel(method) : method;
+  }
+
+  // ---------- Date range filtering ----------
+  let currentRangeKey = "7d";
+
+  function parseOrderDate(dateStr) {
+    // order.date is always produced by `new Date().toLocaleDateString('fr-FR')` -> "dd/mm/yyyy"
+    const parts = (dateStr || "").split("/");
+    if (parts.length !== 3) return new Date(0);
+    return new Date(parseInt(parts[2], 10), parseInt(parts[1], 10) - 1, parseInt(parts[0], 10));
+  }
+
+  function rangeDays(rangeKey) {
+    return rangeKey === "30d" ? 30 : 7;
+  }
+
+  function filterByRange(orders, rangeKey) {
+    if (rangeKey === "all") return orders;
+    const days = rangeDays(rangeKey);
+    const start = new Date();
+    start.setDate(start.getDate() - days);
+    return orders.filter(o => parseOrderDate(o.date) >= start);
+  }
+
+  function filterByPreviousRange(orders, rangeKey) {
+    if (rangeKey === "all") return [];
+    const days = rangeDays(rangeKey);
+    const start = new Date();
+    start.setDate(start.getDate() - days * 2);
+    const end = new Date();
+    end.setDate(end.getDate() - days);
+    return orders.filter(o => {
+      const d = parseOrderDate(o.date);
+      return d >= start && d < end;
+    });
+  }
+
+  function trendPercent(current, previous) {
+    if (!previous) return null;
+    return ((current - previous) / previous) * 100;
+  }
+
+  function renderTrend(elId, value) {
+    const el = document.getElementById(elId);
+    if (!el) return;
+    if (value === null || value === undefined || !isFinite(value)) {
+      el.style.display = "none";
+      return;
+    }
+    el.style.display = "";
+    const sign = value >= 0 ? "+" : "";
+    el.textContent = sign + value.toFixed(1) + "%";
+    el.className = "metric-trend " + (value >= 0 ? "up" : "down");
   }
 
   // ---------- Order detail overlay ----------
@@ -89,49 +135,49 @@
     overlay.querySelector(".order-detail-close").addEventListener("click", closeOrderDetail);
   }
 
-  function loadOverviewMetrics() {
-    const orders = window.db.getOrders();
-    const products = window.db.getProducts();
+  function computeKPIs(allOrders, rangeKey) {
+    const current = filterByRange(allOrders, rangeKey);
+    const previous = filterByPreviousRange(allOrders, rangeKey);
 
-    const totalModelsEl = document.getElementById("val-stock");
-    if (totalModelsEl) totalModelsEl.textContent = products.length + " Modèles";
+    const currentNonCancelled = current.filter(o => o.status !== "Annulée");
+    const previousNonCancelled = previous.filter(o => o.status !== "Annulée");
 
-    const activeOrders = orders.filter(o => o.status === "En attente" || o.status === "Payée");
-    const revenueOrders = orders.filter(o => o.status !== "Annulée");
-    const totalRevenue = revenueOrders.reduce((sum, o) => sum + (parseFloat(o.total) || 0), 0);
-    const avgBasket = revenueOrders.length ? totalRevenue / revenueOrders.length : 0;
+    const currentRevenue = currentNonCancelled.reduce((sum, o) => sum + (parseFloat(o.total) || 0), 0);
+    const previousRevenue = previousNonCancelled.reduce((sum, o) => sum + (parseFloat(o.total) || 0), 0);
 
-    const ordersEl = document.getElementById("val-orders");
-    if (ordersEl) ordersEl.textContent = activeOrders.length + " Commandes";
+    const currentCancelled = current.filter(o => o.status === "Annulée");
+    const previousCancelled = previous.filter(o => o.status === "Annulée");
 
-    const revenueEl = document.getElementById("val-revenue");
-    if (revenueEl) revenueEl.textContent = window.formatPrice(totalRevenue);
+    const currentCustomers = new Set(current.map(o => o.email || o.phone).filter(Boolean)).size;
+    const previousCustomers = new Set(previous.map(o => o.email || o.phone).filter(Boolean)).size;
 
-    const basketEl = document.getElementById("val-basket");
-    if (basketEl) basketEl.textContent = window.formatPrice(avgBasket);
-
-    renderRecentOrdersWidget(orders);
+    return {
+      sales: { value: currentNonCancelled.length, trend: trendPercent(currentNonCancelled.length, previousNonCancelled.length) },
+      revenue: { value: currentRevenue, trend: trendPercent(currentRevenue, previousRevenue) },
+      customers: { value: currentCustomers, trend: trendPercent(currentCustomers, previousCustomers) },
+      refunds: { value: currentCancelled.length, trend: trendPercent(currentCancelled.length, previousCancelled.length) }
+    };
   }
 
-  function renderRecentOrdersWidget(orders) {
-    const tbody = document.getElementById("dashboard-recent-orders");
-    if (!tbody) return;
-    tbody.innerHTML = "";
-    // localStorage.push conserve l'ordre chronologique d'insertion : les 5 derniers éléments
-    // sont donc les plus récents, contrairement à un tri par id (les id sont générés aléatoirement).
-    orders.slice(-5).reverse().forEach(o => {
-      const tr = document.createElement("tr");
-      // o.id comes from the customer checkout form (js/shammah.js), unlike promo/category/product
-      // names which are admin-entered — build the skeleton via innerHTML then assign it via
-      // .textContent so it can never be interpreted as markup.
-      tr.innerHTML =
-        "<td style=\"padding:10px 14px; font-weight:700;\" data-cell=\"id\"></td>" +
-        "<td style=\"padding:10px 14px;\">" + window.formatPrice(o.total) + "</td>" +
-        "<td style=\"padding:10px 14px;\">" + methodDisplay(o.method) + "</td>" +
-        "<td style=\"padding:10px 14px; text-align:right;\"><span class=\"badge-status " + statusBadgeClass(o.status) + "\"><span class=\"bullet-dot\"></span> " + o.status + "</span></td>";
-      tr.querySelector('[data-cell="id"]').textContent = o.id;
-      tbody.appendChild(tr);
-    });
+  function loadOverviewMetrics() {
+    const orders = window.db.getOrders();
+    const kpis = computeKPIs(orders, currentRangeKey);
+
+    const salesEl = document.getElementById("val-sales");
+    if (salesEl) salesEl.textContent = kpis.sales.value;
+    renderTrend("kpi-sales-trend", kpis.sales.trend);
+
+    const revenueEl = document.getElementById("val-revenue");
+    if (revenueEl) revenueEl.textContent = window.formatPrice(kpis.revenue.value);
+    renderTrend("kpi-revenue-trend", kpis.revenue.trend);
+
+    const customersEl = document.getElementById("val-customers");
+    if (customersEl) customersEl.textContent = kpis.customers.value;
+    renderTrend("kpi-customers-trend", kpis.customers.trend);
+
+    const refundsEl = document.getElementById("val-refunds");
+    if (refundsEl) refundsEl.textContent = kpis.refunds.value;
+    renderTrend("kpi-refunds-trend", kpis.refunds.trend);
   }
 
   function loadOrdersPanel() {
@@ -237,9 +283,19 @@
     btnMonth.addEventListener("click", () => { btnMonth.classList.add("active"); btnWeek.classList.remove("active"); updateChart(monthlyData); });
   }
 
+  function setupDateRangeSelector() {
+    const select = document.getElementById("kpi-date-range");
+    if (!select) return;
+    select.addEventListener("change", () => {
+      currentRangeKey = select.value;
+      refresh();
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     refresh();
     setupChartToggle();
+    setupDateRangeSelector();
   });
 
   window.Dashboard = { refresh: refresh };

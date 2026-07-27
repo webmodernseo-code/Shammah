@@ -340,6 +340,28 @@ button:active, .btn-primary:active, .btn-secondary:active, .nav-item:active {
   margin-top: 4px;
 }
 
+.metric-trend {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+.metric-trend.up { background: #ECFDF5; color: var(--status-green); }
+.metric-trend.down { background: #FEF2F2; color: var(--status-red); }
+
+.date-range-select {
+  height: 38px;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: 0 12px;
+  font-family: inherit;
+  font-size: 0.8rem;
+  background: var(--card-bg);
+  color: var(--text-heading);
+}
+
 /* Main content panels side-by-side */
 .panel-grid-2 {
   display: grid;
