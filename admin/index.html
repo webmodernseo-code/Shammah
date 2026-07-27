@@ -153,6 +153,10 @@
           <div class="content-card">
             <div class="content-card-header">
               <h3>Chiffre d'Affaires</h3>
+              <div style="display: flex; gap: 4px; background: var(--page-bg); padding: 2px; border-radius: 6px;">
+                <button class="chart-toggle-btn active" id="btn-chart-week">Semaine</button>
+                <button class="chart-toggle-btn" id="btn-chart-month">Mois</button>
+              </div>
             </div>
             <div class="content-card-body" id="revenue-chart-body" style="height: 260px;"></div>
           </div>
@@ -413,6 +417,7 @@
   <script src="../js/payment-icons.js"></script>
   <script src="js/variant-editor.js"></script>
   <script src="js/ui-kit.js"></script>
+  <script src="js/dashboard-charts.js"></script>
   <script src="js/dashboard.js"></script>
   <script src="js/categories.js"></script>
   <script src="js/promos.js"></script>

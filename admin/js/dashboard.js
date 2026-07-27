@@ -233,54 +233,100 @@
     loadOrdersPanel();
   }
 
+  function buildWeeklyBuckets(orders) {
+    const dayLabels = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
+    const now = new Date();
+    const start = new Date(now);
+    start.setDate(start.getDate() - 6);
+    start.setHours(0, 0, 0, 0);
+
+    const buckets = [];
+    for (let i = 0; i < 7; i++) {
+      const day = new Date(start);
+      day.setDate(day.getDate() + i);
+      buckets.push({ label: dayLabels[(day.getDay() + 6) % 7], total: 0, count: 0, dateLabel: day.toLocaleDateString("fr-FR"), dayStart: day });
+    }
+
+    orders.forEach(o => {
+      if (o.status === "Annulée") return;
+      const d = parseOrderDate(o.date);
+      const bucket = buckets.find(b => b.dayStart.toDateString() === d.toDateString());
+      if (bucket) {
+        bucket.total += parseFloat(o.total) || 0;
+        bucket.count += 1;
+      }
+    });
+
+    return buckets;
+  }
+
+  function buildMonthlyBuckets(orders) {
+    const now = new Date();
+    const start = new Date(now);
+    start.setDate(start.getDate() - 34); // 5 weeks
+    start.setHours(0, 0, 0, 0);
+
+    const buckets = [];
+    for (let i = 0; i < 5; i++) {
+      const weekStart = new Date(start);
+      weekStart.setDate(weekStart.getDate() + i * 7);
+      const weekEnd = new Date(weekStart);
+      weekEnd.setDate(weekEnd.getDate() + 7);
+      buckets.push({ label: "Sem " + (i + 1), total: 0, count: 0, dateLabel: "Sem " + (i + 1) + " (" + weekStart.toLocaleDateString("fr-FR") + ")", weekStart: weekStart, weekEnd: weekEnd });
+    }
+
+    orders.forEach(o => {
+      if (o.status === "Annulée") return;
+      const d = parseOrderDate(o.date);
+      const bucket = buckets.find(b => d >= b.weekStart && d < b.weekEnd);
+      if (bucket) {
+        bucket.total += parseFloat(o.total) || 0;
+        bucket.count += 1;
+      }
+    });
+
+    return buckets;
+  }
+
+  function renderRevenueChart(mode) {
+    const container = document.getElementById("revenue-chart-body");
+    if (!container) return;
+    const orders = window.db.getOrders();
+    const buckets = mode === "month" ? buildMonthlyBuckets(orders) : buildWeeklyBuckets(orders);
+
+    const currentTotal = buckets.reduce((s, b) => s + b.total, 0);
+    // Trend vs the immediately preceding equivalent window — computed by summing orders
+    // that fall in the prior window directly, rather than re-running the bucket builders.
+    const now = new Date();
+    const spanDays = mode === "month" ? 35 : 7;
+    const prevStart = new Date(now); prevStart.setDate(prevStart.getDate() - spanDays * 2);
+    const prevEnd = new Date(now); prevEnd.setDate(prevEnd.getDate() - spanDays);
+    const previousTotal = orders
+      .filter(o => o.status !== "Annulée")
+      .filter(o => { const d = parseOrderDate(o.date); return d >= prevStart && d < prevEnd; })
+      .reduce((s, o) => s + (parseFloat(o.total) || 0), 0);
+
+    const trend = trendPercent(currentTotal, previousTotal);
+    window.DashboardCharts.renderRevenueBarChart(container, buckets, { trend: trend });
+  }
+
   function setupChartToggle() {
     const btnWeek = document.getElementById("btn-chart-week");
     const btnMonth = document.getElementById("btn-chart-month");
     if (!btnWeek || !btnMonth) return;
 
-    const curvePath = document.getElementById("chart-curve-path");
-    const areaPath = document.getElementById("chart-area-path");
-    const cursorLine = document.getElementById("chart-cursor-line");
-    const glowDot = document.getElementById("chart-glow-dot");
-    const innerDot = document.getElementById("chart-inner-dot");
-    const tooltipGroup = document.getElementById("chart-tooltip-group");
-    const tooltipText = document.getElementById("chart-tooltip-text");
-    const trendBadge = document.getElementById("chart-trend-badge");
-    const lbl1 = document.getElementById("chart-label-1");
-    const lbl2 = document.getElementById("chart-label-2");
-    const lbl3 = document.getElementById("chart-label-3");
-    const lbl4 = document.getElementById("chart-label-4");
+    renderRevenueChart("week");
 
-    const weeklyData = {
-      curve: "M 20 105 C 70 105, 70 85, 120 85 C 180 85, 190 45, 240 45 C 290 45, 290 75, 330 75",
-      area: "M 20 105 C 70 105, 70 85, 120 85 C 180 85, 190 45, 240 45 C 290 45, 290 75, 330 75 L 330 110 L 20 110 Z",
-      cx: 240, cy: 45, tooltipTranslate: "translate(200, 7)", tooltipValue: "245 000 FCFA",
-      trend: "+12.5% vs semaine dernière", labels: ["Lun", "Mer", "Ven", "Dim"]
-    };
-    const monthlyData = {
-      curve: "M 20 95 C 70 95, 70 105, 120 105 C 180 105, 190 35, 240 35 C 290 35, 290 55, 330 55",
-      area: "M 20 95 C 70 95, 70 105, 120 105 C 180 105, 190 35, 240 35 C 290 35, 290 55, 330 55 L 330 110 L 20 110 Z",
-      cx: 240, cy: 35, tooltipTranslate: "translate(200, -3)", tooltipValue: "1 050 000 FCFA",
-      trend: "+18.3% vs mois dernier", labels: ["Sem 1", "Sem 2", "Sem 3", "Sem 4"]
-    };
-
-    function updateChart(data) {
-      if (curvePath) curvePath.setAttribute("d", data.curve);
-      if (areaPath) areaPath.setAttribute("d", data.area);
-      if (cursorLine) { cursorLine.setAttribute("x1", data.cx); cursorLine.setAttribute("x2", data.cx); }
-      if (glowDot) { glowDot.setAttribute("cx", data.cx); glowDot.setAttribute("cy", data.cy); }
-      if (innerDot) { innerDot.setAttribute("cx", data.cx); innerDot.setAttribute("cy", data.cy); }
-      if (tooltipGroup) tooltipGroup.setAttribute("transform", data.tooltipTranslate);
-      if (tooltipText) tooltipText.textContent = data.tooltipValue;
-      if (trendBadge) trendBadge.textContent = data.trend;
-      if (lbl1) lbl1.textContent = data.labels[0];
-      if (lbl2) lbl2.textContent = data.labels[1];
-      if (lbl3) lbl3.textContent = data.labels[2];
-      if (lbl4) lbl4.textContent = data.labels[3];
-    }
-
-    btnWeek.addEventListener("click", () => { btnWeek.classList.add("active"); btnMonth.classList.remove("active"); updateChart(weeklyData); });
-    btnMonth.addEventListener("click", () => { btnMonth.classList.add("active"); btnWeek.classList.remove("active"); updateChart(monthlyData); });
+    btnWeek.addEventListener("click", () => {
+      btnWeek.classList.add("active");
+      btnMonth.classList.remove("active");
+      renderRevenueChart("week");
+    });
+    btnMonth.addEventListener("click", () => {
+      btnMonth.classList.add("active");
+      btnWeek.classList.remove("active");
+      renderRevenueChart("month");
+    });
   }
 
   function setupDateRangeSelector() {

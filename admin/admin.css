@@ -643,6 +643,30 @@ tr:hover td {
   font-weight: 700;
 }
 
+/* Revenue Bar Chart */
+.revenue-bar { cursor: pointer; transition: opacity 0.15s; }
+.revenue-bar:hover { opacity: 0.85; }
+
+.revenue-bar-tooltip {
+  position: absolute;
+  transform: translateX(-50%);
+  background: var(--text-heading);
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  line-height: 1.4;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 5;
+}
+
+.chart-trend-floating {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
 /* Command Palette */
 .command-palette-overlay {
   position: fixed; inset: 0; background: rgba(15,23,42,0.5);
