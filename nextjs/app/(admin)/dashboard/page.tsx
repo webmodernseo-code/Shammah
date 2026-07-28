@@ -1,6 +1,7 @@
-import { getDashboardMetrics, type DateRangeKey } from "@/lib/dashboard-metrics";
+import { getDashboardMetrics, getRevenueChartData, type DateRangeKey } from "@/lib/dashboard-metrics";
 import { DateRangeSelect } from "@/components/dashboard/DateRangeSelect";
 import { KpiCard } from "@/components/dashboard/KpiCard";
+import { RevenueChart } from "@/components/dashboard/RevenueChart";
 
 function formatEUR(value: number) {
   return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(value);
@@ -9,12 +10,16 @@ function formatEUR(value: number) {
 export default async function DashboardPage({
   searchParams,
 }: {
-  searchParams: Promise<{ range?: string }>;
+  searchParams: Promise<{ range?: string; chart?: string }>;
 }) {
-  const { range: rawRange } = await searchParams;
+  const { range: rawRange, chart: rawChart } = await searchParams;
   const range: DateRangeKey = rawRange === "30d" || rawRange === "all" ? rawRange : "7d";
+  const chartMode: "week" | "month" = rawChart === "month" ? "month" : "week";
 
-  const metrics = await getDashboardMetrics(range);
+  const [metrics, revenueChart] = await Promise.all([
+    getDashboardMetrics(range),
+    getRevenueChartData(chartMode),
+  ]);
 
   return (
     <main className="p-8">
@@ -55,6 +60,10 @@ export default async function DashboardPage({
           trendPercent={metrics.kpis.refundRequests.trendPercent}
           icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3m0 3h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" /></svg>}
         />
+      </div>
+
+      <div className="mt-6">
+        <RevenueChart points={revenueChart.points} trendPercent={revenueChart.trendPercent} mode={chartMode} />
       </div>
     </main>
   );
