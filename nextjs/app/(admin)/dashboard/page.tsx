@@ -2,6 +2,7 @@ import { getDashboardMetrics, getRevenueChartData, type DateRangeKey } from "@/l
 import { DateRangeSelect } from "@/components/dashboard/DateRangeSelect";
 import { KpiCard } from "@/components/dashboard/KpiCard";
 import { RevenueChart } from "@/components/dashboard/RevenueChart";
+import { SuccessGauge } from "@/components/dashboard/SuccessGauge";
 
 function formatEUR(value: number) {
   return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(value);
@@ -64,6 +65,14 @@ export default async function DashboardPage({
 
       <div className="mt-6">
         <RevenueChart points={revenueChart.points} trendPercent={revenueChart.trendPercent} mode={chartMode} />
+      </div>
+
+      <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <SuccessGauge
+          rate={metrics.successRate.rate}
+          successfulCount={metrics.successRate.successfulCount}
+          revenue={metrics.successRate.revenue}
+        />
       </div>
     </main>
   );
