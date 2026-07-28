@@ -5,9 +5,12 @@ export type ProductRow = {
   title: string;
   basePrice: number;
   category: { name: string };
+  categoryId: string;
+  subcategoryId: string | null;
+  description: string;
   thumbnailUrl: string | null;
   totalStock: number;
-  variants: { id: string; colorName: string; colorHex: string; stock: { size: string; quantity: number }[] }[];
+  variants: { id: string; colorName: string; colorHex: string; images: string[]; stock: { size: string; quantity: number }[] }[];
 };
 
 function formatEUR(value: number) {
