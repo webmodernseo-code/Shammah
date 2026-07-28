@@ -4,8 +4,10 @@
   // ---------- formatPrice ----------
   window.formatPrice = function formatPrice(val) {
     const num = parseFloat(val) || 0;
-    if (num >= 1000) return num.toLocaleString('fr-FR') + " FCFA";
-    return "$" + num.toFixed(2);
+    // Always FCFA - there is no scenario in this codebase where USD formatting is correct.
+    // The dashboard's default "7 derniers jours" range makes a quiet-week $0.00 revenue card
+    // newly likely/visible, so amounts under 1000 must also render as FCFA, not USD.
+    return num.toLocaleString('fr-FR') + " FCFA";
   };
 
   // ---------- Toast ----------
@@ -114,18 +116,49 @@
     });
   }
 
+  function initNavUserMenu() {
+    const userMenu = document.getElementById("nav-user-menu");
+    if (!userMenu) return;
+
+    userMenu.addEventListener("click", (e) => {
+      e.stopPropagation();
+      userMenu.classList.toggle("open");
+    });
+
+    document.addEventListener("click", () => userMenu.classList.remove("open"));
+
+    // Only "logout" is wired — "profile" carries the `disabled` attribute (see index.html)
+    // per spec §3, since Profil & Paramètres has no real destination until Phase 6 exists.
+    userMenu.querySelectorAll(".nav-user-dropdown-item:not([disabled])").forEach(item => {
+      item.addEventListener("click", (e) => {
+        e.stopPropagation();
+        userMenu.classList.remove("open");
+        window.Toast.show("Déconnexion non disponible dans cette démo.", "info");
+      });
+    });
+  }
+
+  function initNotificationBell() {
+    const btn = document.getElementById("nav-bell-btn");
+    if (!btn) return;
+    btn.addEventListener("click", () => window.Toast.show("Aucune nouvelle notification.", "info"));
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
-    initTheme();
-    initSidebarCollapse();
+    if (document.getElementById("theme-toggle-btn")) initTheme();
+    if (document.getElementById("sidebar-toggle-btn")) initSidebarCollapse();
+    initNavUserMenu();
+    initNotificationBell();
   });
 
   // ---------- Command Palette ----------
   const NAV_TARGETS = [
-    { label: "Vue d'ensemble", target: "panel-dashboard" },
+    { label: "Dashboard", target: "panel-dashboard" },
+    { label: "Produits", target: "panel-products" },
     { label: "Commandes", target: "panel-orders" },
-    { label: "Gestion Articles", target: "panel-products" },
-    { label: "Codes Promo", target: "panel-promos" },
-    { label: "Configuration", target: "panel-settings" }
+    { label: "Clients", target: "panel-customers" },
+    { label: "Attributs", target: "panel-settings" },
+    { label: "Promotions", target: "panel-promos" }
   ];
 
   function goToPanel(target) {

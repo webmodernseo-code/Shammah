@@ -11,82 +11,76 @@
 
   <div class="app-container">
     
-    <!-- LEFT SIDEBAR -->
-    <aside class="sidebar">
-      <div class="sidebar-top">
-        <!-- Logo -->
-        <a href="../index.html" class="sidebar-logo">
-          <svg viewBox="0 0 32 32" width="28" height="28" class="brand-mark">
-            <rect width="32" height="32" rx="9" fill="#0f172a"/>
-            <path d="M12 11.5c0-1.933 1.567-3.5 3.5-3.5h4a1 1 0 010 2h-4a1.5 1.5 0 000 3h2c1.933 0 3.5 1.567 3.5 3.5S21.433 20 19.5 20h-4a1 1 0 010-2h4a1.5 1.5 0 000-3h-2c-1.933 0-3.5-1.567-3.5-3.5z" fill="#ffffff"/>
-          </svg>
-          <span class="sidebar-logo-text">SHAMMAH</span>
-        </a>
+    <header class="top-nav">
+      <a href="../index.html" class="top-nav-logo">
+        <svg viewBox="0 0 32 32" width="28" height="28" class="brand-mark">
+          <rect width="32" height="32" rx="9" fill="#0f172a"/>
+          <path d="M12 11.5c0-1.933 1.567-3.5 3.5-3.5h4a1 1 0 010 2h-4a1.5 1.5 0 000 3h2c1.933 0 3.5 1.567 3.5 3.5S21.433 20 19.5 20h-4a1 1 0 010-2h4a1.5 1.5 0 000-3h-2c-1.933 0-3.5-1.567-3.5-3.5z" fill="#ffffff"/>
+        </svg>
+        <span class="top-nav-logo-text">SHAMMAH</span>
+      </a>
 
-        <!-- Search shortcut -->
-        <div class="search-box">
-          <input type="text" placeholder="Rechercher... ⌘K" readonly>
+      <nav class="nav-tabs">
+        <div class="nav-item active" data-target="panel-dashboard">
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z" />
           </svg>
+          <span class="nav-label">Dashboard</span>
         </div>
-
-        <!-- Links -->
-        <nav class="nav-links">
-          <div class="nav-item active" data-target="panel-dashboard">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z" />
-            </svg>
-            <span class="nav-label">Vue d'ensemble</span>
-          </div>
-
-          <div class="nav-item" data-target="panel-orders">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-            </svg>
-            <span class="nav-label">Commandes</span>
-          </div>
-
-          <div class="nav-item" data-target="panel-products">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-            </svg>
-            <span class="nav-label">Gestion Articles</span>
-          </div>
-
-          <div class="nav-item" data-target="panel-promos">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2zM10 8.5a.5.5 0 11-1 0 .5.5 0 011 0zm5 5a.5.5 0 11-1 0 .5.5 0 011 0z" />
-            </svg>
-            <span class="nav-label">Codes Promo</span>
-          </div>
-
-          <div class="nav-item" data-target="panel-settings">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            <span class="nav-label">Configuration</span>
-          </div>
-        </nav>
-
-        <button type="button" id="sidebar-toggle-btn" class="sidebar-toggle-btn" title="Replier/déplier la sidebar">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
-        </button>
-      </div>
-
-      <!-- User footer info -->
-      <div class="user-card">
-        <div class="user-avatar">A</div>
-        <div class="user-info">
-          <span class="user-name">Administrateur</span>
-          <span class="user-email">admin@shammah.com</span>
+        <div class="nav-item" data-target="panel-products">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+          <span class="nav-label">Produits</span>
         </div>
-        <button type="button" id="theme-toggle-btn" class="theme-toggle-btn" title="Basculer le thème">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M12 8a4 4 0 100 8 4 4 0 000-8z" /></svg>
+        <div class="nav-item" data-target="panel-orders">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+          </svg>
+          <span class="nav-label">Commandes</span>
+        </div>
+        <div class="nav-item" data-target="panel-customers">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m5-3.13a4 4 0 100-8 4 4 0 000 8zm6 0a4 4 0 10-2-7.45" />
+          </svg>
+          <span class="nav-label">Clients</span>
+        </div>
+        <div class="nav-item" data-target="panel-settings">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <span class="nav-label">Attributs</span>
+        </div>
+        <div class="nav-item" data-target="panel-promos">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2zM10 8.5a.5.5 0 11-1 0 .5.5 0 011 0zm5 5a.5.5 0 11-1 0 .5.5 0 011 0z" />
+          </svg>
+          <span class="nav-label">Promotions</span>
+        </div>
+      </nav>
+
+      <div class="top-nav-actions">
+        <button type="button" class="nav-bell-btn" id="nav-bell-btn" aria-label="Notifications">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
         </button>
+        <div class="nav-user" id="nav-user-menu">
+          <div class="user-avatar">A</div>
+          <div class="user-info">
+            <span class="user-name">Administrateur</span>
+            <span class="user-role">Super Admin</span>
+          </div>
+          <svg class="nav-user-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+          <div class="nav-user-dropdown" id="nav-user-dropdown">
+            <button type="button" class="nav-user-dropdown-item" data-action="profile" disabled title="Disponible dans une prochaine phase">Profil &amp; Paramètres</button>
+            <button type="button" class="nav-user-dropdown-item" data-action="logout">Déconnexion</button>
+          </div>
+        </div>
       </div>
-    </aside>
+    </header>
+
+    <!-- ==================== PLACEHOLDER PANEL: CLIENTS ==================== -->
+    <!-- Real content arrives in a later phase (customer records don't exist yet). -->
 
     <!-- RIGHT MAIN WORKSPACE -->
     <main class="main-workspace">
@@ -95,177 +89,93 @@
       <div class="workspace-panel active" id="panel-dashboard">
         <div class="panel-header">
           <div>
-            <h2>Operations Center</h2>
-            <p>Indicateurs de performance de la boutique en temps réel.</p>
+            <h2>Bonjour, Administrateur 👋</h2>
+            <p>Gérez produits, commandes, clients et performance en un seul endroit.</p>
           </div>
-          <button class="btn-primary" onclick="window.location.reload();">Actualiser</button>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <select id="kpi-date-range" class="date-range-select">
+              <option value="7d">7 derniers jours</option>
+              <option value="30d">30 derniers jours</option>
+              <option value="all">Tout</option>
+            </select>
+            <button class="btn-primary" id="btn-export-report">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" /></svg>
+              Exporter le rapport
+            </button>
+          </div>
         </div>
 
         <!-- Metrics cards row -->
         <div class="metrics-grid">
-          <!-- Revenues (Green) -->
-          <div class="metric-card green">
-            <div class="metric-icon-wrapper">
-              <svg style="width:22px; height:22px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+          <div class="metric-card">
+            <div class="metric-icon-wrapper" style="background:#EEF2FF; color:var(--accent-primary);">
+              <svg style="width:22px; height:22px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17l6-6 4 4 8-8M17 7h8v8" /></svg>
+            </div>
+            <div>
+              <span class="metric-title">Ventes Totales</span>
+              <div class="metric-value" id="val-sales">…</div>
+              <span class="metric-trend" id="kpi-sales-trend"></span>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon-wrapper" style="background:#ECFDF5; color:var(--status-green);">
+              <svg style="width:22px; height:22px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             </div>
             <div>
               <span class="metric-title">Chiffre d'Affaires</span>
               <div class="metric-value" id="val-revenue">…</div>
+              <span class="metric-trend" id="kpi-revenue-trend"></span>
             </div>
           </div>
-          
-          <!-- Active orders (Blue) -->
-          <div class="metric-card blue">
-            <div class="metric-icon-wrapper">
-              <svg style="width:22px; height:22px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-              </svg>
+          <div class="metric-card">
+            <div class="metric-icon-wrapper" style="background:#EFF6FF; color:var(--status-blue);">
+              <svg style="width:22px; height:22px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m5-3.13a4 4 0 100-8 4 4 0 000 8zm6 0a4 4 0 10-2-7.45" /></svg>
             </div>
             <div>
-              <span class="metric-title">Commandes Actives</span>
-              <div class="metric-value" id="val-orders">…</div>
+              <span class="metric-title">Clients Actifs</span>
+              <div class="metric-value" id="val-customers">…</div>
+              <span class="metric-trend" id="kpi-customers-trend"></span>
             </div>
           </div>
-
-          <!-- Average Basket (Gold) -->
-          <div class="metric-card gold">
-            <div class="metric-icon-wrapper">
-              <svg style="width:22px; height:22px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-              </svg>
+          <div class="metric-card">
+            <div class="metric-icon-wrapper" style="background:#FEF2F2; color:var(--status-red);">
+              <svg style="width:22px; height:22px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636l-12.728 12.728M5.636 5.636l12.728 12.728" /></svg>
             </div>
             <div>
-              <span class="metric-title">Panier Moyen</span>
-              <div class="metric-value" id="val-basket">…</div>
-            </div>
-          </div>
-
-          <!-- Total Catalogue stock items (Red) -->
-          <div class="metric-card red">
-            <div class="metric-icon-wrapper">
-              <svg style="width:22px; height:22px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-              </svg>
-            </div>
-            <div>
-              <span class="metric-title">Articles Catalogue</span>
-              <div class="metric-value" id="val-stock">…</div>
+              <span class="metric-title">Demandes de Remboursement</span>
+              <div class="metric-value" id="val-refunds">…</div>
+              <span class="metric-trend" id="kpi-refunds-trend"></span>
             </div>
           </div>
         </div>
 
-        <!-- Weekly performance and recent orders list -->
-        <div class="panel-grid-2">
-          <!-- Spline Line chart weekly performance -->
+        <div class="panel-grid-2" id="dashboard-charts-row">
           <div class="content-card">
             <div class="content-card-header">
-              <h3>Courbe de Performance</h3>
-              <div style="display: flex; align-items: center; gap: 10px;">
-                <div style="display: flex; gap: 4px; background: var(--bg-primary); padding: 2px; border-radius: 6px; border: 1px solid var(--border-light);">
-                  <button class="chart-toggle-btn active" id="btn-chart-week">Semaine</button>
-                  <button class="chart-toggle-btn" id="btn-chart-month">Mois</button>
-                </div>
-                <span class="badge-status success" id="chart-trend-badge" style="font-size: 0.65rem; padding: 2px 8px; border-radius: 4px; font-weight: 700;">+12.5% vs semaine dernière</span>
+              <h3>Chiffre d'Affaires</h3>
+              <div style="display: flex; gap: 4px; background: var(--page-bg); padding: 2px; border-radius: 6px;">
+                <button class="chart-toggle-btn active" id="btn-chart-week">Semaine</button>
+                <button class="chart-toggle-btn" id="btn-chart-month">Mois</button>
               </div>
             </div>
-            <div class="content-card-body" style="display:flex; align-items:center; justify-content:center; height: 100%; padding: 16px;">
-              <svg viewBox="0 0 350 140" style="width: 100%; height: 100%; overflow: visible;">
-                <style>
-                  @keyframes pulseGlow {
-                    0% { r: 6px; opacity: 0.4; }
-                    50% { r: 12px; opacity: 0.15; }
-                    100% { r: 6px; opacity: 0.4; }
-                  }
-                  .pulse-glow {
-                    animation: pulseGlow 2.5s infinite ease-in-out;
-                  }
-                  .chart-curve {
-                    stroke-dasharray: 600;
-                    stroke-dashoffset: 600;
-                    animation: drawCurve 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-                  }
-                  @keyframes drawCurve {
-                    to { stroke-dashoffset: 0; }
-                  }
-                </style>
-                <defs>
-                  <linearGradient id="curveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#059669" />
-                    <stop offset="50%" stop-color="#10B981" />
-                    <stop offset="100%" stop-color="#34D399" />
-                  </linearGradient>
-                  
-                  <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#10B981" stop-opacity="0.18"/>
-                    <stop offset="100%" stop-color="#10B981" stop-opacity="0"/>
-                  </linearGradient>
-
-                  <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#10B981" flood-opacity="0.25"/>
-                  </filter>
-                </defs>
-
-                <!-- Grid Horizontal Lines -->
-                <line x1="20" y1="30" x2="330" y2="30" stroke="var(--border-light)" stroke-width="1" stroke-dasharray="4, 6" stroke-opacity="0.6" />
-                <line x1="20" y1="70" x2="330" y2="70" stroke="var(--border-light)" stroke-width="1" stroke-dasharray="4, 6" stroke-opacity="0.6" />
-                <line x1="20" y1="110" x2="330" y2="110" stroke="var(--border-light)" stroke-width="1" stroke-dasharray="4, 6" stroke-opacity="0.6" />
-
-                <!-- Grid Vertical Lines -->
-                <line x1="20" y1="20" x2="20" y2="110" stroke="var(--border-light)" stroke-width="1" stroke-dasharray="4, 6" stroke-opacity="0.3" />
-                <line x1="120" y1="20" x2="120" y2="110" stroke="var(--border-light)" stroke-width="1" stroke-dasharray="4, 6" stroke-opacity="0.3" />
-                <line x1="240" y1="20" x2="240" y2="110" stroke="var(--border-light)" stroke-width="1" stroke-dasharray="4, 6" stroke-opacity="0.3" />
-                <line x1="330" y1="20" x2="330" y2="110" stroke="var(--border-light)" stroke-width="1" stroke-dasharray="4, 6" stroke-opacity="0.3" />
-
-                <!-- Area under curve -->
-                <path id="chart-area-path" d="M 20 105 C 70 105, 70 85, 120 85 C 180 85, 190 45, 240 45 C 290 45, 290 75, 330 75 L 330 110 L 20 110 Z" fill="url(#areaGrad)" />
-                
-                <!-- Main Curve Line -->
-                <path id="chart-curve-path" class="chart-curve" d="M 20 105 C 70 105, 70 85, 120 85 C 180 85, 190 45, 240 45 C 290 45, 290 75, 330 75" fill="none" stroke="url(#curveGrad)" stroke-width="3" stroke-linecap="round" filter="url(#shadow)" />
-                
-                <!-- Vertical Cursor for target -->
-                <line id="chart-cursor-line" x1="240" y1="20" x2="240" y2="110" stroke="#10B981" stroke-width="1" stroke-dasharray="2, 2" stroke-opacity="0.6" />
-
-                <!-- Glow Dot Target -->
-                <circle id="chart-glow-dot" cx="240" cy="45" r="10" fill="#10B981" fill-opacity="0.2" class="pulse-glow" />
-                <circle id="chart-inner-dot" cx="240" cy="45" r="4" fill="#ffffff" stroke="#10B981" stroke-width="3" />
-                
-                <!-- Tooltip hover value -->
-                <g id="chart-tooltip-group" transform="translate(200, 7)" class="chart-tooltip">
-                  <rect x="0" y="0" width="80" height="24" rx="6" fill="#0f172a" />
-                  <text id="chart-tooltip-text" x="40" y="15" font-family="var(--font-inter), sans-serif" font-size="8" font-weight="700" fill="#ffffff" text-anchor="middle">245 000 FCFA</text>
-                </g>
-
-                <!-- Labels -->
-                <text id="chart-label-1" x="20" y="126" font-family="var(--font-inter), sans-serif" font-size="8" font-weight="600" fill="#94a3b8" text-anchor="middle">Lun</text>
-                <text id="chart-label-2" x="120" y="126" font-family="var(--font-inter), sans-serif" font-size="8" font-weight="600" fill="#94a3b8" text-anchor="middle">Mer</text>
-                <text id="chart-label-3" x="240" y="126" font-family="var(--font-inter), sans-serif" font-size="8" font-weight="600" fill="#94a3b8" text-anchor="middle">Ven</text>
-                <text id="chart-label-4" x="330" y="126" font-family="var(--font-inter), sans-serif" font-size="8" font-weight="600" fill="#94a3b8" text-anchor="middle">Dim</text>
-              </svg>
-            </div>
+            <div class="content-card-body" id="revenue-chart-body" style="height: 260px;"></div>
           </div>
-
-          <!-- Recent Orders table/list -->
           <div class="content-card">
             <div class="content-card-header">
-              <h3>Dernières Commandes</h3>
+              <h3>Taux de Réussite</h3>
             </div>
-            <div class="content-card-body" style="padding:0; overflow-y:auto; max-height:220px;">
-              <table style="font-size:0.7rem;">
-                <thead>
-                  <tr>
-                    <th style="padding:10px 14px;">N° Commande</th>
-                    <th style="padding:10px 14px;">Total</th>
-                    <th style="padding:10px 14px;">Moyen</th>
-                    <th style="padding:10px 14px; text-align:right;">Statut</th>
-                  </tr>
-                </thead>
-                <tbody id="dashboard-recent-orders">
-                  <!-- Injected dynamically by admin/js/dashboard.js -->
-                </tbody>
-              </table>
-            </div>
+            <div class="content-card-body" id="success-gauge-body" style="height: 260px;"></div>
+          </div>
+        </div>
+
+        <div class="panel-grid-2">
+          <div class="content-card">
+            <div class="content-card-header"><h3>Commandes Récentes</h3></div>
+            <div class="content-card-body" id="recent-orders-body" style="padding:0;"></div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-header"><h3>Aperçu des Ventes</h3></div>
+            <div class="content-card-body" id="sales-overview-body"></div>
           </div>
         </div>
       </div>
@@ -299,6 +209,21 @@
             <div class="empty-state" id="orders-empty-state" style="display:none;">
               <p>Aucune commande pour le moment.</p>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== PANEL: CLIENTS (placeholder) ==================== -->
+      <div class="workspace-panel" id="panel-customers">
+        <div class="panel-header">
+          <div>
+            <h2>Clients</h2>
+            <p>Gérez les comptes et les informations clients.</p>
+          </div>
+        </div>
+        <div class="content-card">
+          <div class="content-card-body empty-state-panel">
+            <p>Cette section arrive bientôt : la gestion des fiches clients fera l'objet d'une prochaine phase.</p>
           </div>
         </div>
       </div>
@@ -492,6 +417,7 @@
   <script src="../js/payment-icons.js"></script>
   <script src="js/variant-editor.js"></script>
   <script src="js/ui-kit.js"></script>
+  <script src="js/dashboard-charts.js"></script>
   <script src="js/dashboard.js"></script>
   <script src="js/categories.js"></script>
   <script src="js/promos.js"></script>
