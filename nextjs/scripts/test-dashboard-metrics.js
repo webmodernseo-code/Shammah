@@ -63,6 +63,9 @@ const prisma = new PrismaClient();
     log("Chiffre d'Affaires sur 7j = 150", metrics.kpis.revenue.value === 150);
     log("Demandes de remboursement sur 7j = 1", metrics.kpis.refundRequests.value === 1);
     log("tendance CA vs période précédente (20) = 650%", metrics.kpis.revenue.trendPercent === 650);
+    log("répartition ventes: 2/3 réussies", Math.abs(metrics.salesBreakdown.successfulPct - 66.666) < 0.01);
+    log("répartition ventes: 1/3 annulées", Math.abs(metrics.salesBreakdown.cancelledPct - 33.333) < 0.01);
+    log("produit le plus vendu = Produit Test 1 (100€, 66.7%)", metrics.topProducts[0]?.title === "Produit Test 1" && Math.abs(metrics.topProducts[0].percentOfTotal - 66.666) < 0.01);
 
     const allTime = await getDashboardMetrics("all", now);
     log("badge de tendance masqué (null) pour range=all", allTime.kpis.revenue.trendPercent === null);

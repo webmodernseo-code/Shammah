@@ -4,6 +4,7 @@ import { KpiCard } from "@/components/dashboard/KpiCard";
 import { RevenueChart } from "@/components/dashboard/RevenueChart";
 import { SuccessGauge } from "@/components/dashboard/SuccessGauge";
 import { RecentOrdersTable } from "@/components/dashboard/RecentOrdersTable";
+import { SalesOverview } from "@/components/dashboard/SalesOverview";
 
 function formatEUR(value: number) {
   return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(value);
@@ -77,6 +78,9 @@ export default async function DashboardPage({
         />
         <div className="lg:col-span-2">
           <RecentOrdersTable orders={recentOrders} />
+        </div>
+        <div className="lg:col-span-3">
+          <SalesOverview breakdown={metrics.salesBreakdown} topProducts={metrics.topProducts} />
         </div>
       </div>
     </main>
