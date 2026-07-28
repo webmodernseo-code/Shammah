@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { ConfirmModal } from "@/components/ConfirmModal";
 import { VariantEditor } from "./VariantEditor";
+import { ProductPreviewCard } from "./ProductPreviewCard";
 import type { ProductRow } from "./ProductsTable";
 
 export type VariantFormState = { colorName: string; colorHex: string; images: string[]; stock: Record<string, number> };
@@ -125,6 +126,13 @@ export function ProductDrawer({
           variants={form.variants}
           onChange={(variants) => update("variants", variants)}
           categorySlug={selectedCategory?.slug}
+        />
+
+        <ProductPreviewCard
+          title={form.title}
+          price={Number(form.price) || 0}
+          categoryName={selectedCategory?.name ?? ""}
+          imageUrl={form.variants[0]?.images.find((img) => img) ?? null}
         />
       </div>
 
