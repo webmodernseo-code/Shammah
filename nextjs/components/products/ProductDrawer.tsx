@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ConfirmModal } from "@/components/ConfirmModal";
+import { VariantEditor } from "./VariantEditor";
 import type { ProductRow } from "./ProductsTable";
 
 export type VariantFormState = { colorName: string; colorHex: string; images: string[]; stock: Record<string, number> };
@@ -119,6 +120,12 @@ export function ProductDrawer({
             <textarea id="drawer-description" value={form.description} onChange={(e) => update("description", e.target.value)} className="mt-1 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm" />
           </div>
         </section>
+
+        <VariantEditor
+          variants={form.variants}
+          onChange={(variants) => update("variants", variants)}
+          categorySlug={selectedCategory?.slug}
+        />
       </div>
 
       <ConfirmModal
