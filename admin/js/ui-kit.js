@@ -239,7 +239,33 @@
   document.addEventListener("DOMContentLoaded", () => {
     const searchBox = document.querySelector(".search-box input");
     if (searchBox) searchBox.addEventListener("click", openCommandPalette);
+    setupLegacyDataExport();
   });
+
+  function setupLegacyDataExport() {
+    const btn = document.getElementById("btn-export-legacy-data");
+    if (!btn) return;
+    btn.addEventListener("click", () => {
+      const payload = {
+        products: window.db.getProducts(),
+        categories: window.db.getCategories(),
+        promoCodes: window.db.getPromoCodes ? window.db.getPromoCodes() : [],
+        orders: window.db.getOrders(),
+      };
+      const json = JSON.stringify(payload, null, 2);
+      const blob = new Blob([json], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      const today = new Date().toISOString().slice(0, 10);
+      a.href = url;
+      a.download = "divinexpress-export-" + today + ".json";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      window.Toast.show("Export terminé.", "success");
+    });
+  }
 
   window.CommandPalette = { open: openCommandPalette };
 })();

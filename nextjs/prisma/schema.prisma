@@ -1,0 +1,126 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id            String         @id @default(cuid())
+  name          String
+  slug          String         @unique
+  subcategories Subcategory[]
+  products      Product[]
+  createdAt     DateTime       @default(now())
+}
+
+model Subcategory {
+  id         String    @id @default(cuid())
+  name       String
+  slug       String
+  category   Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId String
+  products   Product[]
+  createdAt  DateTime  @default(now())
+
+  @@unique([categoryId, slug])
+}
+
+model Product {
+  id            String           @id @default(cuid())
+  title         String
+  slug          String           @unique
+  description   String           @default("")
+  basePrice     Decimal          @db.Decimal(10, 2)
+  baseCurrency  String           @default("EUR")
+  category      Category         @relation(fields: [categoryId], references: [id])
+  categoryId    String
+  subcategory   Subcategory?     @relation(fields: [subcategoryId], references: [id])
+  subcategoryId String?
+  variants      ProductVariant[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+}
+
+model ProductVariant {
+  id        String                @id @default(cuid())
+  product   Product               @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String
+  colorName String
+  colorHex  String
+  images    ProductImage[]
+  stock     ProductVariantStock[]
+  orderItems OrderItem[]
+}
+
+model ProductImage {
+  id        String         @id @default(cuid())
+  variant   ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  variantId String
+  url       String
+  sortOrder Int            @default(0)
+}
+
+model ProductVariantStock {
+  id        String         @id @default(cuid())
+  variant   ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  variantId String
+  size      String
+  quantity  Int            @default(0)
+
+  @@unique([variantId, size])
+}
+
+model PromoCode {
+  id            String    @id @default(cuid())
+  code          String    @unique
+  discountType  String
+  discountValue Decimal   @db.Decimal(10, 2)
+  active        Boolean   @default(true)
+  expiresAt     DateTime?
+  createdAt     DateTime  @default(now())
+}
+
+enum OrderStatus {
+  EN_ATTENTE
+  PAYEE
+  EXPEDIEE
+  ANNULEE
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  orderNumber   String      @unique
+  clientName    String
+  email         String
+  address       String
+  phone         String
+  total         Decimal     @db.Decimal(10, 2)
+  paymentMethod String
+  status        OrderStatus @default(EN_ATTENTE)
+  items         OrderItem[]
+  createdAt     DateTime    @default(now())
+}
+
+model OrderItem {
+  id          String          @id @default(cuid())
+  order       Order           @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId     String
+  // Snapshot fields — copied at purchase time, never a live join to current product data.
+  title       String
+  price       Decimal         @db.Decimal(10, 2)
+  variantName String
+  size        String
+  quantity    Int
+  variant     ProductVariant? @relation(fields: [variantId], references: [id], onDelete: SetNull)
+  variantId   String?
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+}

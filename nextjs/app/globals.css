@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap");
+@import "tailwindcss";
+
+:root {
+  --background: #F6F6FB;
+  --foreground: #111827;
+}
+
+@theme inline {
+  /* Bloom design tokens */
+  --color-page-bg: #F6F6FB;
+  --color-card-bg: #FFFFFF;
+  --color-accent-primary: #6C63FF;
+  --color-accent-primary-hover: #5A52E0;
+  --color-status-blue: #3B82F6;
+  --color-status-amber: #F59E0B;
+  --color-status-green: #22C55E;
+  --color-status-red: #EF4444;
+  --color-text-heading: #111827;
+  --color-text-body: #6B7280;
+
+  /* Border radius */
+  --radius-card: 16px;
+
+  /* Box shadow */
+  --shadow-card: 0 4px 24px rgba(17, 24, 39, 0.06);
+
+  /* Font */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background: var(--color-page-bg);
+  color: var(--color-text-heading);
+  font-family: var(--font-sans);
+}
