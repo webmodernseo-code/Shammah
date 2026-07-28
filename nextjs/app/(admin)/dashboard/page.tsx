@@ -5,6 +5,7 @@ import { RevenueChart } from "@/components/dashboard/RevenueChart";
 import { SuccessGauge } from "@/components/dashboard/SuccessGauge";
 import { RecentOrdersTable } from "@/components/dashboard/RecentOrdersTable";
 import { SalesOverview } from "@/components/dashboard/SalesOverview";
+import { ExportReportButton } from "@/components/dashboard/ExportReportButton";
 
 function formatEUR(value: number) {
   return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(value);
@@ -32,7 +33,10 @@ export default async function DashboardPage({
           <h1 className="text-2xl font-bold text-text-heading">Bonjour, Administrateur 👋</h1>
           <p className="mt-1 text-text-body">Gérez produits, commandes, clients et performance en un seul endroit.</p>
         </div>
-        <DateRangeSelect />
+        <div className="flex items-center gap-3">
+          <DateRangeSelect />
+          <ExportReportButton metrics={metrics} recentOrders={recentOrders} />
+        </div>
       </div>
 
       <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
