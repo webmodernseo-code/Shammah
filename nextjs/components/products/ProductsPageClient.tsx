@@ -3,11 +3,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ProductsTable, type ProductRow } from "./ProductsTable";
+import { ProductDrawer } from "./ProductDrawer";
 import { ConfirmModal } from "@/components/ConfirmModal";
 import { useToast } from "@/components/Toast";
 
 export function ProductsPageClient({ products }: { products: ProductRow[] }) {
   const [deletingProduct, setDeletingProduct] = useState<ProductRow | null>(null);
+  const [editingProduct, setEditingProduct] = useState<ProductRow | null | "new">(null);
   const router = useRouter();
   const { show } = useToast();
 
@@ -30,13 +32,13 @@ export function ProductsPageClient({ products }: { products: ProductRow[] }) {
           <h1 className="text-2xl font-bold text-text-heading">Produits</h1>
           <p className="mt-1 text-text-body">Ajoutez des articles et gérez les niveaux de stock par variante.</p>
         </div>
-        <button id="btn-new-product" className="rounded-full bg-accent-primary px-4 py-2 text-sm font-semibold text-white hover:bg-accent-primary-hover">
+        <button id="btn-new-product" onClick={() => setEditingProduct("new")} className="rounded-full bg-accent-primary px-4 py-2 text-sm font-semibold text-white hover:bg-accent-primary-hover">
           + Nouveau produit
         </button>
       </div>
 
       <div className="mt-6">
-        <ProductsTable products={products} onEdit={() => {}} onDelete={setDeletingProduct} />
+        <ProductsTable products={products} onEdit={setEditingProduct} onDelete={setDeletingProduct} />
       </div>
 
       <ConfirmModal
@@ -47,6 +49,15 @@ export function ProductsPageClient({ products }: { products: ProductRow[] }) {
         danger
         onConfirm={confirmDelete}
         onCancel={() => setDeletingProduct(null)}
+      />
+
+      <ProductDrawer
+        editingProduct={editingProduct}
+        onClose={() => setEditingProduct(null)}
+        onSaved={() => {
+          setEditingProduct(null);
+          router.refresh();
+        }}
       />
     </main>
   );
