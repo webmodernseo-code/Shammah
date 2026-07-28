@@ -1,8 +1,28 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { ProductsTable, type ProductRow } from "./ProductsTable";
+import { ConfirmModal } from "@/components/ConfirmModal";
+import { useToast } from "@/components/Toast";
 
 export function ProductsPageClient({ products }: { products: ProductRow[] }) {
+  const [deletingProduct, setDeletingProduct] = useState<ProductRow | null>(null);
+  const router = useRouter();
+  const { show } = useToast();
+
+  async function confirmDelete() {
+    if (!deletingProduct) return;
+    const res = await fetch(`/api/products/${deletingProduct.id}`, { method: "DELETE" });
+    if (res.ok) {
+      show("L'article a été supprimé avec succès.", "success");
+      router.refresh();
+    } else {
+      show("Erreur lors de la suppression.", "error");
+    }
+    setDeletingProduct(null);
+  }
+
   return (
     <main className="p-8">
       <div className="flex items-center justify-between">
@@ -16,8 +36,18 @@ export function ProductsPageClient({ products }: { products: ProductRow[] }) {
       </div>
 
       <div className="mt-6">
-        <ProductsTable products={products} onEdit={() => {}} onDelete={() => {}} />
+        <ProductsTable products={products} onEdit={() => {}} onDelete={setDeletingProduct} />
       </div>
+
+      <ConfirmModal
+        open={deletingProduct !== null}
+        title="Supprimer l'article"
+        message="Voulez-vous vraiment supprimer cet article de la boutique ?"
+        confirmLabel="Supprimer"
+        danger
+        onConfirm={confirmDelete}
+        onCancel={() => setDeletingProduct(null)}
+      />
     </main>
   );
 }
