@@ -1242,8 +1242,10 @@ const { loginAsAdmin } = require('./test-utils-nextjs-login');
   await page.click('#drawer-publish-btn');
   log('publier sans titre/prix affiche une erreur', await page.locator('.toast', { hasText: 'requis' }).count() >= 0); // toast auto-hides fast; primary check is below
   log('rien n\'a été créé (le tiroir reste ouvert)', await page.locator('#product-drawer').count() === 1);
+  // Nothing was typed (only the no-op publish click), so the form is still non-dirty —
+  // closing goes straight through, no confirmation dialog to click.
   await page.click('#drawer-close');
-  await page.click('[data-action="confirm"]'); // discard the empty, dirty-by-click-attempt form if flagged dirty
+  await page.waitForTimeout(200);
 
   // Real creation
   const testTitle = "TEST PUBLISH " + Date.now();
@@ -1441,10 +1443,10 @@ const { loginAsAdmin } = require('./test-utils-nextjs-login');
   await page.fill('#drawer-price', '120');
   await page.fill('#new-color-name', 'Rouge Brique');
   await page.click('#add-color-btn');
-  await page.fill('[data-variant-block] >> nth=0 >> [data-image-url-input]', 'https://example.com/rouge.jpg');
+  await page.locator('[data-variant-block]').nth(0).locator('[data-image-url-input]').fill('https://example.com/rouge.jpg');
   await page.fill('#new-color-name', 'Vert Sapin');
   await page.click('#add-color-btn');
-  await page.fill('[data-variant-block] >> nth=1 >> [data-image-url-input]', 'https://example.com/vert.jpg');
+  await page.locator('[data-variant-block]').nth(1).locator('[data-image-url-input]').fill('https://example.com/vert.jpg');
   await page.click('#drawer-publish-btn');
   await page.waitForTimeout(800);
   log('création avec 2 couleurs réussie', await page.locator('[data-product-row]', { hasText: testTitle }).count() === 1);
