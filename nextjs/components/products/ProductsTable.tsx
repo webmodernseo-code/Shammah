@@ -1,3 +1,5 @@
+import { StockInput } from "./StockInput";
+
 export type ProductRow = {
   id: string;
   title: string;
@@ -55,7 +57,8 @@ export function ProductsTable({
                     variant.stock.map((s) => (
                       <div key={variant.id + s.size} className="flex items-center gap-2 text-xs text-text-body">
                         <span className="h-2 w-2 rounded-full" style={{ backgroundColor: variant.colorHex }} />
-                        {variant.colorName} ({s.size}): <span className="font-medium text-text-heading">{s.quantity}</span>
+                        {variant.colorName} ({s.size}):
+                        <StockInput productId={product.id} variantId={variant.id} size={s.size} initialQuantity={s.quantity} />
                       </div>
                     ))
                   )}
