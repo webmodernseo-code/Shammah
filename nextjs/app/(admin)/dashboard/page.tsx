@@ -1,8 +1,9 @@
-import { getDashboardMetrics, getRevenueChartData, type DateRangeKey } from "@/lib/dashboard-metrics";
+import { getDashboardMetrics, getRevenueChartData, getRecentOrders, type DateRangeKey } from "@/lib/dashboard-metrics";
 import { DateRangeSelect } from "@/components/dashboard/DateRangeSelect";
 import { KpiCard } from "@/components/dashboard/KpiCard";
 import { RevenueChart } from "@/components/dashboard/RevenueChart";
 import { SuccessGauge } from "@/components/dashboard/SuccessGauge";
+import { RecentOrdersTable } from "@/components/dashboard/RecentOrdersTable";
 
 function formatEUR(value: number) {
   return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(value);
@@ -17,9 +18,10 @@ export default async function DashboardPage({
   const range: DateRangeKey = rawRange === "30d" || rawRange === "all" ? rawRange : "7d";
   const chartMode: "week" | "month" = rawChart === "month" ? "month" : "week";
 
-  const [metrics, revenueChart] = await Promise.all([
+  const [metrics, revenueChart, recentOrders] = await Promise.all([
     getDashboardMetrics(range),
     getRevenueChartData(chartMode),
+    getRecentOrders(5),
   ]);
 
   return (
@@ -73,6 +75,9 @@ export default async function DashboardPage({
           successfulCount={metrics.successRate.successfulCount}
           revenue={metrics.successRate.revenue}
         />
+        <div className="lg:col-span-2">
+          <RecentOrdersTable orders={recentOrders} />
+        </div>
       </div>
     </main>
   );
