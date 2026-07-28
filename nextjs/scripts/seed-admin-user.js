@@ -4,8 +4,14 @@ const bcrypt = require("bcryptjs");
 const prisma = new PrismaClient();
 
 (async () => {
-  const email = process.env.ADMIN_EMAIL || process.env.TEST_ADMIN_EMAIL || "contact@divinexpress.fr";
-  const password = process.env.ADMIN_PASSWORD || process.env.TEST_ADMIN_PASSWORD || "DivineXpress2026@";
+  const email = process.env.ADMIN_SEED_EMAIL;
+  const password = process.env.ADMIN_SEED_PASSWORD;
+
+  if (!email || !password) {
+    console.log("FAIL - ADMIN_SEED_EMAIL et ADMIN_SEED_PASSWORD doivent être définis dans .env");
+    process.exit(1);
+  }
+
   const passwordHash = await bcrypt.hash(password, 12);
 
   await prisma.adminUser.upsert({
