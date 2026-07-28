@@ -837,11 +837,6 @@ export default function StorefrontShell({
                       <div className="product-image-container">
                         <img src={imgUrl} alt={product.title} />
                         <span className="badge-tag" style={{ textTransform: "capitalize" }}>{product.category.name}</span>
-                        {product.promoCode && (
-                          <span className="badge-tag" style={{ backgroundColor: "var(--accent-red)", color: "white", left: 16, top: 46, fontWeight: 700, textTransform: "uppercase" }}>
-                            Code: {product.promoCode}
-                          </span>
-                        )}
                         <button
                           className={`fav-btn ${favorites.has(product.id) ? "active" : ""}`}
                           onClick={(e) => toggleFavorite(product.id, e)}
@@ -864,8 +859,7 @@ export default function StorefrontShell({
                             className="add-cart-fast-btn"
                             onClick={(e) => {
                               e.stopPropagation();
-                              addToCart(product, firstVariant, "M");
-                              showToast("Ajouté au panier !");
+                              handleAddToCart(product, 0, "M", "");
                             }}
                           >
                             <svg fill="none" viewBox="0 0 24 24">
