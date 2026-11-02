@@ -1,0 +1,87 @@
+import React from "react";
+import Link from "next/link";
+import { blogPosts5 } from "@/data/blogs";
+import Image from "next/image";
+export default function Blogs1() {
+  return (
+    <div className="s-content">
+      {blogPosts5.map((post) => (
+        <div className="blog-item hover-img" key={post.id}>
+          <div className="entry_image">
+            <Link href={`/blog-single/${post.id}`} className="img-style">
+              <Image
+                src={post.imageUrl}
+                alt=""
+                className="lazyload"
+                width={952}
+                height={496}
+              />
+            </Link>
+          </div>
+          <div className="blog-content">
+            <div className="entry-tag">
+              <ul className="style-list">
+                <li>
+                  <a href="#" className={post.categoryClass}>
+                    {post.category}
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <Link
+              href={`/blog-single/${post.id}`}
+              className="entry_title d-block text-xl fw-medium link"
+            >
+              {post.title}
+            </Link>
+            <p className="entry_sub text-md text-main">{post.excerpt}</p>
+            <ul className="entry-meta">
+              <li className="entry_author">
+                <div className="avatar">
+                  <Image
+                    src={post.authorAvatar}
+                    alt="avatar"
+                    className="lazyload"
+                    width={100}
+                    height={100}
+                  />
+                </div>
+                <p className="entry_name">
+                  Post by <span className="fw-medium">{post.authorName}</span>
+                </p>
+              </li>
+              <li className="br-line" />
+              <li className="entry_date">
+                <p className="text-md">{post.date}</p>
+              </li>
+              <li className="br-line" />
+              <li className="entry_comment">
+                <p className="text-md">{post.comments}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      ))}
+      <ul className="wg-pagination">
+        <li className="active">
+          <div className="pagination-item">1</div>
+        </li>
+        <li>
+          <a href="#" className="pagination-item">
+            2
+          </a>
+        </li>
+        <li>
+          <a href="#" className="pagination-item">
+            3
+          </a>
+        </li>
+        <li>
+          <a href="#" className="pagination-item">
+            <i className="icon-arr-right2" />
+          </a>
+        </li>
+      </ul>
+    </div>
+  );
+}
