@@ -1,4 +1,4 @@
-﻿// Prisma Schema for Shammah - Mode & Prêt-à-porter
+// Prisma Schema for Shammah - Mode & Prêt-à-porter
 
 datasource db {
   provider = "postgresql"
