@@ -1,0 +1,371 @@
+// Prisma Schema for DivinExpress - Mode & Prêt-à-porter
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+  SUPER_ADMIN
+  MASTER_ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentStatus {
+  UNPAID
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String?
+  email        String   @unique
+  passwordHash String?
+  role         Role     @default(CUSTOMER)
+  phone        String?
+  image        String?
+  adminEnabled Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  addresses           Address[]
+  orders              Order[]
+  reviews             Review[]
+  passwordResetTokens PasswordResetToken[]
+
+  @@map("users")
+}
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  tokenHash String    @unique
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId, expiresAt])
+  @@map("password_reset_tokens")
+}
+
+model Address {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  street     String
+  city       String
+  postalCode String
+  country    String   @default("France")
+  isDefault  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  @@index([userId])
+  @@map("addresses")
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  slug        String    @unique // hommes, femmes, enfants, accessoires
+  name        String // Homme, Femme, Enfant, Accessoires
+  description String?
+  image       String?
+  products    Product[]
+  createdAt   DateTime  @default(now())
+
+  @@map("categories")
+}
+
+model Product {
+  id            String    @id @default(cuid())
+  slug          String    @unique
+  code          String    @unique // e.g. DIV-H-101
+  title         String // e.g. "Costume Sur-Mesure Laine Vierge"
+  subtitle      String? // e.g. "Coupe ajustée & finitions artisanales"
+  description   String
+  gender        String    @default("Homme") // Homme, Femme, Enfant, Unisexe
+  material      String    @default("Coton Bio 100%") // Coton Bio, Lin, Soie, Laine, Denim
+  origin        String    @default("Atelier Haute Couture Paris")
+  basePrice     Decimal   @db.Decimal(10, 2)
+  baseOldPrice  Decimal?  @db.Decimal(10, 2)
+  ratingScore   Decimal   @default(4.9) @db.Decimal(3, 2)
+  ratingCount   Int       @default(84)
+  imageRecto    String
+  imageVerso    String?
+  isFeatured    Boolean   @default(false)
+  isAvailable   Boolean   @default(true)
+  stockQuantity Int       @default(50)
+  categoryId    String?
+  category      Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  variants   ProductVariant[]
+  orderItems OrderItem[]
+  reviews    Review[]
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  @@index([isAvailable, stockQuantity])
+  @@map("products")
+}
+
+model ProductVariant {
+  id        String   @id @default(cuid())
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  size      String // XS, S, M, L, XL, XXL, 3XL
+  color     String // Noir, Blanc, Marine, Beige, Gris, Terracotta
+  colorHex  String? // #000000, #ffffff, #1e3a8a
+  stock     Int      @default(15)
+  price     Decimal  @db.Decimal(10, 2)
+  oldPrice  Decimal? @db.Decimal(10, 2)
+  inStock   Boolean  @default(true)
+
+  @@unique([productId, size, color])
+  @@index([productId, size, color])
+  @@map("product_variants")
+}
+
+model Order {
+  id              String  @id @default(cuid())
+  orderNumber     String  @unique // e.g. DIV-2026-849
+  userId          String?
+  user            User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+  customerName    String
+  customerEmail   String
+  customerPhone   String?
+  shippingStreet  String
+  shippingCity    String
+  shippingPostal  String
+  shippingCountry String  @default("France")
+
+  subtotal        Decimal   @db.Decimal(10, 2)
+  shippingCost    Decimal   @default(0) @db.Decimal(10, 2)
+  discountAmount  Decimal   @default(0) @db.Decimal(10, 2)
+  totalAmount     Decimal   @db.Decimal(10, 2)
+  couponCode      String?
+  stockRestoredAt DateTime?
+
+  status          OrderStatus   @default(PENDING)
+  paymentStatus   PaymentStatus @default(UNPAID)
+  paymentMethod   String        @default("stripe")
+  stripeSessionId String?       @unique
+  stripePaymentId String?       @unique
+
+  items     OrderItem[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  @@index([createdAt])
+  @@index([paymentStatus, createdAt])
+  @@index([status, createdAt])
+  @@index([customerEmail])
+  @@map("orders")
+}
+
+model OrderItem {
+  id          String   @id @default(cuid())
+  orderId     String
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId   String?
+  product     Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  productName String
+  variantInfo String // e.g. "Taille L • Noir Intense"
+  formatLabel String? // Compatibility alias
+  quantity    Int      @default(1)
+  unitPrice   Decimal  @db.Decimal(10, 2)
+  totalPrice  Decimal  @db.Decimal(10, 2)
+
+  @@index([orderId])
+  @@index([productId])
+  @@map("order_items")
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  productId  String
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  authorName String
+  rating     Int      @default(5)
+  comment    String
+  verified   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+
+  @@index([productId])
+  @@index([userId])
+  @@map("reviews")
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@map("newsletter_subscribers")
+}
+
+model PaymentGatewayConfig {
+  id         String  @id @default(cuid())
+  gateway    String  @unique // "stripe", "paypal", "apple_pay"
+  isEnabled  Boolean @default(false)
+  isLiveMode Boolean @default(false)
+
+  stripePublishableKey String?
+  stripeSecretKey      String?
+  stripeWebhookSecret  String?
+
+  paypalClientId  String?
+  paypalSecretKey String?
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  @@map("payment_gateway_configs")
+}
+
+model AdminInvitation {
+  id          String    @id @default(cuid())
+  email       String
+  name        String?
+  tokenHash   String    @unique
+  role        Role      @default(ADMIN)
+  invitedById String
+  expiresAt   DateTime
+  acceptedAt  DateTime?
+  revokedAt   DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@index([email])
+  @@map("admin_invitations")
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  actorId    String?
+  actorEmail String
+  action     String
+  targetType String
+  targetId   String?
+  metadata   Json?
+  createdAt  DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([actorId])
+  @@map("audit_logs")
+}
+
+model MaintenanceConfig {
+  id             String    @id @default("site")
+  enabled        Boolean   @default(false)
+  message        String    @default("Notre boutique DivinExpress est momentanément en maintenance. Nous revenons très vite.")
+  expectedBackAt DateTime?
+  updatedBy      String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@map("maintenance_config")
+}
+
+model MediaStorageConfig {
+  id           String   @id @default(cuid())
+  provider     String   @unique @default("cloudinary")
+  cloudName    String
+  apiKey       String
+  apiSecret    String
+  uploadFolder String   @default("divinexpress/products")
+  isEnabled    Boolean  @default(false)
+  updatedAt    DateTime @updatedAt
+  createdAt    DateTime @default(now())
+
+  @@map("media_storage_configs")
+}
+
+model SmtpEmailConfig {
+  id        String   @id @default(cuid())
+  host      String   @default("smtp.gmail.com")
+  port      Int      @default(465)
+  secure    Boolean  @default(true)
+  user      String
+  password  String
+  fromName  String   @default("DivinExpress")
+  fromEmail String   @default("contact@divinexpress.com")
+  isEnabled Boolean  @default(true)
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  @@map("smtp_email_configs")
+}
+
+model Coupon {
+  id              String    @id @default(cuid())
+  code            String    @unique // e.g. "DIVINE10", "MODE20", "VIP15"
+  description     String? // e.g. "Remise Mode 10%"
+  discountPercent Decimal   @db.Decimal(5, 2)
+  isActive        Boolean   @default(true)
+  minOrderAmount  Decimal?  @db.Decimal(10, 2)
+  expiresAt       DateTime?
+  usageCount      Int       @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@map("coupons")
+}
+
+model BlogPost {
+  id            String    @id @default(cuid())
+  slug          String    @unique
+  title         String
+  category      String
+  excerpt       String    @default("")
+  content       String
+  coverImage    String?
+  authorName    String
+  authorAvatar  String?
+  tags          String[]  @default([])
+  status        String    @default("Brouillon")
+  viewsCount    Int       @default(0)
+  commentsCount Int       @default(0)
+  readTime      String    @default("2 min")
+  publishedAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([status, publishedAt])
+  @@index([category])
+  @@map("blog_posts")
+}
+
+model Faq {
+  id        String   @id @default(cuid())
+  question  String
+  answer    String
+  category  String   @default("Général")
+  status    String   @default("Brouillon")
+  position  Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status, position])
+  @@index([category])
+  @@map("faqs")
+}

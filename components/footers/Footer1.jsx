@@ -301,6 +301,11 @@ export default function Footer1({
                     <li>
                       <Link href={`/term-and-condition`}>Conditions Générales</Link>
                     </li>
+                    <li>
+                      <a href={process.env.NEXT_PUBLIC_DASHBOARD_URL || "http://localhost:3001"} target="_blank" rel="noopener noreferrer">
+                        Espace Administration
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -313,6 +318,10 @@ export default function Footer1({
           <div className="footer-bottom-wrap">
             <p className="text-dark">
               Copyright © 2026 <span className="fw-medium">Shammah.</span> Tous droits réservés.
+              {" • "}
+              <a href={process.env.NEXT_PUBLIC_DASHBOARD_URL || "http://localhost:3001"} target="_blank" rel="noopener noreferrer" className="text-decoration-underline ms-1" title="Tableau de bord Shammah">
+                Tableau de bord (Admin)
+              </a>
             </p>
             <ul className="tf-payment">
               <li className="item">

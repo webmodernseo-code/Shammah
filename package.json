@@ -4,6 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dashboard": "npm --prefix dashboard run dev",
+    "dashboard:build": "npm --prefix dashboard run build",
+    "db:generate": "prisma generate --schema=dashboard/prisma/schema.prisma",
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",

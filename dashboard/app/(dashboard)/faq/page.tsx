@@ -1,0 +1,11 @@
+import FaqTable from "@/components/faqs/faq-table";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Foire Aux Questions | DivinExpress Admin",
+  description: "Gestion des questions fréquentes et réponses clients DivinExpress.",
+};
+
+export default function FaqPage() {
+  return <FaqTable />;
+}
