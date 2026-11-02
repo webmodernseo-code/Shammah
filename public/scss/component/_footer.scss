@@ -306,3 +306,51 @@
         }
     }
 }
+
+.row-footer.no-newsletter {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0;
+
+    @media (min-width: 992px) {
+        .s1 {
+            width: 38%;
+            padding: 48px 32px 48px 0;
+            border-right: 1px solid var(--line);
+        }
+        .s3 {
+            width: 62%;
+            display: flex;
+            justify-content: space-around;
+            padding: 48px 0 48px 48px;
+            gap: 40px;
+        }
+    }
+
+    @media (max-width: 991px) {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 32px;
+        .s1 {
+            width: 100%;
+            border-right: none;
+            padding: 0;
+        }
+        .s3 {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            padding: 0;
+        }
+    }
+
+    @media (max-width: 575px) {
+        .s3 {
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+    }
+}
+

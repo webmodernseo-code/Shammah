@@ -1,51 +1,14 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
 export default function Footer1({
   paddingBottom = false,
   cloud = false,
   fullWidth = false,
   parentClass = "footer-default",
 }) {
-  const [success, setSuccess] = useState(true);
-  const [showMessage, setShowMessage] = useState(false);
-
-  const handleShowMessage = () => {
-    setShowMessage(true);
-    setTimeout(() => {
-      setShowMessage(false);
-    }, 2000);
-  };
-
-  const sendEmail = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-    const email = e.target.email.value;
-
-    try {
-      const response = await axios.post(
-        "https://express-brevomail.vercel.app/api/contacts",
-        {
-          email,
-        }
-      );
-
-      if ([200, 201].includes(response.status)) {
-        e.target.reset(); // Reset the form
-        setSuccess(true); // Set success state
-        handleShowMessage();
-      } else {
-        setSuccess(false); // Handle unexpected responses
-        handleShowMessage();
-      }
-    } catch (error) {
-      console.error("Error:", error.response?.data || "An error occurred");
-      setSuccess(false); // Set error state
-      handleShowMessage();
-      e.target.reset(); // Reset the form
-    }
-  };
   useEffect(() => {
     const headings = document.querySelectorAll(".footer-heading-mobile");
 
@@ -130,7 +93,7 @@ export default function Footer1({
       </div>
       <div className="footer-body">
         <div className={` ${fullWidth ? "container-full" : "container"}  `}>
-          <div className="row-footer">
+          <div className="row-footer no-newsletter">
             <div className="footer-col-block s1">
               <div className="footer-heading footer-heading-mobile text-xl fw-medium">
                 Contact &amp; Atelier
@@ -170,7 +133,7 @@ export default function Footer1({
                           />
                         </svg>
                       </span>
-                      <a href="mailto:contact@shammah-pod.com">contact@shammah-pod.com</a>
+                      <a href="mailto:contact@shammah.eu">contact@shammah.eu</a>
                     </li>
                   </ul>
                   <Link
@@ -180,78 +143,6 @@ export default function Footer1({
                     <span className="text-sm"> Nous contacter </span>
                     <i className="icon-arrow-top-left fs-8" />
                   </Link>
-                </div>
-              </div>
-            </div>
-            <div className="footer-inner-wrap footer-col-block s2">
-              <div className="footer-heading footer-heading-mobile text-xl fw-medium">
-                Newsletter Shammah
-              </div>
-              <div className="tf-collapse-content">
-                <div className="footer-newsletter">
-                  <p>
-                    Inscrivez-vous pour recevoir en avant-première nos nouvelles créations, collections capsules et offres exclusives.
-                  </p>
-                  <div
-                    className={`tfSubscribeMsg  footer-sub-element ${showMessage ? "active" : ""
-                      }`}
-                  >
-                    {success ? (
-                      <p style={{ color: "rgb(52, 168, 83)" }}>
-                        Merci ! Vous êtes bien inscrit(e) à notre newsletter.
-                      </p>
-                    ) : (
-                      <p style={{ color: "red" }}>Une erreur est survenue</p>
-                    )}
-                  </div>
-                  <form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      sendEmail(e);
-                    }}
-                    id="subscribe-form"
-                    className="form-newsletter"
-                  >
-                    <div className="subscribe-content">
-                      <fieldset className="email">
-                        <input
-                          type="email"
-                          name="email"
-                          className="subscribe-email"
-                          placeholder="Votre adresse email"
-                          tabIndex={0}
-                          aria-required="true"
-                          required
-                        />
-                      </fieldset>
-                      <div className="button-submit">
-                        <button
-                          className="subscribe-button animate-btn"
-                          type="submit"
-                        >
-                          <svg
-                            width={18}
-                            height={18}
-                            viewBox="0 0 18 18"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <g clipPath="url(#clip0_5296_3345)">
-                              <path
-                                d="M17.7938 8.50229L17.7931 8.50162L14.1192 4.84537C13.8439 4.57147 13.3988 4.57249 13.1248 4.84776C12.8508 5.123 12.8519 5.56818 13.1271 5.84212L15.5938 8.29687H0.703125C0.314789 8.29687 0 8.61166 0 9C0 9.38833 0.314789 9.70312 0.703125 9.70312H15.5938L13.1272 12.1579C12.8519 12.4318 12.8509 12.877 13.1248 13.1522C13.3988 13.4275 13.844 13.4285 14.1192 13.1546L17.7932 9.49837L17.7938 9.4977C18.0692 9.22285 18.0683 8.77623 17.7938 8.50229Z"
-                                fill="white"
-                              />
-                            </g>
-                            <defs>
-                              <clipPath id="clip0_5296_3345">
-                                <rect width={18} height={18} fill="white" />
-                              </clipPath>
-                            </defs>
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-                  </form>
                 </div>
               </div>
             </div>
