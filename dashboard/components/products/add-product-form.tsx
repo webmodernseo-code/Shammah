@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
@@ -133,7 +133,7 @@ export default function AddProductForm() {
   // 1. General Information State
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
-  const [brand, setBrand] = useState("DivinExpress");
+  const [brand, setBrand] = useState("Shammah");
   const [sku, setSku] = useState(`DIV-PROD-${Math.floor(100 + Math.random() * 900)}`);
   const [price, setPrice] = useState("89.00");
   const [comparePrice, setComparePrice] = useState("119.00");
@@ -579,7 +579,7 @@ export default function AddProductForm() {
                   type="text"
                   value={brand}
                   onChange={(e) => setBrand(e.target.value)}
-                  placeholder="Ex : DivinExpress"
+                  placeholder="Ex : Shammah"
                   className="w-full h-10 px-3.5 text-xs sm:text-sm rounded-lg border border-[#e4e7ec] focus:outline-none focus:border-[#2b6b61] focus:ring-1 focus:ring-[#2b6b61] transition-all bg-white"
                 />
               </div>
@@ -1384,7 +1384,7 @@ export default function AddProductForm() {
                         type="text"
                         value={seoTitle}
                         onChange={(e) => setSeoTitle(e.target.value)}
-                        placeholder={name || "Robe longue satinée | DivinExpress"}
+                        placeholder={name || "Robe longue satinée | Shammah"}
                         className="w-full h-9 px-3 text-xs rounded-lg border border-[#e4e7ec] focus:outline-none focus:border-[#2b6b61]"
                       />
                     </div>

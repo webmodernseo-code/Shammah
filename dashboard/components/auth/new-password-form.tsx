@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import Image from "next/image";
@@ -68,7 +68,7 @@ export function NewPasswordForm() {
         <Link href="/" className="mb-6 inline-block transition-transform hover:scale-102">
           <Image
             src="/images/logo/logo.png"
-            alt="DivinExpress"
+            alt="Shammah"
             width={210}
             height={65}
             priority

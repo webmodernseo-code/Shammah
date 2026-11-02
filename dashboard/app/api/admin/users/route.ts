@@ -1,4 +1,4 @@
-import { createHash, randomBytes } from "node:crypto";
+﻿import { createHash, randomBytes } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { isSuperAdmin, readSession } from "@/lib/auth";
 import { sendAdminInvitationEmail } from "@/lib/email";
@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
     const origin = (
       requestOrigin.includes("localhost") || requestOrigin.includes("127.0.0.1")
         ? (configuredOrigin || requestOrigin)
-        : (configuredOrigin && !configuredIsLocal ? configuredOrigin : "https://admin.divinexpress.fr")
+        : (configuredOrigin && !configuredIsLocal ? configuredOrigin : "https://admin.shammah.eu")
     ).replace(/\/$/, "");
     const invitationUrl = `${origin}/accept-invitation?token=${encodeURIComponent(token)}`;
     const delivery = await sendAdminInvitationEmail({ to: email, name, invitationUrl, expiresAt }).catch(() => ({ success: false }));

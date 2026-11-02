@@ -1,11 +1,11 @@
-import nodemailer from "nodemailer";
+﻿import nodemailer from "nodemailer";
 import { prisma } from "@/lib/prisma";
 import { decryptSecret } from "@/lib/encryption";
 
 const LOGO_URL = process.env.NEXT_PUBLIC_SITE_URL
-  ? `${process.env.NEXT_PUBLIC_SITE_URL}/branding/logo-divinexpress.png`
-  : "https://www.divinexpress.fr/branding/logo-divinexpress.png";
-const BRAND_SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.divinexpress.fr";
+  ? `${process.env.NEXT_PUBLIC_SITE_URL}/branding/logo-shammah.png`
+  : "https://www.shammah.eu/branding/logo-shammah.png";
+const BRAND_SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.shammah.eu";
 
 export interface OrderItemSummary {
   productName: string;
@@ -87,8 +87,8 @@ export async function getSmtpTransporter() {
   let secure = port === 465;
   let user = process.env.SMTP_USER || process.env.SMTP_EMAIL;
   let pass = process.env.SMTP_PASS || process.env.SMTP_PASSWORD;
-  let fromName = process.env.SMTP_FROM_NAME || "DivinExpress Mode";
-  let fromEmail = process.env.SMTP_FROM_EMAIL || user || "contact@divinexpress.fr";
+  let fromName = process.env.SMTP_FROM_NAME || "Shammah Mode";
+  let fromEmail = process.env.SMTP_FROM_EMAIL || user || "contact@shammah.eu";
 
   try {
     const config = await prisma.smtpEmailConfig
@@ -148,7 +148,7 @@ function buildEmailTemplate({
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <title>${title} — DivinExpress</title>
+  <title>${title} — Shammah</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body style="margin: 0; padding: 0; background-color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1e293b;">
@@ -160,7 +160,7 @@ function buildEmailTemplate({
           <tr>
             <td style="padding: 32px 30px; background-color: #0f172a; text-align: center;">
               <a href="${BRAND_SITE}" target="_blank" style="text-decoration: none; display: inline-block;">
-                <span style="font-size: 22px; font-weight: 800; color: #ffffff; letter-spacing: 2px; text-transform: uppercase;">DIVINEXPRESS</span>
+                <span style="font-size: 22px; font-weight: 800; color: #ffffff; letter-spacing: 2px; text-transform: uppercase;">SHAMMAH</span>
               </a>
               ${
                 preheader
@@ -181,8 +181,8 @@ function buildEmailTemplate({
           <tr>
             <td style="padding: 24px 30px; background-color: #f8fafc; border-top: 1px solid #f1f5f9; text-align: center;">
               <p style="margin: 0; font-size: 12px; color: #94a3b8; line-height: 18px;">
-                © ${new Date().getFullYear()} DivinExpress • Mode &amp; Prêt-à-Porter d'Exception<br>
-                Une question ? Contactez notre atelier : <a href="mailto:contact@divinexpress.fr" style="color: #0f172a; text-decoration: none; font-weight: 600;">contact@divinexpress.fr</a>
+                © ${new Date().getFullYear()} Shammah • Mode &amp; Prêt-à-Porter d'Exception<br>
+                Une question ? Contactez notre atelier : <a href="mailto:contact@shammah.eu" style="color: #0f172a; text-decoration: none; font-weight: 600;">contact@shammah.eu</a>
               </p>
             </td>
           </tr>
@@ -265,7 +265,7 @@ export async function sendOrderConfirmationEmail({
     await smtp.transporter.sendMail({
       from: smtp.fromAddress,
       to,
-      subject: `Confirmation de votre commande #${orderNumber} — DivinExpress`,
+      subject: `Confirmation de votre commande #${orderNumber} — Shammah`,
       html: fullHtml,
     });
 
@@ -312,7 +312,7 @@ export async function sendOrderProcessingEmail({
     await smtp.transporter.sendMail({
       from: smtp.fromAddress,
       to,
-      subject: `Votre commande #${orderNumber} est en cours de préparation — DivinExpress`,
+      subject: `Votre commande #${orderNumber} est en cours de préparation — Shammah`,
       html: fullHtml,
     });
 
@@ -372,7 +372,7 @@ export async function sendOrderShippedEmail({
     await smtp.transporter.sendMail({
       from: smtp.fromAddress,
       to,
-      subject: `Votre commande #${orderNumber} a été expédiée — DivinExpress`,
+      subject: `Votre commande #${orderNumber} a été expédiée — Shammah`,
       html: fullHtml,
     });
 
@@ -422,7 +422,7 @@ export async function sendOrderDeliveredEmail({
     await smtp.transporter.sendMail({
       from: smtp.fromAddress,
       to,
-      subject: `Votre commande #${orderNumber} a été livrée — DivinExpress`,
+      subject: `Votre commande #${orderNumber} a été livrée — Shammah`,
       html: fullHtml,
     });
 
@@ -486,7 +486,7 @@ export async function sendOrderRefundedEmail({
     await smtp.transporter.sendMail({
       from: smtp.fromAddress,
       to,
-      subject: `Confirmation de remboursement pour la commande #${orderNumber} — DivinExpress`,
+      subject: `Confirmation de remboursement pour la commande #${orderNumber} — Shammah`,
       html: fullHtml,
     });
 
@@ -575,7 +575,7 @@ export async function sendPasswordResetEmail({
 
     const fullHtml = buildEmailTemplate({
       title: "Réinitialisation de mot de passe",
-      preheader: "Cockpit Administrateur DivinExpress",
+      preheader: "Cockpit Administrateur Shammah",
       contentHtml: bodyHtml,
     });
 
@@ -595,7 +595,7 @@ export async function sendPasswordResetEmail({
         smtp.transporter.sendMail({
           from: smtp.fromAddress,
           to: recipient,
-          subject: "Réinitialisation de votre mot de passe — DivinExpress",
+          subject: "Réinitialisation de votre mot de passe — Shammah",
           html: fullHtml,
         })
       )
@@ -619,16 +619,16 @@ export async function sendAdminInvitationEmail({
     if (!smtp) return { success: false, error: "Configuration SMTP absente." };
 
     const contentHtml = `
-      <h1 style="margin:0 0 16px;font-size:20px;color:#0f172a;">Invitation au tableau de bord DivinExpress</h1>
-      <p style="font-size:14px;line-height:24px;color:#475569;">Bonjour ${name || ""},<br><br>Vous avez été invité à rejoindre l'équipe d'administration de DivinExpress avec le rôle Administrateur.</p>
+      <h1 style="margin:0 0 16px;font-size:20px;color:#0f172a;">Invitation au tableau de bord Shammah</h1>
+      <p style="font-size:14px;line-height:24px;color:#475569;">Bonjour ${name || ""},<br><br>Vous avez été invité à rejoindre l'équipe d'administration de Shammah avec le rôle Administrateur.</p>
       <div style="text-align:center;margin:30px 0;"><a href="${invitationUrl}" style="display:inline-block;background:#0f172a;color:#fff;text-decoration:none;font-size:14px;font-weight:700;padding:14px 32px;border-radius:12px;">Accepter l'invitation</a></div>
       <p style="font-size:12px;color:#64748b;">Ce lien personnel expire le ${expiresAt.toLocaleString("fr-FR")} et ne peut être utilisé qu'une fois.</p>`;
     
     await smtp.transporter.sendMail({
       from: smtp.fromAddress,
       to,
-      subject: "Invitation administrateur — DivinExpress",
-      html: buildEmailTemplate({ title: "Invitation administrateur", preheader: "Accès au cockpit DivinExpress", contentHtml }),
+      subject: "Invitation administrateur — Shammah",
+      html: buildEmailTemplate({ title: "Invitation administrateur", preheader: "Accès au cockpit Shammah", contentHtml }),
     });
     return { success: true };
   } catch (error: any) {
@@ -679,8 +679,8 @@ export async function sendAbandonedCartReminderEmail({
       from: smtp.fromAddress,
       to,
       subject: discountCode
-        ? `Vos articles DivinExpress vous attendent (avantage ${discountCode})`
-        : "Vos articles DivinExpress vous attendent",
+        ? `Vos articles Shammah vous attendent (avantage ${discountCode})`
+        : "Vos articles Shammah vous attendent",
       html: fullHtml,
     });
 
@@ -716,7 +716,7 @@ export async function sendAdminNewOrderAlertEmail({
 }): Promise<{ success: boolean; error?: string }> {
   try {
     const smtp = await getSmtpTransporter();
-    const recipient = to || process.env.ADMIN_EMAIL || process.env.SMTP_USER || "contact@divinexpress.fr";
+    const recipient = to || process.env.ADMIN_EMAIL || process.env.SMTP_USER || "contact@shammah.eu";
 
     const itemsHtml = items.length > 0
       ? `
@@ -731,7 +731,7 @@ export async function sendAdminNewOrderAlertEmail({
 
     const bodyHtml = `
       <div style="border-left: 4px solid #0f172a; padding-left: 14px; margin-bottom: 20px;">
-        <span style="font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 1px;">Cockpit DivinExpress</span>
+        <span style="font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 1px;">Cockpit Shammah</span>
         <h1 style="margin: 4px 0 0 0; font-size: 21px; font-weight: 700; color: #0f172a;">Nouvelle commande reçue #${orderNumber}</h1>
       </div>
 
@@ -794,7 +794,7 @@ export async function sendAdminNewOrderAlertEmail({
     await smtp.transporter.sendMail({
       from: smtp.fromAddress,
       to: recipient,
-      subject: `[Nouvelle Commande] #${orderNumber} reçue (${new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(totalAmount)}) — DivinExpress`,
+      subject: `[Nouvelle Commande] #${orderNumber} reçue (${new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(totalAmount)}) — Shammah`,
       html: fullHtml,
     });
 
@@ -826,14 +826,14 @@ export async function sendCustomerDirectMessageEmail({
         ${message}
       </div>
       <div style="border-top: 1px solid #e2e8f0; padding-top: 16px; margin-top: 24px; font-size: 12px; color: #64748b;">
-        <p style="margin: 0 0 4px 0;"><strong>L'équipe DivinExpress</strong></p>
+        <p style="margin: 0 0 4px 0;"><strong>L'équipe Shammah</strong></p>
         <p style="margin: 0;">Besoin d'un conseil ? Répondez simplement à cet e-mail.</p>
       </div>
     `;
 
     const fullHtml = buildEmailTemplate({
       title: subject,
-      preheader: "Message du service client DivinExpress",
+      preheader: "Message du service client Shammah",
       contentHtml: bodyHtml,
     });
 
@@ -844,7 +844,7 @@ export async function sendCustomerDirectMessageEmail({
     await smtp.transporter.sendMail({
       from: smtp.fromAddress,
       to,
-      subject: `${subject} — DivinExpress`,
+      subject: `${subject} — Shammah`,
       html: fullHtml,
     });
 

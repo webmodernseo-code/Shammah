@@ -1,4 +1,4 @@
-export interface Message {
+﻿export interface Message {
   id: string;
   content: string;
   sender: "me" | "other" | "bot";
@@ -27,10 +27,10 @@ export interface User {
 }
 
 export const INITIAL_AI_USER: User = {
-  id: "ai-stylist-divinexpress",
-  name: "Conseillère Style IA (DivinExpress Pro)",
-  email: "styliste@divinexpress.com",
-  avatar: "/branding/logo-divinexpress.png",
+  id: "ai-stylist-shammah",
+  name: "Conseillère Style IA (Shammah Pro)",
+  email: "styliste@shammah.eu",
+  avatar: "/branding/logo-shammah.png",
   initials: "IA",
   lastMessage: "Posez-moi une question sur le guide des tailles, les matières ou les commandes clients...",
   time: "En direct",
@@ -39,7 +39,7 @@ export const INITIAL_AI_USER: User = {
   messages: [
     {
       id: "m_ai_1",
-      content: "Bonjour ! Je suis votre Conseillère Style & Support IA DivinExpress. Je peux vous aider à rédiger des réponses aux questions clients (guide des tailles, conseils d'entretien matières nobles, expéditions Colissimo et politique d'échange).",
+      content: "Bonjour ! Je suis votre Conseillère Style & Support IA Shammah. Je peux vous aider à rédiger des réponses aux questions clients (guide des tailles, conseils d'entretien matières nobles, expéditions Colissimo et politique d'échange).",
       sender: "bot",
       time: "En direct",
       type: "text",

@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 const PUBLIC_AUTH_PATHS = [
@@ -111,7 +111,7 @@ export async function proxy(req: NextRequest) {
     return unauthorizedResponse(req);
   }
 
-  const token = req.cookies.get("divinexpress_admin_session_v2")?.value;
+  const token = req.cookies.get("shammah_admin_session_v2")?.value;
   if (!(await verifySessionToken(token || "", secret))) {
     return unauthorizedResponse(req);
   }

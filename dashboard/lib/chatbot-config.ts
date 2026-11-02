@@ -1,4 +1,4 @@
-export interface ChatbotConfig {
+﻿export interface ChatbotConfig {
   whatsappNumber: string;
   assistantName: string;
   welcomeMessage: string;
@@ -8,15 +8,15 @@ export interface ChatbotConfig {
 
 export const DEFAULT_CHATBOT_CONFIG: ChatbotConfig = {
   whatsappNumber: "+33612345678",
-  assistantName: "Conseillère Style DivinExpress",
+  assistantName: "Conseillère Style Shammah",
   welcomeMessage:
-    "Bonjour ! Bienvenue chez DivinExpress Mode. Comment puis-je vous guider dans vos choix de vêtements et accessoires aujourd'hui ?",
+    "Bonjour ! Bienvenue chez Shammah Mode. Comment puis-je vous guider dans vos choix de vêtements et accessoires aujourd'hui ?",
   defaultWhatsappMessage:
-    "Bonjour ! J'aimerais avoir des conseils sur une taille ou un modèle de vêtement DivinExpress.",
+    "Bonjour ! J'aimerais avoir des conseils sur une taille ou un modèle de vêtement Shammah.",
   isEnabled: true,
 };
 
-const STORAGE_KEY = "divinexpress_chatbot_config_v1";
+const STORAGE_KEY = "shammah_chatbot_config_v1";
 
 export function getChatbotConfig(): ChatbotConfig {
   if (typeof window === "undefined") {
@@ -39,7 +39,7 @@ export function saveChatbotConfig(config: Partial<ChatbotConfig>): ChatbotConfig
   if (typeof window !== "undefined") {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-      window.dispatchEvent(new Event("divinexpress_chatbot_config_updated"));
+      window.dispatchEvent(new Event("shammah_chatbot_config_updated"));
     } catch {
       // ignore
     }

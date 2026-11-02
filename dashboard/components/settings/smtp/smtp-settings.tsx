@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
@@ -34,10 +34,10 @@ const PRESETS: ProviderPreset[] = [
   {
     id: "o2switch",
     name: "o2switch (cPanel)",
-    host: "mail.divinexpress.fr",
+    host: "mail.shammah.eu",
     port: 465,
     secure: true,
-    tip: "Utilisez votre adresse e-mail complète (ex: contact@divinexpress.fr) et le mot de passe de boîte mail défini dans votre cPanel o2switch.",
+    tip: "Utilisez votre adresse e-mail complète (ex: contact@shammah.eu) et le mot de passe de boîte mail défini dans votre cPanel o2switch.",
   },
   {
     id: "gmail",
@@ -103,8 +103,8 @@ export default function SmtpSettings() {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [hasStoredPassword, setHasStoredPassword] = useState(false);
-  const [fromName, setFromName] = useState("DivinExpress Mode");
-  const [fromEmail, setFromEmail] = useState("contact@divinexpress.fr");
+  const [fromName, setFromName] = useState("Shammah Mode");
+  const [fromEmail, setFromEmail] = useState("contact@shammah.eu");
   const [isEnabled, setIsEnabled] = useState(true);
 
   // Test state
@@ -129,8 +129,8 @@ export default function SmtpSettings() {
             setUser(d.user || "");
             setPassword(d.password || "");
             setHasStoredPassword(Boolean(d.hasPassword));
-            setFromName(d.fromName || "DivinExpress Mode");
-            setFromEmail(d.fromEmail || "contact@divinexpress.fr");
+            setFromName(d.fromName || "Shammah Mode");
+            setFromEmail(d.fromEmail || "contact@shammah.eu");
             setIsEnabled(typeof d.isEnabled === "boolean" ? d.isEnabled : true);
             if (d.user) {
               setTestRecipient(d.user);
@@ -465,7 +465,7 @@ export default function SmtpSettings() {
             </label>
             <input
               type="email"
-              placeholder="Ex: contact@divinexpress.fr"
+              placeholder="Ex: contact@shammah.eu"
               value={user}
               onChange={(e) => setUser(e.target.value)}
               className="w-full h-10 px-3.5 rounded-xl border border-gray-300 bg-white text-xs sm:text-sm text-gray-900 focus:outline-none focus:border-primary shadow-2xs"
@@ -508,7 +508,7 @@ export default function SmtpSettings() {
             </label>
             <input
               type="text"
-              placeholder="DivinExpress Mode"
+              placeholder="Shammah Mode"
               value={fromName}
               onChange={(e) => setFromName(e.target.value)}
               className="w-full h-10 px-3.5 rounded-xl border border-gray-300 bg-white text-xs sm:text-sm text-gray-900 focus:outline-none focus:border-primary shadow-2xs"
@@ -521,7 +521,7 @@ export default function SmtpSettings() {
             </label>
             <input
               type="email"
-              placeholder="contact@divinexpress.fr"
+              placeholder="contact@shammah.eu"
               value={fromEmail}
               onChange={(e) => setFromEmail(e.target.value)}
               className="w-full h-10 px-3.5 rounded-xl border border-gray-300 bg-white text-xs sm:text-sm text-gray-900 focus:outline-none focus:border-primary shadow-2xs"
@@ -538,7 +538,7 @@ export default function SmtpSettings() {
                 <span>Tester l'envoi d'un e-mail en direct</span>
               </p>
               <p className="text-[11px] text-gray-500 mt-0.5">
-                Envoie un e-mail réel de vérification avec le design de marque DivinExpress.
+                Envoie un e-mail réel de vérification avec le design de marque Shammah.
               </p>
             </div>
           </div>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -79,7 +79,7 @@ export default function StockOverview({
             Gestion des Stocks & Tailles Mode
           </h1>
           <p className="text-xs sm:text-sm text-gray-500 mt-0.5">
-            Suivi des niveaux d'inventaire, déclinaisons de tailles et réassorts DivinExpress
+            Suivi des niveaux d'inventaire, déclinaisons de tailles et réassorts Shammah
           </p>
         </div>
 

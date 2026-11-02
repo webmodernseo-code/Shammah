@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+﻿import { PrismaClient } from "@prisma/client";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
@@ -23,7 +23,7 @@ function loadEnvFile() {
   }
 }
 
-// Catalogue initial Haute Couture & Prêt-à-Porter DivinExpress
+// Catalogue initial Haute Couture & Prêt-à-Porter Shammah
 const initialProducts = [
   {
     code: "DIV-H-101",
@@ -146,7 +146,7 @@ async function main() {
   });
 
   try {
-    console.log("⏳ Importation du catalogue officiel DivinExpress dans Prisma...");
+    console.log("⏳ Importation du catalogue officiel Shammah dans Prisma...");
 
     for (const item of initialProducts) {
       const { variants, categorySlug, ...prodData } = item;

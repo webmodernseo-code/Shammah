@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import { DashboardCard } from "@/components/ui/dashboard-card";
@@ -38,7 +38,7 @@ export default function ChatbotSettingsForm() {
 
   const testUrl = formatWhatsappUrl(
     config.whatsappNumber,
-    config.defaultWhatsappMessage || "Bonjour, je vous contacte depuis le site DivinExpress Mode."
+    config.defaultWhatsappMessage || "Bonjour, je vous contacte depuis le site Shammah Mode."
   );
 
   return (
@@ -103,7 +103,7 @@ export default function ChatbotSettingsForm() {
                 onChange={(e) =>
                   setConfig({ ...config, assistantName: e.target.value })
                 }
-                placeholder="Conseillère Style DivinExpress"
+                placeholder="Conseillère Style Shammah"
                 className="w-full bg-white border border-gray-300 rounded-xl px-4 py-2.5 text-sm font-medium text-gray-900 focus:border-primary focus:outline-none shadow-xs"
               />
               <p className="text-[11px] text-gray-500 mt-1.5">
@@ -122,7 +122,7 @@ export default function ChatbotSettingsForm() {
               onChange={(e) =>
                 setConfig({ ...config, welcomeMessage: e.target.value })
               }
-              placeholder="Bonjour ! Bienvenue chez DivinExpress Mode. Comment puis-je vous guider dans vos choix de vêtements et accessoires aujourd'hui ?"
+              placeholder="Bonjour ! Bienvenue chez Shammah Mode. Comment puis-je vous guider dans vos choix de vêtements et accessoires aujourd'hui ?"
               className="w-full bg-white border border-gray-300 rounded-xl p-3.5 text-sm font-medium text-gray-900 focus:border-primary focus:outline-none shadow-xs"
             />
             <p className="text-[11px] text-gray-500 mt-1">
@@ -140,7 +140,7 @@ export default function ChatbotSettingsForm() {
               onChange={(e) =>
                 setConfig({ ...config, defaultWhatsappMessage: e.target.value })
               }
-              placeholder="Bonjour ! J'aimerais avoir des conseils sur une taille ou un modèle de vêtement DivinExpress."
+              placeholder="Bonjour ! J'aimerais avoir des conseils sur une taille ou un modèle de vêtement Shammah."
               className="w-full bg-white border border-gray-300 rounded-xl p-3.5 text-sm font-medium text-gray-900 focus:border-primary focus:outline-none shadow-xs"
             />
             <p className="text-[11px] text-gray-500 mt-1">

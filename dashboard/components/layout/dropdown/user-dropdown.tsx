@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
@@ -11,7 +11,7 @@ import type { AdminIdentity } from "@/components/auth/admin-session-context";
 export default function UserDropdown({ identity }: { identity?: AdminIdentity | null }) {
   const router = useRouter();
   const [loggingOut, setLoggingOut] = useState(false);
-  const displayName = identity?.name?.trim() || identity?.email?.split("@")[0] || "Admin DivinExpress";
+  const displayName = identity?.name?.trim() || identity?.email?.split("@")[0] || "Admin Shammah";
   const initials = (displayName.split(/\s+/).slice(0, 2).map((part) => part[0]).join("") || "DX").toUpperCase();
   const roleLabel = identity?.role === "ADMIN" ? "Administrateur" : "Super administrateur";
 

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -80,7 +80,7 @@ export default function AddStockForm() {
   const [selectedProductCode, setSelectedProductCode] = useState<string>("");
   const [operationType, setOperationType] = useState<"add" | "set">("add");
   const [quantity, setQuantity] = useState<number>(50);
-  const [warehouse, setWarehouse] = useState<string>("Entrepôt Central DivinExpress (Paris)");
+  const [warehouse, setWarehouse] = useState<string>("Entrepôt Central Shammah (Paris)");
   const [batchNumber, setBatchNumber] = useState<string>(`LOT-${new Date().getFullYear()}-09A`);
   const [reason, setReason] = useState<string>("Réception nouvel arrivage collection");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -182,7 +182,7 @@ export default function AddStockForm() {
         <div className="flex items-center gap-2">
           <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
             <Warehouse className="size-3.5" />
-            <span>Gestion d'Inventaire DivinExpress</span>
+            <span>Gestion d'Inventaire Shammah</span>
           </span>
         </div>
       </div>
@@ -198,7 +198,7 @@ export default function AddStockForm() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
               <label className="block text-xs font-bold text-gray-700 mb-2">
-                Référence / Article DivinExpress *
+                Référence / Article Shammah *
               </label>
               <select
                 value={selectedProductCode}
@@ -354,11 +354,11 @@ export default function AddStockForm() {
                 onChange={(e) => setWarehouse(e.target.value)}
                 className="w-full h-11 px-3.5 rounded-xl border border-gray-300 text-xs sm:text-sm font-medium bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-2xs"
               >
-                <option value="Entrepôt Central DivinExpress (Paris)">
-                  Entrepôt Central DivinExpress (Paris)
+                <option value="Entrepôt Central Shammah (Paris)">
+                  Entrepôt Central Shammah (Paris)
                 </option>
-                <option value="Hub Logistique DivinExpress (Île-de-France)">
-                  Hub Logistique DivinExpress (Île-de-France)
+                <option value="Hub Logistique Shammah (Île-de-France)">
+                  Hub Logistique Shammah (Île-de-France)
                 </option>
                 <option value="Réserve Expéditions Express">
                   Réserve Expéditions Express

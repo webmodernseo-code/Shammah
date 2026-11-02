@@ -1,3 +1,17 @@
+import { readFileSync, existsSync } from "node:fs";
+if (!process.env.DATABASE_URL) {
+  for (const envPath of [".env.local", ".env", "../.env.local", "../.env"]) {
+    if (existsSync(envPath)) {
+      const txt = readFileSync(envPath, "utf-8");
+      for (const line of txt.split("\n")) {
+        const [k, ...v] = line.trim().split("=");
+        if (k && v.length && !process.env[k.trim()]) {
+          process.env[k.trim()] = v.join("=").trim().replace(/^["']|["']$/g, "");
+        }
+      }
+    }
+  }
+}
 import { randomBytes, scrypt as nodeScrypt } from "node:crypto";
 import { promisify } from "node:util";
 
@@ -30,7 +44,7 @@ async function setPasswordViaNeonHttp(email, newPassword) {
     body: JSON.stringify({
       query: `
         INSERT INTO public.users (id, email, name, role, "adminEnabled", "passwordHash", "createdAt", "updatedAt")
-        VALUES (gen_random_uuid()::text, LOWER($1), 'Administrateur DivinExpress', 'MASTER_ADMIN', true, $2, NOW(), NOW())
+        VALUES (gen_random_uuid()::text, LOWER($1), 'Administrateur Shammah', 'MASTER_ADMIN', true, $2, NOW(), NOW())
         ON CONFLICT (email) 
         DO UPDATE SET "passwordHash" = EXCLUDED."passwordHash", "adminEnabled" = true, role = 'MASTER_ADMIN', "updatedAt" = NOW()
         RETURNING id, email, role, "adminEnabled";
@@ -48,12 +62,12 @@ async function setPasswordViaNeonHttp(email, newPassword) {
 
 async function main() {
   const args = process.argv.slice(2);
-  const email = (args[0] || "contact@divinexpress.fr").toLowerCase().trim();
+  const email = (args[0] || "admin@shammah.eu").toLowerCase().trim();
   const password = args[1];
 
   if (!password || password.length < 8) {
     console.error("Usage: npm --prefix dashboard run reset-password <email> <newPassword(min 8 chars)>");
-    console.error("Exemple: npm --prefix dashboard run reset-password contact@divinexpress.fr MonSuperMotDePasse123!");
+    console.error("Exemple: npm --prefix dashboard run reset-password admin@shammah.eu MonSuperMotDePasse123!");
     process.exit(1);
   }
 

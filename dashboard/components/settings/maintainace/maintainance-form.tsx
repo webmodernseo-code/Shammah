@@ -1,10 +1,10 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { AlertTriangle, Loader2, Power, Store } from "lucide-react";
 import { toast } from "sonner";
 
-const DEFAULT_MESSAGE = "Notre boutique DivinExpress est momentanément en maintenance. Nous préparons de nouvelles collections et revenons très vite.";
+const DEFAULT_MESSAGE = "Notre boutique Shammah est momentanément en maintenance. Nous préparons de nouvelles collections et revenons très vite.";
 
 export default function MaintenanceForm() {
   const [enabled, setEnabled] = useState(false);

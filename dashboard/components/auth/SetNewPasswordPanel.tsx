@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import Image from "next/image";
@@ -131,8 +131,8 @@ export default function SetNewPasswordPanel() {
       {/* Editorial Left Panel */}
       <section className={styles.heroPanel}>
         <Image
-          src="/image/divinexpress-admin-hero.jpg"
-          alt="DivinExpress Administration"
+          src="/image/shammah-admin-hero.jpg"
+          alt="Shammah Administration"
           fill
           priority
           className={styles.heroImage}
@@ -143,7 +143,7 @@ export default function SetNewPasswordPanel() {
           <div className={styles.heroBrand}>
             <Image
               src="/images/logo/logo-white.svg"
-              alt="DivinExpress"
+              alt="Shammah"
               width={160}
               height={36}
               priority
@@ -187,8 +187,8 @@ export default function SetNewPasswordPanel() {
           <div className={styles.formHeader}>
             <div className={styles.logoWrapper}>
               <Image
-                src="/branding/logo-divinexpress.png"
-                alt="DivinExpress"
+                src="/branding/logo-shammah.png"
+                alt="Shammah"
                 width={180}
                 height={48}
                 priority

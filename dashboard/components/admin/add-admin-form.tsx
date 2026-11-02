@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -46,7 +46,7 @@ export default function AddAdminForm() {
         />
         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
           <ShieldCheck className="size-3.5" />
-          <span>Accès Back Office DivinExpress</span>
+          <span>Accès Back Office Shammah</span>
         </span>
       </div>
 
@@ -80,7 +80,7 @@ export default function AddAdminForm() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="ex: logistique@divinexpress.fr"
+                placeholder="ex: logistique@shammah.eu"
                 className="w-full h-11 px-3.5 rounded-xl border border-gray-300 text-xs sm:text-sm font-medium bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-2xs"
               />
             </div>

@@ -1,18 +1,18 @@
-const https = require('https');
+﻿const https = require('https');
 
-https.get('https://admin.divinexpress.fr/signin', res => {
+https.get('https://admin.shammah.eu/signin', res => {
   let data = '';
   res.on('data', c => data += c);
   res.on('end', () => {
     const scripts = [...data.matchAll(/src="(\/_next\/static\/chunks\/[^"]+)"/g)].map(m => m[1]);
     console.log('Scripts found:', scripts.length);
     scripts.forEach(s => {
-      https.get('https://admin.divinexpress.fr' + s, r => {
+      https.get('https://admin.shammah.eu' + s, r => {
         let chunkData = '';
         r.on('data', c => chunkData += c);
         r.on('end', () => {
           const hasReign = chunkData.toLowerCase().includes('reign');
-          const hasHero = chunkData.includes('divinexpress-admin-hero');
+          const hasHero = chunkData.includes('shammah-admin-hero');
           if (hasReign || hasHero) {
             console.log(s, '-> hasReign:', hasReign, 'hasHero:', hasHero);
           }

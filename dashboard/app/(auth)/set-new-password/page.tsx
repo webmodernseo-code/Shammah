@@ -1,10 +1,10 @@
-import { Suspense } from "react";
+﻿import { Suspense } from "react";
 import type { Metadata } from "next";
 import SetNewPasswordPanel from "@/components/auth/SetNewPasswordPanel";
 
 export const metadata: Metadata = {
-  title: "Définir un Nouveau Mot de Passe — DivinExpress Espace Admin",
-  description: "Mise à jour sécurisée du mot de passe administrateur DivinExpress.",
+  title: "Définir un Nouveau Mot de Passe — Shammah Espace Admin",
+  description: "Mise à jour sécurisée du mot de passe administrateur Shammah.",
 };
 
 export default function SetNewPasswordPage() {

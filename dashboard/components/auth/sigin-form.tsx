@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import Image from "next/image";
@@ -15,7 +15,7 @@ export function SigninForm() {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
 
-  const [email, setEmail] = useState("admin@divinexpress.fr");
+  const [email, setEmail] = useState("admin@shammah.eu");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -46,8 +46,8 @@ export function SigninForm() {
       }
 
       if (typeof window !== "undefined") {
-        sessionStorage.setItem("divinexpress_admin_active_tab", "1");
-        sessionStorage.setItem("divinexpress_last_activity", Date.now().toString());
+        sessionStorage.setItem("shammah_admin_active_tab", "1");
+        sessionStorage.setItem("shammah_last_activity", Date.now().toString());
       }
 
       toast.success("Connexion réussie. Bienvenue sur le tableau de bord !");
@@ -66,7 +66,7 @@ export function SigninForm() {
         <Link href="/" className="mb-6 inline-block transition-transform hover:scale-102">
           <Image
             src="/images/logo/logo.png"
-            alt="DivinExpress"
+            alt="Shammah"
             width={210}
             height={65}
             priority

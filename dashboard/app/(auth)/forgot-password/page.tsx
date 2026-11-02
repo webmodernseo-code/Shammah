@@ -1,10 +1,10 @@
-import { Suspense } from "react";
+﻿import { Suspense } from "react";
 import type { Metadata } from "next";
 import ForgotPasswordPanel from "@/components/auth/ForgotPasswordPanel";
 
 export const metadata: Metadata = {
-  title: "Mot de Passe Oublié — DivinExpress Espace Admin",
-  description: "Récupération sécurisée de votre accès administrateur DivinExpress.",
+  title: "Mot de Passe Oublié — Shammah Espace Admin",
+  description: "Récupération sécurisée de votre accès administrateur Shammah.",
 };
 
 export default function ForgotPasswordPage() {

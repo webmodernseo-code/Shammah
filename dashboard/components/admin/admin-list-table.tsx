@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -66,7 +66,7 @@ export default function AdminListTable() {
         if (!response.ok) throw new Error(data.error || "Chargement impossible.");
         const users: AdminUser[] = (data.users || []).map((user: any) => ({
           id: user.id,
-          user: user.name || "Administrateur DivinExpress",
+          user: user.name || "Administrateur Shammah",
           email: user.email,
           role: user.role === "ADMIN" ? "Gestionnaire Secondaire" : "Administrateur Principal",
           isPrimary: user.role !== "ADMIN",
@@ -89,8 +89,8 @@ export default function AdminListTable() {
           setAdmins([
             {
               id: "ADM-001",
-              user: "Direction DivinExpress",
-              email: "admin@divinexpress.com",
+              user: "Direction Shammah",
+              email: "admin@shammah.eu",
               role: "Administrateur Principal",
               isPrimary: true,
               date: "01 Sept, 2026",
@@ -106,8 +106,8 @@ export default function AdminListTable() {
         setAdmins([
           {
             id: "ADM-001",
-            user: "Direction DivinExpress",
-            email: "admin@divinexpress.com",
+            user: "Direction Shammah",
+            email: "admin@shammah.eu",
             role: "Administrateur Principal",
             isPrimary: true,
             date: "01 Sept, 2026",

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
@@ -113,7 +113,7 @@ export default function NotificationDropdown() {
               <div className="py-8 text-center text-xs text-gray-400 space-y-1">
                 <Bell className="size-6 text-gray-300 mx-auto" />
                 <p className="font-medium text-gray-600">Aucune nouvelle notification</p>
-                <p className="text-[11px] text-gray-400">Tout est à jour dans DivinExpress.</p>
+                <p className="text-[11px] text-gray-400">Tout est à jour dans Shammah.</p>
               </div>
             ) : (
               displayedNotifications.map((notification) => {

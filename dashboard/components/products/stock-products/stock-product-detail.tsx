@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
@@ -38,7 +38,7 @@ const DEFAULT_PRODUCTS: Record<string, any> = {
     format: "Tailles 46 à 54",
     image: "/images/products/fashion-1.jpg",
     status: "Publié",
-    warehouse: "Entrepôt Central DivinExpress (Paris)",
+    warehouse: "Entrepôt Central Shammah (Paris)",
     lastUpdated: "Aujourd'hui",
   },
   "DIV-F-201": {
@@ -53,7 +53,7 @@ const DEFAULT_PRODUCTS: Record<string, any> = {
     format: "Tailles XS à L",
     image: "/images/products/fashion-2.jpg",
     status: "Publié",
-    warehouse: "Entrepôt Central DivinExpress (Paris)",
+    warehouse: "Entrepôt Central Shammah (Paris)",
     lastUpdated: "Hier",
   },
   "DIV-U-301": {
@@ -68,7 +68,7 @@ const DEFAULT_PRODUCTS: Record<string, any> = {
     format: "Tailles XS à XXL",
     image: "/images/products/fashion-3.jpg",
     status: "Publié",
-    warehouse: "Hub Logistique DivinExpress (Île-de-France)",
+    warehouse: "Hub Logistique Shammah (Île-de-France)",
     lastUpdated: "05 Sept. 2026",
   },
   "DIV-H-102": {
@@ -83,7 +83,7 @@ const DEFAULT_PRODUCTS: Record<string, any> = {
     format: "Tailles S à XL",
     image: "/images/products/fashion-4.jpg",
     status: "Publié",
-    warehouse: "Entrepôt Central DivinExpress (Paris)",
+    warehouse: "Entrepôt Central Shammah (Paris)",
     lastUpdated: "02 Sept. 2026",
   },
   "DIV-F-202": {
@@ -98,7 +98,7 @@ const DEFAULT_PRODUCTS: Record<string, any> = {
     format: "Tailles S à L",
     image: "/images/products/fashion-5.jpg",
     status: "Publié",
-    warehouse: "Entrepôt Central DivinExpress (Paris)",
+    warehouse: "Entrepôt Central Shammah (Paris)",
     lastUpdated: "01 Sept. 2026",
   },
 };
@@ -154,7 +154,7 @@ export default function StockProductDetail({ id = "SUL-301" }: StockProductDetai
               format: p.formats?.[0]?.label || "Taille M / Standard",
               image: p.imageRecto || p.image || "/images/products/fashion/product-1.jpg",
               status: p.isAvailable !== false ? "Publié" : "Brouillon",
-              warehouse: "Entrepôt Central DivinExpress (Paris IDF)",
+              warehouse: "Entrepôt Central Shammah (Paris IDF)",
               lastUpdated: p.updatedAt
                 ? new Date(p.updatedAt).toLocaleDateString("fr-FR", {
                     day: "2-digit",

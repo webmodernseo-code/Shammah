@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -26,7 +26,7 @@ export default function ConversationHeader({
   const isAi = user.category === "ai";
   const whatsappUrl = user.phone
     ? `https://wa.me/${user.phone.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(
-        `Bonjour ${user.name}, je vous contacte au sujet de votre commande ${user.orderNumber || ""} sur DivinExpress Mode.`,
+        `Bonjour ${user.name}, je vous contacte au sujet de votre commande ${user.orderNumber || ""} sur Shammah Mode.`,
       )}`
     : null;
 

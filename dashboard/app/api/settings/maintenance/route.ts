@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { isSuperAdmin, readSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
-const DEFAULT_MESSAGE = "Notre boutique DivinExpress est momentanément en maintenance. Nous revenons très vite.";
+const DEFAULT_MESSAGE = "Notre boutique Shammah est momentanément en maintenance. Nous revenons très vite.";
 
 export async function GET(req: NextRequest) {
   if (!(await isSuperAdmin(req))) return NextResponse.json({ error: "Accès refusé." }, { status: 403 });

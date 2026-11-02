@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 
 export interface BrandIconProps {
   className?: string;
@@ -9,7 +9,7 @@ export interface BrandIconProps {
 
 /**
  * ═══════════════════════════════════════════════════════════════════
- *  OFFICIAL SIMPLE ICONS VECTOR COMPONENT SUITE FOR DIVINEXPRESS
+ *  OFFICIAL SIMPLE ICONS VECTOR COMPONENT SUITE FOR SHAMMAH
  *  Source: https://simpleicons.org (100% Pure SVGs, Zero Pixel Slop)
  * ═══════════════════════════════════════════════════════════════════
  */

@@ -1,4 +1,4 @@
-import { createHmac, randomBytes, scrypt as nodeScrypt, timingSafeEqual } from "node:crypto";
+﻿import { createHmac, randomBytes, scrypt as nodeScrypt, timingSafeEqual } from "node:crypto";
 import { promisify } from "node:util";
 import type { NextRequest } from "next/server";
 import { prisma } from "./prisma";
@@ -7,8 +7,8 @@ import { queryNeon } from "./neon-http";
 const scrypt = promisify(nodeScrypt);
 
 // Version the cookie whenever a security fix must invalidate every existing session.
-export const SESSION_COOKIE = "divinexpress_admin_session_v2";
-export const COMPAT_COOKIE = "divinexpress_session";
+export const SESSION_COOKIE = "shammah_admin_session_v2";
+export const COMPAT_COOKIE = "shammah_session";
 
 export type SessionRole = "CUSTOMER" | "ADMIN" | "SUPER_ADMIN" | "MASTER_ADMIN";
 

@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+﻿import { PrismaClient } from "@prisma/client";
 import { randomBytes, scrypt as nodeScrypt } from "node:crypto";
 import { promisify } from "node:util";
 import readline from "node:readline/promises";
@@ -78,7 +78,7 @@ async function main() {
   // Interactive prompt if arguments are missing
   if (!email || !password) {
     const rl = readline.createInterface({ input, output });
-    console.log("💎 --- DIVINEXPRESS : CRÉATION D'UN COMPTE ADMINISTRATEUR SÉCURISÉ ---");
+    console.log("💎 --- SHAMMAH : CRÉATION D'UN COMPTE ADMINISTRATEUR SÉCURISÉ ---");
     
     if (!email) {
       email = await rl.question("📧 Email de l'administrateur : ");

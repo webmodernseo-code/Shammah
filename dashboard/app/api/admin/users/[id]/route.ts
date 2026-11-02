@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { isSuperAdmin, readSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 export async function DELETE(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   if (!(await isSuperAdmin(req))) return NextResponse.json({ error: "Accès refusé." }, { status: 403 });
-  const session = readSession(req) || { userId: "admin-system", email: "admin@divinexpress.com" };
+  const session = readSession(req) || { userId: "admin-system", email: "admin@shammah.eu" };
   const { id } = await context.params;
 
   try {

@@ -1,8 +1,8 @@
-import StockProductDetail from "@/components/products/stock-products/stock-product-detail";
+﻿import StockProductDetail from "@/components/products/stock-products/stock-product-detail";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Détail du Stock Vêtements | DivinExpress Admin",
+  title: "Détail du Stock Vêtements | Shammah Admin",
   description: "Consultation et réapprovisionnement de la référence d'épice.",
 };
 

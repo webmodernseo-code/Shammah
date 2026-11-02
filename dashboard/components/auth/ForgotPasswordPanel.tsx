@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
@@ -108,7 +108,7 @@ export default function ForgotPasswordPanel() {
       <section className={styles.heroPanel}>
         <Image
           src="/images/auth/forgot-password-bg.png"
-          alt="DivinExpress Administration"
+          alt="Shammah Administration"
           fill
           priority
           className={styles.heroImage}
@@ -119,7 +119,7 @@ export default function ForgotPasswordPanel() {
           <div className={styles.heroBrand}>
             <Image
               src="/images/logo/logo-white.svg"
-              alt="DivinExpress"
+              alt="Shammah"
               width={160}
               height={36}
               priority
@@ -163,8 +163,8 @@ export default function ForgotPasswordPanel() {
           <div className={styles.formHeader}>
             <div className={styles.logoWrapper}>
               <Image
-                src="/branding/logo-divinexpress.png"
-                alt="DivinExpress"
+                src="/branding/logo-shammah.png"
+                alt="Shammah"
                 width={180}
                 height={48}
                 priority
@@ -268,7 +268,7 @@ export default function ForgotPasswordPanel() {
                     autoFocus
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="admin@divinexpress.com"
+                    placeholder="admin@shammah.eu"
                     className={styles.inputElement}
                     disabled={pending}
                   />

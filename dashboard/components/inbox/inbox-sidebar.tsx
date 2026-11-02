@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { Search, Bot, User as UserIcon, CheckCircle2, Clock, Sparkles } from "lucide-react";
@@ -47,7 +47,7 @@ export function InboxSidebar({
               Messagerie & Support Client
             </h2>
             <p className="text-xs text-gray-500 mt-0.5">
-              Échanges clients & Conseillère Style IA DivinExpress
+              Échanges clients & Conseillère Style IA Shammah
             </p>
           </div>
           <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 whitespace-nowrap shrink-0">
@@ -92,7 +92,7 @@ export function InboxSidebar({
             )}
           >
             <Sparkles className="size-3" />
-            <span>IA DivinExpress</span>
+            <span>IA Shammah</span>
           </button>
         </div>
 

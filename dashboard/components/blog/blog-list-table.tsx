@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -151,7 +151,7 @@ export default function BlogListTable() {
             Articles de Blog & Inspirations
           </h1>
           <p className="text-xs sm:text-sm text-gray-500 mt-1">
-            Gérez le contenu éditorial, les guides de style et les publications de mode pour la boutique DivinExpress.
+            Gérez le contenu éditorial, les guides de style et les publications de mode pour la boutique Shammah.
           </p>
         </div>
         <Link href="/blog/add">

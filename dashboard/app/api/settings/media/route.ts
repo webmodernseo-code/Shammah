@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { isSuperAdmin } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { encryptSecret, decryptSecret, maskSecret } from "@/lib/encryption";
@@ -27,7 +27,7 @@ export async function GET(req: NextRequest) {
           cloudName: "",
           apiKey: "",
           apiSecret: "",
-          uploadFolder: "divinexpress/products",
+          uploadFolder: "shammah/products",
           isEnabled: false,
           configured: false,
         },
@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
       cloudName: body.cloudName.trim(),
       apiKey: encryptedApiKey,
       apiSecret: encryptedApiSecret,
-      uploadFolder: body.uploadFolder?.trim() || "divinexpress/products",
+      uploadFolder: body.uploadFolder?.trim() || "shammah/products",
       isEnabled: Boolean(body.isEnabled),
     },
     create: {
@@ -68,7 +68,7 @@ export async function POST(req: NextRequest) {
       cloudName: body.cloudName.trim(),
       apiKey: encryptedApiKey,
       apiSecret: encryptedApiSecret,
-      uploadFolder: body.uploadFolder?.trim() || "divinexpress/products",
+      uploadFolder: body.uploadFolder?.trim() || "shammah/products",
       isEnabled: Boolean(body.isEnabled),
     },
   });

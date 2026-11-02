@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -17,8 +17,8 @@ const roleOptions = [
 
 export default function EditAdminForm() {
   const router = useRouter();
-  const [name, setName] = useState("Administrateur DivinExpress");
-  const [email, setEmail] = useState("admin@divinexpress.fr");
+  const [name, setName] = useState("Administrateur Shammah");
+  const [email, setEmail] = useState("admin@shammah.eu");
   const [role, setRole] = useState("Administrateur Principal");
   const [status, setStatus] = useState<"Actif" | "Suspendu">("Actif");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -44,7 +44,7 @@ export default function EditAdminForm() {
         />
         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
           <ShieldCheck className="size-3.5" />
-          <span>Accès Back Office DivinExpress</span>
+          <span>Accès Back Office Shammah</span>
         </span>
       </div>
 

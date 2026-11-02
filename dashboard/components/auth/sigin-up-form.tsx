@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,7 +17,7 @@ export function SignupForm() {
         <Link href="/" className="mb-8">
           <Image
             src="/images/logo/logo.png"
-            alt="DivinExpress"
+            alt="Shammah"
             width={180}
             height={60}
             priority

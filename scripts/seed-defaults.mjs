@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+﻿import { PrismaClient } from "@prisma/client";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
@@ -62,7 +62,7 @@ async function main() {
       create: {
         id: "site",
         enabled: false,
-        message: "Notre boutique DivinExpress est momentanément en maintenance. Nous revenons très vite.",
+        message: "Notre boutique Shammah est momentanément en maintenance. Nous revenons très vite.",
       },
     });
     console.log("   ✅ Configuration Maintenance initialisée");
@@ -88,10 +88,10 @@ async function main() {
       update: {},
       create: {
         provider: "cloudinary",
-        cloudName: "divinexpress",
+        cloudName: "shammah",
         apiKey: "",
         apiSecret: "",
-        uploadFolder: "divinexpress/products",
+        uploadFolder: "shammah/products",
         isEnabled: false,
       },
     });
@@ -108,8 +108,8 @@ async function main() {
         secure: true,
         user: "",
         password: "",
-        fromName: "DivinExpress",
-        fromEmail: "contact@divinexpress.com",
+        fromName: "Shammah",
+        fromEmail: "contact@shammah.eu",
         isEnabled: false,
       },
     });

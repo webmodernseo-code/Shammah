@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { isAdmin } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
@@ -146,7 +146,7 @@ export async function POST(req: NextRequest) {
         code: sku,
         slug: body.slug?.trim() || slug,
         description: body.description?.trim() || name,
-        origin: body.origin?.trim() || "Atelier Création DivinExpress",
+        origin: body.origin?.trim() || "Atelier Création Shammah",
         material: body.material?.trim() || "100% Coton Biologique",
         gender: body.gender?.trim() || (body.category?.includes("Femme") ? "Femme" : "Homme"),
         basePrice: price,
@@ -170,7 +170,7 @@ export async function POST(req: NextRequest) {
         title: name,
         subtitle: body.subtitle?.trim() || null,
         description: body.description?.trim() || name,
-        origin: body.origin?.trim() || "Atelier Création DivinExpress",
+        origin: body.origin?.trim() || "Atelier Création Shammah",
         material: body.material?.trim() || "100% Coton Biologique",
         gender: body.gender?.trim() || (body.category?.includes("Femme") ? "Femme" : "Homme"),
         basePrice: price,

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -150,7 +150,7 @@ export default function NewOrderRequestForm() {
         />
         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-900 border border-emerald-200">
           <Factory className="size-3.5" />
-          <span>Ateliers de Confection & Filature DivinExpress</span>
+          <span>Ateliers de Confection & Filature Shammah</span>
         </span>
       </div>
 
@@ -302,8 +302,8 @@ export default function NewOrderRequestForm() {
                 <option value="Atelier Confection & Filature — Porto / Lyon">
                   Atelier Confection & Filature — Porto / Lyon
                 </option>
-                <option value="Hub Logistique DivinExpress (Île-de-France)">
-                  Hub Logistique DivinExpress (Île-de-France)
+                <option value="Hub Logistique Shammah (Île-de-France)">
+                  Hub Logistique Shammah (Île-de-France)
                 </option>
               </select>
             </div>

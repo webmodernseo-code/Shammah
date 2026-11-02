@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -109,7 +109,7 @@ export default function BasicInfo({ product = DEFAULT_PRODUCT }: ProductDetailPr
               </span>
               <span className="flex items-center gap-1">
                 <ShieldCheck className="size-3.5 text-emerald-600" />
-                Garantie Qualité DivinExpress
+                Garantie Qualité Shammah
               </span>
             </div>
           </div>

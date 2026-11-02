@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { isAdmin } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { sendCustomerDirectMessageEmail } from "@/lib/email";
@@ -33,8 +33,8 @@ export interface InboxCustomer {
   messages: InboxMessage[];
 }
 
-// ── CONSEILLER STYLE & MODE DIVINEXPRESS AI ENGINE ──
-function getDivinExpressStyleReply(query: string, customerContext?: Partial<InboxCustomer>): string {
+// ── CONSEILLER STYLE & MODE SHAMMAH AI ENGINE ──
+function getShammahStyleReply(query: string, customerContext?: Partial<InboxCustomer>): string {
   const q = query.toLowerCase();
 
   if (q.includes("taille") || q.includes("guide") || q.includes("mesure") || q.includes("choisir")) {
@@ -42,7 +42,7 @@ function getDivinExpressStyleReply(query: string, customerContext?: Partial<Inbo
   }
 
   if (q.includes("matiere") || q.includes("tissu") || q.includes("coton") || q.includes("laine") || q.includes("soie")) {
-    return "Toutes nos collections DivinExpress sont confectionnées à partir de fibres nobles : Coton biologique brossé 450 GSM pour les hoodies, Laine italienne 120s pour les costumes, et Soie naturelle pour nos robes de soirée. Entretien : lavage délicat à 30°C ou nettoyage à sec recommandé.";
+    return "Toutes nos collections Shammah sont confectionnées à partir de fibres nobles : Coton biologique brossé 450 GSM pour les hoodies, Laine italienne 120s pour les costumes, et Soie naturelle pour nos robes de soirée. Entretien : lavage délicat à 30°C ou nettoyage à sec recommandé.";
   }
 
   if (q.includes("costume") || q.includes("smoking") || q.includes("veston")) {
@@ -62,10 +62,10 @@ function getDivinExpressStyleReply(query: string, customerContext?: Partial<Inbo
   }
 
   if (q.includes("merci") || q.includes("bonjour") || q.includes("salut")) {
-    return "Bonjour ! Bienvenue au service client DivinExpress Mode. Comment puis-je vous accompagner dans le choix de vos articles ou le suivi de votre commande ?";
+    return "Bonjour ! Bienvenue au service client Shammah Mode. Comment puis-je vous accompagner dans le choix de vos articles ou le suivi de votre commande ?";
   }
 
-  return "Je note votre demande pour la boutique DivinExpress. N'hésitez pas à préciser s'il s'agit d'un conseil de style (guide des tailles, matières), d'un suivi de livraison Colissimo ou d'un échange de taille.";
+  return "Je note votre demande pour la boutique Shammah. N'hésitez pas à préciser s'il s'agit d'un conseil de style (guide des tailles, matières), d'un suivi de livraison Colissimo ou d'un échange de taille.";
 }
 
 export async function GET(req: NextRequest) {
@@ -89,10 +89,10 @@ export async function GET(req: NextRequest) {
 
     // Dedicated AI Style Assistant at the top
     customers.push({
-      id: "ai-style-divinexpress",
-      name: "Assistant Style & Vente IA (DivinExpress)",
-      email: "assistant@divinexpress.com",
-      avatar: "/branding/logo-divinexpress.png",
+      id: "ai-style-shammah",
+      name: "Assistant Style & Vente IA (Shammah)",
+      email: "assistant@shammah.eu",
+      avatar: "/branding/logo-shammah.png",
       initials: "IA",
       lastMessage: "Posez-moi une question sur nos collections, tailles ou commandes...",
       time: "En direct",
@@ -101,7 +101,7 @@ export async function GET(req: NextRequest) {
       messages: [
         {
           id: "m_ai_1",
-          content: "Bonjour ! Je suis votre Assistant Style & Support IA DivinExpress. Je peux vous aider à répondre aux questions des clients sur les tailles, conseiller des assortiments de vêtements ou rédiger des messages personnalisés.",
+          content: "Bonjour ! Je suis votre Assistant Style & Support IA Shammah. Je peux vous aider à répondre aux questions des clients sur les tailles, conseiller des assortiments de vêtements ou rédiger des messages personnalisés.",
           sender: "bot",
           time: "En continu",
           type: "text",
@@ -147,7 +147,7 @@ export async function GET(req: NextRequest) {
             : order.status === "SHIPPED"
             ? "Colis en cours d'acheminement Colissimo. Numéro de suivi transmis au client."
             : order.status === "PROCESSING"
-            ? "Commande en cours de préparation dans les ateliers DivinExpress."
+            ? "Commande en cours de préparation dans les ateliers Shammah."
             : "Paiement validé. En attente de préparation en atelier.",
           sender: "me",
           time: orderTime,
@@ -157,7 +157,7 @@ export async function GET(req: NextRequest) {
 
       customers.push({
         id: order.id,
-        name: order.customerName || "Client DivinExpress",
+        name: order.customerName || "Client Shammah",
         email: order.customerEmail,
         phone: order.customerPhone || undefined,
         initials,
@@ -299,9 +299,9 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { action, recipientEmail, customerName, subject, message, query, customerContext } = body;
 
-    // Action 1: Ask DivinExpress Style AI Engine
+    // Action 1: Ask Shammah Style AI Engine
     if (action === "ask_ai") {
-      const answer = getDivinExpressStyleReply(query || "", customerContext);
+      const answer = getShammahStyleReply(query || "", customerContext);
       return NextResponse.json({
         success: true,
         answer,
@@ -317,7 +317,7 @@ export async function POST(req: NextRequest) {
       const emailResult = await sendCustomerDirectMessageEmail({
         to: recipientEmail,
         customerName: customerName || "Cher Client",
-        subject: subject || "Message concernant votre commande — DivinExpress",
+        subject: subject || "Message concernant votre commande — Shammah",
         message,
       });
 

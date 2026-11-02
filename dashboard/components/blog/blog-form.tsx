@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -40,10 +40,10 @@ export default function BlogForm({ initialData, isEditing = false }: BlogFormPro
     initialData?.coverImage || "/images/blog/blog-7.jpg"
   );
   const [authorName, setAuthorName] = useState(
-    initialData?.authorName || "Rédaction DivinExpress"
+    initialData?.authorName || "Rédaction Shammah"
   );
   const [tags, setTags] = useState<string>(
-    initialData?.tags?.join(", ") || "Mode, Tendances, DivinExpress"
+    initialData?.tags?.join(", ") || "Mode, Tendances, Shammah"
   );
   const [status, setStatus] = useState<string>(initialData?.status || "Publié");
 
@@ -82,7 +82,7 @@ export default function BlogForm({ initialData, isEditing = false }: BlogFormPro
       excerpt: excerpt.trim(),
       content: content.trim(),
       coverImage: coverImage.trim() || "/images/blog/blog-7.jpg",
-      authorName: authorName.trim() || "Rédaction DivinExpress",
+      authorName: authorName.trim() || "Rédaction Shammah",
       tags: tags
         .split(",")
         .map((t) => t.trim())
@@ -135,7 +135,7 @@ export default function BlogForm({ initialData, isEditing = false }: BlogFormPro
             <p className="text-xs sm:text-sm text-gray-500 mt-0.5">
               {isEditing
                 ? "Mettez à jour les informations, images ou texte de la publication."
-                : "Créez un nouveau contenu de blog captivant pour les clients de DivinExpress."}
+                : "Créez un nouveau contenu de blog captivant pour les clients de Shammah."}
             </p>
           </div>
         </div>
@@ -211,7 +211,7 @@ export default function BlogForm({ initialData, isEditing = false }: BlogFormPro
               </label>
               <div className="flex items-center rounded-xl border border-gray-200 overflow-hidden bg-gray-50/50">
                 <span className="px-3 text-xs text-gray-400 select-none border-r border-gray-200 bg-gray-50 py-3">
-                  divinexpress.fr/blog/
+                  shammah.eu/blog/
                 </span>
                 <input
                   type="text"

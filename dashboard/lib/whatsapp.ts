@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Module de notification WhatsApp instantanée pour l'administrateur
  * Utilise l'API CallMeBot (Gratuit, sans frais, 100% sécurisé)
  */
@@ -66,7 +66,7 @@ export async function sendWhatsAppNewOrderAlert(params: WhatsAppOrderAlertParams
         .join("\n");
     }
 
-    const message = `*NOUVELLE COMMANDE DIVINEXPRESS !*
+    const message = `*NOUVELLE COMMANDE SHAMMAH !*
 
 *Commande :* #${params.orderNumber}
 *Client :* ${params.customerName}
@@ -111,9 +111,9 @@ export async function sendWhatsAppTestAlert(phone: string, apikey: string): Prom
 }> {
   try {
     const cleanPhone = normalizePhoneForWhatsApp(phone);
-    const testMessage = `*TEST WHATSAPP DIVINEXPRESS RÉUSSI !*
+    const testMessage = `*TEST WHATSAPP SHAMMAH RÉUSSI !*
     
-Votre boutique *DivinExpress* est désormais connectée à votre WhatsApp.
+Votre boutique *Shammah* est désormais connectée à votre WhatsApp.
 Vous recevrez instantanément une alerte détaillée dès qu'un client passera une commande !`;
 
     const url = `https://api.callmebot.com/whatsapp.php?phone=${encodeURIComponent(

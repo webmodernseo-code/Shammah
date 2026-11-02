@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -28,7 +28,7 @@ const emptyConfig: Config = {
   cloudName: "",
   apiKey: "",
   apiSecret: "",
-  uploadFolder: "divinexpress/products",
+  uploadFolder: "shammah/products",
   isEnabled: true,
   configured: false,
 };
@@ -173,7 +173,7 @@ export default function MediaSettingsPage() {
               type="text"
               value={config.cloudName}
               onChange={(e) => setConfig({ ...config, cloudName: e.target.value })}
-              placeholder="ex: divinexpress-mode ou dx89xyz"
+              placeholder="ex: shammah-mode ou dx89xyz"
               className="w-full h-11 px-3.5 rounded-xl border border-gray-300 text-sm font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white"
             />
           </div>
@@ -226,7 +226,7 @@ export default function MediaSettingsPage() {
               type="text"
               value={config.uploadFolder}
               onChange={(e) => setConfig({ ...config, uploadFolder: e.target.value })}
-              placeholder="divinexpress/products"
+              placeholder="shammah/products"
               className="w-full h-11 px-3.5 rounded-xl border border-gray-300 text-sm font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white"
             />
             <p className="text-[11px] text-gray-400 mt-1">

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { FormEvent, Suspense, useState } from "react";
 import Link from "next/link";
@@ -39,7 +39,7 @@ function AcceptInvitationForm() {
       <form onSubmit={submit} className="w-full max-w-md space-y-5 rounded-2xl bg-white p-8 shadow-xs border border-gray-200">
         <div className="text-center space-y-1">
           <h1 className="text-2xl font-bold text-gray-900">Accepter l'invitation</h1>
-          <p className="text-xs text-gray-500">Choisissez votre mot de passe pour activer votre accès administrateur DivinExpress.</p>
+          <p className="text-xs text-gray-500">Choisissez votre mot de passe pour activer votre accès administrateur Shammah.</p>
         </div>
         
         <div>

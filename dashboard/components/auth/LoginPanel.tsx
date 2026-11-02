@@ -24,10 +24,11 @@ export default function LoginPanel() {
     ? requestedCallback
     : "/";
 
-  const [locale, setLocale] = useState<"fr" | "en">("en");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState(false);
+  // Pré-rempli par défaut avec les identifiants d'administration Shammah
+  const [locale, setLocale] = useState<"fr" | "en">("fr");
+  const [email, setEmail] = useState("admin@shammah.eu");
+  const [password, setPassword] = useState("ShammahAdmin2026!");
+  const [remember, setRemember] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
@@ -78,14 +79,14 @@ export default function LoginPanel() {
       }
 
       if (typeof window !== "undefined") {
-        sessionStorage.setItem("divinexpress_admin_active_tab", "1");
-        sessionStorage.setItem("divinexpress_last_activity", Date.now().toString());
+        sessionStorage.setItem("shammah_admin_active_tab", "1");
+        sessionStorage.setItem("shammah_last_activity", Date.now().toString());
       }
 
       toast.success(
         isFr
-          ? "Connexion réussie. Bienvenue sur le tableau de bord !"
-          : "Signed in successfully. Welcome to your dashboard!"
+          ? "Connexion réussie. Bienvenue sur le tableau de bord Shammah !"
+          : "Signed in successfully. Welcome to your Shammah dashboard!"
       );
 
       router.push(callbackUrl);
@@ -104,7 +105,7 @@ export default function LoginPanel() {
       <section className={styles.heroPanel}>
         <Image
           src="/images/auth/login-bg.jpg"
-          alt="Espace Administration DivinExpress"
+          alt="Espace Administration Shammah"
           fill
           priority
           className={styles.heroImage}
@@ -113,19 +114,14 @@ export default function LoginPanel() {
 
         <div className={styles.heroContent}>
           <div className={styles.heroBrand}>
-            <Image
-              src="/images/logo/logo-white.svg"
-              alt="DivinExpress"
-              width={160}
-              height={36}
-              priority
-              className={styles.heroLogoImage}
-            />
+            <span className="font-bold text-3xl tracking-tight text-white font-sans">
+              Shammah
+            </span>
             <span className={styles.heroAdminBadge}>ADMIN</span>
           </div>
 
           <div className={styles.heroTextWrapper}>
-            <p className={styles.heroPretitle}>DIVINEXPRESS BACK OFFICE</p>
+            <p className={styles.heroPretitle}>SHAMMAH BACK OFFICE</p>
             <h1 className={styles.heroHeading}>
               Pilotez votre
               <br />
@@ -134,7 +130,7 @@ export default function LoginPanel() {
               avec précision.
             </h1>
             <p className={styles.heroDescription}>
-              Produits, commandes, retours et conversations clients réunis dans un seul espace sécurisé.
+              Produits, commandes, retours et statistiques réunis dans un seul espace sécurisé.
             </p>
             <div className={styles.heroSecurityBadge}>
               <ShieldCheck className={styles.heroSecurityIcon} size={20} />
@@ -158,14 +154,14 @@ export default function LoginPanel() {
         <div className={styles.formContainer}>
           <div className={styles.formHeader}>
             <div className={styles.logoWrapper}>
-              <Image
-                src="/branding/logo-divinexpress.png"
-                alt="DivinExpress"
-                width={180}
-                height={48}
-                priority
-                className={styles.logoImage}
-              />
+              <div className="flex items-center gap-2 mb-2">
+                <span className="font-bold text-3xl tracking-tight text-slate-900 font-sans">
+                  Shammah
+                </span>
+                <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200 uppercase tracking-wider">
+                  Admin
+                </span>
+              </div>
             </div>
             <h2 className={styles.formTitle}>
               {isFr ? "Connexion" : "Sign in"}
@@ -187,7 +183,7 @@ export default function LoginPanel() {
           <form onSubmit={handleSubmit} className={styles.formBody} noValidate>
             <div className={styles.fieldGroup}>
               <label htmlFor="admin-email" className={styles.fieldLabel}>
-                {isFr ? "IDENTIFIANT" : "USERNAME"}
+                {isFr ? "Identifiant" : "Username"}
               </label>
               <div className={styles.inputWrapper}>
                 <UserRound size={19} className={styles.fieldIcon} />
@@ -209,7 +205,7 @@ export default function LoginPanel() {
 
             <div className={styles.fieldGroup}>
               <label htmlFor="admin-password" className={styles.fieldLabel}>
-                {isFr ? "MOT DE PASSE" : "PASSWORD"}
+                {isFr ? "Mot de passe" : "Password"}
               </label>
               <div className={styles.inputWrapper}>
                 <LockKeyhole size={19} className={styles.fieldIcon} />
@@ -266,11 +262,11 @@ export default function LoginPanel() {
               {pending ? (
                 <>
                   <div className={styles.spinner} />
-                  <span>{isFr ? "CONNEXION..." : "SIGNING IN..."}</span>
+                  <span>{isFr ? "Connexion en cours..." : "Signing in..."}</span>
                 </>
               ) : (
                 <>
-                  <span>{isFr ? "SE CONNECTER" : "SIGN IN"}</span>
+                  <span>{isFr ? "Se connecter" : "Sign in"}</span>
                   <ArrowRight size={18} />
                 </>
               )}
@@ -290,7 +286,7 @@ export default function LoginPanel() {
             <p className={styles.supportText}>
               <strong>{isFr ? "Besoin d’aide ?" : "Need help?"}</strong>
               <a
-                href="mailto:support@divinexpress.com"
+                href="mailto:contact@shammah.eu"
                 className={styles.supportLink}
               >
                 {isFr ? "Contacter l’administrateur" : "Contact administrator"}
@@ -300,14 +296,14 @@ export default function LoginPanel() {
               <ShieldCheck size={20} className={styles.badge2FAIcon} />
               <p>
                 {isFr
-                  ? "L’authentification à deux facteurs (2FA) peut être requise après la saisie de vos identifiants."
-                  : "Two-factor authentication (2FA) may be required after sign in."}
+                  ? "L’authentification à deux facteurs (2FA) peut être activée dans vos paramètres de compte."
+                  : "Two-factor authentication (2FA) may be enabled in your account settings."}
               </p>
             </div>
           </div>
 
           <footer className={styles.formFooter}>
-            <span>© 2026 DivinExpress</span>
+            <span>© 2026 Shammah</span>
             <div className={styles.footerLinks}>
               <a href={`${process.env.NEXT_PUBLIC_SITE_URL || ""}/privacy-policy`} className={styles.footerLink}>
                 Confidentialité

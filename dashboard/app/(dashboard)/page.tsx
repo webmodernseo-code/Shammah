@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import { Plus } from "lucide-react";
 import DashboardStatsGrid from "@/components/dashboard/dashboard-stats-grid";
@@ -10,8 +10,8 @@ import TopSellingProductsWidget from "@/components/dashboard/top-selling-product
 import AbandonedCartSummaryWidget from "@/components/dashboard/abandoned-cart-summary-widget";
 
 export const metadata: Metadata = {
-  title: "Tableau de bord | DivinExpress Admin",
-  description: "Pilotage et gestion de la boutique en ligne DivinExpress.",
+  title: "Tableau de bord | Shammah Admin",
+  description: "Pilotage et gestion de la boutique en ligne Shammah.",
 };
 
 export default function Home() {

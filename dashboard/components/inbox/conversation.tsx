@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useRef, useEffect } from "react";
 import { toast } from "sonner";
@@ -43,8 +43,8 @@ export function ChatWindow({
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
   const [emailSubject, setEmailSubject] = useState(
     selectedUser.orderNumber
-      ? `Information concernant votre commande #${selectedUser.orderNumber} — DivinExpress`
-      : "Message du service client — DivinExpress",
+      ? `Information concernant votre commande #${selectedUser.orderNumber} — Shammah`
+      : "Message du service client — Shammah",
   );
   const [emailBody, setEmailBody] = useState("");
   const [isSendingEmail, setIsSendingEmail] = useState(false);
@@ -57,8 +57,8 @@ export function ChatWindow({
     setMessages(selectedUser.messages || []);
     setEmailSubject(
       selectedUser.orderNumber
-        ? `Information concernant votre commande #${selectedUser.orderNumber} — DivinExpress`
-        : "Message du service client — DivinExpress",
+        ? `Information concernant votre commande #${selectedUser.orderNumber} — Shammah`
+        : "Message du service client — Shammah",
     );
   }, [selectedUser]);
 
@@ -194,7 +194,7 @@ export function ChatWindow({
                 <Sparkles className="size-8 text-primary mb-2 opacity-50" />
                 <p className="text-sm font-semibold text-gray-700">Début de la conversation</p>
                 <p className="text-xs text-gray-500 max-w-sm mt-1">
-                  Échangez directement avec le client ou posez vos questions à la Conseillère Style IA DivinExpress.
+                  Échangez directement avec le client ou posez vos questions à la Conseillère Style IA Shammah.
                 </p>
               </div>
             ) : (
@@ -234,7 +234,7 @@ export function ChatWindow({
                       {isBot && (
                         <div className="flex items-center gap-1.5 text-[11px] font-bold text-primary mb-1.5 pb-1 border-b border-gray-100">
                           <Sparkles className="size-3 text-amber-500" />
-                          <span>Conseillère Style DivinExpress</span>
+                          <span>Conseillère Style Shammah</span>
                         </div>
                       )}
                       <p className="whitespace-pre-line">{msg.content}</p>

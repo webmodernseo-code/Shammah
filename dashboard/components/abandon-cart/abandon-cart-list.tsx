@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
@@ -206,14 +206,14 @@ export default function AbandonCartList() {
             const apiCarts: AbandonCartItem[] = unpaidOrders.map((o: any, idx: number) => ({
               id: o.id,
               cartRef: `PAN-${o.orderNumber?.replace(/\D/g, "").slice(-4) || 8900 + idx}`,
-              customerName: o.customerName || "Client DivinExpress",
+              customerName: o.customerName || "Client Shammah",
               customerEmail: o.customerEmail || "client@email.fr",
               amount: Number(o.totalAmount || 0),
               itemCount: o.items?.length || 2,
               lastActivity: "Aujourd'hui",
               status: "TO_REMIND",
               productImage: "",
-              itemsSummary: o.items?.[0]?.productName || "Sélection DivinExpress",
+              itemsSummary: o.items?.[0]?.productName || "Sélection Shammah",
             }));
             // Merge with default list for realistic density
             setCarts(demoMode ? [...apiCarts, ...DEFAULT_ABANDONED_CARTS.slice(apiCarts.length)] : apiCarts);

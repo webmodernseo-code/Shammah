@@ -1,4 +1,4 @@
-import type { BlogPost } from "@prisma/client";
+﻿import type { BlogPost } from "@prisma/client";
 import type { BlogPostItem } from "@/data/default-blogs";
 import { prisma } from "@/lib/prisma";
 
@@ -49,7 +49,7 @@ function validatedData(data: BlogInput) {
     excerpt: data.excerpt?.trim().slice(0, 500) || "",
     content,
     coverImage: data.coverImage?.trim() || null,
-    authorName: data.authorName?.trim().slice(0, 120) || "Rédaction DivinExpress",
+    authorName: data.authorName?.trim().slice(0, 120) || "Rédaction Shammah",
     authorAvatar: data.authorAvatar?.trim() || null,
     tags: Array.isArray(data.tags) ? data.tags.map((tag) => tag.trim()).filter(Boolean).slice(0, 20) : [],
     status,

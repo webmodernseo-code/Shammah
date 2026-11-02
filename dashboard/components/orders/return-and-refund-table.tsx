@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
@@ -204,7 +204,7 @@ export default function ReturnAndRefundTable() {
               id: `ret-api-${o.id}`,
               orderId: o.id,
               orderNumber: o.orderNumber,
-              customerName: o.customerName || "Client DivinExpress",
+              customerName: o.customerName || "Client Shammah",
               customerEmail: o.customerEmail || "client@email.fr",
               productName: o.items?.[0]?.productName || "Article Haute Couture",
               productVariant: o.items?.[0]?.formatLabel || "Taille M",

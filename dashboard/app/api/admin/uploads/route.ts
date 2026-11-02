@@ -1,4 +1,4 @@
-import { createHash } from "node:crypto";
+﻿import { createHash } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { isAdmin } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -84,7 +84,7 @@ export async function POST(req: NextRequest) {
     let cloudName = "";
     let apiKey = "";
     let apiSecret = "";
-    let uploadFolder = "divinexpress/products";
+    let uploadFolder = "shammah/products";
     let isEnabled = true;
 
     try {

@@ -1,4 +1,4 @@
-import { createHash, randomBytes } from "node:crypto";
+﻿import { createHash, randomBytes } from "node:crypto";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { sendPasswordResetEmail } from "@/lib/email";
@@ -42,7 +42,7 @@ export async function POST(req: Request) {
       : false;
     const dashboardUrl = requestOrigin.includes("localhost") || requestOrigin.includes("127.0.0.1")
       ? (configuredUrl || requestOrigin)
-      : (configuredUrl && !configuredIsLocal ? configuredUrl : "https://admin.divinexpress.fr");
+      : (configuredUrl && !configuredIsLocal ? configuredUrl : "https://admin.shammah.eu");
     const resetUrl = `${dashboardUrl.replace(/\/$/, "")}/set-new-password?token=${encodeURIComponent(token)}`;
     await sendPasswordResetEmail({ to: user.email, resetUrl });
     return NextResponse.json(GENERIC_RESPONSE);

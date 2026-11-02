@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useMemo, useEffect } from "react";
 
@@ -50,7 +50,7 @@ export default function ProfitMarginChart() {
     loadData();
   }, []);
 
-  // Marge nette estimée (~60% sur les collections prêt-à-porter DivinExpress)
+  // Marge nette estimée (~60% sur les collections prêt-à-porter Shammah)
   const profits = useMemo(() => {
     return monthlyEarnings.map((v) => Math.round(v * 0.6 * 100) / 100);
   }, [monthlyEarnings]);

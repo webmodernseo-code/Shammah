@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -165,7 +165,7 @@ export default function ProductReviewTable() {
                 <span>Avis Clients & Modération</span>
               </h3>
               <p className="text-xs text-gray-500 mt-0.5">
-                Retours vérifiés des clients sur les créations DivinExpress
+                Retours vérifiés des clients sur les créations Shammah
               </p>
             </div>
             <div className="flex items-center gap-1.5 bg-amber-50 border border-amber-200/60 px-3 py-1.5 rounded-full text-xs font-bold text-amber-800">

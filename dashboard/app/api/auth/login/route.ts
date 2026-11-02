@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { createSessionToken, verifyPassword, SESSION_COOKIE, type SessionRole } from "@/lib/auth";
 import { rateLimit, getClientIp } from "@/lib/rate-limit";
@@ -84,8 +84,8 @@ export async function POST(req: Request) {
       user: { id: user.id, email: user.email, name: user.name, role: user.role },
     });
     const host = req.headers.get("x-forwarded-host") || req.headers.get("host") || "";
-    const isProductionDomain = host.includes("divinexpress.fr");
-    const cookieDomain = isProductionDomain ? ".divinexpress.fr" : undefined;
+    const isProductionDomain = host.includes("shammah.eu");
+    const cookieDomain = isProductionDomain ? ".shammah.eu" : undefined;
 
     response.cookies.set(SESSION_COOKIE, token, {
       httpOnly: true,

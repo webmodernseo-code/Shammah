@@ -1,9 +1,9 @@
-import React from "react";
+﻿import React from "react";
 import PaymentApiSettings from "@/components/settings/payment/payment-settings";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Passerelles de Paiement | DivinExpress Admin",
+  title: "Passerelles de Paiement | Shammah Admin",
   description: "Configuration sécurisée des paiements bancaires Stripe et PayPal.",
 };
 

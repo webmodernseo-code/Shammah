@@ -1,16 +1,16 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { Store, Mail, Phone, MapPin, Truck, Euro } from "lucide-react";
 
 export default function GeneralSettingsForm() {
   const [formData, setFormData] = useState({
-    storeName: "DivinExpress — Mode & Prêt-à-porter",
-    contactEmail: "contact@divinexpress.fr",
+    storeName: "Shammah — Mode & Prêt-à-porter",
+    contactEmail: "contact@shammah.eu",
     phone: "+33 6 12 34 56 78",
     country: "France",
     city: "Paris",
-    address: "Boutique DivinExpress, 14 Rue de la Paix",
+    address: "Boutique Shammah, 14 Rue de la Paix",
     zip: "75002",
     freeShippingThreshold: "70.00",
     standardShippingFee: "5.90",
@@ -33,7 +33,7 @@ export default function GeneralSettingsForm() {
             Identité de la Boutique & Expédition
           </h2>
           <p className="text-xs text-gray-500">
-            Coordonnées générales et règles d'expédition de la boutique DivinExpress Mode
+            Coordonnées générales et règles d'expédition de la boutique Shammah Mode
           </p>
         </div>
       </div>

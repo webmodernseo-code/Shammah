@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
@@ -99,12 +99,12 @@ export default function ProductDetailsPage({
           material: p.material || "100% Coton Biologique",
           fit: p.subtitle || "Coupe ajustée & finitions soignées",
           care: "Nettoyage délicat sur l'envers ou pressing spécialisé",
-          origin: p.origin || "Atelier Création DivinExpress",
+          origin: p.origin || "Atelier Création Shammah",
           status: p.isAvailable !== false ? "Publié" : "Brouillon",
           description: p.description || "Création confectionnée dans des matières nobles.",
           image: p.imageRecto || "/images/products/fashion-1.jpg",
           totalStock: p.stockQuantity ?? 0,
-          season: "Collection Permanente DivinExpress",
+          season: "Collection Permanente Shammah",
           gallery,
           variants: variantsList,
         };

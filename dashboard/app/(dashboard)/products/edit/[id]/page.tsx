@@ -1,8 +1,8 @@
-import EditProductForm from "@/components/products/edit-product-form";
+﻿import EditProductForm from "@/components/products/edit-product-form";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Modifier un Produit | DivinExpress Admin",
+  title: "Modifier un Produit | Shammah Admin",
   description: "Modification des caractéristiques, prix, visuels et déclinaisons de stock du produit.",
 };
 

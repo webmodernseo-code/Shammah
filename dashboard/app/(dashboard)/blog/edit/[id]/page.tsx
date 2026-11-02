@@ -1,11 +1,11 @@
-import BlogForm from "@/components/blog/blog-form";
+﻿import BlogForm from "@/components/blog/blog-form";
 import { blogService } from "@/lib/blog-service";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "Modifier l'article de Blog | DivinExpress Admin",
-  description: "Mettez à jour votre publication du blog DivinExpress.",
+  title: "Modifier l'article de Blog | Shammah Admin",
+  description: "Mettez à jour votre publication du blog Shammah.",
 };
 
 export default async function EditBlogPage({

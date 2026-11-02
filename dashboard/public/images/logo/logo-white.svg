@@ -1,4 +1,4 @@
-<svg width="220" height="48" viewBox="0 0 220 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+﻿<svg width="220" height="48" viewBox="0 0 220 48" fill="none" xmlns="http://www.w3.org/2000/svg">
   <!-- Brand Icon -->
   <g transform="translate(4, 6)">
     <rect x="0" y="0" width="36" height="36" rx="9" fill="#FFFFFF" fill-opacity="0.16"/>
@@ -9,6 +9,6 @@
   </g>
 
   <!-- Typography -->
-  <text x="48" y="24" font-family="'Albert Sans', 'Poppins', -apple-system, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF" letter-spacing="-0.5">DivinExpress</text>
+  <text x="48" y="24" font-family="'Albert Sans', 'Poppins', -apple-system, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF" letter-spacing="-0.5">Shammah</text>
   <text x="49" y="37" font-family="'Albert Sans', 'Poppins', -apple-system, sans-serif" font-size="8.5" font-weight="700" fill="#84CC16" letter-spacing="1.5">MODE &amp; PRÊT-À-PORTER</text>
 </svg>

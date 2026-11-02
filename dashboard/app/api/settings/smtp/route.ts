@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { isSuperAdmin } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { encryptSecret, decryptSecret, maskSecret } from "@/lib/encryption";
@@ -43,8 +43,8 @@ export async function GET(req: NextRequest) {
     const envPort = parseInt(process.env.SMTP_PORT || "465", 10);
     const envUser = process.env.SMTP_USER || process.env.SMTP_EMAIL || "";
     const envPass = process.env.SMTP_PASS || process.env.SMTP_PASSWORD || "";
-    const envFromName = process.env.SMTP_FROM_NAME || "DivinExpress";
-    const envFromEmail = process.env.SMTP_FROM_EMAIL || envUser || "contact@divinexpress.fr";
+    const envFromName = process.env.SMTP_FROM_NAME || "Shammah";
+    const envFromEmail = process.env.SMTP_FROM_EMAIL || envUser || "contact@shammah.eu";
 
     return NextResponse.json({
       success: true,
@@ -96,8 +96,8 @@ export async function POST(req: NextRequest) {
     const port = Number(body.port) || existing?.port || 465;
     const secure = typeof body.secure === "boolean" ? body.secure : port === 465;
     const user = body.user?.trim() || existing?.user || process.env.SMTP_USER || "";
-    const fromName = body.fromName?.trim() || existing?.fromName || "DivinExpress";
-    const fromEmail = body.fromEmail?.trim() || existing?.fromEmail || user || "contact@divinexpress.fr";
+    const fromName = body.fromName?.trim() || existing?.fromName || "Shammah";
+    const fromEmail = body.fromEmail?.trim() || existing?.fromEmail || user || "contact@shammah.eu";
     const isEnabled = typeof body.isEnabled === "boolean" ? body.isEnabled : true;
 
     // ── ACTION: TEST SMTP CONNECTION & SEND TEST EMAIL ──
@@ -160,7 +160,7 @@ export async function POST(req: NextRequest) {
         <table role="presentation" width="100%" style="max-width: 560px; background-color: #ffffff; border-radius: 20px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.04);">
           <tr>
             <td style="padding: 32px; background-color: #047857; text-align: center;">
-              <h1 style="margin: 0; color: #ffffff; font-size: 22px; font-weight: 800;">🌿 DivinExpress</h1>
+              <h1 style="margin: 0; color: #ffffff; font-size: 22px; font-weight: 800;">🌿 Shammah</h1>
               <p style="margin: 4px 0 0 0; color: #a7f3d0; font-size: 12px; font-weight: 600;">Validation du Serveur SMTP Transactionnel</p>
             </td>
           </tr>
@@ -171,7 +171,7 @@ export async function POST(req: NextRequest) {
               </div>
               <h2 style="margin: 0 0 12px 0; font-size: 18px; color: #0f172a;">Félicitations !</h2>
               <p style="margin: 0 0 20px 0; font-size: 14px; line-height: 22px; color: #475569;">
-                Votre serveur SMTP est correctement configuré et authentifié. Votre boutique <strong>DivinExpress</strong> peut désormais distribuer en temps réel :
+                Votre serveur SMTP est correctement configuré et authentifié. Votre boutique <strong>Shammah</strong> peut désormais distribuer en temps réel :
               </p>
               <ul style="margin: 0 0 24px 0; padding-left: 20px; font-size: 13px; color: #334155; line-height: 22px;">
                 <li>Les <strong>confirmations de commande avec facture PDF acquittée</strong></li>
@@ -189,7 +189,7 @@ export async function POST(req: NextRequest) {
           </tr>
           <tr>
             <td style="padding: 20px; background-color: #f8fafc; border-top: 1px solid #f1f5f9; text-align: center;">
-              <p style="margin: 0; font-size: 11px; color: #94a3b8;">© ${new Date().getFullYear()} DivinExpress — Système de messagerie transactionnelle</p>
+              <p style="margin: 0; font-size: 11px; color: #94a3b8;">© ${new Date().getFullYear()} Shammah — Système de messagerie transactionnelle</p>
             </td>
           </tr>
         </table>
@@ -203,7 +203,7 @@ export async function POST(req: NextRequest) {
       await testTransporter.sendMail({
         from: `"${fromName}" <${fromEmail}>`,
         to: recipient,
-        subject: `✓ Test SMTP Réussi — DivinExpress (${new Date().toLocaleTimeString("fr-FR")})`,
+        subject: `✓ Test SMTP Réussi — Shammah (${new Date().toLocaleTimeString("fr-FR")})`,
         html: testHtml,
       });
 

@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+﻿import { PrismaClient } from "@prisma/client";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
@@ -34,7 +34,7 @@ function loadEnvFile() {
     const syncContent = `# Auto-synchronized with .env.local
 DATABASE_URL="${process.env.DATABASE_URL}"
 DIRECT_URL="${process.env.DIRECT_URL || process.env.DATABASE_URL}"
-NEXTAUTH_SECRET="${process.env.NEXTAUTH_SECRET || "divinexpress_secret_local_dev_key_super_secure_2026_paris"}"
+NEXTAUTH_SECRET="${process.env.NEXTAUTH_SECRET || "shammah_secret_local_dev_key_super_secure_2026_paris"}"
 NEXT_PUBLIC_SITE_URL="${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}"
 NEXT_PUBLIC_DASHBOARD_URL="${process.env.NEXT_PUBLIC_DASHBOARD_URL || "http://localhost:3001"}"
 NEXT_PUBLIC_DEMO_MODE="false"

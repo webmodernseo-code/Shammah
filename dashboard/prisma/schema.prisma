@@ -1,4 +1,4 @@
-// Prisma Schema for DivinExpress - Mode & Prêt-à-porter
+﻿// Prisma Schema for Shammah - Mode & Prêt-à-porter
 
 datasource db {
   provider = "postgresql"
@@ -277,7 +277,7 @@ model AuditLog {
 model MaintenanceConfig {
   id             String    @id @default("site")
   enabled        Boolean   @default(false)
-  message        String    @default("Notre boutique DivinExpress est momentanément en maintenance. Nous revenons très vite.")
+  message        String    @default("Notre boutique Shammah est momentanément en maintenance. Nous revenons très vite.")
   expectedBackAt DateTime?
   updatedBy      String?
   createdAt      DateTime  @default(now())
@@ -292,7 +292,7 @@ model MediaStorageConfig {
   cloudName    String
   apiKey       String
   apiSecret    String
-  uploadFolder String   @default("divinexpress/products")
+  uploadFolder String   @default("shammah/products")
   isEnabled    Boolean  @default(false)
   updatedAt    DateTime @updatedAt
   createdAt    DateTime @default(now())
@@ -307,8 +307,8 @@ model SmtpEmailConfig {
   secure    Boolean  @default(true)
   user      String
   password  String
-  fromName  String   @default("DivinExpress")
-  fromEmail String   @default("contact@divinexpress.com")
+  fromName  String   @default("Shammah")
+  fromEmail String   @default("contact@shammah.eu")
   isEnabled Boolean  @default(true)
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())

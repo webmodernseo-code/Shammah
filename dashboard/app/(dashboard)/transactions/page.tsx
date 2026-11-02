@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import TransactionTable from "@/components/transactions/transaction-table";
 
 export const metadata: Metadata = {
-  title: "Paiements | DivinExpress Admin",
+  title: "Paiements | Shammah Admin",
   description: "Suivez tous les paiements encaissés via Stripe, PayPal et autres moyens de paiement.",
 };
 
