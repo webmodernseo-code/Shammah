@@ -484,3 +484,74 @@ body.font-option-3 {
   }
 }
 
+/* ========================================================
+   💎 HARMONISATION DES PRIX HAUT DE GAMME — SHAMMAH
+   - Prix réel : Noir intense (#111827), contrasté, gras et élégant
+   - Prix barré : Rouge rubis raffiné (#dc2626) avec barre rouge nette
+   - Zéro AI Slop : typographie nette, lisibilité AAA
+   ======================================================== */
+
+/* 1. Prix réel / Prix de vente actuel (Noir profond & net) */
+.price-wrap,
+.card-product-info .price,
+.card-product-info .price-wrap,
+.price-new,
+.price-on-sale,
+.new-price,
+.product-price .price-new,
+.product-price .price-on-sale,
+.display-sm.price-new,
+.display-sm.price-on-sale,
+.box-price .price-new,
+.bundle-price .new-price,
+.fbt-total-price .price-new,
+.discount-price .price-new,
+.tf-cart-item_price .price {
+  color: #111827 !important; /* Noir profond luxe / text-gray-900 */
+  font-weight: 700 !important;
+  letter-spacing: -0.015em !important;
+}
+
+/* 2. Prix barré / Ancien prix avant réduction (Rouge rubis élégant) */
+.price-old,
+.old-price,
+.product-price .price-old,
+.price-wrap .price-old,
+.display-sm.price-old,
+.card-product-info .old-price,
+.bundle-price .old-price,
+.fbt-total-price .price-old,
+.discount-price .price-old,
+del,
+.text-decoration-line-through.old-price {
+  color: #dc2626 !important; /* Rouge rubis raffiné (Red 600) */
+  font-weight: 500 !important;
+  text-decoration: line-through !important;
+  text-decoration-color: #dc2626 !important;
+  text-decoration-thickness: 1.5px !important;
+  opacity: 0.9 !important;
+  margin-left: 6px !important;
+  position: relative !important;
+
+  /* Remplacement de la ligne pseudo-element si le template en génère une */
+  &::after {
+    background-color: #dc2626 !important;
+    height: 1.5px !important;
+    opacity: 0.9 !important;
+  }
+}
+
+/* 3. Badge promo discret et élégant (Style Apple / Stripe) */
+.badge-sale {
+  background-color: #fef2f2 !important;
+  color: #dc2626 !important;
+  border: 1px solid #fee2e2 !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  border-radius: 9999px !important;
+  padding: 3px 9px !important;
+  text-transform: uppercase !important;
+}
+
+

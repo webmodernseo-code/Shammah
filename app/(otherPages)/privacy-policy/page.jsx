@@ -4,6 +4,7 @@ import Topbar4 from "@/components/headers/Topbar4";
 import Breadcumb from "@/components/common/Breadcumb";
 
 export const metadata = {
+  alternates: { canonical: "/privacy-policy" },
   title: "Politique de Confidentialité || Shammah - shammah.eu",
   description: "Engagement de protection des données personnelles et conformité RGPD pour le site e-commerce Shammah.",
 };

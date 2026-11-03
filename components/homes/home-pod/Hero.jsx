@@ -17,9 +17,9 @@ export default function Hero() {
         <div className="container">
           <div className="content-slider style-2 text-center rounded-0">
             <div className="wow fadeInUp box-title-slider">
-              <h2 className="heading display-xl-2 fw-bold">
+              <h1 className="heading display-xl-2 fw-bold">
                 La foi, portée avec style
-              </h2>
+              </h1>
               <p className="sub text-md text-main">
                 Vêtements chrétiens et cadeaux personnalisés, créés avec soin.{" "}
                 <br /> Livraison en France et en Afrique de l’Ouest.

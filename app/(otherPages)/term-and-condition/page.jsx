@@ -4,6 +4,7 @@ import Topbar4 from "@/components/headers/Topbar4";
 import Breadcumb from "@/components/common/Breadcumb";
 
 export const metadata = {
+  alternates: { canonical: "/term-and-condition" },
   title: "Conditions Générales de Vente (CGV) || Shammah - shammah.eu",
   description: "Conditions Générales de Vente régissant les achats effectués sur la boutique en ligne Shammah.",
 };
