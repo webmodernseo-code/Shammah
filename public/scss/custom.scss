@@ -485,13 +485,24 @@ body.font-option-3 {
 }
 
 /* ========================================================
-   💎 HARMONISATION DES PRIX HAUT DE GAMME — SHAMMAH
-   - Prix réel : Noir intense (#111827), contrasté, gras et élégant
-   - Prix barré : Rouge rubis raffiné (#dc2626) avec barre rouge nette
-   - Zéro AI Slop : typographie nette, lisibilité AAA
+   💎 RÉVOLUTION DUO DE PRIX LUXE — SHAMMAH (ZÉRO EFFET D'ALERTE)
+   - Prix réel actuel : Noir absolu satiné (#09090b), structuré, franc et net
+   - Prix d'origine barré : Gris ardoise feutré (#71717a), trait ultra-fin et discret
+   - Hiérarchie optique : Échelle de taille naturelle (prix barré en retrait doux)
+   - Micro-badge promo : Pastille minérale épurée (Style Apple / Jacquemus)
    ======================================================== */
 
-/* 1. Prix réel / Prix de vente actuel (Noir profond & net) */
+/* Conteneur de prix : alignement parfait au millimètre sur la ligne de base */
+.price-wrap,
+.card-product-info .price-wrap,
+.product-price {
+  display: inline-flex !important;
+  align-items: baseline !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+}
+
+/* 1. Prix réel de vente (Noir profond, affirmé, stable et rassurant) */
 .price-wrap,
 .card-product-info .price,
 .card-product-info .price-wrap,
@@ -507,12 +518,12 @@ body.font-option-3 {
 .fbt-total-price .price-new,
 .discount-price .price-new,
 .tf-cart-item_price .price {
-  color: #111827 !important; /* Noir profond luxe / text-gray-900 */
+  color: #09090b !important; /* Noir absolu profond (Zinc 950) */
   font-weight: 700 !important;
-  letter-spacing: -0.015em !important;
+  letter-spacing: -0.02em !important;
 }
 
-/* 2. Prix barré / Ancien prix avant réduction (Rouge rubis élégant) */
+/* 2. Prix fictif / d'origine barré (Gris ardoise soyeux, apaisant et sans stress) */
 .price-old,
 .old-price,
 .product-price .price-old,
@@ -524,34 +535,38 @@ body.font-option-3 {
 .discount-price .price-old,
 del,
 .text-decoration-line-through.old-price {
-  color: #dc2626 !important; /* Rouge rubis raffiné (Red 600) */
-  font-weight: 500 !important;
+  color: #71717a !important; /* Gris ardoise élégant (Zinc 500) */
+  font-weight: 400 !important;
+  font-size: 0.88em !important; /* Légèrement plus discret pour guider l'œil vers le prix réel */
   text-decoration: line-through !important;
-  text-decoration-color: #dc2626 !important;
-  text-decoration-thickness: 1.5px !important;
-  opacity: 0.9 !important;
-  margin-left: 6px !important;
+  text-decoration-color: #a1a1aa !important; /* Trait fin et délicat (Zinc 400) */
+  text-decoration-thickness: 1px !important;
+  opacity: 0.85 !important;
+  margin-left: 2px !important;
   position: relative !important;
 
-  /* Remplacement de la ligne pseudo-element si le template en génère une */
+  /* Ligne de biffure fine et élégante si pseudo-element utilisé */
   &::after {
-    background-color: #dc2626 !important;
-    height: 1.5px !important;
-    opacity: 0.9 !important;
+    background-color: #a1a1aa !important;
+    height: 1px !important;
+    opacity: 0.85 !important;
   }
 }
 
-/* 3. Badge promo discret et élégant (Style Apple / Stripe) */
+/* 3. Micro-badge réduction (Minimaliste, noble & sans criard) */
 .badge-sale {
-  background-color: #fef2f2 !important;
-  color: #dc2626 !important;
-  border: 1px solid #fee2e2 !important;
-  font-size: 12px !important;
+  background-color: #f4f4f5 !important; /* Gris perlé délicat */
+  color: #18181b !important; /* Noir graphite */
+  border: 1px solid #e4e4e7 !important;
+  font-size: 11px !important;
   font-weight: 600 !important;
-  letter-spacing: 0.02em !important;
-  border-radius: 9999px !important;
-  padding: 3px 9px !important;
+  letter-spacing: 0.03em !important;
+  border-radius: 6px !important;
+  padding: 2px 7px !important;
+  margin-left: 4px !important;
   text-transform: uppercase !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03) !important;
 }
+
 
 
