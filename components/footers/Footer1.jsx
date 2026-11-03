@@ -193,7 +193,7 @@ export default function Footer1({
                       <Link href={`/term-and-condition`}>Conditions Générales</Link>
                     </li>
                     <li>
-                      <a href={process.env.NEXT_PUBLIC_DASHBOARD_URL || "http://localhost:3001"} target="_blank" rel="noopener noreferrer">
+                      <a href={process.env.NEXT_PUBLIC_DASHBOARD_URL || (process.env.NODE_ENV === "production" ? "https://admin.shammah.eu" : "http://localhost:3001")} target="_blank" rel="noopener noreferrer">
                         Espace Administration
                       </a>
                     </li>
@@ -210,7 +210,7 @@ export default function Footer1({
             <p className="text-dark">
               Copyright © 2026 <span className="fw-medium">Shammah.</span> Tous droits réservés.
               {" • "}
-              <a href={process.env.NEXT_PUBLIC_DASHBOARD_URL || "http://localhost:3001"} target="_blank" rel="noopener noreferrer" className="text-decoration-underline ms-1" title="Tableau de bord Shammah">
+              <a href={process.env.NEXT_PUBLIC_DASHBOARD_URL || (process.env.NODE_ENV === "production" ? "https://admin.shammah.eu" : "http://localhost:3001")} target="_blank" rel="noopener noreferrer" className="text-decoration-underline ms-1" title="Tableau de bord Shammah">
                 Tableau de bord (Admin)
               </a>
             </p>

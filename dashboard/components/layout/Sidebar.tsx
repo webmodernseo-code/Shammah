@@ -93,7 +93,7 @@ export default function Sidebar({
     !/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?/i.test(configuredSiteUrl)
   )
     ? configuredSiteUrl
-    : "http://localhost:3000";
+    : (process.env.NODE_ENV === "production" ? "https://shammah.eu" : "http://localhost:3000");
 
   return (
     <>
