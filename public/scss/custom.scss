@@ -740,34 +740,84 @@ del,
 }
 
 /* ========================================================
+   SLIM HIGH-END HEADER & TOPBAR (Libérer l'espace pour le Hero)
+   ======================================================== */
+.marquee-topbar {
+  min-height: 32px !important;
+  height: 32px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+
+  .marquee-child-item p {
+    font-size: 11.5px !important;
+    font-weight: 500 !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+  }
+}
+
+.header-default {
+  .wrapper-header {
+    min-height: 58px !important;
+    height: 58px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .logo-header img {
+    max-height: 30px !important;
+    width: auto !important;
+  }
+
+  .box-nav-menu .item-link {
+    font-size: 15px !important;
+    padding: 4px 8px !important;
+  }
+
+  .nav-icon {
+    gap: 16px !important;
+
+    .nav-icon-item {
+      font-size: 19px !important;
+    }
+  }
+}
+
+/* ========================================================
    SHAMMAH MODERN STREETWEAR HERO SECTION (Image 2 Replica)
-   - Dark luxury aesthetic (Obsidian & Matte Black)
-   - High-impact bold display typography
-   - Floating piece with soft atmospheric glow
-   - 5 Segmented interactive tabs with live progress bar
+   - Grand & expansive (plus d'effet coincé)
+   - Dark luxury aesthetic (Noir mat profond #08090c)
+   - Fondu 100% invisible des visuels avec le fond
+   - Typographie d'impact Anton / Oswald
+   - 5 Onglets segmentés avec barre de progression live
    ======================================================== */
 .shammah-hero-wrapper {
-  padding: 16px 20px 24px;
-  max-width: 1440px;
+  padding: 4px 16px 20px;
+  max-width: 1560px;
   margin: 0 auto;
 
   @media (max-width: 768px) {
-    padding: 10px 12px 18px;
+    padding: 4px 8px 14px;
   }
 }
 
 .shammah-hero-card {
   position: relative;
-  background: radial-gradient(circle at 75% 45%, #181922 0%, #0d0e13 55%, #08080a 100%);
+  background: #08090c;
   border-radius: 28px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 25px 65px -15px rgba(0, 0, 0, 0.85);
   overflow: hidden;
   color: #ffffff;
-  min-height: 580px;
+  min-height: 720px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media (min-width: 1400px) {
+    min-height: 760px;
+  }
 
   @media (max-width: 991px) {
     min-height: auto;
@@ -777,21 +827,25 @@ del,
 
 .shammah-hero-main {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1.1fr 0.9fr;
   align-items: center;
-  padding: 56px 64px 28px;
-  gap: 32px;
+  padding: 56px 68px 24px;
+  gap: 40px;
   flex: 1;
+
+  @media (min-width: 1400px) {
+    padding: 68px 84px 32px;
+  }
 
   @media (max-width: 991px) {
     grid-template-columns: 1fr;
-    padding: 36px 24px 20px;
+    padding: 32px 20px 16px;
     gap: 24px;
   }
 }
 
 .shammah-hero-content {
-  max-width: 600px;
+  max-width: 620px;
   z-index: 2;
   animation: shammahFadeIn 0.4s ease-out forwards;
 
@@ -799,12 +853,12 @@ del,
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.22em;
     color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 14px;
+    margin-bottom: 16px;
 
     &::before {
       content: '';
@@ -819,42 +873,42 @@ del,
 
   .shammah-hero-title {
     font-family: 'Anton', 'Oswald', 'Syne', sans-serif !important;
-    font-size: clamp(2.5rem, 5.2vw, 4.3rem);
+    font-size: clamp(2.8rem, 5.8vw, 4.8rem);
     font-weight: 900;
-    line-height: 1.02;
+    line-height: 0.98;
     text-transform: uppercase;
     letter-spacing: -0.015em;
     color: #ffffff !important;
-    margin: 0 0 18px 0;
+    margin: 0 0 20px 0;
     text-wrap: balance;
   }
 
   .shammah-hero-sub {
-    font-size: clamp(0.95rem, 1.25vw, 1.08rem);
-    line-height: 1.55;
-    color: rgba(255, 255, 255, 0.68);
-    margin: 0 0 28px 0;
-    max-width: 480px;
+    font-size: clamp(1rem, 1.3vw, 1.12rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 32px 0;
+    max-width: 500px;
     font-weight: 400;
   }
 
   .shammah-hero-cta {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     background: #ffffff;
     color: #000000 !important;
-    font-size: 0.92rem;
+    font-size: 0.95rem;
     font-weight: 600;
-    padding: 8px 10px 8px 24px;
+    padding: 10px 12px 10px 28px;
     border-radius: 9999px;
     text-decoration: none !important;
     transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 4px 18px rgba(255, 255, 255, 0.15);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.18);
 
     .shammah-cta-icon {
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       background: #000000;
       color: #ffffff;
@@ -873,10 +927,10 @@ del,
     &:hover {
       background: #f4f4f5;
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.25);
+      box-shadow: 0 10px 28px rgba(255, 255, 255, 0.28);
 
       .shammah-cta-icon {
-        transform: translateX(3px);
+        transform: translateX(4px);
       }
     }
   }
@@ -887,47 +941,52 @@ del,
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 380px;
+  min-height: 480px;
+  height: 100%;
 
   @media (max-width: 991px) {
     min-height: 280px;
     order: -1;
   }
 
+  /* Halo atmosphérique doux et progressif */
   .shammah-visual-glow {
     position: absolute;
-    width: 320px;
-    height: 320px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+    width: 440px;
+    height: 440px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
     border-radius: 50%;
     pointer-events: none;
-    filter: blur(40px);
+    filter: blur(50px);
     z-index: 1;
   }
 
   .shammah-visual-img {
     position: relative;
     z-index: 2;
-    max-width: 100%;
-    max-height: 440px;
-    object-fit: contain;
-    filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.6));
-    animation: shammahFloat 5s ease-in-out infinite alternate;
+    display: block;
   }
 
+  /* Hoodie flottant avec ombre douce réaliste */
   .shammah-visual-hoodie {
     width: auto;
     height: auto;
-    max-width: 420px;
+    max-width: 460px;
+    max-height: 480px;
+    object-fit: contain;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.7));
+    animation: shammahFloat 5s ease-in-out infinite alternate;
   }
 
+  /* Mannequin shooting photo - fondu parfait dans le noir */
   .shammah-visual-model {
-    max-height: 460px;
-    border-radius: 18px;
-    object-fit: cover;
-    object-position: center top;
-    mask-image: radial-gradient(ellipse 95% 95% at 50% 50%, #000 65%, transparent 100%);
-    -webkit-mask-image: radial-gradient(ellipse 95% 95% at 50% 50%, #000 65%, transparent 100%);
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    max-height: 540px;
+    object-fit: contain;
+    object-position: right center;
+    filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.8));
   }
 }
 
