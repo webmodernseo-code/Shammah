@@ -11,7 +11,7 @@ export const products1 = [
     oldPrice: 130,
 
     filterSizes: ["S", "L", "M", "XL"],
-    filterBrands: ["Vineta", "Zotac"],
+    filterBrands: ["Shammah", "Zotac"],
     filterColor: [
       "White",
       "Purple",
@@ -72,7 +72,7 @@ export const products1 = [
     sizes: [],
     colors: [],
     filterSizes: ["XS", "M", "XL"],
-    filterBrands: ["Vineta"],
+    filterBrands: ["Shammah"],
     filterColor: [
       "Yellow",
       "Black",
@@ -119,7 +119,7 @@ export const products1 = [
       { color: "Black", size: "XL", price: 129, oldPrice: 149 },
     ],
     filterSizes: ["XS", "S", "L"],
-    filterBrands: ["Vineta", "Zotac"],
+    filterBrands: ["Shammah", "Zotac"],
     filterColor: ["Yellow", "Black", "White", "Purple", "Light Orange", "Grey"],
     inStock: false,
     countdownTimer: 1007500,
@@ -228,7 +228,7 @@ export const products1 = [
     ],
     inStock: true,
     filterSizes: ["XS", , "M", "XL"],
-    filterBrands: ["Vineta", "Zotac"],
+    filterBrands: ["Shammah", "Zotac"],
     filterColor: [
       "Yellow",
       "Black",
@@ -272,7 +272,7 @@ export const products2 = [
     ],
     inStock: true,
     filterSizes: ["XS", "M", "XL"],
-    filterBrands: ["Vineta"],
+    filterBrands: ["Shammah"],
     filterColor: [
       "Yellow",
       "Black",
@@ -314,7 +314,7 @@ export const products2 = [
     ],
     inStock: false,
     filterSizes: ["XS", "S", "XL"],
-    filterBrands: ["Vineta", "Zotac"],
+    filterBrands: ["Shammah", "Zotac"],
     filterColor: [
       "White",
       "Purple",
@@ -350,7 +350,7 @@ export const products2 = [
     ],
     inStock: true,
     filterSizes: ["XS", "S", "L"],
-    filterBrands: ["Vineta"],
+    filterBrands: ["Shammah"],
     filterColor: [
       "Yellow",
       "Black",
@@ -387,7 +387,7 @@ export const products2 = [
     ],
     inStock: true,
     filterSizes: ["XS", "M", "XL"],
-    filterBrands: ["Vineta", "Zotac"],
+    filterBrands: ["Shammah", "Zotac"],
     filterColor: ["Yellow", "Black", "Pink", "Dark Green", "Grey"],
   },
   {
@@ -420,7 +420,7 @@ export const products2 = [
     ],
     inStock: false,
     filterSizes: ["S", "L", "M", "XL"],
-    filterBrands: ["Vineta", "Zotac"],
+    filterBrands: ["Shammah", "Zotac"],
     filterColor: ["Yellow", "Black", "White", "Purple"],
   },
   {
@@ -453,7 +453,7 @@ export const products2 = [
     ],
     inStock: true,
     filterSizes: ["XS", "S", "L"],
-    filterBrands: ["Vineta", "Zotac"],
+    filterBrands: ["Shammah", "Zotac"],
     filterColor: [
       "Purple",
       "Light Orange",
@@ -540,7 +540,7 @@ export const products4 = [
     style: "style-2",
     inStock: true,
     filterSizes: ["XS", "S", "L", "XL"],
-    filterBrands: ["Vineta"],
+    filterBrands: ["Shammah"],
     filterColor: [
       "Yellow",
 
@@ -584,7 +584,7 @@ export const products4 = [
     style: "style-1 style-2",
     inStock: false,
     filterSizes: ["XS", "M", "XL"],
-    filterBrands: ["Vineta", "Zotac"],
+    filterBrands: ["Shammah", "Zotac"],
     filterColor: [
       "Yellow",
       "Black",
@@ -623,7 +623,7 @@ export const products4 = [
     style: "style-2",
     inStock: true,
     filterSizes: ["XS", "S", "L"],
-    filterBrands: ["Vineta", "Zotac"],
+    filterBrands: ["Shammah", "Zotac"],
     filterColor: [
       "Yellow",
       "Black",
@@ -661,7 +661,7 @@ export const products4 = [
     style: "style-2",
     inStock: false,
     filterSizes: ["XS", "L", "M", "XL"],
-    filterBrands: ["Vineta"],
+    filterBrands: ["Shammah"],
     filterColor: [
       "Yellow",
 
@@ -700,7 +700,7 @@ export const products4 = [
     style: "style-2",
     inStock: true,
     filterSizes: ["S", "L", "M", "XL"],
-    filterBrands: ["Vineta", "Zotac"],
+    filterBrands: ["Shammah", "Zotac"],
     filterColor: [
       "Yellow",
       "Black",
@@ -789,7 +789,7 @@ export const products5 = [
     style: "style-2",
     inStock: true,
     filterSizes: ["XS", "L", "M", "XL"],
-    filterBrands: ["Vineta", "Zotac"],
+    filterBrands: ["Shammah", "Zotac"],
     filterColor: [
       "Yellow",
       "Black",
@@ -832,7 +832,7 @@ export const products5 = [
     style: "style-2",
     inStock: true,
     filterSizes: ["XS", "S", "XL"],
-    filterBrands: ["Vineta", "Zotac"],
+    filterBrands: ["Shammah", "Zotac"],
     filterColor: [
       "Black",
       "White",
@@ -910,7 +910,7 @@ export const products5 = [
     style: "style-2",
     inStock: true,
     filterSizes: ["XS", "S", "L"],
-    filterBrands: ["Vineta", "Zotac"],
+    filterBrands: ["Shammah", "Zotac"],
     filterColor: [
       "Yellow",
       "Black",
@@ -949,7 +949,7 @@ export const products5 = [
     style: "style-2",
     inStock: false,
     filterSizes: ["XS", "S", "XL"],
-    filterBrands: ["Vineta"],
+    filterBrands: ["Shammah"],
     filterColor: [
       "Yellow",
       "Black",
@@ -992,7 +992,7 @@ export const products5 = [
     style: "style-2",
     inStock: true,
     filterSizes: ["L", "M", "XL"],
-    filterBrands: ["Vineta", "Zotac"],
+    filterBrands: ["Shammah", "Zotac"],
     filterColor: [
       "Yellow",
       "Black",

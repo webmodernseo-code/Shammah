@@ -277,7 +277,7 @@ export default function Footer6() {
         <div className="container">
           <div className="footer-bottom-wrap">
             <p className="text-dark-8 text-md font-9">
-              All Rights Reserved 2025 Vineta.
+              All Rights Reserved 2025 Shammah.
             </p>
             <ul className="tf-payment">
               <li className="item">

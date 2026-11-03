@@ -350,19 +350,19 @@ export const pickleballSlides = [
 export const handcraftSlides = [
   {
     image: "/images/slider/handcraft/slider-1.jpg",
-    subtitle: "WELCOME TO VINETA",
+    subtitle: "BIENVENUE CHEZ SHAMMAH",
     title: "Crafted by Hand, <br /> Made with Heart",
     buttonText: "EXPLORE OUR CREATIONS",
   },
   {
     image: "/images/slider/handcraft/slider-2.jpg",
-    subtitle: "WELCOME TO VINETA",
+    subtitle: "BIENVENUE CHEZ SHAMMAH",
     title: "Naturally Beautiful, <br /> Handcrafted for You",
     buttonText: "Shop the Collection",
   },
   {
     image: "/images/slider/handcraft/slider-3.jpg",
-    subtitle: "WELCOME TO VINETA",
+    subtitle: "BIENVENUE CHEZ SHAMMAH",
     title: "Every Piece <br /> Tells a Story",
     buttonText: "Discover Handmade Treasures",
   },

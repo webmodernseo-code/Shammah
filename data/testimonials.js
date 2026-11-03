@@ -125,7 +125,7 @@ export const testimonials3 = [
     delay: "0.2s",
   },
   {
-    name: "Vineta P.",
+    name: "Esther M.",
     image: "/images/testimonial/author/author-electric1.jpg",
     product: "Instax Mini 12 Camera",
     price: "$130.00",
@@ -154,7 +154,7 @@ export const testimonials4 = [
     title: "Elegance and Comfort Combined",
     review:
       "I just got a coffee table from this store, and it’s absolutely perfect for my space. The design is stylish, the quality is top-notch, and it adds a cozy touch to my living room. Definitely worth it!",
-    author: "Vineta P.",
+    author: "Esther M.",
     product: "Round Wooden Table",
 
     imgSrc: "/images/testimonial/tes-furniture2.jpg",
@@ -190,7 +190,7 @@ export const testimonials5 = [
   {
     quote: "Style and Comfort in Perfect Harmony",
     reviewText: `I recently purchased a handbag from this store, and I couldn’t be happier! The design is elegant, the quality is exceptional, and it complements every outfit perfectly. Definitely a great buy!`,
-    author: "Vineta P.",
+    author: "Esther M.",
     purchaseItem: "Loose Fit Tee",
     imgSrc: "/images/testimonial/tes-women2.jpg",
   },
@@ -200,7 +200,7 @@ export const testimonials6 = [
   {
     quote:
       "I’ve been using this skincare line for a month, and the results are amazing! My skin feels smoother, looks brighter, and has a healthy glow. The products are gentle yet effective, and I love the natural ingredients. I’m definitely a fan!",
-    name: "Vinetant P",
+    name: "David K.",
     imgSrc: "/images/testimonial/tes-skincare.jpg",
   },
   {
@@ -237,7 +237,7 @@ export const testimonials7 = [
     image: "/images/products/phonecase/product-8.jpg",
   },
   {
-    author: "Vineta T.",
+    author: "Grace T.",
     review:
       "The phone case is beyond amazing! The material feels premium, fits perfectly, and offers great protection. I love the sleek design and soft touch.",
     product: "Moonlight - iPhone 16 Case",
@@ -292,7 +292,7 @@ export const testimonials8 = [
     price: "$140.00",
   },
   {
-    name: "Vineta P.",
+    name: "Esther M.",
     status: "Verified Buyer",
     review:
       "I love these pet accessories! The quality is excellent, and they look adorable. My pet seems so comfortable. I’ll be buying more!",
@@ -308,7 +308,7 @@ export const testimonials9 = [
     review:
       '"I absolutely love the quality of the sportwear! It fits perfectly, feels great, and looks amazing during my workouts."',
     imgSrc: "/images/testimonial/tes-sport.jpg",
-    author: "Vinetant",
+    author: "Thomas B.",
     product: "Essential Oversize Tee",
   },
   {
@@ -343,7 +343,7 @@ export const testimonials10 = [
     review:
       "These AirPods Pro have excellent sound quality and noise cancellation. Couldn't be happier!",
     author: {
-      name: "Vinetant P.",
+      name: "Marc L.",
       imgSrc: "/images/testimonial/author/author-mega-elec2.jpg",
     },
     product: {
@@ -388,7 +388,7 @@ export const testimonials10 = [
     review:
       "These AirPods Pro have excellent sound quality and noise cancellation. Couldn't be happier!",
     author: {
-      name: "Vinetant P.",
+      name: "Marc L.",
       imgSrc: "/images/testimonial/author/author-mega-elec2.jpg",
     },
     product: {
@@ -430,7 +430,7 @@ export const testimonialsData = [
     review:
       "The designs are so unique, and the material feels premium. Wore it all day, and it's super comfortable!",
     authorAvatar: "/images/avatar/testimonial-2.jpg",
-    authorName: "Vinetant P.",
+    authorName: "Marc L.",
     productImage: "/images/cls-categories/pod/testimonial-2.jpg",
     productName: "Pirate's Life Black T-Shirt",
     productPrice: "$90.00",
@@ -450,7 +450,7 @@ export const testimonialsData = [
     review:
       "I absolutely love the T-shirt I ordered! The print quality is amazing, and the fit is just perfect. Will definitely order again!",
     authorAvatar: "/images/avatar/testimonial-1.jpg",
-    authorName: "Vinetant P.",
+    authorName: "Marc L.",
     productImage: "/images/cls-categories/pod/testimonial-1.jpg",
     productName: "Portrait Comfort Colors Shirt",
     productPrice: "$80.00",
@@ -460,7 +460,7 @@ export const testimonialsData = [
 export const testimonials11 = [
   {
     id: 1,
-    name: "Vinetant",
+    name: "Thomas B.",
     item: "Olive Tree",
     review:
       '"Beautiful, Healthy Plants!" I ordered a few indoor plants, and they arrived in perfect condition. They’ve added so much life to my living room! I’ll definitely be back for more.',
@@ -486,7 +486,7 @@ export const testimonials12 = [
     imgSrc: "/images/avatar/avt-1.png",
     imgWidth: 64,
     imgHeight: 64,
-    name: "Vinetant P.",
+    name: "Marc L.",
     review:
       "Stylish, comfortable, and perfect for any occasion! My new favorite fashion destination.",
   },

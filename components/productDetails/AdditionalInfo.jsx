@@ -19,7 +19,7 @@ export default function AdditionalInfo() {
         <tr className="tb-attr-item">
           <th className="tb-attr-label">Brand</th>
           <td className="tb-attr-value">
-            <p>Vineta</p>
+            <p>Shammah</p>
           </td>
         </tr>
         <tr className="tb-attr-item">

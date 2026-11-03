@@ -55,7 +55,7 @@ export default function TypographySwitcher() {
     },
     {
       id: "default",
-      title: "Template Vineta d'origine",
+      title: "Template Shammah d'origine",
       subtitle: "Poppins & Albert Sans",
       badge: "Standard",
       preview: "Typographie standard du template",

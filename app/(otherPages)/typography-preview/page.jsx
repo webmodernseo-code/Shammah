@@ -45,7 +45,7 @@ export default function TypographyPreviewPage() {
               Visualisez & Comparez les 3 Options de Polices
             </h1>
             <p className="text-gray-600 mb-4" style={{ fontSize: "16px", lineHeight: "1.6" }}>
-              Voici les 3 directions artistiques créées sur-mesure pour rompre avec le style standard du template Vineta.
+              Voici les 3 directions artistiques créées sur-mesure pour rompre avec le style standard du style par défaut.
               Cliquez sur un bouton pour l'activer en temps réel sur l'ensemble de la boutique, ou comparez les maquettes ci-dessous.
             </p>
 
@@ -188,7 +188,7 @@ export default function TypographyPreviewPage() {
                     Points forts :
                   </h6>
                   <ul className="list-unstyled space-y-1 text-gray-600 ps-1" style={{ fontSize: "13px" }}>
-                    <li>✓ Élimine l'effet générique « template Vineta »</li>
+                    <li>✓ Élimine l'effet générique « style par défaut »</li>
                     <li>✓ Lisibilité parfaite sur tous les smartphones</li>
                     <li>✓ Rendu ultra-propre, moderne et bienveillant</li>
                   </ul>

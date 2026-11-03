@@ -30,15 +30,102 @@ export default function Nav2() {
         </Link>
       </li>
 
-      <li className="menu-item">
+      <li className="menu-item menu-item-has-children shammah-nav-collections">
         <Link
           href="/shop-collection-list"
-          className={`item-link ${
-            pathname === "/shop-collection-list" ? "menuActive" : ""
+          className={`item-link d-inline-flex align-items-center gap-1.5 ${
+            pathname === "/shop-collection-list" || pathname.includes("category=")
+              ? "menuActive"
+              : ""
           }`}
         >
-          Collections
+          <span>Collections</span>
+          <svg
+            className="chevron-down-icon"
+            width="10"
+            height="10"
+            viewBox="0 0 10 10"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M2.5 3.75L5 6.25L7.5 3.75" />
+          </svg>
         </Link>
+        <div className="sub-menu shammah-collections-dropdown">
+          <div className="collections-menu-wrapper">
+            <div className="collections-menu-list">
+              <Link
+                href="/shop-default?category=homme"
+                className="collection-menu-item"
+              >
+                <div className="collection-item-bullet" />
+                <div className="collection-item-content">
+                  <span className="collection-item-title">Homme</span>
+                  <span className="collection-item-desc">T-shirts, Sweats & Hoodies</span>
+                </div>
+                <svg className="collection-item-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </Link>
+
+              <Link
+                href="/shop-default?category=femme"
+                className="collection-menu-item"
+              >
+                <div className="collection-item-bullet" />
+                <div className="collection-item-content">
+                  <span className="collection-item-title">Femme</span>
+                  <span className="collection-item-desc">Tops, Sweats & Créations</span>
+                </div>
+                <svg className="collection-item-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </Link>
+
+              <Link
+                href="/shop-default?category=enfant"
+                className="collection-menu-item"
+              >
+                <div className="collection-item-bullet" />
+                <div className="collection-item-content">
+                  <span className="collection-item-title">Enfant</span>
+                  <span className="collection-item-desc">Vêtements & Bodys d'Espérance</span>
+                </div>
+                <svg className="collection-item-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </Link>
+
+              <Link
+                href="/shop-default?category=accessoires"
+                className="collection-menu-item"
+              >
+                <div className="collection-item-bullet" />
+                <div className="collection-item-content">
+                  <span className="collection-item-title">Accessoires</span>
+                  <span className="collection-item-desc">Mugs, Tote Bags & Objets de Foi</span>
+                </div>
+                <svg className="collection-item-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </Link>
+            </div>
+
+            <div className="collections-menu-footer">
+              <Link
+                href="/shop-collection-list"
+                className="view-all-collections-btn"
+              >
+                <span>Voir toutes les collections</span>
+                <span className="arrow">→</span>
+              </Link>
+            </div>
+          </div>
+        </div>
       </li>
 
       <li className="menu-item">

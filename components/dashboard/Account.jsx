@@ -25,12 +25,12 @@ export default function Account() {
           <div className="my-acount-content account-dashboard">
             <div className="box-account-title">
               <p className="hello-name display-sm fw-medium">
-                Hello Vinetant Pham!
+                Bienvenue sur votre espace client !
                 <span>
-                  (not <span className="name">Vinetant Pham</span>?
+                  (
                 </span>
                 <Link href={`/`} className="text-decoration-underline link">
-                  Log Out
+                  Se déconnecter
                 </Link>
                 <span>)</span>
               </p>

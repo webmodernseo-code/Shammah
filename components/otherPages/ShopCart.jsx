@@ -196,9 +196,9 @@ export default function ShopCart() {
                 </fieldset>
                 <fieldset className="field">
                   <label htmlFor="state" className="text-sm">
-                    State/Provineta
+                    Région / Province
                   </label>
-                  <input type="text" id="state" placeholder="State/Provineta" />
+                  <input type="text" id="state" placeholder="Région / Province" />
                 </fieldset>
                 <fieldset className="field">
                   <label htmlFor="code" className="text-sm">

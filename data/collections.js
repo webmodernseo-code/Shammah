@@ -484,8 +484,8 @@ export const categories11 = [
     imgSrc: "/images/cls-categories/pod/bags.jpg",
     width: 696,
     height: 696,
-    label: "Gadgets",
-    slug: "gadgets",
+    label: "Accessoires",
+    slug: "accessoires",
     itemCount: "Mugs, Sacs & Accessoires",
   },
 ];
@@ -641,10 +641,10 @@ export const categories14 = [
   },
   {
     id: 4,
-    name: "Gadgets",
+    name: "Accessoires",
     image: "/images/cls-categories/pod/bags.jpg",
-    items: "Mugs, Tote Bags & Accessoires",
-    slug: "gadgets",
+    items: "Mugs, Tote Bags & Objets de Foi",
+    slug: "accessoires",
   },
 ];
 

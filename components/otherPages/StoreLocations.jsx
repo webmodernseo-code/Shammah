@@ -46,8 +46,8 @@ export default function StoreLocations() {
                     <li>
                       <p>
                         Email:{" "}
-                        <a className="link" href="mailto:contact@vineta.com">
-                          contact@vineta.com
+                        <a className="link" href="mailto:contact@shammah.eu">
+                          contact@shammah.eu
                         </a>
                       </p>
                     </li>
@@ -97,8 +97,8 @@ export default function StoreLocations() {
                     <li>
                       <p>
                         Email:{" "}
-                        <a className="link" href="mailto:contact@vineta.com">
-                          contact@vineta.com
+                        <a className="link" href="mailto:contact@shammah.eu">
+                          contact@shammah.eu
                         </a>
                       </p>
                     </li>
@@ -148,8 +148,8 @@ export default function StoreLocations() {
                     <li>
                       <p>
                         Email:{" "}
-                        <a className="link" href="mailto:contact@vineta.com">
-                          contact@vineta.com
+                        <a className="link" href="mailto:contact@shammah.eu">
+                          contact@shammah.eu
                         </a>
                       </p>
                     </li>
@@ -199,8 +199,8 @@ export default function StoreLocations() {
                     <li>
                       <p>
                         Email:{" "}
-                        <a className="link" href="mailto:contact@vineta.com">
-                          contact@vineta.com
+                        <a className="link" href="mailto:contact@shammah.eu">
+                          contact@shammah.eu
                         </a>
                       </p>
                     </li>
@@ -250,8 +250,8 @@ export default function StoreLocations() {
                     <li>
                       <p>
                         Email:{" "}
-                        <a className="link" href="mailto:contact@vineta.com">
-                          contact@vineta.com
+                        <a className="link" href="mailto:contact@shammah.eu">
+                          contact@shammah.eu
                         </a>
                       </p>
                     </li>

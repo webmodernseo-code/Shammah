@@ -1,6 +1,5 @@
 export const brands = [
-  { name: "Vineta", count: 11 },
-  { name: "Zotac", count: 20 },
+  { name: "Shammah", count: 31 },
   // Add more brands as needed
 ];
 

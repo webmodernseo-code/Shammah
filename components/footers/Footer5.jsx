@@ -336,7 +336,7 @@ export default function Footer5() {
         <div className="container">
           <div className="footer-bottom-wrap">
             <p className="text-dark">
-              Copyright © 2025 by <span className="fw-medium">Vineta.</span> All
+              Copyright © 2025 by <span className="fw-medium">Shammah.</span> All
               Rights Reserved.
             </p>
             <ul className="tf-payment">

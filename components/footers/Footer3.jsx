@@ -331,7 +331,7 @@ export default function Footer3() {
         <div className="container">
           <div className="footer-bottom-wrap">
             <p>
-              Copyright © 2025 by <span className="fw-medium">Vineta.</span> All
+              Copyright © 2025 by <span className="fw-medium">Shammah.</span> All
               Rights Reserved.
             </p>
             <div className="box-right">

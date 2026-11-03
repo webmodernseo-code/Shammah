@@ -405,70 +405,70 @@ export default function CartModal() {
                     >
                       <option
                         value="Australia"
-                        data-provinetas='[["Australian Capital Territory","Australian Capital Territory"],["New South Wales","New South Wales"],["Northern Territory","Northern Territory"],["Queensland","Queensland"],["South Australia","South Australia"],["Tasmania","Tasmania"],["Victoria","Victoria"],["Western Australia","Western Australia"]]'
+                        data-provinces='[["Australian Capital Territory","Australian Capital Territory"],["New South Wales","New South Wales"],["Northern Territory","Northern Territory"],["Queensland","Queensland"],["South Australia","South Australia"],["Tasmania","Tasmania"],["Victoria","Victoria"],["Western Australia","Western Australia"]]'
                       >
                         Australia
                       </option>
-                      <option value="Austria" data-provinetas="[]">
+                      <option value="Austria" data-provinces="[]">
                         Austria
                       </option>
-                      <option value="Belgium" data-provinetas="[]">
+                      <option value="Belgium" data-provinces="[]">
                         Belgium
                       </option>
                       <option
                         value="Canada"
-                        data-provinetas='[["Ontario","Ontario"],["Quebec","Quebec"]]'
+                        data-provinces='[["Ontario","Ontario"],["Quebec","Quebec"]]'
                       >
                         Canada
                       </option>
-                      <option value="Czech Republic" data-provinetas="[]">
+                      <option value="Czech Republic" data-provinces="[]">
                         Czechia
                       </option>
-                      <option value="Denmark" data-provinetas="[]">
+                      <option value="Denmark" data-provinces="[]">
                         Denmark
                       </option>
-                      <option value="Finland" data-provinetas="[]">
+                      <option value="Finland" data-provinces="[]">
                         Finland
                       </option>
-                      <option value="France" data-provinetas="[]">
+                      <option value="France" data-provinces="[]">
                         France
                       </option>
-                      <option value="Germany" data-provinetas="[]">
+                      <option value="Germany" data-provinces="[]">
                         Germany
                       </option>
                       <option
                         value="United States"
-                        data-provinetas='[["Alabama","Alabama"],["California","California"],["Florida","Florida"]]'
+                        data-provinces='[["Alabama","Alabama"],["California","California"],["Florida","Florida"]]'
                       >
                         United States
                       </option>
                       <option
                         value="United Kingdom"
-                        data-provinetas='[["England","England"],["Scotland","Scotland"],["Wales","Wales"],["Northern Ireland","Northern Ireland"]]'
+                        data-provinces='[["England","England"],["Scotland","Scotland"],["Wales","Wales"],["Northern Ireland","Northern Ireland"]]'
                       >
                         United Kingdom
                       </option>
-                      <option value="India" data-provinetas="[]">
+                      <option value="India" data-provinces="[]">
                         India
                       </option>
-                      <option value="Japan" data-provinetas="[]">
+                      <option value="Japan" data-provinces="[]">
                         Japan
                       </option>
-                      <option value="Mexico" data-provinetas="[]">
+                      <option value="Mexico" data-provinces="[]">
                         Mexico
                       </option>
-                      <option value="South Korea" data-provinetas="[]">
+                      <option value="South Korea" data-provinces="[]">
                         South Korea
                       </option>
-                      <option value="Spain" data-provinetas="[]">
+                      <option value="Spain" data-provinces="[]">
                         Spain
                       </option>
-                      <option value="Italy" data-provinetas="[]">
+                      <option value="Italy" data-provinces="[]">
                         Italy
                       </option>
                       <option
                         value="Vietnam"
-                        data-provinetas='[["Ha Noi","Ha Noi"],["Da Nang","Da Nang"],["Ho Chi Minh","Ho Chi Minh"]]'
+                        data-provinces='[["Ha Noi","Ha Noi"],["Da Nang","Da Nang"],["Ho Chi Minh","Ho Chi Minh"]]'
                       >
                         Vietnam
                       </option>
@@ -476,11 +476,11 @@ export default function CartModal() {
                   </div>
                 </div>
                 <div className="field">
-                  <p className="text-sm">State/Provineta</p>
+                  <p className="text-sm">Région / Province</p>
                   <div className="tf-select">
                     <select
-                      id="shipping-provineta-form"
-                      name="address[provineta]"
+                      id="shipping-province-form"
+                      name="address[province]"
                       data-default=""
                     />
                   </div>

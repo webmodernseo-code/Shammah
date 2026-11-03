@@ -6,41 +6,38 @@ export default function Features() {
     <section className="flat-spacing-3">
       <div className="container">
         <div className="flat-title-2 text-center">
-          <p className="display-md-2 fw-medium">Why Choose Vineta</p>
+          <p className="display-md-2 fw-medium">Pourquoi Choisir Shammah</p>
           <p className="text-md text-main">
-            Our products are crafted with innovation and an eye for the latest
-            trends. We push the boundaries of{" "}
+            Nos créations allient qualité textile d'exception, inspiration chrétienne
+            et confection éco-responsable imprimée en France.{" "}
             <br className="d-none d-lg-block" />
-            traditional fashion, delivering bold, fresh designs that inspire
-            confidence and individuality.
+            Nous donnons du sens à votre style pour proclamer la foi, l'amour et l'espérance au quotidien.
           </p>
         </div>
         <div className="row">
           <div className="col-xl-7 col-md-6">
             <ul className="list-esd d-md-flex flex-md-column justify-content-md-center h-100">
               <li className="item">
-                <h6>Ethics &amp; Responsibility</h6>
+                <h6>Éthique &amp; Confection Responsable</h6>
                 <p className="text-md">
-                  At Vineta, we are dedicated to upholding the highest ethical
-                  standards in production. We ensure mindful manufacturing
-                  through regular audits, training, and a strong focus on
-                  responsible sourcing.
+                  Chez Shammah, nous nous engageons à respecter les standards éthiques
+                  les plus rigoureux. Chaque pièce est imprimée à la demande avec soin
+                  afin de bannir le gaspillage textile et de préserver notre environnement.
                 </p>
               </li>
               <li className="item">
-                <h6>Style Meets Durability</h6>
+                <h6>Élégance &amp; Durabilité</h6>
                 <p className="text-md">
-                  From classic tailoring to casual staples, our Vineta
-                  collections embrace the latest trends while prioritizing
-                  comfort and long-lasting quality.
+                  Du t-shirt essentiel au sweat à capuche réconfortant, nos collections
+                  Shammah privilégient des cotons doux, des coupes modernes et des finitions
+                  conçues pour durer au fil du temps.
                 </p>
               </li>
               <li className="item">
-                <h6>Express Yourself</h6>
+                <h6>Exprimer sa Foi avec Fierté</h6>
                 <p className="text-md">
-                  Our designs are crafted with the latest fashion trends in
-                  mind, offering flexibility for individual expression,
-                  especially for the modern, style-conscious youth.
+                  Chaque création porte un message biblique, une promesse ou un verset inspirant
+                  qui transforme un simple vêtement en un témoignage vivant de lumière et de grâce.
                 </p>
               </li>
             </ul>

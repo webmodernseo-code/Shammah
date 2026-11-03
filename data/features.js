@@ -57,21 +57,21 @@ export const features = [
 export const features2 = [
   {
     icon: "icon-precision",
-    title: "Precision in Every Stitch",
+    title: "Précision & Qualité Textile",
     description:
-      "At Vineta, we use only premium materials, ensuring our collections offer superior comfort and lasting durability. Every piece is crafted with care and attention to detail.",
+      "Chez Shammah, nous sélectionnons des matières de première qualité pour offrir un confort absolu et une durabilité remarquable. Chaque pièce est imprimée avec soin et rigueur.",
   },
   {
     icon: "icon-elegance",
-    title: "Effortless Elegance",
+    title: "Élégance Intemporelle",
     description:
-      "Our designs embrace simplicity at its finest. Vineta’s understated yet refined style captures the essence of modern fashion, making a statement.",
+      "Nos créations allient sobriété et inspiration. Le style épuré et raffiné de Shammah sublime votre quotidien avec des messages porteurs de sens.",
   },
   {
     icon: "icon-fashion-body",
-    title: "Fashion for Every Body",
+    title: "Des Collections pour Tous",
     description:
-      "We celebrate individuality with a diverse range of sizes, offering clothing that fits and flatters every body type. At Vineta, fashion is for everyone.",
+      "Nous proposons une gamme de coupes adaptées à toutes les morphologies (Homme, Femme, Enfant). Chez Shammah, la foi et l'élégance sont accessibles à tous.",
   },
 ];
 

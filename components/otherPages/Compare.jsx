@@ -261,16 +261,16 @@ export default function Compare() {
               <p className="text-md fw-medium">Vendor</p>
             </div>
             <div className="tf-compare-col tf-compare-value text-center">
-              <p className="text-sm">Vineta</p>
+              <p className="text-sm">Shammah</p>
             </div>
             <div className="tf-compare-col tf-compare-value text-center">
-              <p className="text-sm">Vineta</p>
+              <p className="text-sm">Shammah</p>
             </div>
             <div className="tf-compare-col tf-compare-value text-center">
-              <p className="text-sm">Vineta</p>
+              <p className="text-sm">Shammah</p>
             </div>
             <div className="tf-compare-col tf-compare-value text-center">
-              <p className="text-sm">Vineta</p>
+              <p className="text-sm">Shammah</p>
             </div>
           </div>
           <div className="tf-compare-row">

@@ -13,20 +13,20 @@ export default function Testimonials() {
             <i className="icon-star text-green" />
           </div>
           <p className="text-xl-2 lh-xl-32">
-            "I've ordered from many places, but I have to say, this shop offers
-            the best shipping <br className="d-none d-lg-block" />
-            experience ever. Thank you so much for the outstanding service!"
+            « J'ai commandé plusieurs fois sur Shammah et je suis impressionné par la qualité
+            des matières, la précision des impressions et la rapidité d'expédition. <br className="d-none d-lg-block" />
+            Porter ces messages au quotidien est une vraie source d'édification ! »
           </p>
           <div className="box-author">
             <div className="avt">
               <Image
-                alt=""
+                alt="Témoignage client Shammah"
                 src="/images/testimonial/tes-about.jpg"
                 width={100}
                 height={100}
               />
             </div>
-            <p className="text-md lh-xl-26 fw-medium">Vinetant P</p>
+            <p className="text-md lh-xl-26 fw-medium">Samuel D.</p>
           </div>
         </div>
       </div>

@@ -331,7 +331,7 @@ export default function Footer4() {
           <div className="footer-bottom-wrap">
             <p className="text-dark">
               Copyright © {new Date().getFullYear()} by{" "}
-              <span className="fw-medium">Vineta.</span> All Rights Reserved.
+              <span className="fw-medium">Shammah.</span> All Rights Reserved.
             </p>
             <ul className="tf-payment">
               <li className="item">

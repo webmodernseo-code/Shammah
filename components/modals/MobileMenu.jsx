@@ -52,14 +52,47 @@ export default function MobileMenu() {
                 </Link>
               </li>
               <li className="nav-mb-item">
-                <Link
-                  href="/shop-collection-list"
-                  className={`mb-menu-link ${
-                    pathname === "/shop-collection-list" ? "menuActive" : ""
+                <a
+                  href="#dropdown-mb-collections"
+                  className={`collapsed mb-menu-link ${
+                    pathname === "/shop-collection-list" || pathname.includes("category=") ? "menuActive" : ""
                   }`}
+                  data-bs-toggle="collapse"
+                  aria-expanded="false"
+                  aria-controls="dropdown-mb-collections"
                 >
                   <span>Collections</span>
-                </Link>
+                  <span className="btn-open-sub" />
+                </a>
+                <div id="dropdown-mb-collections" className="collapse">
+                  <ul className="sub-nav-menu" style={{ paddingLeft: "16px", paddingTop: "8px" }}>
+                    <li style={{ marginBottom: "8px" }}>
+                      <Link href="/shop-default?category=homme" className="sub-nav-link" data-bs-dismiss="offcanvas">
+                        Homme (T-shirts & Sweats)
+                      </Link>
+                    </li>
+                    <li style={{ marginBottom: "8px" }}>
+                      <Link href="/shop-default?category=femme" className="sub-nav-link" data-bs-dismiss="offcanvas">
+                        Femme (Tops & Confection)
+                      </Link>
+                    </li>
+                    <li style={{ marginBottom: "8px" }}>
+                      <Link href="/shop-default?category=enfant" className="sub-nav-link" data-bs-dismiss="offcanvas">
+                        Enfant (Vêtements & Bodys)
+                      </Link>
+                    </li>
+                    <li style={{ marginBottom: "8px" }}>
+                      <Link href="/shop-default?category=accessoires" className="sub-nav-link" data-bs-dismiss="offcanvas">
+                        Accessoires (Mugs, Sacs & Objets de Foi)
+                      </Link>
+                    </li>
+                    <li style={{ marginTop: "10px" }}>
+                      <Link href="/shop-collection-list" className="sub-nav-link fw-medium text-dark" data-bs-dismiss="offcanvas">
+                        Toutes les collections →
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
               </li>
               <li className="nav-mb-item">
                 <Link

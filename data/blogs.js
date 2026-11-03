@@ -1,4 +1,4 @@
-export const blogItems = [
+﻿export const blogItems = [
   {
     id: 1,
     imgSrc: "/images/blog/blog-7.jpg",
@@ -12,7 +12,7 @@ export const blogItems = [
   {
     id: 3,
     imgSrc: "/images/blog/blog-9.jpg",
-    title: "Fashion Trends of the Year: Styles You Can’t Miss",
+    title: "Fashion Trends of the Year: Styles You Canâ€™t Miss",
   },
   {
     id: 4,
@@ -80,7 +80,7 @@ export const blogItems4 = [
     imgSrc: "/images/blog/pet-1.jpg",
     title: "Quality Pet Products",
     description:
-      "Discover top-quality items for all your pet’s needs, from nutrition to toys.",
+      "Discover top-quality items for all your petâ€™s needs, from nutrition to toys.",
   },
   {
     id: 14,
@@ -101,7 +101,7 @@ export const blogItems4 = [
     imgSrc: "/images/blog/pet-1.jpg",
     title: "Quality Pet Products",
     description:
-      "Discover top-quality items for all your pet’s needs, from nutrition to toys.",
+      "Discover top-quality items for all your petâ€™s needs, from nutrition to toys.",
   },
 ];
 
@@ -172,7 +172,7 @@ export const blogPosts3 = [
     comments: "04 Comments",
     title: "How to Choose the Perfect Plant for Your Home",
     description:
-      "Growing a greener space starts with the right care — simple tools, natural touches, and a lot of love",
+      "Growing a greener space starts with the right care â€” simple tools, natural touches, and a lot of love",
   },
   {
     id: 27,
@@ -240,7 +240,7 @@ export const blogPosts4 = [
     description:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand...",
     authorImg: "/images/avatar/blog-author-4.jpg",
-    author: "Vinetant",
+    author: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
     categoryClass: "type-bag",
@@ -253,7 +253,7 @@ export const blogPosts4 = [
     description:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand...",
     authorImg: "/images/avatar/blog-author-6.jpg",
-    author: "Vinetant",
+    author: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
     categoryClass: "type-life",
@@ -266,7 +266,7 @@ export const blogPosts4 = [
     description:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand...",
     authorImg: "/images/avatar/blog-author-1.jpg",
-    author: "Vinetant",
+    author: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
     categoryClass: "type-life",
@@ -279,7 +279,7 @@ export const blogPosts4 = [
     description:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand...",
     authorImg: "/images/avatar/blog-author-4.jpg",
-    author: "Vinetant",
+    author: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
     categoryClass: "type-life",
@@ -326,7 +326,7 @@ export const blogPosts5 = [
     excerpt:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand the test of time. These essentials form the backbone of any wardrobe...",
     authorAvatar: "/images/avatar/blog-author-1.jpg",
-    authorName: "Vinetant",
+    authorName: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
   },
@@ -339,7 +339,7 @@ export const blogPosts5 = [
     excerpt:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand the test of time. These essentials form the backbone of any wardrobe...",
     authorAvatar: "/images/avatar/blog-author-2.jpg",
-    authorName: "Vinetant",
+    authorName: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
   },
@@ -352,7 +352,7 @@ export const blogPosts5 = [
     excerpt:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand the test of time. These essentials form the backbone of any wardrobe...",
     authorAvatar: "/images/avatar/blog-author-3.jpg",
-    authorName: "Vinetant",
+    authorName: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
   },
@@ -368,7 +368,7 @@ export const blogPostsStyle2 = [
     excerpt:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand...",
     authorAvatar: "/images/avatar/blog-author-1.jpg",
-    authorName: "Vinetant",
+    authorName: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
     width: 684,
@@ -383,7 +383,7 @@ export const blogPostsStyle2 = [
     excerpt:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand...",
     authorAvatar: "/images/avatar/blog-author-2.jpg",
-    authorName: "Vinetant",
+    authorName: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
     width: 684,
@@ -398,7 +398,7 @@ export const blogPostsStyle2 = [
     excerpt:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand...",
     authorAvatar: "/images/avatar/blog-author-3.jpg",
-    authorName: "Vinetant",
+    authorName: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
     width: 684,
@@ -413,7 +413,7 @@ export const blogPostsStyle2 = [
     excerpt:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand...",
     authorAvatar: "/images/avatar/blog-author-4.jpg",
-    authorName: "Vinetant",
+    authorName: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
     width: 684,
@@ -431,7 +431,7 @@ export const blogPostsLarge = [
     excerpt:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand...",
     authorAvatar: "/images/avatar/blog-author-1.jpg",
-    authorName: "Vinetant",
+    authorName: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
     width: 928,
@@ -446,7 +446,7 @@ export const blogPostsLarge = [
     excerpt:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand...",
     authorAvatar: "/images/avatar/blog-author-2.jpg",
-    authorName: "Vinetant",
+    authorName: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
     width: 928,
@@ -461,7 +461,7 @@ export const blogPostsLarge = [
     excerpt:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand...",
     authorAvatar: "/images/avatar/blog-author-3.jpg",
-    authorName: "Vinetant",
+    authorName: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
     width: 928,
@@ -476,7 +476,7 @@ export const blogPostsLarge = [
     excerpt:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand...",
     authorAvatar: "/images/avatar/blog-author-4.jpg",
-    authorName: "Vinetant",
+    authorName: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
     width: 928,
@@ -491,7 +491,7 @@ export const blogPostsLarge = [
     excerpt:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand...",
     authorAvatar: "/images/avatar/blog-author-5.jpg",
-    authorName: "Vinetant",
+    authorName: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
     width: 928,
@@ -506,7 +506,7 @@ export const blogPostsLarge = [
     excerpt:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand...",
     authorAvatar: "/images/avatar/blog-author-6.jpg",
-    authorName: "Vinetant",
+    authorName: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
     width: 928,
@@ -524,7 +524,7 @@ export const blogPosts6 = [
     excerpt:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand...",
     authorAvatar: "/images/avatar/blog-author-1.jpg",
-    authorName: "Vinetant",
+    authorName: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
     width: 928,
@@ -539,7 +539,7 @@ export const blogPosts6 = [
     excerpt:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand...",
     authorAvatar: "/images/avatar/blog-author-2.jpg",
-    authorName: "Vinetant",
+    authorName: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
     width: 928,
@@ -554,7 +554,7 @@ export const blogPosts6 = [
     excerpt:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand...",
     authorAvatar: "/images/avatar/blog-author-3.jpg",
-    authorName: "Vinetant",
+    authorName: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
     width: 928,
@@ -569,7 +569,7 @@ export const blogPosts6 = [
     excerpt:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand...",
     authorAvatar: "/images/avatar/blog-author-4.jpg",
-    authorName: "Vinetant",
+    authorName: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
     width: 928,
@@ -584,7 +584,7 @@ export const blogPosts6 = [
     excerpt:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand...",
     authorAvatar: "/images/avatar/blog-author-5.jpg",
-    authorName: "Vinetant",
+    authorName: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
     width: 928,
@@ -599,7 +599,7 @@ export const blogPosts6 = [
     excerpt:
       "When it comes to fashion, trends come and go, but there are certain pieces that stand...",
     authorAvatar: "/images/avatar/blog-author-6.jpg",
-    authorName: "Vinetant",
+    authorName: "Rédaction Shammah",
     date: "Sep 19 2024",
     comments: "3 comments",
     width: 928,
@@ -674,7 +674,7 @@ export const blogPosts7 = [
   {
     id: 68,
     image: "/images/blog/blog-11.jpg",
-    author: "Vineta",
+    author: "Shammah",
     date: "Mar 10, 2025",
     comments: "02 Comments",
     title: "5 Ways to Style Your Handmade Bag This Season",
@@ -712,7 +712,7 @@ export const blogPosts8 = [
     date: "Jan 15, 2025",
     comments: "04 Comments",
     title: "Tech Trends 2025: Must-Have Gadgets & Innovations",
-    desc: "Technology is more than convenience. It’s about enhancing everyday life with smart, seamless solutions.",
+    desc: "Technology is more than convenience. Itâ€™s about enhancing everyday life with smart, seamless solutions.",
   },
   {
     id: 72,
@@ -722,7 +722,7 @@ export const blogPosts8 = [
     date: "Jan 22, 2025",
     comments: "02 Comments",
     title: "Cutting-Edge Tech: Top Electronics to Watch This Year",
-    desc: "Electric design goes beyond function. It’s about powering your world with style, simplicity, and innovation.",
+    desc: "Electric design goes beyond function. Itâ€™s about powering your world with style, simplicity, and innovation.",
   },
   {
     id: 73,
@@ -742,7 +742,7 @@ export const blogPosts8 = [
     date: "Jan 15, 2025",
     comments: "04 Comments",
     title: "Tech Trends 2025: Must-Have Gadgets & Innovations",
-    desc: "Technology is more than convenience. It’s about enhancing everyday life with smart, seamless solutions.",
+    desc: "Technology is more than convenience. Itâ€™s about enhancing everyday life with smart, seamless solutions.",
   },
 ];
 export const blogPosts9 = [
@@ -764,7 +764,7 @@ export const blogPosts9 = [
     date: "Jan 10, 2025",
     comments: "03 Comments",
     title: "Creating a Cozy Nursery: Tips for First-Time Parents",
-    desc: "Every moment with your baby matters. That’s why we create gentle essentials for comfort and care.",
+    desc: "Every moment with your baby matters. Thatâ€™s why we create gentle essentials for comfort and care.",
   },
   {
     id: 77,
@@ -774,7 +774,7 @@ export const blogPosts9 = [
     date: "Jan 16, 2025",
     comments: "05 Comments",
     title: "Baby Care 101: Expert Tips for New Parents",
-    desc: "From first snuggles to tiny steps, we’re here with thoughtfully made products for every stage.",
+    desc: "From first snuggles to tiny steps, weâ€™re here with thoughtfully made products for every stage.",
   },
   {
     id: 78,
@@ -808,3 +808,4 @@ export const allBlogs = [
   ...blogPosts9,
   ...largeRecentPosts,
 ];
+
