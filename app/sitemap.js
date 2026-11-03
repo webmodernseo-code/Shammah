@@ -2,7 +2,7 @@ import { allProducts } from "@/data/products";
 import { SITE_URL } from "@/lib/seo";
 
 export default function sitemap() {
-  const contentUpdatedAt = new Date("2026-11-02");
+  const contentUpdatedAt = new Date("2026-11-03");
   const pages = [
     ["", 1, "weekly"], ["/shop-default", 0.9, "weekly"], ["/shop-collection-list", 0.8, "weekly"],
     ["/zones-livraison", 0.85, "monthly"], ["/about-us", 0.7, "monthly"], ["/contact-us", 0.7, "monthly"],
