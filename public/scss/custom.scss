@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@600;700&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap');
 
 /* ========================================================
    GLOBAL DEFINITIVE TYPOGRAPHY — OPTION 1 (Épure Moderne Sans-Serif)
@@ -738,6 +738,316 @@ del,
     }
   }
 }
+
+/* ========================================================
+   SHAMMAH MODERN STREETWEAR HERO SECTION (Image 2 Replica)
+   - Dark luxury aesthetic (Obsidian & Matte Black)
+   - High-impact bold display typography
+   - Floating piece with soft atmospheric glow
+   - 5 Segmented interactive tabs with live progress bar
+   ======================================================== */
+.shammah-hero-wrapper {
+  padding: 16px 20px 24px;
+  max-width: 1440px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: 10px 12px 18px;
+  }
+}
+
+.shammah-hero-card {
+  position: relative;
+  background: radial-gradient(circle at 75% 45%, #181922 0%, #0d0e13 55%, #08080a 100%);
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  color: #ffffff;
+  min-height: 580px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @media (max-width: 991px) {
+    min-height: auto;
+    border-radius: 20px;
+  }
+}
+
+.shammah-hero-main {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  padding: 56px 64px 28px;
+  gap: 32px;
+  flex: 1;
+
+  @media (max-width: 991px) {
+    grid-template-columns: 1fr;
+    padding: 36px 24px 20px;
+    gap: 24px;
+  }
+}
+
+.shammah-hero-content {
+  max-width: 600px;
+  z-index: 2;
+  animation: shammahFadeIn 0.4s ease-out forwards;
+
+  .shammah-hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 14px;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  .shammah-hero-title {
+    font-family: 'Anton', 'Oswald', 'Syne', sans-serif !important;
+    font-size: clamp(2.5rem, 5.2vw, 4.3rem);
+    font-weight: 900;
+    line-height: 1.02;
+    text-transform: uppercase;
+    letter-spacing: -0.015em;
+    color: #ffffff !important;
+    margin: 0 0 18px 0;
+    text-wrap: balance;
+  }
+
+  .shammah-hero-sub {
+    font-size: clamp(0.95rem, 1.25vw, 1.08rem);
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.68);
+    margin: 0 0 28px 0;
+    max-width: 480px;
+    font-weight: 400;
+  }
+
+  .shammah-hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #ffffff;
+    color: #000000 !important;
+    font-size: 0.92rem;
+    font-weight: 600;
+    padding: 8px 10px 8px 24px;
+    border-radius: 9999px;
+    text-decoration: none !important;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 18px rgba(255, 255, 255, 0.15);
+
+    .shammah-cta-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #000000;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.22s ease;
+
+      svg {
+        width: 15px;
+        height: 15px;
+        stroke-width: 2.5;
+      }
+    }
+
+    &:hover {
+      background: #f4f4f5;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.25);
+
+      .shammah-cta-icon {
+        transform: translateX(3px);
+      }
+    }
+  }
+}
+
+.shammah-hero-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 380px;
+
+  @media (max-width: 991px) {
+    min-height: 280px;
+    order: -1;
+  }
+
+  .shammah-visual-glow {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(40px);
+    z-index: 1;
+  }
+
+  .shammah-visual-img {
+    position: relative;
+    z-index: 2;
+    max-width: 100%;
+    max-height: 440px;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.6));
+    animation: shammahFloat 5s ease-in-out infinite alternate;
+  }
+
+  .shammah-visual-hoodie {
+    width: auto;
+    height: auto;
+    max-width: 420px;
+  }
+
+  .shammah-visual-model {
+    max-height: 460px;
+    border-radius: 18px;
+    object-fit: cover;
+    object-position: center top;
+    mask-image: radial-gradient(ellipse 95% 95% at 50% 50%, #000 65%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 95% 95% at 50% 50%, #000 65%, transparent 100%);
+  }
+}
+
+@keyframes shammahFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shammahFloat {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-8px); }
+}
+
+/* ========================================================
+   BOTTOM SEGMENTED TABS & PROGRESS BAR
+   ======================================================== */
+.shammah-hero-tabs-wrap {
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 18px 48px 24px;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  @media (max-width: 991px) {
+    padding: 14px 20px 20px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
+  }
+}
+
+.shammah-hero-tabs {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+
+  @media (max-width: 991px) {
+    display: flex;
+    gap: 16px;
+    min-width: 680px;
+  }
+}
+
+.shammah-tab-item {
+  position: relative;
+  background: none;
+  border: none;
+  padding: 10px 4px 0 0;
+  text-align: left;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.45);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+
+  .shammah-tab-track {
+    position: absolute;
+    top: -19px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: transparent;
+    border-radius: 2px;
+    overflow: hidden;
+
+    @media (max-width: 991px) {
+      top: -15px;
+    }
+  }
+
+  .shammah-tab-progress {
+    height: 100%;
+    background: #ffffff;
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.05s linear;
+  }
+
+  .shammah-tab-num {
+    font-size: 0.88rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+    transition: color 0.2s ease;
+  }
+
+  .shammah-tab-title {
+    font-size: 0.78rem;
+    line-height: 1.35;
+    font-weight: 400;
+    transition: color 0.2s ease;
+  }
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  &.active {
+    color: #ffffff;
+
+    .shammah-tab-num {
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    .shammah-tab-title {
+      color: #ffffff;
+      font-weight: 500;
+    }
+  }
+}
+
 
 
 
