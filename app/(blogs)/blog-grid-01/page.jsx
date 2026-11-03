@@ -9,8 +9,9 @@ import Link from "next/link";
 import React from "react";
 
 export const metadata = {
-  title: "Blog Grid 01 || Shammah - Print On Demand E-Commerce",
-  description: "Shammah - Print On Demand E-Commerce",
+  title: "Blog & Inspirations Mode Chrétienne | Shammah",
+  description: "Articles, inspirations et actualités autour des vêtements et accessoires chrétiens Shammah.",
+  alternates: { canonical: "/blog-grid-01" },
 };
 export default function page() {
   return (

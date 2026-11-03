@@ -6,8 +6,9 @@ import React from "react";
 import Link from "next/link";
 import Breadcumb from "@/components/common/Breadcumb";
 export const metadata = {
-  title: "Contact Us || Shammah - Print On Demand E-Commerce",
-  description: "Shammah - Print On Demand E-Commerce",
+  title: "Contactez-nous | Service Client Shammah",
+  description: "Une question sur nos vêtements et accessoires chrétiens ou sur votre commande ? Contactez le service client Shammah.",
+  alternates: { canonical: "/contact-us" },
 };
 export default function page() {
   return (

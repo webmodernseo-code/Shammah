@@ -7,8 +7,9 @@ import Topbar4 from "@/components/headers/Topbar4";
 import React from "react";
 
 export const metadata = {
-  title: "Accout Address || Shammah - Print On Demand E-Commerce",
-  description: "Shammah - Print On Demand E-Commerce",
+  title: "Mes Adresses de Livraison | Shammah",
+  description: "Gérez vos adresses de livraison sur la boutique Shammah.",
+  robots: { index: false, follow: false },
 };
 export default function page() {
   return (

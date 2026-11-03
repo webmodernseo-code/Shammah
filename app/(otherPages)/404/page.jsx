@@ -5,8 +5,9 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 export const metadata = {
-  title: "Page Not Found || Shammah - Print On Demand E-Commerce",
-  description: "Shammah - Print On Demand E-Commerce",
+  title: "Page Non Trouvée | Shammah",
+  description: "La page recherchée n'existe pas. Découvrez nos collections de vêtements et accessoires chrétiens.",
+  robots: { index: false, follow: false },
 };
 export default function page() {
   return (

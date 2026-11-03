@@ -14,11 +14,11 @@ import { SITE_URL } from "@/lib/seo";
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Shammah | Prêt-à-porter Chrétien & Cadeaux Personnalisés | Boutique Officielle",
+    default: "Shammah | Vêtements et Accessoires Chrétiens | Boutique Officielle",
     template: "%s | Shammah",
   },
   description:
-    "Boutique officielle Shammah : prêt-à-porter, vêtements chrétiens haut de gamme et cadeaux personnalisés imprimés avec amour en France (t-shirts, sweats, hoodies, accessoires). Découvrez nos créations porteuses d'inspiration et d'élégance.",
+    "Boutique officielle Shammah : marque dédiée aux vêtements et accessoires chrétiens haut de gamme (t-shirts, sweats, hoodies, tote bags, casquettes, mugs et cadeaux chrétiens personnalisés). Créations inspirantes de foi et d'élégance imprimées en France.",
   applicationName: "Shammah",
   keywords: [
     "Shammah",

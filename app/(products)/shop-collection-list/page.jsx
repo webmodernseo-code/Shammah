@@ -8,8 +8,9 @@ import Link from "next/link";
 import React from "react";
 
 export const metadata = {
-  title: "Shop Collection List || Shammah - Print On Demand E-Commerce",
-  description: "Shammah - Print On Demand E-Commerce",
+  title: "Collections de Vêtements & Accessoires Chrétiens",
+  description: "Découvrez toutes nos collections de vêtements chrétiens et accessoires de foi : t-shirts, sweats, hoodies, tote bags et cadeaux personnalisés Shammah.",
+  alternates: { canonical: "/shop-collection-list" },
 };
 export default function page() {
   return (

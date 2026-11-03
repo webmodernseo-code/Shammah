@@ -13,8 +13,8 @@ import Newsletter from "@/components/modals/Newsletter";
 import React from "react";
 
 export const metadata = {
-  title: "Vêtements chrétiens & cadeaux personnalisés",
-  description: "Découvrez les vêtements chrétiens et cadeaux personnalisés Shammah. Impression à la demande et livraison à Paris, en Île-de-France, Grenoble, partout en France et en Afrique de l’Ouest.",
+  title: "Vêtements et Accessoires Chrétiens de Qualité | Boutique Officielle",
+  description: "Découvrez la collection officielle Shammah : vêtements et accessoires chrétiens uniques (t-shirts chrétiens, sweats, hoodies, tote bags, casquettes et cadeaux de foi personnalisés). Livraison en France et à l'international.",
   alternates: { canonical: "/" },
 };
 

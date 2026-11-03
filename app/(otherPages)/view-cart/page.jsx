@@ -7,8 +7,9 @@ import React from "react";
 import Link from "next/link";
 import Breadcumb from "@/components/common/Breadcumb";
 export const metadata = {
-  title: "View Cart || Shammah - Print On Demand E-Commerce",
-  description: "Shammah - Print On Demand E-Commerce",
+  title: "Mon Panier | Shammah",
+  description: "Finalisez vos achats de vêtements et accessoires chrétiens sur Shammah.",
+  robots: { index: false, follow: false },
 };
 export default function page() {
   return (

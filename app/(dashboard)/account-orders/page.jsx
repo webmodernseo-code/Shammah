@@ -8,8 +8,9 @@ import Link from "next/link";
 import React from "react";
 
 export const metadata = {
-  title: "Account Orders || Shammah - Print On Demand E-Commerce",
-  description: "Shammah - Print On Demand E-Commerce",
+  title: "Mes Commandes | Shammah",
+  description: "Suivi de vos commandes de vêtements et accessoires chrétiens Shammah.",
+  robots: { index: false, follow: false },
 };
 export default function page() {
   return (

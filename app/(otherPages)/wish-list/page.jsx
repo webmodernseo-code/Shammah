@@ -5,8 +5,9 @@ import Wishlist from "@/components/otherPages/Wishlist";
 import Link from "next/link";
 import React from "react";
 export const metadata = {
-  title: "Wish list || Shammah - Print On Demand E-Commerce",
-  description: "Shammah - Print On Demand E-Commerce",
+  title: "Mes Favoris | Vêtements & Accessoires Shammah",
+  description: "Retrouvez vos créations et accessoires chrétiens enregistrés dans vos favoris.",
+  robots: { index: false, follow: false },
 };
 export default function page() {
   return (

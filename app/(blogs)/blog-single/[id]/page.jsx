@@ -7,8 +7,8 @@ import { allBlogs } from "@/data/blogs";
 import React from "react";
 
 export const metadata = {
-  title: "Blog Single || Shammah - Print On Demand E-Commerce",
-  description: "Shammah - Print On Demand E-Commerce",
+  title: "Article de Blog | Shammah",
+  description: "Découvrez notre article et l'actualité de la marque de vêtements et accessoires chrétiens Shammah.",
 };
 export default async function BlogDetailsPage1({ params }) {
   const { id } = await params;

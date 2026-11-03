@@ -6,8 +6,9 @@ import Topbar4 from "@/components/headers/Topbar4";
 import React from "react";
 
 export const metadata = {
-  title: "Account Page || Shammah - Print On Demand E-Commerce",
-  description: "Shammah - Print On Demand E-Commerce",
+  title: "Mon Compte Client | Shammah",
+  description: "Gérez vos informations personnelles et votre compte sur Shammah.",
+  robots: { index: false, follow: false },
 };
 export default function page() {
   return (

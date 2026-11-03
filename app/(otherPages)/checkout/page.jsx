@@ -6,8 +6,9 @@ import Link from "next/link";
 import React from "react";
 
 export const metadata = {
-  title: "Checkout || Shammah - Print On Demand E-Commerce",
-  description: "Shammah - Print On Demand E-Commerce",
+  title: "Commande Sécurisée | Shammah",
+  description: "Tunnel de paiement sécurisé pour votre commande de vêtements et accessoires chrétiens.",
+  robots: { index: false, follow: false },
 };
 export default function page() {
   return (
