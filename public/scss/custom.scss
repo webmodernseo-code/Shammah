@@ -447,37 +447,53 @@ body.font-option-3 {
   }
 
   /* Navigation Buttons */
-  .shammah-nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 38px;
-    height: 38px;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #111827;
-    cursor: pointer;
-    z-index: 10;
-    transition: all 0.2s ease;
-    backdrop-filter: blur(4px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  /* Navigation Buttons */
+  .shammah-nav-btn,
+  .shammah-nav-prev,
+  .shammah-nav-next {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 38px !important;
+    height: 38px !important;
+    background: rgba(255, 255, 255, 0.92) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #111827 !important;
+    cursor: pointer !important;
+    z-index: 10 !important;
+    transition: all 0.2s ease !important;
+    backdrop-filter: blur(4px) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+
+    &::before,
+    &::after {
+      content: none !important;
+      display: none !important;
+    }
+
+    svg {
+      width: 14px !important;
+      height: 14px !important;
+      pointer-events: none !important;
+    }
 
     &:hover {
-      background: #ffffff;
-      color: #000000;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      background: #ffffff !important;
+      color: #000000 !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+      transform: translateY(-50%) scale(1.05) !important;
     }
 
     &.shammah-nav-prev {
-      left: 12px;
+      left: 12px !important;
     }
 
     &.shammah-nav-next {
-      right: 12px;
+      right: 12px !important;
     }
   }
 }
@@ -1107,6 +1123,87 @@ del,
     }
   }
 }
+
+/* ========================================================
+   💎 ULTRA-PREMIUM SWIPER NAVIGATION GLOBAL OVERHAUL
+   - Élimine tout dédoublement (aucun ::after / ::before parasite)
+   - Icônes vectorielles SVG nettes (14px), parfaitement centrées
+   - Flèche gauche et droite correctement orientées sans overflow
+   ======================================================== */
+.nav-swiper,
+.swiper-button-prev,
+.swiper-button-next,
+.nav-prev-hot,
+.nav-next-hot,
+.nav-prev-cls,
+.nav-next-cls,
+.shammah-nav-prev,
+.shammah-nav-next {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
+  max-width: 40px !important;
+  max-height: 40px !important;
+  border-radius: 50% !important;
+  background-color: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  color: #111827 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  overflow: hidden !important;
+
+  /* Éliminer STRICTEMENT le pseudo-élément font-icon de Swiper (cause de la double flèche déformée) */
+  &::before,
+  &::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  /* Dimensionner le SVG intérieur au millimètre */
+  svg,
+  .swiper-navigation-icon {
+    width: 14px !important;
+    height: 14px !important;
+    min-width: 14px !important;
+    min-height: 14px !important;
+    max-width: 14px !important;
+    max-height: 14px !important;
+    display: block !important;
+    margin: auto !important;
+    pointer-events: none !important;
+  }
+
+  &:hover:not(.swiper-button-disabled) {
+    background-color: #09090b !important;
+    border-color: #09090b !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(9, 9, 11, 0.18) !important;
+    transform: scale(1.05) !important;
+
+    svg path {
+      stroke: #ffffff !important;
+    }
+  }
+
+  &.swiper-button-disabled {
+    opacity: 0.3 !important;
+    cursor: default !important;
+    pointer-events: none !important;
+    box-shadow: none !important;
+    transform: none !important;
+    background-color: #f8fafc !important;
+    border-color: #e2e8f0 !important;
+    color: #94a3b8 !important;
+  }
+}
+
 
 
 

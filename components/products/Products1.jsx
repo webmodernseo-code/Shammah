@@ -5,6 +5,7 @@ import GridProducts from "./GridProducts";
 import FilterModal from "./FilterModal";
 import LayoutHandler from "./LayoutHandler";
 import { useEffect, useReducer, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { initialState, reducer } from "@/reducer/filterReducer";
 import { products } from "@/data/products";
 
@@ -71,8 +72,19 @@ export default function Products1({
     },
   };
 
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams?.get("category")?.toLowerCase() || "";
+
   useEffect(() => {
     let filteredArrays = [];
+
+    if (categoryParam) {
+      const filteredByCategory = [...products].filter((elm) => {
+        if (!elm.categories) return false;
+        return elm.categories.includes(categoryParam);
+      });
+      filteredArrays = [...filteredArrays, filteredByCategory];
+    }
 
     if (brands !== "All") {
       const filteredByBrands = [...products].filter((elm) =>
@@ -108,7 +120,7 @@ export default function Products1({
       filteredArrays.every((array) => array.includes(item))
     );
     dispatch({ type: "SET_FILTERED", payload: commonItems });
-  }, [price, availability, color, size, brands]);
+  }, [price, availability, color, size, brands, categoryParam]);
 
   useEffect(() => {
     if (sortingOption === "Price Ascending") {

@@ -256,8 +256,22 @@ export default function Slider1({
           ))}
         </Swiper>
 
-        <div className="swiper-button-next nav-swiper thumbs-next shammah-nav-next" />
-        <div className="swiper-button-prev nav-swiper thumbs-prev shammah-nav-prev" />
+        <div
+          className="swiper-button-prev nav-swiper thumbs-prev shammah-nav-prev"
+          aria-label="Photo précédente"
+        >
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 13L5 8L10 3" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
+        <div
+          className="swiper-button-next nav-swiper thumbs-next shammah-nav-next"
+          aria-label="Photo suivante"
+        >
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 13L11 8L6 3" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
       </div>
     </div>
   );

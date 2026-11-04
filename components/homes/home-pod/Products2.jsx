@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
 import Image from "next/image";
 import { useContextElement } from "@/context/Context";
+
 export default function Products2() {
   const {
     addToWishlist,
@@ -32,10 +33,43 @@ export default function Products2() {
   }, [activeTab]);
 
   return (
-    <div className="">
+    <div className="flat-spacing-24">
       <div className="container">
+        {/* En-tête de section ultra-premium avec titre inspirant et flèches vectorielles pures */}
+        <div className="d-flex flex-column flex-md-row align-items-start align-items-md-end justify-content-between gap-3 mb-4">
+          <div>
+            <span className="text-xs text-uppercase tracking-wider text-muted fw-semibold d-inline-block mb-1">
+              Prêt-à-porter & Articles de Foi
+            </span>
+            <h2 className="title fw-bold text-dark letter-0 mb-1" style={{ fontSize: "2rem" }}>
+              Créations en Vedette
+            </h2>
+            <p className="text-secondary text-sm mb-0">
+              Des pièces d’exception confectionnées pour proclamer et porter la Parole avec élégance.
+            </p>
+          </div>
+          <div className="d-flex align-items-center gap-2">
+            <div
+              className="swiper-button-prev nav-swiper nav-prev-hot"
+              aria-label="Précédent"
+            >
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 13L5 8L10 3" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+            <div
+              className="swiper-button-next nav-swiper nav-next-hot"
+              aria-label="Suivant"
+            >
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 13L11 8L6 3" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
         <div className="flat-animate-tab flat-controltab-nav overflow-visible">
-          <div className="flat-title">
+          <div className="flat-title mb-4">
             <ul className="menu-tab-line style2 style-lg style-lg3">
               {tabs.map((tab, index) => (
                 <li
@@ -128,7 +162,6 @@ export default function Products2() {
                             >
                               <span className="icon icon-cart2" />
                               <span className="tooltip">
-                                {" "}
                                 {isAddedToCartProducts(product.id)
                                   ? "Already Added"
                                   : "Add to Cart"}
@@ -217,10 +250,6 @@ export default function Products2() {
                 ))}
                 <div className="d-flex d-xl-none sw-dot-default sw-pagination-hot justify-content-center" />
               </Swiper>
-              <div className="box-nav-swiper style-2">
-                <div className="swiper-button-prev nav-swiper nav-prev-hot relative" />
-                <div className="swiper-button-next nav-swiper nav-next-hot relative" />
-              </div>
             </div>
           </div>
         </div>
