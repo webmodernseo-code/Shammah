@@ -1064,76 +1064,96 @@ del,
 
 /* ========================================================
    💎 BADGES DE MOYENS DE PAIEMENT VECTORIELS (100% SVG)
-   - Visa, Mastercard, CB, American Express (fond bleu), PayPal, Apple Pay, Klarna
-   - Alignement millimétré Retina / OLED / Mobile
+   - Gabarit unique universel carte bancaire (ratio 3:2 -> 48x32px)
+   - Coins arrondis identiques (6px) & contour intérieur uniforme
+   - Calibrage optique individuel (Visa, Mastercard, CB, Amex, PayPal, Apple Pay, Klarna)
    ======================================================== */
 .shammah-payment-list {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 8px !important;
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .shammah-payment-badge {
-  width: 46px;
-  height: 30px;
-  border-radius: 6px;
-  border: 1px solid #e5e7eb;
-  background-color: #ffffff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px 6px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-  overflow: hidden;
-  flex-shrink: 0;
+  width: 48px !important;
+  height: 32px !important;
+  min-width: 48px !important;
+  max-width: 48px !important;
+  min-height: 32px !important;
+  max-height: 32px !important;
+  border-radius: 6px !important;
+  border: none !important;
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  flex-shrink: 0 !important;
+  position: relative !important;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+
+  &.is-white {
+    background-color: #ffffff !important;
+  }
+
+  &.is-cb {
+    background-color: #18265e !important;
+  }
+
+  &.is-amex {
+    background-color: #006fcf !important;
+  }
+
+  &.is-klarna {
+    background-color: #ffb3c7 !important;
+  }
 
   svg {
-    width: 100%;
-    height: 100%;
-    max-height: 20px;
-    display: block;
-    object-fit: contain;
+    display: block !important;
+    margin: auto !important;
+    flex-shrink: 0 !important;
   }
 
-  /* Cartes Bancaires CB : dégradé plein cadre */
-  &.shammah-payment-cb {
-    padding: 0;
-    border-color: #18265e;
-    background-color: #18265e;
-
-    svg {
-      max-height: 100%;
-      width: 100%;
-      height: 100%;
-    }
+  /* Calibrage optique de chaque logotype dans la carte 48x32 */
+  .logo-visa {
+    width: 34px !important;
+    height: 11px !important;
   }
 
-  /* American Express : fond bleu officiel #006fcf */
-  &.shammah-payment-amex {
-    padding: 0;
-    background-color: #006fcf;
-    border-color: #006fcf;
-
-    svg {
-      max-height: 100%;
-      width: 100%;
-      height: 100%;
-    }
+  .logo-mastercard {
+    width: 30px !important;
+    height: 19px !important;
   }
 
-  /* Klarna : fond rose officiel #ffb3c7 */
-  &.shammah-payment-klarna {
-    background-color: #ffb3c7;
-    border-color: #f49eb5;
-    padding: 5px 6px;
+  .logo-cb {
+    width: 48px !important;
+    height: 32px !important;
+  }
 
-    svg {
-      max-height: 14px;
-    }
+  .logo-amex {
+    width: 48px !important;
+    height: 32px !important;
+  }
+
+  .logo-paypal {
+    width: 17px !important;
+    height: 20px !important;
+  }
+
+  .logo-applepay {
+    width: 34px !important;
+    height: 14px !important;
+  }
+
+  .logo-klarna {
+    width: 34px !important;
+    height: 9px !important;
   }
 }
 

@@ -1,16 +1,22 @@
 import React from "react";
 
 /**
- * Composant vectoriel pur (100% SVG) des moyens de paiement officiels Shammah :
- * Visa, Mastercard, CB (Cartes Bancaires), PayPal, Apple Pay, Klarna, American Express.
+ * Composant vectoriel pur (100% SVG) des 7 moyens de paiement officiels Shammah.
+ * Chaque badge possède exactement la même forme idéale (format carte bancaire 3:2 — 48×32px,
+ * coins arrondis 6px, bordure intérieure subtile et calibrage optique de chaque logotype).
  */
 export default function PaymentMethods({ className = "" }) {
   return (
-    <ul className={`shammah-payment-list ${className}`} aria-label="Moyens de paiement acceptés">
+    <ul
+      className={`shammah-payment-list ${className}`}
+      aria-label="Moyens de paiement acceptés"
+    >
       {/* 1. Visa */}
-      <li className="shammah-payment-badge bg-white" title="Visa">
+      <li className="shammah-payment-badge is-white" title="Visa">
         <svg
+          className="logo-visa"
           viewBox="0.5 0.5 999 323.684"
+          preserveAspectRatio="xMidYMid meet"
           xmlns="http://www.w3.org/2000/svg"
           aria-label="Visa"
           role="img"
@@ -23,9 +29,11 @@ export default function PaymentMethods({ className = "" }) {
       </li>
 
       {/* 2. Mastercard */}
-      <li className="shammah-payment-badge bg-white" title="Mastercard">
+      <li className="shammah-payment-badge is-white" title="Mastercard">
         <svg
+          className="logo-mastercard"
           viewBox="55.2 38.3 464.5 287.8"
+          preserveAspectRatio="xMidYMid meet"
           xmlns="http://www.w3.org/2000/svg"
           aria-label="Mastercard"
           role="img"
@@ -46,13 +54,14 @@ export default function PaymentMethods({ className = "" }) {
       </li>
 
       {/* 3. Cartes Bancaires (CB) */}
-      <li className="shammah-payment-badge shammah-payment-cb" title="Cartes Bancaires CB">
+      <li className="shammah-payment-badge is-cb" title="Cartes Bancaires CB">
         <svg
-          viewBox="0 0 26.47 18.16"
+          className="logo-cb"
+          viewBox="-2.5 -2 31.47 22.16"
+          preserveAspectRatio="xMidYMid slice"
           xmlns="http://www.w3.org/2000/svg"
           aria-label="Cartes Bancaires CB"
           role="img"
-          preserveAspectRatio="xMidYMid slice"
         >
           <defs>
             <radialGradient
@@ -61,7 +70,7 @@ export default function PaymentMethods({ className = "" }) {
               cy="18.27"
               gradientTransform="matrix(1 0 0 .94 0 .5)"
               gradientUnits="userSpaceOnUse"
-              r="26.83"
+              r="30"
             >
               <stop offset=".09" stopColor="#009245" />
               <stop offset=".23" stopColor="#049552" stopOpacity=".89" />
@@ -74,7 +83,7 @@ export default function PaymentMethods({ className = "" }) {
               cx="5.89"
               cy="19.23"
               gradientUnits="userSpaceOnUse"
-              r="34.42"
+              r="38"
             >
               <stop offset=".15" stopColor="#1fb0b8" stopOpacity="0" />
               <stop offset=".35" stopColor="#1c7491" stopOpacity=".4" />
@@ -84,9 +93,9 @@ export default function PaymentMethods({ className = "" }) {
             </radialGradient>
           </defs>
           <g>
-            <path d="M0 0h26.47v18.16H0z" fill="#29abe2" />
-            <path d="M0 0h26.47v18.16H0z" fill="url(#shammah-cb-grad-b)" />
-            <path d="M0 0h26.47v18.16H0z" fill="url(#shammah-cb-grad-c)" />
+            <rect x="-10" y="-10" width="48" height="40" fill="#29abe2" />
+            <rect x="-10" y="-10" width="48" height="40" fill="url(#shammah-cb-grad-b)" />
+            <rect x="-10" y="-10" width="48" height="40" fill="url(#shammah-cb-grad-c)" />
           </g>
           <g fill="#fff">
             <path d="M14.39 3.86h7.07a2.47 2.47 0 0 1 2.47 2.47 2.47 2.47 0 0 1-2.47 2.47h-7.07V3.86zM14.39 9.36h7.07a2.47 2.47 0 0 1 2.47 2.47 2.47 2.47 0 0 1-2.47 2.47h-7.07V9.36zM8.23 9.36V8.8h5.69a5.51 5.51 0 0 0-5.69-4.94 5.47 5.47 0 0 0-5.69 5.22 5.47 5.47 0 0 0 5.69 5.22 5.51 5.51 0 0 0 5.69-4.94z" />
@@ -95,33 +104,33 @@ export default function PaymentMethods({ className = "" }) {
       </li>
 
       {/* 4. American Express (Fond bleu #006fcf) */}
-      <li className="shammah-payment-badge shammah-payment-amex" title="American Express">
+      <li className="shammah-payment-badge is-amex" title="American Express">
         <svg
-          viewBox="0 0 160 100"
+          className="logo-amex"
+          viewBox="-14 -8 188 116"
+          preserveAspectRatio="xMidYMid meet"
           xmlns="http://www.w3.org/2000/svg"
           aria-label="American Express"
           role="img"
-          preserveAspectRatio="xMidYMid slice"
         >
-          <path
-            d="M148 0H8C4 0 0 4 0 8v80c0 8 4 12 12 12h136c8 0 12-4 12-12V12c0-8-4-12-12-12zm0 0"
-            fill="#006fcf"
-          />
+          <rect x="-30" y="-20" width="220" height="140" fill="#006fcf" />
           <path
             d="M13.52 36.625l-3.099-7.55-3.081 7.55zm68.266-3.006c-.623.377-1.358.39-2.24.39h-5.5v-4.207h5.575c.789 0 1.612.035 2.147.341.587.276.95.864.95 1.675 0 .828-.345 1.494-.932 1.8 0 0 .587-.306 0 0zm39.236 3.006l-3.133-7.55-3.116 7.55zm-73.139 8.173h-4.641l-.018-14.834-6.564 14.834h-3.976l-6.582-14.847v14.847h-9.208l-1.74-4.224H5.728L3.97 44.798H-.947l8.108-18.94h6.726l7.7 17.933V25.857h7.39l5.925 12.85 5.443-12.85h7.537v18.941h.001zm18.498 0H51.257v-18.94h15.124v3.944H55.785v3.414h10.342v3.882H55.785v3.783H66.38v3.917zm21.325-13.84c0 3.02-2.016 4.58-3.19 5.05.99.376 1.837 1.042 2.24 1.594.639.942.749 1.784.749 3.476v3.72h-4.567l-.017-2.388c0-1.14.11-2.779-.714-3.69-.662-.666-1.67-.81-3.3-.81h-4.86v6.888H69.52v-18.94h10.413c2.314 0 4.018.06 5.482.907 1.432.846 2.291 2.08 2.291 4.194zm7.245 13.84h-4.62v-18.94h4.62zm53.594 0h-6.416l-8.582-14.216v14.216h-9.22l-1.762-4.224h-9.405l-1.71 4.224h-5.297c-2.2 0-4.987-.486-6.565-2.095-1.59-1.608-2.419-3.786-2.419-7.23 0-2.81.495-5.378 2.44-7.407 1.465-1.512 3.757-2.209 6.877-2.209h4.383v4.059h-4.291c-1.653 0-2.586.246-3.484 1.122-.772.797-1.302 2.305-1.302 4.29 0 2.03.404 3.493 1.245 4.449.697.75 1.964.977 3.155.977h2.034l6.38-14.896h6.784l7.666 17.916V25.858h6.893l7.958 13.191V25.858h4.638v18.94zM-1 48.518h7.735l1.744-4.206h3.905l1.74 4.207h15.22v-3.217l1.359 3.23h7.9l1.36-3.278v3.265h37.825l-.018-6.906h.732c.512.018.662.065.662.911v5.995h19.563V46.91c1.578.846 4.033 1.608 7.262 1.608h8.23l1.762-4.207h3.905l1.722 4.207h15.86v-3.996l2.402 3.996h12.71V22.102h-12.578v3.12l-1.762-3.12h-12.906v3.12l-1.618-3.12h-17.433c-2.918 0-5.484.407-7.556 1.542v-1.542h-12.03v1.542c-1.319-1.17-3.116-1.542-5.114-1.542H37.632l-2.95 6.823-3.028-6.823H17.81v3.12l-1.52-3.12H4.483L-1 34.662v13.857zM160.04 62.468h-8.252c-.824 0-1.371.03-1.832.342-.478.307-.662.762-.662 1.363 0 .715.404 1.201.99 1.411.478.167.991.215 1.745.215l2.454.066c2.476.06 4.129.487 5.137 1.525.183.144.293.306.42.469v-5.391zm0 12.49c-1.1 1.609-3.243 2.424-6.144 2.424h-8.744v-4.063h8.708c.864 0 1.469-.113 1.832-.469.316-.293.536-.718.536-1.236 0-.551-.22-.99-.553-1.252-.329-.29-.807-.42-1.595-.42-4.251-.145-9.555.13-9.555-5.865 0-2.748 1.745-5.64 6.496-5.64h9.018v-3.77h-8.379c-2.528 0-4.365.606-5.666 1.547v-1.547H133.6c-1.981 0-4.308.491-5.408 1.547v-1.547H106.06v1.547c-1.762-1.27-4.734-1.547-6.105-1.547H85.357v1.547c-1.393-1.35-4.492-1.547-6.38-1.547H62.638L58.9 58.712 55.4 54.666H30.993v26.436H54.94l3.853-4.11 3.628 4.11 14.76.013v-6.219h1.452c1.958.03 4.268-.048 6.306-.93v7.135h12.175v-6.89h.587c.75 0 .823.031.823.78v6.11h36.985c2.348 0 4.802-.601 6.161-1.692v1.692H153.4c2.442 0 4.826-.343 6.64-1.219v-4.925zm-18.06-7.568c.881.912 1.354 2.064 1.354 4.014 0 4.075-2.546 5.978-7.112 5.978h-8.818v-4.063h8.782c.859 0 1.468-.113 1.85-.469a1.68 1.68 0 0 0 .534-1.236c0-.551-.241-.99-.552-1.252-.346-.29-.824-.42-1.612-.42-4.234-.145-9.537.13-9.537-5.865 0-2.748 1.727-5.64 6.473-5.64h9.077v4.032h-8.305c-.824 0-1.359.03-1.814.342-.496.307-.68.762-.68 1.363 0 .715.42 1.201.99 1.411.478.167.991.215 1.762.215l2.438.066c2.457.06 4.144.485 5.17 1.524 0 0-1.026-1.039 0 0zm-40.853-1.17c-.606.359-1.355.39-2.236.39h-5.5v-4.255h5.575c.806 0 1.613.017 2.16.342.587.307.938.893.938 1.704 0 .81-.35 1.464-.937 1.819 0 0 .586-.355 0 0zm2.734 2.357c1.008.372 1.832 1.039 2.218 1.59.64.926.732 1.79.75 3.46v3.755h-4.545v-2.37c0-1.14.11-2.828-.732-3.709-.662-.679-1.67-.84-3.322-.84h-4.838v6.919h-4.55V58.435h10.453c2.292 0 3.962.101 5.448.894 1.428.863 2.327 2.046 2.327 4.207 0 3.024-2.017 4.567-3.209 5.04 0 0 1.192-.473 0 0zm5.72-10.14h15.11v3.917h-10.602v3.445h10.343v3.865H114.09v3.77l10.602.017v3.93h-15.11V58.436zm-30.547 8.742h-5.85v-4.824h5.903c1.634 0 2.769.666 2.769 2.323 0 1.638-1.082 2.501-2.822 2.501zm-10.36 8.48l-6.951-7.717 6.951-7.473zm-17.951-2.225H39.592v-3.77h9.94v-3.865h-9.94v-3.445h11.35l4.952 5.521-5.171 5.559zm35.994-8.756c0 5.263-3.927 6.35-7.885 6.35h-5.649v6.354h-8.8l-5.574-6.272-5.794 6.272H35.082V58.435H53.29l5.57 6.21 5.759-6.21h14.467c3.593 0 7.63.995 7.63 6.242zm0 0"
-            fill="#fff"
+            fill="#ffffff"
           />
         </svg>
       </li>
 
       {/* 5. PayPal */}
-      <li className="shammah-payment-badge bg-white" title="PayPal">
+      <li className="shammah-payment-badge is-white" title="PayPal">
         <svg
+          className="logo-paypal"
           clipRule="evenodd"
           fillRule="evenodd"
           strokeLinejoin="round"
           strokeMiterlimit="2"
           viewBox="25.388 7.515 239.638 279.415"
+          preserveAspectRatio="xMidYMid meet"
           xmlns="http://www.w3.org/2000/svg"
           aria-label="PayPal"
           role="img"
@@ -148,9 +157,11 @@ export default function PaymentMethods({ className = "" }) {
       </li>
 
       {/* 6. Apple Pay */}
-      <li className="shammah-payment-badge bg-white" title="Apple Pay">
+      <li className="shammah-payment-badge is-white" title="Apple Pay">
         <svg
+          className="logo-applepay"
           viewBox="-7.8 0 519.8 210.2"
+          preserveAspectRatio="xMidYMid meet"
           xmlns="http://www.w3.org/2000/svg"
           aria-label="Apple Pay"
           role="img"
@@ -163,20 +174,19 @@ export default function PaymentMethods({ className = "" }) {
       </li>
 
       {/* 7. Klarna */}
-      <li className="shammah-payment-badge shammah-payment-klarna" title="Klarna">
+      <li className="shammah-payment-badge is-klarna" title="Klarna">
         <svg
-          viewBox="4.413 5.76850966 37.5527723 11.47054642"
+          className="logo-klarna"
+          viewBox="6.5 8.5 35.4 8.5"
+          preserveAspectRatio="xMidYMid meet"
           xmlns="http://www.w3.org/2000/svg"
           aria-label="Klarna"
           role="img"
         >
-          <g fill="none">
-            <rect fill="#ffb3c7" height="25" rx="4.321" width="45" />
-            <path
-              d="m40.794 14.646a1.07 1.07 0 0 0 -1.066 1.076 1.07 1.07 0 0 0 1.066 1.076c.588 0 1.066-.482 1.066-1.076a1.07 1.07 0 0 0 -1.066-1.076zm-3.508-.831c0-.814-.689-1.473-1.539-1.473s-1.539.66-1.539 1.473.69 1.472 1.54 1.472 1.538-.659 1.538-1.472zm.006-2.863h1.698v5.725h-1.698v-.366a2.96 2.96 0 0 1 -1.684.524c-1.653 0-2.993-1.352-2.993-3.02s1.34-3.02 2.993-3.02c.625 0 1.204.193 1.684.524zm-13.592.746v-.745h-1.739v5.724h1.743v-2.673c0-.902.968-1.386 1.64-1.386h.02v-1.665c-.69 0-1.323.298-1.664.745zm-4.332 2.117c0-.814-.689-1.473-1.539-1.473s-1.539.66-1.539 1.473.69 1.472 1.54 1.472 1.538-.659 1.538-1.472zm.006-2.863h1.699v5.725h-1.699v-.366c-.48.33-1.059.524-1.684.524-1.653 0-2.993-1.352-2.993-3.02s1.34-3.02 2.993-3.02c.625 0 1.204.193 1.684.524zm10.223-.153c-.678 0-1.32.212-1.75.798v-.644h-1.691v5.724h1.712v-3.008c0-.87.578-1.297 1.275-1.297.746 0 1.176.45 1.176 1.285v3.02h1.696v-3.64c0-1.332-1.05-2.238-2.418-2.238zm-17.374 5.878h1.778v-8.275h-1.778zm-7.81.002h1.883v-8.279h-1.882zm6.586-8.279c0 1.792-.692 3.46-1.926 4.699l2.602 3.58h-2.325l-2.827-3.89.73-.552a4.768 4.768 0 0 0 1.902-3.837h1.842z"
-              fill="#0a0b09"
-            />
-          </g>
+          <path
+            d="m40.794 14.646a1.07 1.07 0 0 0 -1.066 1.076 1.07 1.07 0 0 0 1.066 1.076c.588 0 1.066-.482 1.066-1.076a1.07 1.07 0 0 0 -1.066-1.076zm-3.508-.831c0-.814-.689-1.473-1.539-1.473s-1.539.66-1.539 1.473.69 1.472 1.54 1.472 1.538-.659 1.538-1.472zm.006-2.863h1.698v5.725h-1.698v-.366a2.96 2.96 0 0 1 -1.684.524c-1.653 0-2.993-1.352-2.993-3.02s1.34-3.02 2.993-3.02c.625 0 1.204.193 1.684.524zm-13.592.746v-.745h-1.739v5.724h1.743v-2.673c0-.902.968-1.386 1.64-1.386h.02v-1.665c-.69 0-1.323.298-1.664.745zm-4.332 2.117c0-.814-.689-1.473-1.539-1.473s-1.539.66-1.539 1.473.69 1.472 1.54 1.472 1.538-.659 1.538-1.472zm.006-2.863h1.699v5.725h-1.699v-.366c-.48.33-1.059.524-1.684.524-1.653 0-2.993-1.352-2.993-3.02s1.34-3.02 2.993-3.02c.625 0 1.204.193 1.684.524zm10.223-.153c-.678 0-1.32.212-1.75.798v-.644h-1.691v5.724h1.712v-3.008c0-.87.578-1.297 1.275-1.297.746 0 1.176.45 1.176 1.285v3.02h1.696v-3.64c0-1.332-1.05-2.238-2.418-2.238zm-17.374 5.878h1.778v-8.275h-1.778zm-7.81.002h1.883v-8.279h-1.882zm6.586-8.279c0 1.792-.692 3.46-1.926 4.699l2.602 3.58h-2.325l-2.827-3.89.73-.552a4.768 4.768 0 0 0 1.902-3.837h1.842z"
+            fill="#0a0b09"
+          />
         </svg>
       </li>
     </ul>
