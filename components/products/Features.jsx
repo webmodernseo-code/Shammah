@@ -7,29 +7,10 @@ export default function Features() {
     <>
       <div className="flat-spacing pt-0">
         <div className="container">
-          <p className="text text-md text-center">
-            Our women's collection brings you a unique blend of classic
-            sophistication and the latest fashion trends. Whether you're looking
-            for versatile daywear, stylish work attire, or statement pieces for
-            special occasions, this collection has it all. Each garment is
-            thoughtfully crafted with attention to detail, using high-quality
-            fabrics to ensure lasting comfort and a flawless fit. From chic
-            blouses and tailored pants to stunning dresses and outerwear, you'll
-            find pieces that seamlessly blend elegance with practicality. Our
-            collection is designed to empower women with confidence and style,
-            no matter the occasion.
-          </p>
-          <p className="mt_12 text-md text-center">
-            Looking for more? Don’t miss out on our other exciting collections
-            for{" "}
-            <span className="text-primary text-decoration-underline fw-medium">
-              BAGS
-            </span>{" "}
-            and{" "}
-            <span className="text-primary text-decoration-underline fw-medium">
-              ACCESSORIES
-            </span>
-            .
+          <p className="text text-md text-center mx-auto" style={{ maxWidth: "780px" }}>
+            Notre collection réunit l&apos;ensemble des créations Shammah : t-shirts en coton lourd,
+            sweats à capuche au tombé structuré, casquettes finement brodées et accessoires du quotidien.
+            Chaque pièce est pensée pour allier confort durable, sobriété contemporaine et témoignage de foi.
           </p>
         </div>
       </div>
@@ -69,9 +50,9 @@ export default function Features() {
                   />
                 </svg>
                 <div className="content">
-                  <div className="title">Free Shipping</div>
+                  <div className="title">Livraison offerte dès 60 €</div>
                   <p className="desc text-grey-2">
-                    Enjoy free shipping on all orders over $150
+                    Expédition soignée et suivie partout en France et en Europe.
                   </p>
                 </div>
               </div>
@@ -91,9 +72,9 @@ export default function Features() {
                   />
                 </svg>
                 <div className="content">
-                  <div className="title">Easy Returns</div>
+                  <div className="title">Retours sous 14 jours</div>
                   <p className="desc text-grey-2">
-                    Hassle-free returns for a worry-free shopping experience.
+                    Échange ou retour simple pour commander en toute sérénité.
                   </p>
                 </div>
               </div>
@@ -113,9 +94,9 @@ export default function Features() {
                   />
                 </svg>
                 <div className="content">
-                  <div className="title">24/7 Support</div>
+                  <div className="title">Assistance fraternelle</div>
                   <p className="desc text-grey-2">
-                    Shop with confidence, covered by our one-year warranty.
+                    À votre écoute par WhatsApp et e-mail pour vous accompagner.
                   </p>
                 </div>
               </div>

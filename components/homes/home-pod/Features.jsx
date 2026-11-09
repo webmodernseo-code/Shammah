@@ -46,8 +46,8 @@ export default function Features() {
                   />
                 </svg>
                 <div className="content">
-                  <div className="title fw-bold text-uppercase">
-                    LIVRAISON OFFERTE DÈS 60€
+                  <div className="title fw-bold">
+                    Livraison offerte dès 60 €
                   </div>
                   <p className="desc">Expédition suivie partout en Europe</p>
                 </div>
@@ -71,8 +71,8 @@ export default function Features() {
                   />
                 </svg>
                 <div className="content">
-                  <div className="title fw-bold text-uppercase">
-                    RETOURS SOUS 14 JOURS
+                  <div className="title fw-bold">
+                    Retours sous 14 jours
                   </div>
                   <p className="desc">Échange simple et sans tracas</p>
                 </div>
@@ -96,8 +96,8 @@ export default function Features() {
                   />
                 </svg>
                 <div className="content">
-                  <div className="title fw-bold text-uppercase">
-                    ASSISTANCE FRATERNELLE
+                  <div className="title fw-bold">
+                    Assistance fraternelle
                   </div>
                   <p className="desc">À votre écoute par WhatsApp & email</p>
                 </div>

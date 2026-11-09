@@ -68,28 +68,30 @@ export default function ProductCard11({ product }) {
           <p className="decs text-sm text-main text-line-clamp-2">
             Confection haut de gamme Shammah : coton sélectionné pour sa tenue, sa douceur et sa durabilité, imprimé et brodé avec soin.
           </p>
-          <ul className="list-color-product">
-            {product.colors.map((color, index) => (
-              <li
-                className={`list-color-item color-swatch hover-tooltip tooltip-bot ${
-                  currentImage == color.img ? "active" : ""
-                } ${color.value == "bg-white" ? "line" : ""}`}
-                key={index}
-                onMouseOver={() => setCurrentImage(color.img)}
-              >
-                <span className="tooltip color-filter">{color.label}</span>
-                <span className={`swatch-value ${color.value}`} />
-                <Image
-                  className="lazyload"
-                  data-src={color.img}
-                  alt="image-product"
-                  src={color.img}
-                  width="684"
-                  height="972"
-                />
-              </li>
-            ))}
-          </ul>
+          {product.colors?.length > 0 && (
+            <ul className="list-color-product">
+              {product.colors.map((color, index) => (
+                <li
+                  className={`list-color-item color-swatch hover-tooltip tooltip-bot ${
+                    currentImage == color.img ? "active" : ""
+                  } ${color.value == "bg-white" ? "line" : ""}`}
+                  key={index}
+                  onMouseOver={() => setCurrentImage(color.img)}
+                >
+                  <span className="tooltip color-filter">{color.label}</span>
+                  <span className={`swatch-value ${color.value}`} />
+                  <Image
+                    className="lazyload"
+                    data-src={color.img}
+                    alt="image-product"
+                    src={color.img}
+                    width="684"
+                    height="972"
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
           <ul className="size-box">
             <li className="size-item text-xs">S</li>
             <li className="size-item text-xs">M</li>

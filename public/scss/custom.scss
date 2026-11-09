@@ -1434,15 +1434,46 @@ del,
 }
 
 /* ========================================================
-   💎 BANNIÈRE ÉDITORIALE "JESUS — QUEL CRÉATEUR EXTRAORDINAIRE"
-   - Fond noir profond (#000000) fusionné avec le visuel
-   - Bouton sobre et contrasté pour explorer la collection
+   💎 BANNIÈRE CARROUSEL "JESUS — QUEL CRÉATEUR EXTRAORDINAIRE"
+   - Carrousel 3 visuels (fond noir et fond blanc adaptatif)
+   - Gabarit uniforme sans saut de hauteur & bouton contrasté
    ======================================================== */
 .shammah-creator-banner {
   background-color: #000000;
-  padding: 36px 0 56px;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  padding: 36px 0 52px;
   position: relative;
   overflow: hidden;
+  transition: background-color 0.45s ease, border-color 0.45s ease;
+
+  &.is-light {
+    background-color: #ffffff;
+    border-top-color: #e5e7eb;
+    border-bottom-color: #e5e7eb;
+
+    .shammah-creator-pagination {
+      .swiper-pagination-bullet {
+        background-color: rgba(9, 9, 11, 0.25) !important;
+
+        &.swiper-pagination-bullet-active {
+          background-color: #09090b !important;
+        }
+      }
+    }
+
+    .shammah-creator-btn {
+      background-color: #09090b;
+      color: #ffffff !important;
+      border-color: #09090b;
+
+      &:hover {
+        background-color: transparent;
+        color: #09090b !important;
+        border-color: #09090b;
+      }
+    }
+  }
 
   @media (max-width: 767px) {
     padding: 24px 0 40px;
@@ -1460,16 +1491,57 @@ del,
     max-width: 1024px;
     margin: 0 auto;
 
-    .shammah-creator-img {
+    .shammah-creator-slide {
       width: 100%;
-      height: auto;
+      height: clamp(220px, 38vw, 410px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+
+      &.is-dark {
+        background-color: #000000;
+      }
+
+      &.is-light {
+        background-color: #ffffff;
+      }
+    }
+
+    .shammah-creator-img {
+      width: 100% !important;
+      height: 100% !important;
       display: block;
-      object-fit: contain;
+      object-fit: contain !important;
+    }
+  }
+
+  .shammah-creator-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 14px;
+    margin-bottom: 18px;
+
+    .swiper-pagination-bullet {
+      width: 8px !important;
+      height: 8px !important;
+      border-radius: 999px !important;
+      background-color: rgba(255, 255, 255, 0.35) !important;
+      opacity: 1 !important;
+      margin: 0 !important;
+      transition: all 0.25s ease !important;
+
+      &.swiper-pagination-bullet-active {
+        width: 24px !important;
+        background-color: #ffffff !important;
+      }
     }
   }
 
   .shammah-creator-actions {
-    margin-top: 8px;
+    margin-top: 4px;
     position: relative;
     z-index: 2;
   }
