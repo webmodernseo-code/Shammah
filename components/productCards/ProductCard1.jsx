@@ -29,6 +29,9 @@ export default function ProductCard1({
   }, [product]);
 
   const hoverImage = product.imgHover || product.imageHover || product.imgSrc;
+  const isUnoptimized = Boolean(
+    currentImage?.startsWith("data:") || hoverImage?.startsWith("data:")
+  );
 
   return (
     <div
@@ -44,6 +47,7 @@ export default function ProductCard1({
             src={currentImage}
             width={513}
             height={729}
+            unoptimized={isUnoptimized}
             sizes="(max-width: 767px) 50vw, (max-width: 1199px) 33vw, 25vw"
           />
           <Image
@@ -53,6 +57,7 @@ export default function ProductCard1({
             src={hoverImage}
             width={513}
             height={729}
+            unoptimized={isUnoptimized}
             sizes="(max-width: 767px) 50vw, (max-width: 1199px) 33vw, 25vw"
           />
         </Link>
@@ -183,11 +188,11 @@ export default function ProductCard1({
           <span
             className={`price-new ${product.oldPrice ? "text-primary" : ""} `}
           >
-            {product.price.toFixed(2)} €
+            {Number(product.price).toFixed(2)} €
           </span>{" "}
           {product.oldPrice && (
             <span className="price-old text-dark">
-              {product.oldPrice.toFixed(2)} €
+              {Number(product.oldPrice).toFixed(2)} €
             </span>
           )}{" "}
         </p>
@@ -214,6 +219,7 @@ export default function ProductCard1({
                   src={color.img}
                   width="684"
                   height="972"
+                  unoptimized={Boolean(color.img?.startsWith("data:"))}
                 />
               </li>
             ))}

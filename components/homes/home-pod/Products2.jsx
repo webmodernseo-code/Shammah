@@ -1,6 +1,6 @@
 "use client";
 import { products29 } from "@/data/products";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
@@ -9,6 +9,7 @@ import { useContextElement } from "@/context/Context";
 
 export default function Products2() {
   const {
+    dbProducts = [],
     addToWishlist,
     isAddedtoWishlist,
     addToCompareItem,
@@ -24,22 +25,36 @@ export default function Products2() {
     { label: "Nouveautés", key: "Just Arrivals" },
   ];
   const [activeTab, setActiveTab] = useState("What's Hot?");
-  const [filtered, setFiltered] = useState(products29);
+
+  const allFeaturedPool = useMemo(() => {
+    const seen = new Set();
+    const list = [];
+    for (const item of [...dbProducts, ...products29]) {
+      const key = String(item.title || "").trim().toLowerCase();
+      if (!key || seen.has(key)) continue;
+      seen.add(key);
+      list.push(item);
+    }
+    return list;
+  }, [dbProducts]);
+
+  const [filtered, setFiltered] = useState(allFeaturedPool);
 
   useEffect(() => {
     setFiltered(
-      products29.filter((elm) => elm.tabFilterCategories?.includes(activeTab))
+      allFeaturedPool.filter(
+        (elm) => !elm.tabFilterCategories || elm.tabFilterCategories.includes(activeTab)
+      )
     );
-  }, [activeTab]);
+  }, [activeTab, allFeaturedPool]);
 
   return (
     <div className="flat-spacing-24">
       <div className="container">
-        {/* En-tête de section ultra-premium avec titre inspirant et flèches vectorielles pures */}
         <div className="d-flex flex-column flex-md-row align-items-start align-items-md-end justify-content-between gap-3 mb-4">
           <div>
             <span className="text-xs text-uppercase tracking-wider text-muted fw-semibold d-inline-block mb-1">
-              Prêt-à-porter & Articles de Foi
+              Prêt-à-porter &amp; Articles de Foi
             </span>
             <h2 className="title fw-bold text-dark letter-0 mb-1" style={{ fontSize: "2rem" }}>
               Créations en Vedette
@@ -107,129 +122,139 @@ export default function Products2() {
                 }}
                 modules={[Pagination, Navigation, Autoplay]}
               >
-                {filtered.map((product) => (
-                  <SwiperSlide className="swiper-slide" key={product.id}>
-                    <div className={`card-product ${product.style || ""}`}>
-                      <div className="card-product-wrapper rounded-0 asp-ratio-0">
-                        <Link
-                          href={`/product-detail/${product.id}`}
-                          className="product-img"
-                        >
-                          <Image
-                            className="img-product lazyload"
-                            data-src={product.imgSrc}
-                            alt="image-product"
-                            src={product.imgSrc}
-                            width={513}
-                            height={606}
-                            sizes="(max-width: 767px) 50vw, (max-width: 1199px) 33vw, 25vw"
-                          />
-                          <Image
-                            className="img-hover lazyload"
-                            data-src={product.imageHover}
-                            alt="image-product"
-                            src={product.imageHover}
-                            width={513}
-                            height={606}
-                            sizes="(max-width: 767px) 50vw, (max-width: 1199px) 33vw, 25vw"
-                          />
-                        </Link>
-                        <ul className="list-product-btn">
-                          <li>
-                            <a
-                              href="#shoppingCart"
-                              onClick={() => addProductToCart(product.id)}
-                              data-bs-toggle="offcanvas"
-                              className="hover-tooltip tooltip-left box-icon"
-                            >
-                              <span className="icon icon-cart2" />
-                              <span className="tooltip">
-                                {isAddedToCartProducts(product.id)
-                                  ? "Déjà au panier"
-                                  : "Ajouter au panier"}
-                              </span>
-                            </a>
-                          </li>
-                          <li
-                            className={`wishlist ${
-                              isAddedtoWishlist(product.id) ? "addwishlist" : ""
-                            }`}
+                {filtered.map((product) => {
+                  const isDataImg = Boolean(
+                    product.imgSrc?.startsWith("data:") ||
+                      product.imageHover?.startsWith("data:")
+                  );
+                  return (
+                    <SwiperSlide className="swiper-slide" key={product.id}>
+                      <div className={`card-product ${product.style || ""}`}>
+                        <div className="card-product-wrapper rounded-0 asp-ratio-0">
+                          <Link
+                            href={`/product-detail/${product.id}`}
+                            className="product-img"
                           >
-                            <a
-                              onClick={() => addToWishlist(product.id)}
-                              className="hover-tooltip tooltip-left box-icon"
+                            <Image
+                              className="img-product lazyload"
+                              data-src={product.imgSrc}
+                              alt={product.title || "Produit Shammah"}
+                              src={product.imgSrc}
+                              width={513}
+                              height={606}
+                              unoptimized={isDataImg}
+                              sizes="(max-width: 767px) 50vw, (max-width: 1199px) 33vw, 25vw"
+                            />
+                            <Image
+                              className="img-hover lazyload"
+                              data-src={product.imageHover || product.imgSrc}
+                              alt={product.title || "Produit Shammah"}
+                              src={product.imageHover || product.imgSrc}
+                              width={513}
+                              height={606}
+                              unoptimized={isDataImg}
+                              sizes="(max-width: 767px) 50vw, (max-width: 1199px) 33vw, 25vw"
+                            />
+                          </Link>
+                          <ul className="list-product-btn">
+                            <li>
+                              <a
+                                href="#shoppingCart"
+                                onClick={() => addProductToCart(product.id)}
+                                data-bs-toggle="offcanvas"
+                                className="hover-tooltip tooltip-left box-icon"
+                              >
+                                <span className="icon icon-cart2" />
+                                <span className="tooltip">
+                                  {isAddedToCartProducts(product.id)
+                                    ? "Déjà au panier"
+                                    : "Ajouter au panier"}
+                                </span>
+                              </a>
+                            </li>
+                            <li
+                              className={`wishlist ${
+                                isAddedtoWishlist(product.id) ? "addwishlist" : ""
+                              }`}
                             >
-                              <span
-                                className={`icon ${
-                                  isAddedtoWishlist(product.id)
-                                    ? "icon-trash"
-                                    : "icon-heart2"
-                                } `}
-                              />
-                              <span className="tooltip">
-                                {isAddedtoWishlist(product.id)
-                                  ? "Retirer des favoris"
-                                  : "Ajouter aux favoris"}
+                              <a
+                                onClick={() => addToWishlist(product.id)}
+                                className="hover-tooltip tooltip-left box-icon"
+                              >
+                                <span
+                                  className={`icon ${
+                                    isAddedtoWishlist(product.id)
+                                      ? "icon-trash"
+                                      : "icon-heart2"
+                                  } `}
+                                />
+                                <span className="tooltip">
+                                  {isAddedtoWishlist(product.id)
+                                    ? "Retirer des favoris"
+                                    : "Ajouter aux favoris"}
+                                </span>
+                              </a>
+                            </li>
+                            <li>
+                              <a
+                                href="#quickView"
+                                data-bs-toggle="modal"
+                                onClick={() => setQuickViewItem(product)}
+                                className="hover-tooltip tooltip-left box-icon quickview"
+                              >
+                                <span className="icon icon-view" />
+                                <span className="tooltip">Aperçu rapide</span>
+                              </a>
+                            </li>
+                            <li className="compare">
+                              <a
+                                href="#compare"
+                                data-bs-toggle="modal"
+                                aria-controls="compare"
+                                onClick={() => addToCompareItem(product.id)}
+                                className="hover-tooltip tooltip-left box-icon"
+                              >
+                                <span className="icon icon-compare" />
+                                <span className="tooltip">
+                                  {isAddedtoCompareItem(product.id)
+                                    ? "Déjà comparé"
+                                    : "Comparer"}
+                                </span>
+                              </a>
+                            </li>
+                          </ul>
+                          {product.discount && (
+                            <div className="on-sale-wrap">
+                              <span className="on-sale-item">
+                                {Array.isArray(product.discount)
+                                  ? product.discount[0]
+                                  : product.discount}
                               </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              href="#quickView"
-                              data-bs-toggle="modal"
-                              onClick={() => setQuickViewItem(product)}
-                              className="hover-tooltip tooltip-left box-icon quickview"
-                            >
-                              <span className="icon icon-view" />
-                              <span className="tooltip">Aperçu rapide</span>
-                            </a>
-                          </li>
-                          <li className="compare">
-                            <a
-                              href="#compare"
-                              data-bs-toggle="modal"
-                              aria-controls="compare"
-                              onClick={() => addToCompareItem(product.id)}
-                              className="hover-tooltip tooltip-left box-icon"
-                            >
-                              <span className="icon icon-compare" />
-                              <span className="tooltip">
-                                {isAddedtoCompareItem(product.id)
-                                  ? "Déjà comparé"
-                                  : "Comparer"}
-                              </span>
-                            </a>
-                          </li>
-                        </ul>
-                        {product.discount && (
-                          <div className="on-sale-wrap">
-                            <span className="on-sale-item">
-                              {product.discount}
-                            </span>
-                          </div>
-                        )}
-                      </div>
-                      <div className="card-product-info pb-0">
-                        <Link
-                          href={`/product-detail/${product.id}`}
-                          className="name-product link fw-medium text-md"
-                        >
-                          {product.title}
-                        </Link>
-                        <p className="price-wrap fw-medium">
-                          <span className="price-new text-primary">
-                            {product.price.toFixed(2)} €
-                          </span>{" "}
-                          {product.oldPrice && (
-                            <span className="price-old">
-                              {product.oldPrice.toFixed(2)} €
-                            </span>
+                            </div>
                           )}
-                        </p>
+                        </div>
+                        <div className="card-product-info pb-0">
+                          <Link
+                            href={`/product-detail/${product.id}`}
+                            className="name-product link fw-medium text-md"
+                          >
+                            {product.title}
+                          </Link>
+                          <p className="price-wrap fw-medium">
+                            <span className="price-new text-primary">
+                              {Number(product.price).toFixed(2)} €
+                            </span>{" "}
+                            {product.oldPrice && (
+                              <span className="price-old">
+                                {Number(product.oldPrice).toFixed(2)} €
+                              </span>
+                            )}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  </SwiperSlide>
-                ))}
+                    </SwiperSlide>
+                  );
+                })}
                 <div className="d-flex d-xl-none sw-dot-default sw-pagination-hot justify-content-center" />
               </Swiper>
             </div>

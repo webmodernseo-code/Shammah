@@ -22,13 +22,13 @@ const QUICK_CATEGORIES = [
   {
     slug: "t-shirts",
     title: "T-shirts",
-    desc: "Coton bio épais",
+    desc: "Coton bio",
     thumb: "/images/cls-categories/pod/t-shirts-jesus.jpg",
   },
   {
     slug: "sweats",
     title: "Sweats à capuche",
-    desc: "Molleton structuré",
+    desc: "Molleton doux",
     thumb: "/images/cls-categories/pod/sweat-vert-jesus.jpg",
   },
   {
@@ -53,11 +53,9 @@ export default function Newsletter() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // Sélectionner le verset du jour
     const dayIndex = new Date().getDate() % INSPIRING_VERSES.length;
     setVerse(INSPIRING_VERSES[dayIndex]);
 
-    // Afficher une seule fois par session de navigation
     const alreadySeenSession =
       sessionStorage.getItem("shammah_welcome_seen") === "true";
     if (alreadySeenSession) return;
@@ -107,72 +105,216 @@ export default function Newsletter() {
       aria-labelledby="shammahWelcomeTitle"
       aria-hidden="true"
     >
-      <div className="modal-dialog modal-dialog-centered">
-        <div className="modal-content shammah-welcome-content">
-          <div className="modal-top shammah-welcome-top">
-            <Image
-              src="/images/banner/jesus-createur.jpg"
-              alt="Bienvenue chez Shammah — Créations chrétiennes"
-              width={1024}
-              height={572}
-              className="shammah-welcome-img"
-            />
-            <button
-              type="button"
-              className="icon icon-close btn-hide-popup shammah-welcome-close"
-              data-bs-dismiss="modal"
-              onClick={handleClose}
-              aria-label="Fermer"
-            />
-          </div>
+      <div
+        className="modal-dialog modal-dialog-centered"
+        style={{ maxWidth: "480px", margin: "10px auto" }}
+      >
+        <div
+          className="modal-content shammah-welcome-content"
+          style={{
+            borderRadius: "14px",
+            border: "1px solid #e5e7eb",
+            backgroundColor: "#ffffff",
+            padding: "14px 16px",
+            position: "relative",
+          }}
+        >
+          <button
+            type="button"
+            className="icon icon-close btn-hide-popup shammah-welcome-close"
+            data-bs-dismiss="modal"
+            onClick={handleClose}
+            aria-label="Fermer"
+            style={{
+              position: "absolute",
+              top: "10px",
+              right: "10px",
+              width: "26px",
+              height: "26px",
+              borderRadius: "50%",
+              backgroundColor: "#f4f4f5",
+              color: "#09090b",
+              border: "1px solid #e4e4e7",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "10px",
+              cursor: "pointer",
+              zIndex: 5,
+            }}
+          />
 
-          <div className="modal-bottom shammah-welcome-body text-center">
-            <div className="shammah-welcome-header-row">
-              <span className="shammah-welcome-badge">
+          <div
+            className="shammah-welcome-body text-center"
+            style={{ padding: 0, maxWidth: "100%", margin: 0 }}
+          >
+            <div
+              className="shammah-welcome-header-row"
+              style={{ marginBottom: "6px", paddingRight: "20px", paddingLeft: "20px" }}
+            >
+              <span
+                className="shammah-welcome-badge"
+                style={{
+                  display: "inline-block",
+                  fontSize: "10.5px",
+                  fontWeight: 600,
+                  color: "#52525b",
+                  backgroundColor: "#f4f4f5",
+                  border: "1px solid #e4e4e7",
+                  padding: "1px 8px",
+                  borderRadius: "999px",
+                  marginBottom: "2px",
+                }}
+              >
                 Parole &amp; Création Shammah
               </span>
-              <h5 id="shammahWelcomeTitle" className="shammah-welcome-title">
+              <h5
+                id="shammahWelcomeTitle"
+                className="shammah-welcome-title"
+                style={{
+                  fontSize: "1.02rem",
+                  fontWeight: 800,
+                  color: "#09090b",
+                  margin: 0,
+                  lineHeight: 1.2,
+                }}
+              >
                 Portez votre foi avec caractère
               </h5>
             </div>
 
-            {/* Bloc Verset d'Inspiration compact (Option 3) */}
-            <blockquote className="shammah-welcome-verse">
-              <p className="verse-text">{verse.text}</p>
-              <footer className="verse-ref">— {verse.ref}</footer>
+            {/* Verset d'inspiration ultra-compact */}
+            <blockquote
+              className="shammah-welcome-verse"
+              style={{
+                backgroundColor: "#fafafa",
+                border: "1px solid #e5e7eb",
+                borderRadius: "8px",
+                padding: "6px 10px",
+                margin: "0 0 8px 0",
+              }}
+            >
+              <p
+                className="verse-text"
+                style={{
+                  fontSize: "11.5px",
+                  lineHeight: 1.35,
+                  color: "#27272a",
+                  fontStyle: "italic",
+                  margin: 0,
+                }}
+              >
+                {verse.text}{" "}
+                <strong
+                  className="verse-ref"
+                  style={{ fontStyle: "normal", color: "#09090b", fontWeight: 700 }}
+                >
+                  ({verse.ref})
+                </strong>
+              </p>
             </blockquote>
 
-            {/* Grille compacte des 4 catégories avec mini-vignettes (Option 2) */}
-            <div className="shammah-welcome-grid">
+            {/* Grille stricte 2x2 (2 à 2) des 4 catégories */}
+            <div
+              className="shammah-welcome-grid"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                gap: "6px",
+                marginBottom: "8px",
+              }}
+            >
               {QUICK_CATEGORIES.map((cat) => (
                 <Link
                   key={cat.slug}
                   href={`/shop-default?category=${cat.slug}`}
                   onClick={handleClose}
                   className="shammah-welcome-cat-card"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "7px",
+                    padding: "5px 7px",
+                    borderRadius: "8px",
+                    border: "1px solid #e5e7eb",
+                    backgroundColor: "#ffffff",
+                    textDecoration: "none",
+                    textAlign: "left",
+                    minWidth: 0,
+                  }}
                 >
-                  <span className="shammah-welcome-cat-thumb">
+                  <span
+                    className="shammah-welcome-cat-thumb"
+                    style={{
+                      width: "28px",
+                      height: "28px",
+                      minWidth: "28px",
+                      borderRadius: "6px",
+                      border: "1px solid #e5e7eb",
+                      backgroundColor: "#ffffff",
+                      overflow: "hidden",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                    }}
+                  >
                     <Image
                       src={cat.thumb}
                       alt={cat.title}
-                      width={32}
-                      height={32}
+                      width={28}
+                      height={28}
+                      style={{ width: "100%", height: "100%", objectFit: "contain" }}
                     />
                   </span>
-                  <span className="shammah-welcome-cat-text">
-                    <span className="cat-name">{cat.title}</span>
-                    <span className="cat-sub">{cat.desc}</span>
+                  <span
+                    className="shammah-welcome-cat-text"
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      flex: 1,
+                      minWidth: 0,
+                    }}
+                  >
+                    <span
+                      className="cat-name"
+                      style={{
+                        fontSize: "12px",
+                        fontWeight: 700,
+                        color: "#09090b",
+                        lineHeight: 1.15,
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {cat.title}
+                    </span>
+                    <span
+                      className="cat-sub"
+                      style={{
+                        fontSize: "10px",
+                        color: "#71717a",
+                        lineHeight: 1.15,
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {cat.desc}
+                    </span>
                   </span>
                   <svg
                     className="cat-arrow"
-                    width="13"
-                    height="13"
+                    width="12"
+                    height="12"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
+                    style={{ flexShrink: 0, color: "#a1a1aa" }}
                   >
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
@@ -184,11 +326,26 @@ export default function Newsletter() {
               href="/shop-default"
               onClick={handleClose}
               className="shammah-welcome-cta"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "6px",
+                width: "100%",
+                height: "34px",
+                borderRadius: "8px",
+                backgroundColor: "#09090b",
+                color: "#ffffff",
+                fontSize: "12px",
+                fontWeight: 600,
+                textDecoration: "none",
+                marginBottom: "6px",
+              }}
             >
               <span>Explorer toute la collection</span>
               <svg
-                width="15"
-                height="15"
+                width="13"
+                height="13"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -200,10 +357,21 @@ export default function Newsletter() {
               </svg>
             </Link>
 
-            <div className="shammah-welcome-reassurance">
+            <div
+              className="shammah-welcome-reassurance"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "4px",
+                fontSize: "10.5px",
+                color: "#71717a",
+                lineHeight: 1.2,
+              }}
+            >
               <svg
-                width="13"
-                height="13"
+                width="11"
+                height="11"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -213,9 +381,7 @@ export default function Newsletter() {
               >
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
-              <span>
-                Livraison offerte dès 60 € • Achat rapide sans création de compte
-              </span>
+              <span>Livraison offerte dès 60 € • Achat rapide sans compte</span>
             </div>
           </div>
         </div>

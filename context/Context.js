@@ -1,16 +1,16 @@
 "use client";
 import { allProducts } from "@/data/products";
 import { openCartModal } from "@/utlis/openCartModal";
-// import { openWistlistModal } from "@/utlis/openWishlist";
 
-import React, { useEffect } from "react";
-import { useContext, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
+
 const noop = () => {};
 const dataContext = React.createContext({
   cartProducts: [],
   wishList: [],
   compareItem: [],
   totalPrice: 0,
+  dbProducts: [],
   quickViewItem: allProducts[0],
   quickAddItem: 1,
   setCartProducts: noop,
@@ -27,6 +27,7 @@ const dataContext = React.createContext({
   setCompareItem: noop,
   updateQuantity: noop,
 });
+
 export const useContextElement = () => {
   return useContext(dataContext);
 };
@@ -35,9 +36,23 @@ export default function Context({ children }) {
   const [cartProducts, setCartProducts] = useState([]);
   const [wishList, setWishList] = useState([1, 2, 3]);
   const [compareItem, setCompareItem] = useState([1, 2, 3]);
+  const [dbProducts, setDbProducts] = useState([]);
   const [quickViewItem, setQuickViewItem] = useState(allProducts[0]);
   const [quickAddItem, setQuickAddItem] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
+
+  // Charger en direct les produits publiés depuis le tableau de bord (base Neon)
+  useEffect(() => {
+    fetch("/api/products", { cache: "no-store" })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json?.success && Array.isArray(json.data)) {
+          setDbProducts(json.data);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   useEffect(() => {
     const subtotal = cartProducts.reduce((accumulator, product) => {
       return accumulator + product.quantity * product.price;
@@ -46,15 +61,19 @@ export default function Context({ children }) {
   }, [cartProducts]);
 
   const isAddedToCartProducts = (id) => {
-    if (cartProducts.filter((elm) => elm.id == id)[0]) {
+    if (cartProducts.find((elm) => String(elm.id) === String(id))) {
       return true;
     }
     return false;
   };
+
   const addProductToCart = (id, qty, isModal = true) => {
     if (!isAddedToCartProducts(id)) {
+      const combinedPool = [...dbProducts, ...allProducts];
+      const found = combinedPool.find((elm) => String(elm.id) === String(id));
+      if (!found) return;
       const item = {
-        ...allProducts.filter((elm) => elm.id == id)[0],
+        ...found,
         quantity: qty ? qty : 1,
       };
       setCartProducts((pre) => [...pre, item]);
@@ -66,7 +85,7 @@ export default function Context({ children }) {
 
   const updateQuantity = (id, qty) => {
     if (isAddedToCartProducts(id)) {
-      let item = cartProducts.filter((elm) => elm.id == id)[0];
+      let item = cartProducts.find((elm) => String(elm.id) === String(id));
       let items = [...cartProducts];
       const itemIndex = items.indexOf(item);
 
@@ -79,7 +98,6 @@ export default function Context({ children }) {
   const addToWishlist = (id) => {
     if (!wishList.includes(id)) {
       setWishList((pre) => [...pre, id]);
-      //   openWistlistModal();
     } else {
       setWishList((pre) => pre.filter((elm) => elm != id));
     }
@@ -90,28 +108,27 @@ export default function Context({ children }) {
       setWishList((pre) => [...pre.filter((elm) => elm != id)]);
     }
   };
+
   const addToCompareItem = (id) => {
     if (!compareItem.includes(id)) {
       setCompareItem((pre) => [...pre, id]);
     }
   };
+
   const removeFromCompareItem = (id) => {
     if (compareItem.includes(id)) {
       setCompareItem((pre) => [...pre.filter((elm) => elm != id)]);
     }
   };
+
   const isAddedtoWishlist = (id) => {
-    if (wishList.includes(id)) {
-      return true;
-    }
-    return false;
+    return wishList.includes(id);
   };
+
   const isAddedtoCompareItem = (id) => {
-    if (compareItem.includes(id)) {
-      return true;
-    }
-    return false;
+    return compareItem.includes(id);
   };
+
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem("cartList"));
     if (items?.length) {
@@ -122,6 +139,7 @@ export default function Context({ children }) {
   useEffect(() => {
     localStorage.setItem("cartList", JSON.stringify(cartProducts));
   }, [cartProducts]);
+
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem("wishlist"));
     if (items?.length) {
@@ -137,6 +155,7 @@ export default function Context({ children }) {
     cartProducts,
     setCartProducts,
     totalPrice,
+    dbProducts,
     addProductToCart,
     isAddedToCartProducts,
     removeFromWishlist,

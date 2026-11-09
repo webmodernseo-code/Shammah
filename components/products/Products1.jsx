@@ -5,10 +5,11 @@ import GridProducts from "./GridProducts";
 import FilterModal from "./FilterModal";
 import LayoutHandler from "./LayoutHandler";
 import Image from "next/image";
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useMemo, useReducer, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { initialState, reducer } from "@/reducer/filterReducer";
 import { products } from "@/data/products";
+import { useContextElement } from "@/context/Context";
 
 export const SHAMMAH_CATEGORY_FILTERS = [
   { slug: "All", label: "Tous les produits", thumb: null },
@@ -48,6 +49,7 @@ export default function Products1({
   tooltipDirection,
   parentClass = "flat-spacing-24",
 }) {
+  const { dbProducts = [] } = useContextElement();
   const [activeLayout, setActiveLayout] = useState(4);
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
@@ -61,10 +63,20 @@ export default function Products1({
     filtered,
     sortingOption,
     sorted,
-
-    currentPage,
-    itemPerPage,
   } = state;
+
+  // Fusionner les produits créés dans le tableau de bord avec ceux du catalogue
+  const catalogSource = useMemo(() => {
+    const seen = new Set();
+    const list = [];
+    for (const item of [...dbProducts, ...products]) {
+      const key = String(item.title || "").trim().toLowerCase();
+      if (!key || seen.has(key)) continue;
+      seen.add(key);
+      list.push(item);
+    }
+    return list;
+  }, [dbProducts]);
 
   const updateUrlCategory = (nextCat) => {
     if (typeof window === "undefined") return;
@@ -139,7 +151,7 @@ export default function Products1({
     let filteredArrays = [];
 
     if (category && category !== "All") {
-      const filteredByCategory = [...products].filter((elm) => {
+      const filteredByCategory = [...catalogSource].filter((elm) => {
         if (!elm.categories) return false;
         return elm.categories.includes(category);
       });
@@ -147,40 +159,40 @@ export default function Products1({
     }
 
     if (brands !== "All") {
-      const filteredByBrands = [...products].filter((elm) =>
-        elm.filterBrands.includes(brands)
+      const filteredByBrands = [...catalogSource].filter((elm) =>
+        elm.filterBrands?.includes(brands)
       );
       filteredArrays = [...filteredArrays, filteredByBrands];
     }
     if (availability !== "All") {
-      const filteredByavailability = [...products].filter(
+      const filteredByavailability = [...catalogSource].filter(
         (elm) => availability === elm.inStock
       );
       filteredArrays = [...filteredArrays, filteredByavailability];
     }
     if (color !== "All") {
-      const filteredByColor = [...products].filter((elm) =>
-        elm.filterColor.includes(color)
+      const filteredByColor = [...catalogSource].filter((elm) =>
+        elm.filterColor?.includes(color)
       );
       filteredArrays = [...filteredArrays, filteredByColor];
     }
     if (size !== "All" && size !== "Free Size") {
-      const filteredBysize = [...products].filter((elm) =>
-        elm.filterSizes.includes(size)
+      const filteredBysize = [...catalogSource].filter((elm) =>
+        elm.filterSizes?.includes(size)
       );
       filteredArrays = [...filteredArrays, filteredBysize];
     }
 
-    const filteredByPrice = [...products].filter(
+    const filteredByPrice = [...catalogSource].filter(
       (elm) => elm.price >= price[0] && elm.price <= price[1]
     );
     filteredArrays = [...filteredArrays, filteredByPrice];
 
-    const commonItems = [...products].filter((item) =>
+    const commonItems = [...catalogSource].filter((item) =>
       filteredArrays.every((array) => array.includes(item))
     );
     dispatch({ type: "SET_FILTERED", payload: commonItems });
-  }, [price, category, availability, color, size, brands]);
+  }, [price, category, availability, color, size, brands, catalogSource]);
 
   useEffect(() => {
     if (sortingOption === "Price Ascending") {
@@ -404,7 +416,6 @@ export default function Products1({
             {activeLayout == 1 ? (
               <div className="tf-list-layout wrapper-shop" id="listLayout">
                 <ListProducts products={sorted} />
-                {/* Pagination */}
                 <ul className="wg-pagination">
                   <li className="active">
                     <div className="pagination-item">1</div>
@@ -436,7 +447,6 @@ export default function Products1({
                   products={sorted}
                   tooltipDirection={tooltipDirection}
                 />
-                {/* Pagination */}
                 <ul className="wg-pagination">
                   <li className="active">
                     <div className="pagination-item">1</div>

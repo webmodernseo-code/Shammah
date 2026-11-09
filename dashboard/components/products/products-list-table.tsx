@@ -19,103 +19,13 @@ import SearchInput from "../common/search-input";
 import DeleteModal from "../ui/delete-modal";
 import Link from "next/link";
 import { Shirt } from "lucide-react";
-
-const FASHION_DATA = [
-  {
-    id: "DIV-H-101",
-    name: "Costume 2 Pièces Laine Vierge",
-    category: "Homme",
-    price: "289,00 €",
-    material: "100% Laine Vierge Italienne",
-    stock: 45,
-    status: "Publié",
-    sizes: "46, 48, 50, 52, 54",
-    image: "/images/products/fashion-1.jpg",
-  },
-  {
-    id: "DIV-F-201",
-    name: "Robe Longue Fluide Soie Sauvage",
-    category: "Femme",
-    price: "195,00 €",
-    material: "100% Soie Naturelle",
-    stock: 60,
-    status: "Publié",
-    sizes: "XS, S, M, L",
-    image: "/images/products/fashion-2.jpg",
-  },
-  {
-    id: "DIV-U-301",
-    name: "Hoodie Oversize Signature Coton Bio",
-    category: "Homme",
-    price: "89,00 €",
-    material: "Coton Biologique 450 g/m²",
-    stock: 120,
-    status: "Publié",
-    sizes: "XS, S, M, L, XL, XXL",
-    image: "/images/products/fashion-3.jpg",
-  },
-  {
-    id: "DIV-H-102",
-    name: "Chemise Slim Fit Lin Naturel",
-    category: "Homme",
-    price: "79,00 €",
-    material: "100% Lin Français",
-    stock: 85,
-    status: "Publié",
-    sizes: "S, M, L, XL",
-    image: "/images/products/fashion-4.jpg",
-  },
-  {
-    id: "DIV-F-202",
-    name: "Trench Coat Ceinturé Imperméable",
-    category: "Femme",
-    price: "245,00 €",
-    material: "Gabardine Coton Déperlant",
-    stock: 32,
-    status: "Publié",
-    sizes: "S, M, L",
-    image: "/images/products/fashion-5.jpg",
-  },
-  {
-    id: "DIV-E-401",
-    name: "Ensemble Cérémonie Enfant",
-    category: "Enfant",
-    price: "65,00 €",
-    material: "Coton & Lin Doux",
-    stock: 40,
-    status: "Publié",
-    sizes: "4A, 6A, 8A, 10A, 12A",
-    image: "/images/products/fashion-6.jpg",
-  },
-  {
-    id: "DIV-A-501",
-    name: "Sac Cabas Cuir Pleine Fleur Italien",
-    category: "Accessoires",
-    price: "180,00 €",
-    material: "Cuir Tannage Végétal",
-    stock: 18,
-    status: "Publié",
-    sizes: "Taille Unique",
-    image: "/images/products/fashion-7.jpg",
-  },
-  {
-    id: "DIV-A-502",
-    name: "Ceinture Cuir Vintage Boucle Dorée",
-    category: "Accessoires",
-    price: "45,00 €",
-    material: "Cuir Véritable",
-    stock: 55,
-    status: "Publié",
-    sizes: "85, 90, 95, 100",
-    image: "/images/products/fashion-8.jpg",
-  },
-];
+import { toast } from "sonner";
 
 const categoryOptions = [
-  { label: "Tous les rayons", value: "" },
-  { label: "Homme", value: "Homme" },
-  { label: "Femme", value: "Femme" },
-  { label: "Enfant", value: "Enfant" },
+  { label: "Toutes les catégories", value: "" },
+  { label: "T-shirts", value: "T-shirts" },
+  { label: "Sweats à capuche", value: "Sweats à capuche" },
+  { label: "Casquettes", value: "Casquettes" },
   { label: "Accessoires", value: "Accessoires" },
 ];
 
@@ -134,32 +44,68 @@ export default function ProductListTable() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedRows, setSelectedRows] = useState<string[]>([]);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [productToDelete, setProductToDelete] = useState<any | null>(null);
 
-  useEffect(() => {
+  const loadProducts = () => {
     setLoading(true);
     fetch("/api/admin/products", { cache: "no-store" })
       .then((r) => r.json())
       .then((json) => {
         if (json.success && Array.isArray(json.data)) {
-          const dbItems = json.data.map((p: any) => ({
-            id: p.id,
-            code: p.code || p.id,
-            name: p.title || p.name,
-            category: p.category?.name || p.category || "Sans catégorie",
-            price: `${Number(p.basePrice).toFixed(2).replace(".", ",")} €`,
-            material: p.material || "100% Coton / Laine",
-            stock: p.stockQuantity ?? 0,
-            status: p.isAvailable !== false ? "Publié" : "Brouillon",
-            sizes: p.variants?.map((v: any) => v.size).filter(Boolean).join(", ") || "Unique",
-            image: p.imageRecto || "/images/products/fashion-1.jpg",
-          }));
+          const dbItems = json.data.map((p: any) => {
+            const uniqueSizes = Array.from(
+              new Set(p.variants?.map((v: any) => v.size).filter(Boolean))
+            );
+            return {
+              id: p.id,
+              code: p.code || p.id,
+              name: p.title || p.name,
+              category: p.category?.name || p.category || "T-shirts",
+              price: `${Number(p.basePrice).toFixed(2).replace(".", ",")} €`,
+              material: p.material || "100% Coton Biologique",
+              stock: p.stockQuantity ?? 0,
+              status: p.isAvailable !== false ? "Publié" : "Brouillon",
+              sizes: uniqueSizes.length > 0 ? uniqueSizes.join(", ") : "Unique",
+              image: p.imageRecto || "/images/cls-categories/pod/t-shirts-jesus.jpg",
+            };
+          });
 
           setProducts(dbItems);
         }
       })
       .catch(() => setProducts([]))
       .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    loadProducts();
   }, []);
+
+  const handleConfirmDelete = async () => {
+    if (!productToDelete) {
+      setIsDeleteModalOpen(false);
+      return;
+    }
+
+    try {
+      const res = await fetch(
+        `/api/admin/products/${encodeURIComponent(productToDelete.id)}`,
+        { method: "DELETE" }
+      );
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error(data.error || "Erreur lors de la suppression.");
+      }
+
+      toast.success(data.message || "Article supprimé avec succès.");
+      setProducts((prev) => prev.filter((p) => p.id !== productToDelete.id));
+    } catch (err: any) {
+      toast.error(err.message || "Impossible de supprimer cet article.");
+    } finally {
+      setIsDeleteModalOpen(false);
+      setProductToDelete(null);
+    }
+  };
 
   const filteredProducts = products.filter((item) => {
     const matchesCategory =
@@ -170,11 +116,12 @@ export default function ProductListTable() {
       !searchTerm ||
       item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.material.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.id.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesCategory && matchesStatus && matchesSearch;
   });
 
-  const pageSize = 6;
+  const pageSize = 12;
   const isAllSelected =
     filteredProducts.length > 0 &&
     selectedRows.length === filteredProducts.length;
@@ -201,7 +148,7 @@ export default function ProductListTable() {
       <div className="p-4 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-4 border-b border-gray-100">
         <div className="w-full md:w-72">
           <SearchInput
-            placeholder="Rechercher un vêtement, matière, réf..."
+            placeholder="Rechercher un article, matière, réf..."
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
@@ -212,7 +159,7 @@ export default function ProductListTable() {
               options={categoryOptions}
               value={selectedCategory}
               onChange={setSelectedCategory}
-              placeholder="Filtrer par rayon"
+              placeholder="Filtrer par catégorie"
             />
           </div>
           <div className="w-full sm:w-36">
@@ -225,9 +172,9 @@ export default function ProductListTable() {
           </div>
           <Link
             href="/products/add"
-            className="btn btn-primary py-2 px-4 rounded-xl text-xs font-bold whitespace-nowrap bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm"
+            className="btn btn-primary py-2.5 px-4 rounded-xl text-xs font-bold whitespace-nowrap bg-[#2b6b61] hover:bg-[#22564e] text-white shadow-xs transition-colors"
           >
-            + Nouvel Article Mode
+            + Ajouter un article
           </Link>
         </div>
       </div>
@@ -242,8 +189,8 @@ export default function ProductListTable() {
               />
             </TableHead>
             <TableHead className="text-xs font-semibold text-gray-600">Réf.</TableHead>
-            <TableHead className="text-xs font-semibold text-gray-600">Article / Modèle</TableHead>
-            <TableHead className="text-xs font-semibold text-gray-600">Rayon</TableHead>
+            <TableHead className="text-xs font-semibold text-gray-600">Article / Création</TableHead>
+            <TableHead className="text-xs font-semibold text-gray-600">Catégorie</TableHead>
             <TableHead className="text-xs font-semibold text-gray-600">Prix TTC</TableHead>
             <TableHead className="text-xs font-semibold text-gray-600">Matière</TableHead>
             <TableHead className="text-xs font-semibold text-gray-600">Stock Total</TableHead>
@@ -261,108 +208,120 @@ export default function ProductListTable() {
           ) : filteredProducts.length === 0 ? (
             <TableRow>
               <TableCell colSpan={9} className="py-12 text-center text-xs text-slate-500">
-                Aucun produit trouvé dans le catalogue.
+                Aucun article trouvé dans le catalogue. Cliquez sur « + Ajouter un article » pour en créer un.
               </TableCell>
             </TableRow>
           ) : (
             filteredProducts
               .slice((currentPage - 1) * pageSize, currentPage * pageSize)
               .map((product) => (
-              <TableRow
-                key={product.id}
-                className="border-b border-gray-100 last:border-0 hover:bg-gray-50/50 transition-colors"
-              >
-                <TableCell className="pl-6 whitespace-nowrap">
-                  <Checkbox
-                    checked={selectedRows.includes(product.id)}
-                    onCheckedChange={(checked) =>
-                      toggleSelectRow(product.id, checked as boolean)
-                    }
-                  />
-                </TableCell>
-                <TableCell className="font-mono text-xs text-gray-500 whitespace-nowrap">
-                  {product.id}
-                </TableCell>
-                <TableCell className="whitespace-nowrap">
-                  <div className="flex items-center gap-3">
-                    <div className="size-11 rounded-xl bg-slate-100 border border-slate-200 shrink-0 flex items-center justify-center text-slate-700">
-                      <Shirt className="size-5 text-indigo-600" />
+                <TableRow
+                  key={product.id}
+                  className="border-b border-gray-100 last:border-0 hover:bg-gray-50/50 transition-colors"
+                >
+                  <TableCell className="pl-6 whitespace-nowrap">
+                    <Checkbox
+                      checked={selectedRows.includes(product.id)}
+                      onCheckedChange={(checked) =>
+                        toggleSelectRow(product.id, checked as boolean)
+                      }
+                    />
+                  </TableCell>
+                  <TableCell className="font-mono text-xs text-gray-500 whitespace-nowrap">
+                    {product.code}
+                  </TableCell>
+                  <TableCell className="whitespace-nowrap">
+                    <div className="flex items-center gap-3">
+                      <div className="size-11 rounded-xl bg-white border border-slate-200 shrink-0 flex items-center justify-center overflow-hidden p-0.5">
+                        {product.image ? (
+                          <img
+                            src={product.image}
+                            alt={product.name}
+                            className="w-full h-full object-contain rounded-lg"
+                          />
+                        ) : (
+                          <Shirt className="size-5 text-[#2b6b61]" />
+                        )}
+                      </div>
+                      <div>
+                        <span className="text-xs sm:text-sm font-bold text-gray-900 block">
+                          {product.name}
+                        </span>
+                        <span className="text-[11px] text-gray-400 font-medium">
+                          Tailles : {product.sizes}
+                        </span>
+                      </div>
                     </div>
-                    <div>
-                      <span className="text-xs sm:text-sm font-bold text-gray-900 block">
-                        {product.name}
-                      </span>
-                      <span className="text-[11px] text-gray-400 font-medium">
-                        Tailles : {product.sizes}
-                      </span>
+                  </TableCell>
+                  <TableCell className="text-xs text-gray-700 font-semibold">
+                    <span className="px-2.5 py-1 rounded-md bg-slate-100 text-slate-800 text-[11px]">
+                      {product.category}
+                    </span>
+                  </TableCell>
+                  <TableCell className="font-bold text-xs sm:text-sm text-[#101828] whitespace-nowrap">
+                    {product.price}
+                  </TableCell>
+                  <TableCell className="text-xs text-gray-600 whitespace-nowrap">
+                    {product.material}
+                  </TableCell>
+                  <TableCell className="whitespace-nowrap">
+                    <span
+                      className={`text-xs font-bold ${
+                        product.stock <= 10 ? "text-amber-600" : "text-gray-800"
+                      }`}
+                    >
+                      {product.stock} pièces
+                    </span>
+                  </TableCell>
+                  <TableCell className="whitespace-nowrap">
+                    <Badge
+                      variant={
+                        product.status === "Publié" ? "success" : "warning"
+                      }
+                    >
+                      {product.status}
+                    </Badge>
+                  </TableCell>
+                  <TableCell className="pr-6 whitespace-nowrap text-right">
+                    <div className="flex items-center justify-end gap-1">
+                      <Button
+                        className="hover:text-[#2b6b61] p-1.5"
+                        href={`/products/${product.id}`}
+                        variant="icon"
+                        title="Voir"
+                      >
+                        <Eye className="size-4" />
+                      </Button>
+                      <Button
+                        className="hover:text-[#2b6b61] p-1.5"
+                        variant="icon"
+                        href={`/products/edit/${product.id}`}
+                        title="Modifier"
+                      >
+                        <Pencil className="size-4" />
+                      </Button>
+                      <Button
+                        className="hover:text-red-500 p-1.5 text-gray-400"
+                        variant="icon"
+                        onClick={() => {
+                          setProductToDelete(product);
+                          setIsDeleteModalOpen(true);
+                        }}
+                        title="Supprimer"
+                      >
+                        <Trash className="size-4" />
+                      </Button>
                     </div>
-                  </div>
-                </TableCell>
-                <TableCell className="text-xs text-gray-700 font-semibold">
-                  <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 text-[11px]">
-                    {product.category}
-                  </span>
-                </TableCell>
-                <TableCell className="font-bold text-xs sm:text-sm text-indigo-600 whitespace-nowrap">
-                  {product.price}
-                </TableCell>
-                <TableCell className="text-xs text-gray-600 whitespace-nowrap">
-                  {product.material}
-                </TableCell>
-                <TableCell className="whitespace-nowrap">
-                  <span
-                    className={`text-xs font-bold ${
-                      product.stock <= 20 ? "text-amber-600" : "text-gray-800"
-                    }`}
-                  >
-                    {product.stock} pièces
-                  </span>
-                </TableCell>
-                <TableCell className="whitespace-nowrap">
-                  <Badge
-                    variant={
-                      product.status === "Publié" ? "success" : "warning"
-                    }
-                  >
-                    {product.status}
-                  </Badge>
-                </TableCell>
-                <TableCell className="pr-6 whitespace-nowrap text-right">
-                  <div className="flex items-center justify-end gap-1">
-                    <Button
-                      className="hover:text-indigo-600 p-1.5"
-                      href={`/products/${product.id}`}
-                      variant="icon"
-                      title="Voir"
-                    >
-                      <Eye className="size-4" />
-                    </Button>
-                    <Button
-                      className="hover:text-indigo-600 p-1.5"
-                      variant="icon"
-                      href={`/products/edit/${product.id}`}
-                      title="Modifier"
-                    >
-                      <Pencil className="size-4" />
-                    </Button>
-                    <Button
-                      className="hover:text-red-500 p-1.5 text-gray-400"
-                      variant="icon"
-                      onClick={() => setIsDeleteModalOpen(true)}
-                      title="Supprimer"
-                    >
-                      <Trash className="size-4" />
-                    </Button>
-                  </div>
-                </TableCell>
-              </TableRow>
-            )))}
+                  </TableCell>
+                </TableRow>
+              ))
+          )}
         </TableBody>
       </Table>
 
       <div className="p-4 sm:p-6 border-t border-gray-100 flex items-center justify-between">
         <p className="text-xs text-gray-500">
-          Affichage de {filteredProducts.length} articles de mode
+          Affichage de {filteredProducts.length} article{filteredProducts.length > 1 ? "s" : ""} Shammah
         </p>
         <Pagination
           currentPage={currentPage}
@@ -373,8 +332,11 @@ export default function ProductListTable() {
 
       <DeleteModal
         isOpen={isDeleteModalOpen}
-        onClose={() => setIsDeleteModalOpen(false)}
-        onConfirm={() => setIsDeleteModalOpen(false)}
+        onClose={() => {
+          setIsDeleteModalOpen(false);
+          setProductToDelete(null);
+        }}
+        onConfirm={handleConfirmDelete}
       />
     </div>
   );

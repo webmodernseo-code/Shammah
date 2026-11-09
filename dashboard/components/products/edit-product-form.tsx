@@ -6,41 +6,39 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import Switch from "@/components/ui/switch";
-import { 
-  ArrowLeft, 
-  UploadCloud, 
+import {
+  ArrowLeft,
+  UploadCloud,
   Euro,
   Image as ImageIcon,
   Shirt,
   Scissors,
   Palette,
-  Layers
+  Layers,
+  Trash2,
 } from "lucide-react";
-import { 
-  ColorVariant, 
-  ProductVariantItem, 
-  PRESET_FASHION_COLORS 
+import {
+  ColorVariant,
+  ProductVariantItem,
+  PRESET_FASHION_COLORS,
 } from "@/lib/fashion-colors";
 import ColorPalettePicker from "./color-palette-picker";
 import ProductVariantsMatrix from "./product-variants-matrix";
 
 const CATEGORIES = [
-  "Homme",
-  "Femme",
-  "Enfant",
+  "T-shirts",
+  "Sweats à capuche",
+  "Casquettes",
   "Accessoires",
 ];
 
 const MATERIALS = [
-  "100% Coton Biologique (450 g/m²)",
-  "100% Lin Français Naturel",
-  "100% Soie Sauvage Italienne",
-  "100% Laine Vierge Mérinos",
-  "Denim Brut Japonais Selvedge",
-  "Gabardine Coton Déperlant",
-  "Cuir Pleine Fleur Tannage Végétal",
-  "Mélange Soie & Cachemire",
-  "Velours Côtelé Pur Coton",
+  "100% Coton Biologique",
+  "Molleton Brossé 350 g/m²",
+  "Coton Sergé Brodé",
+  "Céramique Haute Qualité",
+  "Coton & Polyester Recyclé",
+  "100% Lin Naturel",
 ];
 
 const AVAILABLE_SIZES = ["XS", "S", "M", "L", "XL", "XXL", "3XL", "Taille Unique"];
@@ -79,8 +77,10 @@ export default function EditProductForm({ productId, initialData }: EditProductF
   const [sku, setSku] = useState(initialData?.code || "");
   const [category, setCategory] = useState(initialData?.category || CATEGORIES[0]);
   const [material, setMaterial] = useState(initialData?.material || MATERIALS[0]);
-  const [selectedSizes, setSelectedSizes] = useState<string[]>(initialData?.sizes || ["46", "48", "50", "52", "54"]);
-  
+  const [selectedSizes, setSelectedSizes] = useState<string[]>(
+    initialData?.sizes || ["S", "M", "L", "XL", "XXL"]
+  );
+
   // Colors State
   const [selectedColors, setSelectedColors] = useState<ColorVariant[]>(
     initialData?.colors && initialData.colors.length > 0
@@ -93,8 +93,10 @@ export default function EditProductForm({ productId, initialData }: EditProductF
   const [variants, setVariants] = useState<ProductVariantItem[]>(initialData?.variants || []);
 
   const [description, setDescription] = useState(initialData?.description || "");
-  const [careInstructions, setCareInstructions] = useState(initialData?.careInstructions || "Nettoyage à sec au pressing uniquement.");
-  const [price, setPrice] = useState(initialData?.basePrice?.toString() || "0.00");
+  const [careInstructions, setCareInstructions] = useState(
+    initialData?.careInstructions || "Lavage à 30°C sur l'envers. Ne pas repasser sur l'imprimé."
+  );
+  const [price, setPrice] = useState(initialData?.basePrice?.toString() || "29.00");
   const [comparePrice, setComparePrice] = useState(initialData?.baseOldPrice?.toString() || "");
   const [stock, setStock] = useState(initialData?.stockQuantity?.toString() || "0");
   const [isPublished, setIsPublished] = useState(initialData?.isAvailable !== false);
@@ -103,7 +105,6 @@ export default function EditProductForm({ productId, initialData }: EditProductF
   const [versoImage, setVersoImage] = useState<string | null>(initialData?.imageVerso || null);
   const [uploadingSide, setUploadingSide] = useState<"recto" | "verso" | null>(null);
 
-  // Fetch real product details if productId is supplied
   useEffect(() => {
     if (!productId) return;
     setLoadingProduct(true);
@@ -126,7 +127,9 @@ export default function EditProductForm({ productId, initialData }: EditProductF
           setVersoImage(p.imageVerso || null);
 
           if (Array.isArray(p.variants) && p.variants.length > 0) {
-            const rawSizes = Array.from(new Set(p.variants.map((v: any) => v.size).filter(Boolean)));
+            const rawSizes = Array.from(
+              new Set(p.variants.map((v: any) => v.size).filter(Boolean))
+            );
             if (rawSizes.length > 0) setSelectedSizes(rawSizes as string[]);
 
             const colorsMap = new Map<string, ColorVariant>();
@@ -168,7 +171,7 @@ export default function EditProductForm({ productId, initialData }: EditProductF
   // Synchronize variants when sizes, colors or base parameters change
   useEffect(() => {
     const numPrice = parseFloat(price) || 0;
-    const cleanSku = sku.trim() || "DIV-PROD";
+    const cleanSku = sku.trim() || "SHM-PROD";
 
     setVariants((prevVariants) => {
       const prevMap = new Map<string, ProductVariantItem>();
@@ -196,7 +199,7 @@ export default function EditProductForm({ productId, initialData }: EditProductF
               color: c.name,
               colorHex: c.hex,
               sku: `${cleanSku}-${colorCode}-${s}`,
-              stock: 10,
+              stock: 15,
               price: numPrice,
               inStock: true,
             });
@@ -208,9 +211,10 @@ export default function EditProductForm({ productId, initialData }: EditProductF
     });
   }, [selectedColors, selectedSizes, sku, price]);
 
-  const totalStockCount = variants.length > 0
-    ? variants.reduce((sum, v) => sum + (v.stock || 0), 0)
-    : parseInt(stock, 10) || 0;
+  const totalStockCount =
+    variants.length > 0
+      ? variants.reduce((sum, v) => sum + (v.stock || 0), 0)
+      : parseInt(stock, 10) || 0;
 
   const toggleSize = (size: string) => {
     setSelectedSizes((prev) =>
@@ -218,29 +222,38 @@ export default function EditProductForm({ productId, initialData }: EditProductF
     );
   };
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, side: "recto" | "verso") => {
+  const handleImageUpload = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+    side: "recto" | "verso"
+  ) => {
     const file = e.target.files?.[0];
     if (file) {
-      const preview = URL.createObjectURL(file);
-      if (side === "recto") setRectoImage(preview);
-      else setVersoImage(preview);
-
       setUploadingSide(side);
       const form = new FormData();
       form.set("file", file);
 
       try {
-        const response = await fetch("/api/admin/uploads", { method: "POST", body: form });
+        const response = await fetch("/api/admin/uploads", {
+          method: "POST",
+          body: form,
+        });
         const json = await response.json();
-        if (!response.ok) throw new Error(json.error);
+        if (!response.ok || !json.data?.url) throw new Error(json.error);
 
         if (side === "recto") setRectoImage(json.data.url);
         else setVersoImage(json.data.url);
 
-        URL.revokeObjectURL(preview);
-        toast.success(`Photo ${side === "recto" ? "Face (Recto)" : "Dos / Porté"} enregistrée !`);
+        toast.success(
+          `Photo ${side === "recto" ? "principale (Recto)" : "secondaire (Verso)"} enregistrée.`
+        );
       } catch {
-        toast.success(`Visuel sélectionné en mode local.`);
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          if (side === "recto") setRectoImage(reader.result as string);
+          else setVersoImage(reader.result as string);
+          toast.success("Visuel chargé avec succès.");
+        };
+        reader.readAsDataURL(file);
       } finally {
         setUploadingSide(null);
       }
@@ -269,8 +282,8 @@ export default function EditProductForm({ productId, initialData }: EditProductF
         stock: totalStockCount,
         isAvailable: isPublished,
         isPublished,
-        imageRecto: rectoImage || "/images/products/fashion-1.jpg",
-        imageVerso: versoImage || null,
+        imageRecto: rectoImage || "/images/cls-categories/pod/t-shirts-jesus.jpg",
+        imageVerso: versoImage || "",
         sizes: selectedSizes,
         colors: selectedColors,
         variants: variants,
@@ -321,8 +334,8 @@ export default function EditProductForm({ productId, initialData }: EditProductF
             <ArrowLeft className="size-5" />
           </Link>
           <div>
-            <h1 className="text-xl font-bold text-gray-900">Modifier l'Article : {name}</h1>
-            <p className="text-xs text-gray-500">Mettez à jour les déclinaisons couleurs, tailles, prix ou stocks.</p>
+            <h1 className="text-xl font-bold text-gray-900">Modifier l&apos;article : {name}</h1>
+            <p className="text-xs text-gray-500">Mettez à jour les visuels, catégories, tailles, prix ou stocks.</p>
           </div>
         </div>
 
@@ -335,8 +348,8 @@ export default function EditProductForm({ productId, initialData }: EditProductF
           </Link>
           <Button
             type="submit"
-            disabled={saving}
-            className="btn btn-primary bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-sm cursor-pointer"
+            disabled={saving || uploadingSide !== null}
+            className="btn btn-primary bg-[#2b6b61] hover:bg-[#22564e] text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-xs cursor-pointer"
           >
             {saving ? "Enregistrement..." : "Enregistrer les modifications"}
           </Button>
@@ -348,53 +361,55 @@ export default function EditProductForm({ productId, initialData }: EditProductF
         <div className="lg:col-span-2 space-y-6">
           <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-2xs space-y-4">
             <h2 className="text-sm font-bold text-gray-900 flex items-center gap-2">
-              <Shirt className="size-4 text-indigo-600" />
-              <span>Informations Générales</span>
+              <Shirt className="size-4 text-[#2b6b61]" />
+              <span>Informations générales</span>
             </h2>
 
             <div>
-              <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
-                Nom du Vêtement / Modèle *
+              <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                Nom de l&apos;article / modèle *
               </label>
               <input
                 type="text"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full h-11 px-3.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                className="w-full h-11 px-3.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:border-[#2b6b61]"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
-                Sous-titre / Accroche Mode
+              <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                Sous-titre / accroche
               </label>
               <input
                 type="text"
                 value={subtitle}
                 onChange={(e) => setSubtitle(e.target.value)}
-                className="w-full h-11 px-3.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:border-indigo-500"
+                className="w-full h-11 px-3.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:border-[#2b6b61]"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
-                  Rayon / Catégorie
+                <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                  Catégorie
                 </label>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full h-11 px-3.5 text-sm rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-indigo-500"
+                  className="w-full h-11 px-3.5 text-sm rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-[#2b6b61]"
                 >
-                  {CATEGORIES.map((c) => (
-                    <option key={c} value={c}>{c}</option>
+                  {Array.from(new Set([...CATEGORIES, category].filter(Boolean))).map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
                   ))}
                 </select>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-semibold text-gray-700 mb-1.5">
                   Référence Article (SKU)
                 </label>
                 <input
@@ -407,38 +422,40 @@ export default function EditProductForm({ productId, initialData }: EditProductF
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
-                Matière & Tissage
+              <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                Matière &amp; confection
               </label>
               <select
                 value={material}
                 onChange={(e) => setMaterial(e.target.value)}
-                className="w-full h-11 px-3.5 text-sm rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-indigo-500"
+                className="w-full h-11 px-3.5 text-sm rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-[#2b6b61]"
               >
-                {MATERIALS.map((m) => (
-                  <option key={m} value={m}>{m}</option>
+                {Array.from(new Set([...MATERIALS, material].filter(Boolean))).map((m) => (
+                  <option key={m} value={m}>
+                    {m}
+                  </option>
                 ))}
               </select>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-semibold text-gray-700 mb-1.5">
                 Description de la pièce
               </label>
               <textarea
                 rows={4}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full p-3.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:border-indigo-500"
+                className="w-full p-3.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:border-[#2b6b61]"
               />
             </div>
           </div>
 
-          {/* 🎨 Colors & Custom Color Choice */}
+          {/* Colors & Custom Color Choice */}
           <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-2xs space-y-4">
             <h2 className="text-sm font-bold text-gray-900 flex items-center gap-2">
-              <Palette className="size-4 text-indigo-600" />
-              <span>Choix des Couleurs & Teintes Disponibles</span>
+              <Palette className="size-4 text-[#2b6b61]" />
+              <span>Choix des couleurs disponibles</span>
             </h2>
 
             <ColorPalettePicker
@@ -452,8 +469,8 @@ export default function EditProductForm({ productId, initialData }: EditProductF
           {/* Sizes Selection */}
           <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-2xs space-y-4">
             <h2 className="text-sm font-bold text-gray-900 flex items-center gap-2">
-              <Scissors className="size-4 text-indigo-600" />
-              <span>Tailles Disponibles</span>
+              <Scissors className="size-4 text-[#2b6b61]" />
+              <span>Tailles disponibles</span>
             </h2>
 
             <div className="flex flex-wrap gap-2.5">
@@ -466,7 +483,7 @@ export default function EditProductForm({ productId, initialData }: EditProductF
                     onClick={() => toggleSize(size)}
                     className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
                       isSelected
-                        ? "bg-indigo-600 text-white border-indigo-600 shadow-xs"
+                        ? "bg-[#2b6b61] text-white border-[#2b6b61] shadow-2xs"
                         : "bg-gray-50 text-gray-700 border-gray-200 hover:border-gray-300"
                     }`}
                   >
@@ -477,23 +494,23 @@ export default function EditProductForm({ productId, initialData }: EditProductF
             </div>
 
             <div className="pt-2">
-              <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
-                Conseils d'Entretien
+              <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                Conseils d&apos;entretien
               </label>
               <textarea
                 rows={2}
                 value={careInstructions}
                 onChange={(e) => setCareInstructions(e.target.value)}
-                className="w-full p-3.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:border-indigo-500"
+                className="w-full p-3.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:border-[#2b6b61]"
               />
             </div>
           </div>
 
-          {/* 📦 Variants Matrix (Couleurs × Tailles) */}
+          {/* Variants Matrix */}
           <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-2xs space-y-4">
             <h2 className="text-sm font-bold text-gray-900 flex items-center gap-2">
-              <Layers className="size-4 text-indigo-600" />
-              <span>Gestion des Déclinaisons (Couleur × Taille)</span>
+              <Layers className="size-4 text-[#2b6b61]" />
+              <span>Gestion des déclinaisons (Couleur × Taille)</span>
             </h2>
 
             <ProductVariantsMatrix
@@ -508,12 +525,12 @@ export default function EditProductForm({ productId, initialData }: EditProductF
         <div className="space-y-6">
           <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-2xs space-y-4">
             <h2 className="text-sm font-bold text-gray-900 flex items-center gap-2">
-              <Euro className="size-4 text-indigo-600" />
-              <span>Tarification & Inventaire</span>
+              <Euro className="size-4 text-[#2b6b61]" />
+              <span>Tarification &amp; inventaire</span>
             </h2>
 
             <div>
-              <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-semibold text-gray-700 mb-1.5">
                 Prix de vente TTC (€) *
               </label>
               <input
@@ -522,12 +539,12 @@ export default function EditProductForm({ productId, initialData }: EditProductF
                 required
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
-                className="w-full h-11 px-3.5 text-sm font-bold text-gray-900 rounded-xl border border-gray-200 focus:outline-none focus:border-indigo-500"
+                className="w-full h-11 px-3.5 text-sm font-bold text-gray-900 rounded-xl border border-gray-200 focus:outline-none focus:border-[#2b6b61]"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-semibold text-gray-700 mb-1.5">
                 Prix avant réduction (€)
               </label>
               <input
@@ -535,13 +552,13 @@ export default function EditProductForm({ productId, initialData }: EditProductF
                 step="0.01"
                 value={comparePrice}
                 onChange={(e) => setComparePrice(e.target.value)}
-                className="w-full h-11 px-3.5 text-sm text-gray-600 rounded-xl border border-gray-200 focus:outline-none focus:border-indigo-500"
+                className="w-full h-11 px-3.5 text-sm text-gray-600 rounded-xl border border-gray-200 focus:outline-none focus:border-[#2b6b61]"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
-                Stock Total Combiné
+              <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                Stock total combiné
               </label>
               <div className="w-full h-11 px-3.5 flex items-center justify-between text-sm font-bold rounded-xl border border-gray-200 bg-gray-50 text-gray-800">
                 <span>{totalStockCount} pièces</span>
@@ -551,7 +568,7 @@ export default function EditProductForm({ productId, initialData }: EditProductF
 
             <div className="pt-2 border-t border-gray-100 flex items-center justify-between">
               <div>
-                <span className="text-xs font-bold text-gray-900 block">Article Publié</span>
+                <span className="text-xs font-bold text-gray-900 block">Article publié</span>
                 <span className="text-[11px] text-gray-400">Visible sur la boutique en ligne</span>
               </div>
               <Switch checked={isPublished} onChange={setIsPublished} />
@@ -561,55 +578,81 @@ export default function EditProductForm({ productId, initialData }: EditProductF
           {/* Visuals / Images */}
           <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-2xs space-y-4">
             <h2 className="text-sm font-bold text-gray-900 flex items-center gap-2">
-              <ImageIcon className="size-4 text-indigo-600" />
-              <span>Visuels Haute Définition</span>
+              <ImageIcon className="size-4 text-[#2b6b61]" />
+              <span>Visuels du produit</span>
             </h2>
 
             {/* Front Photo */}
             <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1.5">Photo Face (Recto)</label>
-              <div className="border-2 border-dashed border-gray-200 rounded-xl p-4 text-center hover:border-indigo-400 transition-colors">
-                {rectoImage ? (
-                  <div className="relative size-32 mx-auto rounded-lg overflow-hidden bg-gray-50 border border-gray-200">
-                    <img src={rectoImage} alt="Face" className="w-full h-full object-cover" />
+              <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                Photo principale (Recto)
+              </label>
+              <div className="border-2 border-dashed border-gray-200 rounded-xl p-4 text-center hover:border-[#2b6b61] transition-colors space-y-2">
+                {rectoImage && (
+                  <div className="relative size-32 mx-auto rounded-lg overflow-hidden bg-gray-50 border border-gray-200 p-1">
+                    <img src={rectoImage} alt="Face" className="w-full h-full object-contain" />
                   </div>
-                ) : (
-                  <label className="cursor-pointer block">
-                    <UploadCloud className="size-8 text-gray-400 mx-auto mb-1" />
-                    <span className="text-xs text-indigo-600 font-bold block">Téléverser visuel face</span>
-                    <span className="text-[10px] text-gray-400">PNG, JPG, WEBP jusqu'à 5MB</span>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => handleImageUpload(e, "recto")}
-                      className="hidden"
-                    />
-                  </label>
                 )}
+                <label className="cursor-pointer block">
+                  <UploadCloud className="size-6 text-gray-400 mx-auto mb-1" />
+                  <span className="text-xs text-[#2b6b61] font-bold block">
+                    {uploadingSide === "recto"
+                      ? "Téléversement..."
+                      : rectoImage
+                      ? "Remplacer le visuel principal"
+                      : "Téléverser visuel principal"}
+                  </span>
+                  <span className="text-[10px] text-gray-400">PNG, JPG, WEBP jusqu&apos;à 10 Mo</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleImageUpload(e, "recto")}
+                    className="hidden"
+                  />
+                </label>
               </div>
             </div>
 
             {/* Back / Modeled Photo */}
             <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1.5">Photo Dos / Porté (Verso)</label>
-              <div className="border-2 border-dashed border-gray-200 rounded-xl p-4 text-center hover:border-indigo-400 transition-colors">
-                {versoImage ? (
-                  <div className="relative size-32 mx-auto rounded-lg overflow-hidden bg-gray-50 border border-gray-200">
-                    <img src={versoImage} alt="Dos" className="w-full h-full object-cover" />
-                  </div>
-                ) : (
-                  <label className="cursor-pointer block">
-                    <UploadCloud className="size-8 text-gray-400 mx-auto mb-1" />
-                    <span className="text-xs text-indigo-600 font-bold block">Téléverser visuel dos/porté</span>
-                    <span className="text-[10px] text-gray-400">PNG, JPG, WEBP jusqu'à 5MB</span>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => handleImageUpload(e, "verso")}
-                      className="hidden"
-                    />
-                  </label>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="block text-xs font-semibold text-gray-700">
+                  Photo secondaire / Dos (Verso)
+                </label>
+                {versoImage && (
+                  <button
+                    type="button"
+                    onClick={() => setVersoImage(null)}
+                    className="text-[11px] text-rose-600 hover:underline flex items-center gap-1 cursor-pointer"
+                  >
+                    <Trash2 className="size-3" />
+                    <span>Retirer</span>
+                  </button>
                 )}
+              </div>
+              <div className="border-2 border-dashed border-gray-200 rounded-xl p-4 text-center hover:border-[#2b6b61] transition-colors space-y-2">
+                {versoImage && (
+                  <div className="relative size-32 mx-auto rounded-lg overflow-hidden bg-gray-50 border border-gray-200 p-1">
+                    <img src={versoImage} alt="Dos" className="w-full h-full object-contain" />
+                  </div>
+                )}
+                <label className="cursor-pointer block">
+                  <UploadCloud className="size-6 text-gray-400 mx-auto mb-1" />
+                  <span className="text-xs text-[#2b6b61] font-bold block">
+                    {uploadingSide === "verso"
+                      ? "Téléversement..."
+                      : versoImage
+                      ? "Remplacer le visuel secondaire"
+                      : "Téléverser visuel secondaire"}
+                  </span>
+                  <span className="text-[10px] text-gray-400">PNG, JPG, WEBP jusqu&apos;à 10 Mo</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleImageUpload(e, "verso")}
+                    className="hidden"
+                  />
+                </label>
               </div>
             </div>
           </div>

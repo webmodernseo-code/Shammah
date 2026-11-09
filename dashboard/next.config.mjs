@@ -4,10 +4,28 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const isProd = process.env.NODE_ENV === "production";
+
+const cspDirectives = [
+  "default-src 'self'",
+  "base-uri 'self'",
+  "object-src 'none'",
+  "frame-ancestors 'none'",
+  "form-action 'self'",
+  "img-src 'self' data: blob: https: http:",
+  "font-src 'self' data: https:",
+  "style-src 'self' 'unsafe-inline'",
+  isProd
+    ? "script-src 'self' 'unsafe-inline'"
+    : "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+  "connect-src 'self' https://api.cloudinary.com https://api.stripe.com https://api-m.paypal.com https://api-m.sandbox.paypal.com https: http: ws: wss:",
+  ...(isProd ? ["upgrade-insecure-requests"] : []),
+].join("; ");
+
 const securityHeaders = [
   {
     key: "Content-Security-Policy",
-    value: "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: blob: https://res.cloudinary.com; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self' https://api.cloudinary.com https://api.stripe.com https://api-m.paypal.com https://api-m.sandbox.paypal.com; upgrade-insecure-requests",
+    value: cspDirectives,
   },
   {
     key: "X-DNS-Prefetch-Control",
@@ -40,9 +58,9 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  serverExternalPackages: ["@prisma/client", "prisma"],
+  serverExternalPackages: ["@prisma/client", "prisma", "sharp"],
   images: {
-    remotePatterns: [{ protocol: "https", hostname: "res.cloudinary.com" }],
+    remotePatterns: [{ protocol: "https", hostname: "**" }],
   },
   webpack(config) {
     config.module.rules.push({
