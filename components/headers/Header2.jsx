@@ -66,15 +66,6 @@ export default function Header2({
                   <i className="icon icon-search" />
                 </a>
               </li>
-              <li className="nav-account d-none d-sm-inline-block">
-                <a
-                  href="#login"
-                  data-bs-toggle="modal"
-                  className="nav-icon-item"
-                >
-                  <i className="icon icon-user" />
-                </a>
-              </li>
               <li className="nav-wishlist d-none d-sm-inline-block">
                 <Link href="/wish-list" className="nav-icon-item" title="Favoris">
                   <i className="icon icon-heart" />

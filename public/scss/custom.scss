@@ -776,27 +776,63 @@ del,
   background-color: #ffffff;
 
   .wrapper-header {
-    min-height: 58px !important;
-    height: 58px !important;
+    min-height: 76px !important;
+    height: 76px !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
+    display: flex !important;
+    align-items: center !important;
   }
 
-  .logo-header img {
-    max-height: 30px !important;
-    width: auto !important;
+  .logo-header {
+    display: inline-flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+
+    img {
+      max-height: 32px !important;
+      width: auto !important;
+      display: block !important;
+    }
+  }
+
+  .box-navigation,
+  .box-nav-menu {
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .box-nav-menu .menu-item {
+    padding: 0 !important;
+    height: 76px !important;
+    display: inline-flex !important;
+    align-items: center !important;
   }
 
   .box-nav-menu .item-link {
-    font-size: 15px !important;
-    padding: 4px 8px !important;
+    font-size: 15.5px !important;
+    line-height: 1 !important;
+    padding: 8px 10px !important;
+    display: inline-flex !important;
+    align-items: center !important;
   }
 
   .nav-icon {
-    gap: 16px !important;
+    gap: 18px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
 
     .nav-icon-item {
-      font-size: 19px !important;
+      font-size: 20px !important;
+      line-height: 1 !important;
+      display: inline-flex !important;
+      align-items: center !important;
     }
   }
 }
