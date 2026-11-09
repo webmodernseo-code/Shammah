@@ -77,8 +77,8 @@ export default function MobileMenu() {
                       </Link>
                     </li>
                     <li style={{ marginBottom: "8px" }}>
-                      <Link href="/shop-default?category=bonnets-casquettes" className="sub-nav-link" data-bs-dismiss="offcanvas">
-                        Bonnets &amp; Casquettes
+                      <Link href="/shop-default?category=casquettes" className="sub-nav-link" data-bs-dismiss="offcanvas">
+                        Casquettes
                       </Link>
                     </li>
                     <li style={{ marginBottom: "8px" }}>

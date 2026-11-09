@@ -87,13 +87,13 @@ export default function Nav2() {
               </Link>
 
               <Link
-                href="/shop-default?category=bonnets-casquettes"
+                href="/shop-default?category=casquettes"
                 className="collection-menu-item"
               >
                 <div className="collection-item-bullet" />
                 <div className="collection-item-content">
-                  <span className="collection-item-title">Bonnets &amp; Casquettes</span>
-                  <span className="collection-item-desc">Broderies fines &amp; accessoires de tête</span>
+                  <span className="collection-item-title">Casquettes</span>
+                  <span className="collection-item-desc">Casquettes structurées &amp; broderies fines</span>
                 </div>
                 <svg className="collection-item-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14M12 5l7 7-7 7"/>

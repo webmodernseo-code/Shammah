@@ -465,7 +465,7 @@ export const categories11 = [
     itemCount: "Coupes classiques & oversize",
   },
   {
-    imgSrc: "/images/cls-categories/pod/sweats-hoodies.jpg",
+    imgSrc: "/images/cls-categories/pod/sweat-vert-jesus.jpg",
     width: 696,
     height: 696,
     label: "Sweats à capuche",
@@ -476,9 +476,9 @@ export const categories11 = [
     imgSrc: "/images/cls-categories/pod/bonnets-casquettes.jpg",
     width: 696,
     height: 696,
-    label: "Bonnets & Casquettes",
-    slug: "bonnets-casquettes",
-    itemCount: "Broderies fines & accessoires",
+    label: "Casquettes",
+    slug: "casquettes",
+    itemCount: "Casquettes brodées signature",
   },
   {
     imgSrc: "/images/cls-categories/pod/accessories-mug.jpg",
@@ -628,16 +628,16 @@ export const categories14 = [
   {
     id: 2,
     name: "Sweats à capuche",
-    image: "/images/cls-categories/pod/sweats-hoodies.jpg",
+    image: "/images/cls-categories/pod/sweat-vert-jesus.jpg",
     items: "Hoodies épais & sweats en molleton",
     slug: "sweats",
   },
   {
     id: 3,
-    name: "Bonnets & Casquettes",
+    name: "Casquettes",
     image: "/images/cls-categories/pod/bonnets-casquettes.jpg",
-    items: "Broderies fines & accessoires de tête",
-    slug: "bonnets-casquettes",
+    items: "Casquettes brodées signature",
+    slug: "casquettes",
   },
   {
     id: 4,

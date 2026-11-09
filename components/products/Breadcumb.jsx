@@ -31,11 +31,17 @@ const CATEGORY_META = {
     crumb: "Sweats à capuche",
     desc: "Hoodies haut de gamme et sweats confectionnés dans un coton molletonné dense, doux et durable.",
   },
+  casquettes: {
+    eyebrow: "Broderies Signature",
+    title: "Casquettes",
+    crumb: "Casquettes",
+    desc: "Casquettes structurées en coton épais et finement brodées pour affirmer votre foi au quotidien.",
+  },
   "bonnets-casquettes": {
     eyebrow: "Broderies Signature",
-    title: "Bonnets & Casquettes",
-    crumb: "Bonnets & Casquettes",
-    desc: "Casquettes structurées et bonnets finement brodés pour parfaire votre tenue au quotidien.",
+    title: "Casquettes",
+    crumb: "Casquettes",
+    desc: "Casquettes structurées en coton épais et finement brodées pour affirmer votre foi au quotidien.",
   },
   accessoires: {
     eyebrow: "Objets & Quotidien",
