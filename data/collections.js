@@ -473,7 +473,7 @@ export const categories11 = [
     itemCount: "Sweats à capuche & cols ronds",
   },
   {
-    imgSrc: "/images/cls-categories/fashion/accessories.jpg",
+    imgSrc: "/images/cls-categories/pod/bonnets-casquettes.jpg",
     width: 696,
     height: 696,
     label: "Bonnets & Casquettes",
@@ -635,7 +635,7 @@ export const categories14 = [
   {
     id: 3,
     name: "Bonnets & Casquettes",
-    image: "/images/cls-categories/fashion/accessories.jpg",
+    image: "/images/cls-categories/pod/bonnets-casquettes.jpg",
     items: "Broderies fines & accessoires de tête",
     slug: "bonnets-casquettes",
   },

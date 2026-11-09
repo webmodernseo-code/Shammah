@@ -1,7 +1,7 @@
 import { products } from "@/data/products";
 
 export const initialState = {
-  price: [20, 300],
+  price: [0, 300],
 
   availability: "All",
 
@@ -45,7 +45,7 @@ export function reducer(state, action) {
     case "CLEAR_FILTER":
       return {
         ...state,
-        price: [20, 300],
+        price: [0, 300],
 
         availability: "All",
 

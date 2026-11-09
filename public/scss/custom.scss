@@ -1307,6 +1307,50 @@ del,
   }
 }
 
+/* ========================================================
+   💎 CARTES DE COLLECTIONS & BOUTONS TOUJOURS VISIBLES
+   - Cadre subtil autour des visuels sur fond blanc (tasse, casquette)
+   - Boutons parfaitement lisibles au repos (sans survol) avec bordure
+     nette et ombre portée, et inversion franche au survol
+   ======================================================== */
+.wg-cls {
+  &.style-abs,
+  &.style-abs2 {
+    .image {
+      border: 1px solid #e5e7eb;
+      background-color: #f8fafc;
+    }
+
+    .cls-btn {
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: translateY(0) !important;
+      bottom: 16px !important;
+
+      .tf-btn {
+        background-color: #ffffff !important;
+        color: #09090b !important;
+        border: 1.5px solid #18181b !important;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14) !important;
+        font-weight: 600 !important;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+
+        svg path {
+          stroke: currentColor !important;
+        }
+
+        &:hover {
+          background-color: #09090b !important;
+          color: #ffffff !important;
+          border-color: #09090b !important;
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22) !important;
+          transform: translateY(-2px) !important;
+        }
+      }
+    }
+  }
+}
+
 
 
 

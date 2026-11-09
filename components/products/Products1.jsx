@@ -200,7 +200,7 @@ export default function Products1({
           <div className="wrapper-control-shop">
             {(availability != "All" ||
               brands != "All" ||
-              price.join("-") != [20, 300].join("-") ||
+              price.join("-") != [0, 300].join("-") ||
               color != "All" ||
               size != "All") && (
               <div className="meta-filter-shop" style={{}}>
@@ -235,10 +235,10 @@ export default function Products1({
                   ) : (
                     ""
                   )}
-                  {price.join("-") != [20, 300].join("-") ? (
+                  {price.join("-") != [0, 300].join("-") ? (
                     <span
                       className="filter-tag"
-                      onClick={() => allProps.setPrice([20, 300])}
+                      onClick={() => allProps.setPrice([0, 300])}
                     >
                       <span
                         className="remove-tag icon-close"
@@ -280,7 +280,7 @@ export default function Products1({
                 </div>
                 {availability != "All" ||
                 brands != "All" ||
-                price.join("-") != [20, 300].join("-") ||
+                price.join("-") != [0, 300].join("-") ||
                 color != "All" ||
                 size != "All" ? (
                   <button
