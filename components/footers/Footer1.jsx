@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import PaymentMethods from "@/components/common/PaymentMethods";
 
 export default function Footer1({
   paddingBottom = false,
@@ -214,88 +215,7 @@ export default function Footer1({
                 Tableau de bord (Admin)
               </a>
             </p>
-            <ul className="tf-payment">
-              <li className="item">
-                <Image
-                  alt="payment"
-                  src="/images/payment/EximBank.png"
-                  width={80}
-                  height={50}
-                />
-              </li>
-              <li className="item">
-                <Image
-                  alt="payment"
-                  src="/images/payment/ApplePay.png"
-                  width={90}
-                  height={64}
-                />
-              </li>
-              <li className="item">
-                <Image
-                  alt="payment"
-                  src="/images/payment/DinersClub.png"
-                  width={90}
-                  height={64}
-                />
-              </li>
-              <li className="item">
-                <Image
-                  alt="payment"
-                  src="/images/payment/Discover.png"
-                  width={80}
-                  height={50}
-                />
-              </li>
-              <li className="item">
-                <Image
-                  alt="payment"
-                  src="/images/payment/GooglePay.png"
-                  width={90}
-                  height={64}
-                />
-              </li>
-              <li className="item">
-                <Image
-                  alt="payment"
-                  src="/images/payment/Mastercard-2.png"
-                  width={80}
-                  height={50}
-                />
-              </li>
-              <li className="item">
-                <Image
-                  alt="payment"
-                  src="/images/payment/Mastercard.png"
-                  width={90}
-                  height={64}
-                />
-              </li>
-              <li className="item">
-                <Image
-                  alt="payment"
-                  src="/images/payment/Shop.png"
-                  width={80}
-                  height={50}
-                />
-              </li>
-              <li className="item">
-                <Image
-                  alt="payment"
-                  src="/images/payment/UnionPay.png"
-                  width={80}
-                  height={50}
-                />
-              </li>
-              <li className="item">
-                <Image
-                  alt="payment"
-                  src="/images/payment/Visa.png"
-                  width={90}
-                  height={64}
-                />
-              </li>
-            </ul>
+            <PaymentMethods className="tf-payment" />
           </div>
         </div>
       </div>

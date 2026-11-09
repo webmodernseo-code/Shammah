@@ -10,6 +10,7 @@ import { useContextElement } from "@/context/Context";
 import QuantitySelect from "../common/QuantitySelect";
 import StickyProducts from "./StickyProducts";
 import ProductHeading from "./ProductHeading";
+import PaymentMethods from "@/components/common/PaymentMethods";
 
 export default function Details1({ product }) {
   const [quantity, setQuantity] = useState(1);
@@ -181,66 +182,9 @@ export default function Details1({ product }) {
 
                   <div className="tf-product-trust-seal text-center">
                     <p className="text-md text-dark-2 text-seal fw-medium">
-                      Guarantee Safe Checkout:
+                      Paiement 100 % sécurisé :
                     </p>
-                    <ul className="list-card">
-                      <li className="card-item">
-                        <Image
-                          alt="card"
-                          src="/images/payment/Visa.png"
-                          width={90}
-                          height={64}
-                        />
-                      </li>
-                      <li className="card-item">
-                        <Image
-                          alt="card"
-                          src="/images/payment/DinersClub.png"
-                          width={90}
-                          height={64}
-                        />
-                      </li>
-                      <li className="card-item">
-                        <Image
-                          alt="card"
-                          src="/images/payment/Mastercard.png"
-                          width={90}
-                          height={64}
-                        />
-                      </li>
-                      <li className="card-item">
-                        <Image
-                          alt="card"
-                          src="/images/payment/Stripe.png"
-                          width={90}
-                          height={64}
-                        />
-                      </li>
-                      <li className="card-item">
-                        <Image
-                          alt="card"
-                          src="/images/payment/PayPal.png"
-                          width={90}
-                          height={64}
-                        />
-                      </li>
-                      <li className="card-item">
-                        <Image
-                          alt="card"
-                          src="/images/payment/GooglePay.png"
-                          width={90}
-                          height={64}
-                        />
-                      </li>
-                      <li className="card-item">
-                        <Image
-                          alt="card"
-                          src="/images/payment/ApplePay.png"
-                          width={90}
-                          height={64}
-                        />
-                      </li>
-                    </ul>
+                    <PaymentMethods className="justify-content-center mt-2" />
                   </div>
                   <div className="tf-product-delivery-return">
                     <div className="product-delivery">
