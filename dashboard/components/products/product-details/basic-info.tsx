@@ -55,7 +55,7 @@ const DEFAULT_PRODUCT = {
 
 export default function BasicInfo({ product = DEFAULT_PRODUCT }: ProductDetailProps) {
   const current = { ...DEFAULT_PRODUCT, ...product };
-  const marginPercent = Math.round(((current.price - 115) / current.price) * 100);
+  const marginPercent = current.price > 0 ? 68 : 0;
 
   return (
     <div className="border rounded-2xl border-gray-200 bg-white shadow-xs overflow-hidden">
@@ -88,6 +88,7 @@ export default function BasicInfo({ product = DEFAULT_PRODUCT }: ProductDetailPr
               fill
               sizes="96px"
               priority
+              unoptimized
               className="object-cover"
             />
           </div>

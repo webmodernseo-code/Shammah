@@ -39,6 +39,7 @@ export default function ProductMedia({ images = DEFAULT_MEDIA }: ProductMediaPro
                 src={item.url}
                 alt={item.label}
                 fill
+                unoptimized
                 sizes="(max-width: 640px) 50vw, 25vw"
                 className="object-cover group-hover:scale-105 transition-transform duration-300"
               />
