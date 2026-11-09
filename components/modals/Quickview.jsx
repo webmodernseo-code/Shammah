@@ -6,19 +6,22 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import QuantitySelect from "../common/QuantitySelect";
 import Image from "next/image";
-import ColorSelect1 from "../productDetails/ColorSelect1";
-import SizePicker from "../productDetails/SizeSelect";
+
 export default function Quickview() {
-  const [activeColor, setActiveColor] = useState("gray");
-  const [quantity, setQuantity] = useState(1); // Initial quantity is 1
+  const [quantity, setQuantity] = useState(1);
   const {
     quickViewItem,
     addProductToCart,
     isAddedToCartProducts,
-
     cartProducts,
     updateQuantity,
   } = useContextElement();
+
+  const hoverImg =
+    quickViewItem.imgHover ||
+    quickViewItem.imageHover ||
+    quickViewItem.imgSrc;
+
   return (
     <div className="modal fade modalCentered modal-quick-view" id="quickView">
       <div className="modal-dialog modal-dialog-centered">
@@ -37,35 +40,28 @@ export default function Quickview() {
                 nextEl: ".qvsnn1",
               }}
             >
-              <SwiperSlide className="swiper-slide" data-color="orange">
+              <SwiperSlide className="swiper-slide">
                 <div className="item">
                   <Image
                     className="lazyload"
-                    alt=""
+                    alt={quickViewItem.title || "Produit Shammah"}
                     src={quickViewItem.imgSrc}
                     width={513}
                     height={729}
                   />
                 </div>
               </SwiperSlide>
-              <SwiperSlide className="swiper-slide" data-color="orange">
+              <SwiperSlide className="swiper-slide">
                 <div className="item">
                   <Image
                     className="lazyload"
-                    alt=""
-                    src={
-                      quickViewItem.imgHover
-                        ? quickViewItem.imgHover
-                        : quickViewItem.imgSrc
-                    }
+                    alt={quickViewItem.title || "Produit Shammah"}
+                    src={hoverImg}
                     width={513}
                     height={729}
                   />
                 </div>
               </SwiperSlide>
-
-              <div className="swiper-button-prev nav-swiper arrow-1 nav-prev-cls single-slide-prev qvsnp1" />
-              <div className="swiper-button-next nav-swiper arrow-1 nav-next-cls single-slide-next qvsnn1" />
             </Swiper>
           </div>
           <div className="tf-product-info-wrap">
@@ -81,21 +77,17 @@ export default function Quickview() {
                 </h6>
                 <div className="product-price">
                   <h6 className="price-new price-on-sale">
-                    {" "}
-                    ${quickViewItem.price.toFixed(2)}
+                    {quickViewItem.price.toFixed(2)} €
                   </h6>
                   {quickViewItem.oldPrice && (
                     <h6 className="price-old">
-                      ${quickViewItem.oldPrice.toFixed(2)}
+                      {quickViewItem.oldPrice.toFixed(2)} €
                     </h6>
                   )}
-                  <span className="badge-sale">20% Off</span>
                 </div>
                 <p className="text">
-                  A beautifully handcrafted item made with care and premium
-                  materials, showcasing unique artistry and thoughtful details.
-                  Ideal for adding warmth and character to any space, while
-                  celebrating the charm of handmade craftsmanship.
+                  Création officielle Shammah confectionnée avec soin dans des matériaux
+                  sélectionnés pour leur confort, leur tenue et leur durabilité au quotidien.
                 </p>
               </div>
 
@@ -124,25 +116,22 @@ export default function Quickview() {
                     onClick={() => addProductToCart(quickViewItem.id, quantity)}
                   >
                     {isAddedToCartProducts(quickViewItem.id)
-                      ? "Already Added"
-                      : "Add to cart -"}
+                      ? "Déjà au panier"
+                      : "Ajouter au panier"}
                   </a>
                 </div>
-                <a
-                  href="#"
+                <Link
+                  href={`/checkout`}
                   className="tf-btn w-100 animate-btn paypal btn-primary"
                 >
-                  Buy It Now
-                </a>
-                <Link href={`/checkout`} className="more-choose-payment link">
-                  More payment options
+                  Commander maintenant
                 </Link>
               </div>
               <Link
                 href={`/product-detail/${quickViewItem.id}`}
                 className="view-details link"
               >
-                View full details <i className="icon icon-arrow-right" />
+                Voir tous les détails <i className="icon icon-arrow-right" />
               </Link>
             </div>
           </div>
