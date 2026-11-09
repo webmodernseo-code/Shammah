@@ -57,7 +57,7 @@ export default function PaymentMethods({ className = "" }) {
       <li className="shammah-payment-badge is-cb" title="Cartes Bancaires CB">
         <svg
           className="logo-cb"
-          viewBox="-3 -2.2 32.47 22.56"
+          viewBox="-4 -3 34.47 24.16"
           preserveAspectRatio="xMidYMid slice"
           xmlns="http://www.w3.org/2000/svg"
           aria-label="Cartes Bancaires CB"
@@ -107,7 +107,7 @@ export default function PaymentMethods({ className = "" }) {
       <li className="shammah-payment-badge is-amex" title="American Express">
         <svg
           className="logo-amex"
-          viewBox="-14 -8 188 116"
+          viewBox="-22 -14 204 128"
           preserveAspectRatio="xMidYMid meet"
           xmlns="http://www.w3.org/2000/svg"
           aria-label="American Express"
