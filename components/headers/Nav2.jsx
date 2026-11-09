@@ -78,8 +78,8 @@ export default function Nav2() {
               >
                 <div className="collection-item-bullet" />
                 <div className="collection-item-content">
-                  <span className="collection-item-title">Sweats &amp; Hoodies</span>
-                  <span className="collection-item-desc">Sweats à capuche &amp; cols ronds en molleton</span>
+                  <span className="collection-item-title">Sweats à capuche</span>
+                  <span className="collection-item-desc">Hoodies épais &amp; sweats en molleton</span>
                 </div>
                 <svg className="collection-item-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14M12 5l7 7-7 7"/>

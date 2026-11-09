@@ -465,12 +465,12 @@ export const categories11 = [
     itemCount: "Coupes classiques & oversize",
   },
   {
-    imgSrc: "/images/cls-categories/fashion/women.jpg",
+    imgSrc: "/images/cls-categories/pod/sweats-hoodies.jpg",
     width: 696,
     height: 696,
-    label: "Sweats & Hoodies",
+    label: "Sweats à capuche",
     slug: "sweats",
-    itemCount: "Sweats à capuche & cols ronds",
+    itemCount: "Hoodies & sweats en molleton lourd",
   },
   {
     imgSrc: "/images/cls-categories/pod/bonnets-casquettes.jpg",
@@ -627,9 +627,9 @@ export const categories14 = [
   },
   {
     id: 2,
-    name: "Sweats & Hoodies",
-    image: "/images/cls-categories/fashion/women.jpg",
-    items: "Sweats à capuche & cols ronds en molleton",
+    name: "Sweats à capuche",
+    image: "/images/cls-categories/pod/sweats-hoodies.jpg",
+    items: "Hoodies épais & sweats en molleton",
     slug: "sweats",
   },
   {

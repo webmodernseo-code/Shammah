@@ -73,7 +73,7 @@ export default function MobileMenu() {
                     </li>
                     <li style={{ marginBottom: "8px" }}>
                       <Link href="/shop-default?category=sweats" className="sub-nav-link" data-bs-dismiss="offcanvas">
-                        Sweats &amp; Hoodies
+                        Sweats à capuche
                       </Link>
                     </li>
                     <li style={{ marginBottom: "8px" }}>

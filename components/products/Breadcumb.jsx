@@ -27,9 +27,9 @@ const CATEGORY_META = {
   },
   sweats: {
     eyebrow: "Molleton Lourd",
-    title: "Sweats & Hoodies",
-    crumb: "Sweats & Hoodies",
-    desc: "Sweats à capuche et sweatshirts à col rond confectionnés dans un coton molletonné dense, doux et durable.",
+    title: "Sweats à capuche",
+    crumb: "Sweats à capuche",
+    desc: "Hoodies haut de gamme et sweats confectionnés dans un coton molletonné dense, doux et durable.",
   },
   "bonnets-casquettes": {
     eyebrow: "Broderies Signature",
