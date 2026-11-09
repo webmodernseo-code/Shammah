@@ -22,29 +22,41 @@ export default function FilterModal({ allProps }) {
         </div>
         <div className="canvas-body">
           <div className="widget-facet">
-            <ul className="list-categories current-scrollbar">
+            <ul className="list-categories shammah-sidebar-collections current-scrollbar">
               <li className="cate-item">
-                <Link className="text-sm link" href={`/shop-default`}>
+                <Link className="text-sm link shammah-sidebar-cat-link" href={`/shop-default`}>
                   <span>Tous les produits</span>
                 </Link>
               </li>
               <li className="cate-item">
-                <Link className="text-sm link" href={`/shop-default?category=t-shirts`}>
+                <Link className="text-sm link shammah-sidebar-cat-link" href={`/shop-default?category=t-shirts`}>
+                  <span className="shammah-sidebar-cat-thumb">
+                    <Image src="/images/cls-categories/pod/t-shirts-jesus.jpg" alt="T-shirts" width={36} height={36} />
+                  </span>
                   <span>T-shirts</span>
                 </Link>
               </li>
               <li className="cate-item">
-                <Link className="text-sm link" href={`/shop-default?category=sweats`}>
+                <Link className="text-sm link shammah-sidebar-cat-link" href={`/shop-default?category=sweats`}>
+                  <span className="shammah-sidebar-cat-thumb">
+                    <Image src="/images/cls-categories/pod/sweat-vert-jesus.jpg" alt="Sweats à capuche" width={36} height={36} />
+                  </span>
                   <span>Sweats à capuche</span>
                 </Link>
               </li>
               <li className="cate-item">
-                <Link className="text-sm link" href={`/shop-default?category=casquettes`}>
+                <Link className="text-sm link shammah-sidebar-cat-link" href={`/shop-default?category=casquettes`}>
+                  <span className="shammah-sidebar-cat-thumb">
+                    <Image src="/images/cls-categories/pod/bonnets-casquettes.jpg" alt="Casquettes" width={36} height={36} />
+                  </span>
                   <span>Casquettes</span>
                 </Link>
               </li>
               <li className="cate-item">
-                <Link className="text-sm link" href={`/shop-default?category=accessoires`}>
+                <Link className="text-sm link shammah-sidebar-cat-link" href={`/shop-default?category=accessoires`}>
+                  <span className="shammah-sidebar-cat-thumb">
+                    <Image src="/images/cls-categories/pod/accessories-mug.jpg" alt="Accessoires" width={36} height={36} />
+                  </span>
                   <span>Accessoires</span>
                 </Link>
               </li>

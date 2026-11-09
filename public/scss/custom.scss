@@ -656,7 +656,7 @@ del,
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 10px 14px;
+    padding: 8px 12px;
     border-radius: 10px;
     text-decoration: none !important;
     transition: background-color 0.15s ease;
@@ -664,9 +664,9 @@ del,
     &:hover {
       background-color: #f9fafb;
 
-      .collection-item-bullet {
-        background-color: #000000;
-        transform: scale(1.3);
+      .collection-item-thumb {
+        border-color: #18181b;
+        transform: scale(1.04);
       }
 
       .collection-item-title {
@@ -680,13 +680,28 @@ del,
       }
     }
 
-    .collection-item-bullet {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background-color: #9ca3af;
+    .collection-item-thumb {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      min-height: 44px;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      background-color: #ffffff;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
-      transition: all 0.2s ease;
+      padding: 2px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+      img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+        display: block !important;
+      }
     }
 
     .collection-item-content {
@@ -750,6 +765,58 @@ del,
       .arrow {
         transition: transform 0.15s ease;
       }
+    }
+  }
+}
+
+/* Mini-vignettes des catégories dans les barres latérales (Menu Mobile & Filtres Boutique) */
+.shammah-sidebar-collections {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  li {
+    margin-bottom: 0 !important;
+  }
+
+  .shammah-sidebar-cat-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 4px 6px !important;
+    border-radius: 8px !important;
+    transition: background-color 0.15s ease !important;
+
+    &:hover {
+      background-color: #f8fafc;
+
+      .shammah-sidebar-cat-thumb {
+        border-color: #18181b;
+      }
+    }
+  }
+
+  .shammah-sidebar-cat-thumb {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    border-radius: 7px;
+    border: 1px solid #e5e7eb;
+    background-color: #ffffff;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 2px;
+    transition: border-color 0.15s ease;
+
+    img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: contain !important;
+      display: block !important;
     }
   }
 }

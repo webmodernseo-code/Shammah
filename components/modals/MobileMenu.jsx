@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import React from "react";
 import { usePathname } from "next/navigation";
 import LanguageSelect from "../common/LanguageSelect";
@@ -65,25 +66,37 @@ export default function MobileMenu() {
                   <span className="btn-open-sub" />
                 </a>
                 <div id="dropdown-mb-collections" className="collapse">
-                  <ul className="sub-nav-menu" style={{ paddingLeft: "16px", paddingTop: "8px" }}>
-                    <li style={{ marginBottom: "8px" }}>
-                      <Link href="/shop-default?category=t-shirts" className="sub-nav-link" data-bs-dismiss="offcanvas">
-                        T-shirts
+                  <ul className="sub-nav-menu shammah-sidebar-collections" style={{ paddingLeft: "8px", paddingTop: "8px" }}>
+                    <li>
+                      <Link href="/shop-default?category=t-shirts" className="sub-nav-link shammah-sidebar-cat-link" data-bs-dismiss="offcanvas">
+                        <span className="shammah-sidebar-cat-thumb">
+                          <Image src="/images/cls-categories/pod/t-shirts-jesus.jpg" alt="T-shirts" width={36} height={36} />
+                        </span>
+                        <span>T-shirts</span>
                       </Link>
                     </li>
-                    <li style={{ marginBottom: "8px" }}>
-                      <Link href="/shop-default?category=sweats" className="sub-nav-link" data-bs-dismiss="offcanvas">
-                        Sweats à capuche
+                    <li>
+                      <Link href="/shop-default?category=sweats" className="sub-nav-link shammah-sidebar-cat-link" data-bs-dismiss="offcanvas">
+                        <span className="shammah-sidebar-cat-thumb">
+                          <Image src="/images/cls-categories/pod/sweat-vert-jesus.jpg" alt="Sweats à capuche" width={36} height={36} />
+                        </span>
+                        <span>Sweats à capuche</span>
                       </Link>
                     </li>
-                    <li style={{ marginBottom: "8px" }}>
-                      <Link href="/shop-default?category=casquettes" className="sub-nav-link" data-bs-dismiss="offcanvas">
-                        Casquettes
+                    <li>
+                      <Link href="/shop-default?category=casquettes" className="sub-nav-link shammah-sidebar-cat-link" data-bs-dismiss="offcanvas">
+                        <span className="shammah-sidebar-cat-thumb">
+                          <Image src="/images/cls-categories/pod/bonnets-casquettes.jpg" alt="Casquettes" width={36} height={36} />
+                        </span>
+                        <span>Casquettes</span>
                       </Link>
                     </li>
-                    <li style={{ marginBottom: "8px" }}>
-                      <Link href="/shop-default?category=accessoires" className="sub-nav-link" data-bs-dismiss="offcanvas">
-                        Accessoires (Tasses, Sacs &amp; Objets)
+                    <li>
+                      <Link href="/shop-default?category=accessoires" className="sub-nav-link shammah-sidebar-cat-link" data-bs-dismiss="offcanvas">
+                        <span className="shammah-sidebar-cat-thumb">
+                          <Image src="/images/cls-categories/pod/accessories-mug.jpg" alt="Accessoires" width={36} height={36} />
+                        </span>
+                        <span>Accessoires (Tasses, Sacs &amp; Objets)</span>
                       </Link>
                     </li>
                     <li style={{ marginTop: "10px" }}>

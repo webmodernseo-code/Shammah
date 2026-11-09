@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import React from "react";
 import { usePathname } from "next/navigation";
 
@@ -62,7 +63,14 @@ export default function Nav2() {
                 href="/shop-default?category=t-shirts"
                 className="collection-menu-item"
               >
-                <div className="collection-item-bullet" />
+                <div className="collection-item-thumb">
+                  <Image
+                    src="/images/cls-categories/pod/t-shirts-jesus.jpg"
+                    alt="T-shirts"
+                    width={44}
+                    height={44}
+                  />
+                </div>
                 <div className="collection-item-content">
                   <span className="collection-item-title">T-shirts</span>
                   <span className="collection-item-desc">Coupes oversize & classiques en coton bio</span>
@@ -76,7 +84,14 @@ export default function Nav2() {
                 href="/shop-default?category=sweats"
                 className="collection-menu-item"
               >
-                <div className="collection-item-bullet" />
+                <div className="collection-item-thumb">
+                  <Image
+                    src="/images/cls-categories/pod/sweat-vert-jesus.jpg"
+                    alt="Sweats à capuche"
+                    width={44}
+                    height={44}
+                  />
+                </div>
                 <div className="collection-item-content">
                   <span className="collection-item-title">Sweats à capuche</span>
                   <span className="collection-item-desc">Hoodies épais &amp; sweats en molleton</span>
@@ -90,7 +105,14 @@ export default function Nav2() {
                 href="/shop-default?category=casquettes"
                 className="collection-menu-item"
               >
-                <div className="collection-item-bullet" />
+                <div className="collection-item-thumb">
+                  <Image
+                    src="/images/cls-categories/pod/bonnets-casquettes.jpg"
+                    alt="Casquettes"
+                    width={44}
+                    height={44}
+                  />
+                </div>
                 <div className="collection-item-content">
                   <span className="collection-item-title">Casquettes</span>
                   <span className="collection-item-desc">Casquettes structurées &amp; broderies fines</span>
@@ -104,7 +126,14 @@ export default function Nav2() {
                 href="/shop-default?category=accessoires"
                 className="collection-menu-item"
               >
-                <div className="collection-item-bullet" />
+                <div className="collection-item-thumb">
+                  <Image
+                    src="/images/cls-categories/pod/accessories-mug.jpg"
+                    alt="Accessoires"
+                    width={44}
+                    height={44}
+                  />
+                </div>
                 <div className="collection-item-content">
                   <span className="collection-item-title">Accessoires</span>
                   <span className="collection-item-desc">Tasses, mugs, tote bags &amp; objets de foi</span>
