@@ -48,6 +48,10 @@ export default function Quickview() {
                     src={quickViewItem.imgSrc}
                     width={513}
                     height={729}
+                    unoptimized={Boolean(
+                      quickViewItem.imgSrc?.startsWith("data:") ||
+                        quickViewItem.imgSrc?.startsWith("http")
+                    )}
                   />
                 </div>
               </SwiperSlide>
@@ -59,6 +63,10 @@ export default function Quickview() {
                     src={hoverImg}
                     width={513}
                     height={729}
+                    unoptimized={Boolean(
+                      hoverImg?.startsWith("data:") ||
+                        hoverImg?.startsWith("http")
+                    )}
                   />
                 </div>
               </SwiperSlide>

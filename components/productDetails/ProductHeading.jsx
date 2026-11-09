@@ -1,14 +1,9 @@
 import React from "react";
 
-function formatUsd(amount) {
+function formatEur(amount) {
   const num = Number(amount);
-  if (!Number.isFinite(num)) return "$0.00";
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(num);
+  if (!Number.isFinite(num)) return "0,00 €";
+  return `${num.toFixed(2)} €`;
 }
 
 export default function ProductHeading({
@@ -18,10 +13,20 @@ export default function ProductHeading({
   showProgress = true,
   inStock,
 }) {
-  // Only these are dynamic, per request
-  const title = product?.title ?? "Product";
+  const title = product?.title ?? "Article Shammah";
   const resolvedPrice = price ?? product?.price;
   const resolvedOldPrice = oldPrice ?? product?.oldPrice;
+  const hasDiscount =
+    resolvedOldPrice != null &&
+    Number(resolvedOldPrice) > Number(resolvedPrice) &&
+    Number(resolvedPrice) > 0;
+  const discountPct = hasDiscount
+    ? Math.round(
+        ((Number(resolvedOldPrice) - Number(resolvedPrice)) /
+          Number(resolvedOldPrice)) *
+          100
+      )
+    : null;
 
   const resolvedInStock =
     typeof inStock === "boolean" ? inStock : Boolean(product?.inStock ?? true);
@@ -31,7 +36,7 @@ export default function ProductHeading({
         resolvedInStock ? "" : "pb-0 border-0"
       }`}
     >
-      <span className="brand-product">KOTON</span>
+      <span className="brand-product">SHAMMAH</span>
       <h5 className="product-name fw-medium">{title}</h5>
       <div className="product-rate">
         <div className="list-star">
@@ -41,18 +46,24 @@ export default function ProductHeading({
           <i className="icon icon-star" />
           <i className="icon icon-star" />
         </div>
-        <span className="count-review">(5 reviews)</span>
+        <span className="count-review">(Avis vérifiés)</span>
       </div>
       <div className="product-price">
         <div className="display-sm price-new price-on-sale">
-          {formatUsd(resolvedPrice)}
+          {formatEur(resolvedPrice)}
         </div>
-        <div className="display-sm price-old">{formatUsd(resolvedOldPrice)}</div>
-        <span className="badge-sale">20% Off</span>
+        {hasDiscount && (
+          <>
+            <div className="display-sm price-old">
+              {formatEur(resolvedOldPrice)}
+            </div>
+            <span className="badge-sale">-{discountPct}%</span>
+          </>
+        )}
       </div>
       {resolvedInStock ? (
         <div className="product-stock">
-          <span className="stock in-stock">In Stock</span>
+          <span className="stock in-stock">En stock</span>
           <svg
             className="icon"
             width={18}
@@ -82,32 +93,20 @@ export default function ProductHeading({
               fill="#EA5513"
             />
           </svg>
-          <span className="text-dark">30 sold in last 24 hours</span>
+          <span className="text-dark">Confectionné avec soin à la commande</span>
         </div>
       ) : (
         <>
           <div className="product-stock">
-            <span className="stock out-stock">Out of Stock</span>
+            <span className="stock out-stock">Rupture de stock</span>
           </div>
           <button className="tf-btn btn-out-stock">
-            This product is currently unavailable
+            Cet article est momentanément indisponible
           </button>
         </>
       )}
-      {showProgress && (
-        <div className="product-progress-sale">
-          <div className="title-hurry-up">
-            <span className="text-primary fw-medium">HURRY UP!</span> Only{" "}
-            <span className="count">4</span> items left!
-          </div>
-          <div className="progress-sold">
-            <div
-              className="value"
-              style={{ width: "70%" }}
-              data-progress={70}
-            />
-          </div>
-        </div>
+      {product?.description && (
+        <p className="text-sm text-main mt-3 mb-0">{product.description}</p>
       )}
     </div>
   );

@@ -203,6 +203,9 @@ export default function Slider1({
                   width={120}
                   height={150}
                   className="thumb-img"
+                  unoptimized={Boolean(
+                    imgSrc?.startsWith("data:") || imgSrc?.startsWith("http")
+                  )}
                 />
               </button>
             </SwiperSlide>
@@ -249,6 +252,10 @@ export default function Slider1({
                     width={828}
                     height={1035}
                     priority={i === 0}
+                    unoptimized={Boolean(
+                      elm.imgSrc?.startsWith("data:") ||
+                        elm.imgSrc?.startsWith("http")
+                    )}
                   />
                 </div>
               </a>

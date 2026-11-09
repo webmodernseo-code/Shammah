@@ -84,6 +84,7 @@ export default function Details1({ product }) {
                       selectedPrice={price}
                     />
                     <SizePicker
+                      sizes={product?.sizes || product?.filterSizes}
                       activeSize={activeSize}
                       setActiveSize={setActiveSize}
                     />
@@ -113,21 +114,22 @@ export default function Details1({ product }) {
                         className="tf-btn hover-primary btn-add-to-cart"
                       >
                         {isAddedToCartProducts(product.id)
-                          ? "Already Added"
-                          : "Add to cart"}
+                          ? "Déjà au panier"
+                          : "Ajouter au panier"}
                       </a>
                     </div>
-                    <a
-                      href="#"
+                    <Link
+                      href={`/checkout`}
+                      onClick={() => addProductToCart(product.id, quantity)}
                       className="tf-btn btn-primary w-100 animate-btn"
                     >
-                      Buy it now
-                    </a>
+                      Commander maintenant
+                    </Link>
                     <Link
                       href={`/checkout`}
                       className="more-choose-payment link"
                     >
-                      More payment options
+                      Autres moyens de paiement
                     </Link>
                   </div>
                   <div className="tf-product-extra-link">
@@ -137,9 +139,9 @@ export default function Details1({ product }) {
                         } `}
                     >
                       <i className="icon add icon-heart" />
-                      <span className="add">Add to wishlist</span>
+                      <span className="add">Ajouter aux favoris</span>
                       <i className="icon added icon-trash" />
-                      <span className="added">Remove from wishlist</span>
+                      <span className="added">Retirer des favoris</span>
                     </a>
                     <a
                       href="#compare"
@@ -149,8 +151,8 @@ export default function Details1({ product }) {
                     >
                       <i className="icon icon-compare2" />
                       {isAddedtoCompareItem(product.id)
-                        ? "Already compared"
-                        : "Add to Compare"}
+                        ? "Déjà comparé"
+                        : "Comparer"}
                     </a>
                     <a
                       href="#askQuestion"
@@ -158,7 +160,7 @@ export default function Details1({ product }) {
                       className="product-extra-icon link"
                     >
                       <i className="icon icon-ask" />
-                      Ask a question
+                      Poser une question
                     </a>
                     <a
                       href="#shareSocial"
@@ -166,17 +168,17 @@ export default function Details1({ product }) {
                       className="product-extra-icon link"
                     >
                       <i className="icon icon-share" />
-                      Share
+                      Partager
                     </a>
                   </div>
                   <ul className="tf-product-cate-sku text-md">
                     <li className="item-cate-sku">
-                      <span className="label">SKU:</span>
-                      <span className="value">AD1FSSE0YR</span>
+                      <span className="label">Référence :</span>
+                      <span className="value">{product?.code || `SHM-${product?.id}`}</span>
                     </li>
                     <li className="item-cate-sku">
-                      <span className="label">Categories:</span>
-                      <span className="value">Clothes, Top</span>
+                      <span className="label">Collection :</span>
+                      <span className="value">Shammah Officiel</span>
                     </li>
                   </ul>
 
@@ -190,17 +192,17 @@ export default function Details1({ product }) {
                     <div className="product-delivery">
                       <div className="icon icon-car2" />
                       <p className="text-md">
-                        Estimated delivery time:
+                        Délai de livraison estimé :{" "}
                         <span className="fw-medium">
-                          3-5 days international
+                          3 à 5 jours ouvrés
                         </span>
                       </p>
                     </div>
                     <div className="product-delivery">
                       <div className="icon icon-shipping3" />
                       <p className="text-md">
-                        Free shipping on
-                        <span className="fw-medium">all orders over $150</span>
+                        Livraison offerte{" "}
+                        <span className="fw-medium">dès 100 € d&apos;achat</span>
                       </p>
                     </div>
                   </div>

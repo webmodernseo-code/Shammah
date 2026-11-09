@@ -8,7 +8,6 @@ import Hero from "@/components/homes/home-pod/Hero";
 import Marquee from "@/components/homes/home-pod/Marquee";
 import Products from "@/components/homes/home-pod/Products";
 import Products2 from "@/components/homes/home-pod/Products2";
-import Shopgram from "@/components/homes/home-pod/Shopgram";
 import Newsletter from "@/components/modals/Newsletter";
 import React from "react";
 
@@ -30,7 +29,6 @@ export default function Home() {
       <Products />
       <Banner2 />
       <Products2 />
-      <Shopgram />
       <Features />
       <section className="flat-spacing-24" aria-labelledby="livraison-shammah">
         <div className="container text-center">
