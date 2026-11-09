@@ -127,25 +127,22 @@ export default function Newsletter() {
           </div>
 
           <div className="modal-bottom shammah-welcome-body text-center">
-            <span className="shammah-welcome-badge">
-              Parole &amp; Création Shammah
-            </span>
+            <div className="shammah-welcome-header-row">
+              <span className="shammah-welcome-badge">
+                Parole &amp; Création Shammah
+              </span>
+              <h5 id="shammahWelcomeTitle" className="shammah-welcome-title">
+                Portez votre foi avec caractère
+              </h5>
+            </div>
 
-            <h5 id="shammahWelcomeTitle" className="shammah-welcome-title">
-              Portez votre foi avec caractère
-            </h5>
-
-            {/* Bloc Verset d'Inspiration (Option 3) */}
+            {/* Bloc Verset d'Inspiration compact (Option 3) */}
             <blockquote className="shammah-welcome-verse">
               <p className="verse-text">{verse.text}</p>
               <footer className="verse-ref">— {verse.ref}</footer>
             </blockquote>
 
-            <p className="shammah-welcome-subtitle">
-              Accédez directement à la catégorie de votre choix :
-            </p>
-
-            {/* Grille des 4 catégories avec mini-vignettes (Option 2) */}
+            {/* Grille compacte des 4 catégories avec mini-vignettes (Option 2) */}
             <div className="shammah-welcome-grid">
               {QUICK_CATEGORIES.map((cat) => (
                 <Link
@@ -158,8 +155,8 @@ export default function Newsletter() {
                     <Image
                       src={cat.thumb}
                       alt={cat.title}
-                      width={40}
-                      height={40}
+                      width={32}
+                      height={32}
                     />
                   </span>
                   <span className="shammah-welcome-cat-text">
@@ -168,8 +165,8 @@ export default function Newsletter() {
                   </span>
                   <svg
                     className="cat-arrow"
-                    width="14"
-                    height="14"
+                    width="13"
+                    height="13"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -190,8 +187,8 @@ export default function Newsletter() {
             >
               <span>Explorer toute la collection</span>
               <svg
-                width="16"
-                height="16"
+                width="15"
+                height="15"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -205,8 +202,8 @@ export default function Newsletter() {
 
             <div className="shammah-welcome-reassurance">
               <svg
-                width="14"
-                height="14"
+                width="13"
+                height="13"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -217,8 +214,7 @@ export default function Newsletter() {
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
               <span>
-                Confection soignée • Livraison offerte dès 60 € • Achat sans
-                création de compte
+                Livraison offerte dès 60 € • Achat rapide sans création de compte
               </span>
             </div>
           </div>
