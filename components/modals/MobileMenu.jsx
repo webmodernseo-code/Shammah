@@ -72,18 +72,18 @@ export default function MobileMenu() {
                       </Link>
                     </li>
                     <li style={{ marginBottom: "8px" }}>
-                      <Link href="/shop-default?category=sweats-a-capuche" className="sub-nav-link" data-bs-dismiss="offcanvas">
-                        Sweats à capuche (Hoodies)
-                      </Link>
-                    </li>
-                    <li style={{ marginBottom: "8px" }}>
                       <Link href="/shop-default?category=sweats" className="sub-nav-link" data-bs-dismiss="offcanvas">
-                        Sweats (Cols ronds)
+                        Sweats &amp; Hoodies
                       </Link>
                     </li>
                     <li style={{ marginBottom: "8px" }}>
                       <Link href="/shop-default?category=bonnets-casquettes" className="sub-nav-link" data-bs-dismiss="offcanvas">
                         Bonnets &amp; Casquettes
+                      </Link>
+                    </li>
+                    <li style={{ marginBottom: "8px" }}>
+                      <Link href="/shop-default?category=accessoires" className="sub-nav-link" data-bs-dismiss="offcanvas">
+                        Accessoires (Tasses, Sacs &amp; Objets)
                       </Link>
                     </li>
                     <li style={{ marginTop: "10px" }}>

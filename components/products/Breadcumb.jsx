@@ -26,10 +26,10 @@ const CATEGORY_META = {
     desc: "Hoodies haut de gamme au tombé structuré, confectionnés dans un coton molletonné dense et durable.",
   },
   sweats: {
-    eyebrow: "Vestiaire Minimaliste",
-    title: "Sweats & Crewnecks",
-    crumb: "Sweats",
-    desc: "Sweatshirts à col rond au style épuré et intemporel, alliant confort absolu et témoignage discret.",
+    eyebrow: "Molleton Lourd",
+    title: "Sweats & Hoodies",
+    crumb: "Sweats & Hoodies",
+    desc: "Sweats à capuche et sweatshirts à col rond confectionnés dans un coton molletonné dense, doux et durable.",
   },
   "bonnets-casquettes": {
     eyebrow: "Broderies Signature",
@@ -37,31 +37,11 @@ const CATEGORY_META = {
     crumb: "Bonnets & Casquettes",
     desc: "Casquettes structurées et bonnets finement brodés pour parfaire votre tenue au quotidien.",
   },
-  homme: {
-    eyebrow: "Vestiaire Masculin",
-    title: "Collection Homme",
-    crumb: "Homme",
-    desc: "Vêtements et pièces streetwear chrétiens pour homme : t-shirts, sweats et hoodies d'exception pour affirmer sa foi avec sobriété et style.",
-    heroImage: "/images/collections/hero-collection-homme.jpg",
-    heroAlt: "Collection Homme Shammah — T-shirt Jésus porté en studio",
-  },
-  femme: {
-    eyebrow: "Vestiaire Féminin",
-    title: "Collection Femme",
-    crumb: "Femme",
-    desc: "Créations chrétiennes pour femme : des pièces élégantes, modernes et lumineuses conçues pour célébrer la foi et la grâce au quotidien.",
-  },
-  enfant: {
-    eyebrow: "Jeune Génération",
-    title: "Collection Enfant",
-    crumb: "Enfant",
-    desc: "Vêtements chrétiens doux et inspirants pour les plus jeunes : semer des paroles de vie et d'amour dès le premier âge.",
-  },
   accessoires: {
     eyebrow: "Objets & Quotidien",
-    title: "Accessoires & Objets de Foi",
+    title: "Accessoires & Tasses",
     crumb: "Accessoires",
-    desc: "Mugs, tote bags, casquettes et objets du quotidien pensés pour vous inspirer et témoigner de votre foi jour après jour.",
+    desc: "Tasses en céramique, mugs, tote bags et créations du quotidien pensés pour vous accompagner et témoigner de votre foi jour après jour.",
   },
   gadgets: {
     eyebrow: "Objets & Quotidien",

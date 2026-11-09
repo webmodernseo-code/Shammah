@@ -19,7 +19,7 @@ export default function Collections() {
               Nos Collections
             </h2>
             <p className="text-secondary text-sm mb-0">
-              T-shirts, sweats à capuche, crewnecks, bonnets et casquettes : des pièces uniques conçues pour témoigner avec force et sobriété.
+              T-shirts, sweats à capuche, bonnets, casquettes et accessoires : des pièces uniques conçues pour témoigner avec force et sobriété.
             </p>
           </div>
           <div className="d-flex align-items-center gap-2">

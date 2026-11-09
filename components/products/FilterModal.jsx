@@ -34,18 +34,18 @@ export default function FilterModal({ allProps }) {
                 </Link>
               </li>
               <li className="cate-item">
-                <Link className="text-sm link" href={`/shop-default?category=sweats-a-capuche`}>
-                  <span>Sweats à capuche</span>
-                </Link>
-              </li>
-              <li className="cate-item">
                 <Link className="text-sm link" href={`/shop-default?category=sweats`}>
-                  <span>Sweats</span>
+                  <span>Sweats &amp; Hoodies</span>
                 </Link>
               </li>
               <li className="cate-item">
                 <Link className="text-sm link" href={`/shop-default?category=bonnets-casquettes`}>
                   <span>Bonnets &amp; Casquettes</span>
+                </Link>
+              </li>
+              <li className="cate-item">
+                <Link className="text-sm link" href={`/shop-default?category=accessoires`}>
+                  <span>Accessoires</span>
                 </Link>
               </li>
             </ul>

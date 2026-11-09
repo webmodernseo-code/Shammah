@@ -73,27 +73,13 @@ export default function Nav2() {
               </Link>
 
               <Link
-                href="/shop-default?category=sweats-a-capuche"
-                className="collection-menu-item"
-              >
-                <div className="collection-item-bullet" />
-                <div className="collection-item-content">
-                  <span className="collection-item-title">Sweats à capuche</span>
-                  <span className="collection-item-desc">Hoodies épais au tombé structuré</span>
-                </div>
-                <svg className="collection-item-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </Link>
-
-              <Link
                 href="/shop-default?category=sweats"
                 className="collection-menu-item"
               >
                 <div className="collection-item-bullet" />
                 <div className="collection-item-content">
-                  <span className="collection-item-title">Sweats</span>
-                  <span className="collection-item-desc">Crewnecks & cols ronds minimalistes</span>
+                  <span className="collection-item-title">Sweats &amp; Hoodies</span>
+                  <span className="collection-item-desc">Sweats à capuche &amp; cols ronds en molleton</span>
                 </div>
                 <svg className="collection-item-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -106,8 +92,22 @@ export default function Nav2() {
               >
                 <div className="collection-item-bullet" />
                 <div className="collection-item-content">
-                  <span className="collection-item-title">Bonnets & Casquettes</span>
-                  <span className="collection-item-desc">Broderies fines & accessoires de tête</span>
+                  <span className="collection-item-title">Bonnets &amp; Casquettes</span>
+                  <span className="collection-item-desc">Broderies fines &amp; accessoires de tête</span>
+                </div>
+                <svg className="collection-item-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </Link>
+
+              <Link
+                href="/shop-default?category=accessoires"
+                className="collection-menu-item"
+              >
+                <div className="collection-item-bullet" />
+                <div className="collection-item-content">
+                  <span className="collection-item-title">Accessoires</span>
+                  <span className="collection-item-desc">Tasses, mugs, tote bags &amp; objets de foi</span>
                 </div>
                 <svg className="collection-item-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
