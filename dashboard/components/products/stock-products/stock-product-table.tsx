@@ -195,7 +195,14 @@ export default function StockProductTable() {
         if (json.success && Array.isArray(json.data) && json.data.length > 0) {
           const dbItems: StockItem[] = json.data.map((p: any) => {
             const rawImg = p.imageRecto || p.image || "";
-            const safeImg = rawImg && (rawImg.startsWith("http") || rawImg.startsWith("/") ? rawImg : `/images/products/${rawImg}`);
+            const safeImg =
+              rawImg &&
+              (rawImg.startsWith("http") ||
+                rawImg.startsWith("/") ||
+                rawImg.startsWith("data:") ||
+                rawImg.startsWith("blob:")
+                ? rawImg
+                : `/images/products/${rawImg}`);
             return {
               id: p.code || p.id,
               code: p.code || p.id,

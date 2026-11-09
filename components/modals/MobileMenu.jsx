@@ -43,20 +43,10 @@ export default function MobileMenu() {
                 </Link>
               </li>
               <li className="nav-mb-item">
-                <Link
-                  href="/shop-default"
-                  className={`mb-menu-link ${
-                    pathname.startsWith("/shop") ? "menuActive" : ""
-                  }`}
-                >
-                  <span>Boutique</span>
-                </Link>
-              </li>
-              <li className="nav-mb-item">
                 <a
                   href="#dropdown-mb-collections"
                   className={`collapsed mb-menu-link ${
-                    pathname === "/shop-collection-list" || pathname.includes("category=") ? "menuActive" : ""
+                    pathname.startsWith("/shop") || pathname.startsWith("/product") || pathname.includes("category=") ? "menuActive" : ""
                   }`}
                   data-bs-toggle="collapse"
                   aria-expanded="false"
@@ -100,8 +90,8 @@ export default function MobileMenu() {
                       </Link>
                     </li>
                     <li style={{ marginTop: "10px" }}>
-                      <Link href="/shop-collection-list" className="sub-nav-link fw-medium text-dark" data-bs-dismiss="offcanvas">
-                        Toutes les collections →
+                      <Link href="/shop-default" className="sub-nav-link fw-medium text-dark" data-bs-dismiss="offcanvas">
+                        Explorer toute la collection →
                       </Link>
                     </li>
                   </ul>

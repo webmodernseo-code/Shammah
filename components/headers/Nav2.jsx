@@ -18,24 +18,11 @@ export default function Nav2() {
         </Link>
       </li>
 
-      <li className="menu-item">
-        <Link
-          href="/shop-default"
-          className={`item-link ${
-            pathname.startsWith("/shop") || pathname.startsWith("/product")
-              ? "menuActive"
-              : ""
-          }`}
-        >
-          Boutique
-        </Link>
-      </li>
-
       <li className="menu-item menu-item-has-children shammah-nav-collections">
         <Link
           href="/shop-default"
           className={`item-link d-inline-flex align-items-center gap-1.5 ${
-            pathname === "/shop-collection-list" || pathname.includes("category=")
+            pathname.startsWith("/shop") || pathname.startsWith("/product") || pathname.includes("category=")
               ? "menuActive"
               : ""
           }`}

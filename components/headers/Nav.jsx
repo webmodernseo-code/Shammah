@@ -26,17 +26,6 @@ export default function Nav() {
               : ""
           }`}
         >
-          Boutique
-        </Link>
-      </li>
-
-      <li className="menu-item">
-        <Link
-          href="/shop-collection-list"
-          className={`item-link ${
-            pathname === "/shop-collection-list" ? "menuActive" : ""
-          }`}
-        >
           Collections
         </Link>
       </li>
