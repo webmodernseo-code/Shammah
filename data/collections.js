@@ -457,7 +457,7 @@ export const categories10 = [
 
 export const categories11 = [
   {
-    imgSrc: "/images/cls-categories/fashion/men.jpg",
+    imgSrc: "/images/cls-categories/pod/t-shirts-jesus.jpg",
     width: 696,
     height: 696,
     label: "T-shirts",
@@ -621,7 +621,7 @@ export const categories14 = [
   {
     id: 1,
     name: "T-shirts",
-    image: "/images/cls-categories/fashion/men.jpg",
+    image: "/images/cls-categories/pod/t-shirts-jesus.jpg",
     items: "Coupes oversize & classiques en coton bio",
     slug: "t-shirts",
   },

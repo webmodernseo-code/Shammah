@@ -30,15 +30,15 @@ export default function ProductCard11({ product }) {
         <Link href={`/product-detail/${product.id}`} className="product-img">
           <Image
             className="img-product lazyload"
-            alt="image-product"
+            alt={product.title || "Produit Shammah"}
             src={currentImage}
             width={684}
             height={972}
           />
           <Image
             className="img-hover lazyload"
-            alt="image-product"
-            src={product.imgHover}
+            alt={product.title || "Produit Shammah"}
+            src={product.imgHover || product.imageHover || product.imgSrc}
             width={684}
             height={972}
           />
@@ -57,18 +57,16 @@ export default function ProductCard11({ product }) {
             <span
               className={`price-new ${product.oldPrice ? "text-primary" : ""} `}
             >
-              ${product.price?.toFixed(2)}
+              {product.price?.toFixed(2)} €
             </span>{" "}
             {product.oldPrice && (
               <span className="price-old text-dark">
-                ${product.oldPrice.toFixed(2)}
+                {product.oldPrice.toFixed(2)} €
               </span>
             )}
           </p>
           <p className="decs text-sm text-main text-line-clamp-2">
-            Product Specifications Care for fiber: 30% more recycled polyester.
-            We label garments manufactured using environmentally friendly
-            technologies and raw materials with the Join Life label.
+            Confection haut de gamme Shammah : coton sélectionné pour sa tenue, sa douceur et sa durabilité, imprimé et brodé avec soin.
           </p>
           <ul className="list-color-product">
             {product.colors.map((color, index) => (
@@ -107,8 +105,8 @@ export default function ProductCard11({ product }) {
             className="tf-btn btn-main-product animate-btn"
           >
             {isAddedToCartProducts(product.id)
-              ? "Already Added"
-              : "Add to Cart"}
+              ? "Déjà au panier"
+              : "Ajouter au panier"}
           </a>
           <a
             onClick={() => addToWishlist(product.id)}
@@ -121,8 +119,8 @@ export default function ProductCard11({ product }) {
             />
             <span className="tooltip">
               {isAddedtoWishlist(product.id)
-                ? "Remove Wishlist"
-                : "Add to Wishlist"}
+                ? "Retirer des favoris"
+                : "Ajouter aux favoris"}
             </span>
           </a>
           <a
@@ -135,8 +133,8 @@ export default function ProductCard11({ product }) {
             <span className="icon icon-compare3" />
             <span className="tooltip">
               {isAddedtoCompareItem(product.id)
-                ? "Already compared"
-                : "Add to Compare"}
+                ? "Déjà comparé"
+                : "Comparer"}
             </span>
           </a>
         </div>

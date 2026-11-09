@@ -63,8 +63,8 @@ export default function Products() {
                         <span className="icon icon-cart2" />
                         <span className="tooltip">
                           {isAddedToCartProducts(product.id)
-                            ? "Already Added"
-                            : "Add to Cart"}
+                            ? "Déjà au panier"
+                            : "Ajouter au panier"}
                         </span>
                       </a>
                     </li>
@@ -86,8 +86,8 @@ export default function Products() {
                         />
                         <span className="tooltip">
                           {isAddedtoWishlist(product.id)
-                            ? "Remove Wishlist"
-                            : "Add to Wishlist"}
+                            ? "Retirer des favoris"
+                            : "Ajouter aux favoris"}
                         </span>
                       </a>
                     </li>
@@ -99,7 +99,7 @@ export default function Products() {
                         className="hover-tooltip tooltip-left box-icon quickview"
                       >
                         <span className="icon icon-view" />
-                        <span className="tooltip">Quick View</span>
+                        <span className="tooltip">Aperçu rapide</span>
                       </a>
                     </li>
                   </ul>
