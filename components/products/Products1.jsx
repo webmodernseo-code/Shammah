@@ -4,10 +4,43 @@ import ListProducts from "./ListProducts";
 import GridProducts from "./GridProducts";
 import FilterModal from "./FilterModal";
 import LayoutHandler from "./LayoutHandler";
+import Image from "next/image";
 import { useEffect, useReducer, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { initialState, reducer } from "@/reducer/filterReducer";
 import { products } from "@/data/products";
+
+export const SHAMMAH_CATEGORY_FILTERS = [
+  { slug: "All", label: "Tous les produits", thumb: null },
+  {
+    slug: "t-shirts",
+    label: "T-shirts",
+    thumb: "/images/cls-categories/pod/t-shirts-jesus.jpg",
+  },
+  {
+    slug: "sweats",
+    label: "Sweats à capuche",
+    thumb: "/images/cls-categories/pod/sweat-vert-jesus.jpg",
+  },
+  {
+    slug: "casquettes",
+    label: "Casquettes",
+    thumb: "/images/cls-categories/pod/bonnets-casquettes.jpg",
+  },
+  {
+    slug: "accessoires",
+    label: "Accessoires",
+    thumb: "/images/cls-categories/pod/accessories-mug.jpg",
+  },
+];
+
+const SORT_LABELS = {
+  "Sort by (Default)": "Trier par (Défaut)",
+  "Title Ascending": "Nom : A à Z",
+  "Title Descending": "Nom : Z à A",
+  "Price Ascending": "Prix : croissant",
+  "Price Descending": "Prix : décroissant",
+};
 
 export default function Products1({
   fullWidth = false,
@@ -19,6 +52,7 @@ export default function Products1({
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
     price,
+    category,
     availability,
     color,
     size,
@@ -32,9 +66,26 @@ export default function Products1({
     itemPerPage,
   } = state;
 
+  const updateUrlCategory = (nextCat) => {
+    if (typeof window === "undefined") return;
+    const url = new URL(window.location.href);
+    if (!nextCat || nextCat === "All") {
+      url.searchParams.delete("category");
+    } else {
+      url.searchParams.set("category", nextCat);
+    }
+    window.history.replaceState({}, "", url.toString());
+  };
+
   const allProps = {
     ...state,
     setPrice: (value) => dispatch({ type: "SET_PRICE", payload: value }),
+
+    setCategory: (value) => {
+      const next = value === category && value !== "All" ? "All" : value;
+      dispatch({ type: "SET_CATEGORY", payload: next });
+      updateUrlCategory(next);
+    },
 
     setColor: (value) => {
       value == color
@@ -69,6 +120,7 @@ export default function Products1({
     },
     clearFilter: () => {
       dispatch({ type: "CLEAR_FILTER" });
+      updateUrlCategory("All");
     },
   };
 
@@ -76,12 +128,20 @@ export default function Products1({
   const categoryParam = searchParams?.get("category")?.toLowerCase() || "";
 
   useEffect(() => {
+    if (categoryParam) {
+      dispatch({ type: "SET_CATEGORY", payload: categoryParam });
+    } else {
+      dispatch({ type: "SET_CATEGORY", payload: "All" });
+    }
+  }, [categoryParam]);
+
+  useEffect(() => {
     let filteredArrays = [];
 
-    if (categoryParam) {
+    if (category && category !== "All") {
       const filteredByCategory = [...products].filter((elm) => {
         if (!elm.categories) return false;
-        return elm.categories.includes(categoryParam);
+        return elm.categories.includes(category);
       });
       filteredArrays = [...filteredArrays, filteredByCategory];
     }
@@ -120,7 +180,7 @@ export default function Products1({
       filteredArrays.every((array) => array.includes(item))
     );
     dispatch({ type: "SET_FILTERED", payload: commonItems });
-  }, [price, availability, color, size, brands, categoryParam]);
+  }, [price, category, availability, color, size, brands]);
 
   useEffect(() => {
     if (sortingOption === "Price Ascending") {
@@ -148,10 +208,51 @@ export default function Products1({
     }
     dispatch({ type: "SET_CURRENT_PAGE", payload: 1 });
   }, [filtered, sortingOption]);
+
+  const activeCategoryLabel =
+    SHAMMAH_CATEGORY_FILTERS.find((c) => c.slug === category)?.label || category;
+
+  const hasActiveFilters =
+    category !== "All" ||
+    availability != "All" ||
+    brands != "All" ||
+    price.join("-") != [0, 300].join("-") ||
+    color != "All" ||
+    size != "All";
+
   return (
     <>
       <section className={parentClass}>
         <div className={fullWidth ? "container-full" : "container"}>
+          {/* Barre de filtres rapides par catégorie (Collection unique) */}
+          <div className="shammah-category-filter-bar" role="tablist" aria-label="Filtrer par catégorie">
+            {SHAMMAH_CATEGORY_FILTERS.map((cat) => {
+              const isActive = category === cat.slug;
+              return (
+                <button
+                  key={cat.slug}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`shammah-cat-pill ${isActive ? "active" : ""}`}
+                  onClick={() => allProps.setCategory(cat.slug)}
+                >
+                  {cat.thumb && (
+                    <span className="shammah-cat-pill-thumb">
+                      <Image
+                        src={cat.thumb}
+                        alt={cat.label}
+                        width={28}
+                        height={28}
+                      />
+                    </span>
+                  )}
+                  <span className="shammah-cat-pill-label">{cat.label}</span>
+                </button>
+              );
+            })}
+          </div>
+
           <div className="tf-shop-control">
             <div className="tf-group-filter">
               <a
@@ -161,11 +262,13 @@ export default function Products1({
                 className="tf-btn-filter"
               >
                 <span className="icon icon-filter" />
-                <span className="text">Filter</span>
+                <span className="text">Filtrer</span>
               </a>
               <div className="tf-dropdown-sort" data-bs-toggle="dropdown">
                 <div className="btn-select">
-                  <span className="text-sort-value">{sortingOption}</span>
+                  <span className="text-sort-value">
+                    {SORT_LABELS[sortingOption] || sortingOption}
+                  </span>
                   <span className="icon icon-arr-down" />
                 </div>
                 <div className="dropdown-menu">
@@ -184,7 +287,9 @@ export default function Products1({
                       onClick={() => allProps.setSortingOption(elm)}
                       data-sort-value="best-selling"
                     >
-                      <span className="text-value-item">{elm}</span>
+                      <span className="text-value-item">
+                        {SORT_LABELS[elm] || elm}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -198,25 +303,33 @@ export default function Products1({
             </ul>
           </div>
           <div className="wrapper-control-shop">
-            {(availability != "All" ||
-              brands != "All" ||
-              price.join("-") != [0, 300].join("-") ||
-              color != "All" ||
-              size != "All") && (
+            {hasActiveFilters && (
               <div className="meta-filter-shop" style={{}}>
                 <div id="product-count-grid" className="count-text">
-                  <span className="count">{sorted.length}</span>Product
-                  {sorted.length > 1 ? "s" : ""} found
+                  <span className="count">{sorted.length}</span> article
+                  {sorted.length > 1 ? "s" : ""} trouvé
+                  {sorted.length > 1 ? "s" : ""}
                 </div>
 
                 <div id="applied-filters">
+                  {category !== "All" ? (
+                    <span
+                      className="filter-tag"
+                      onClick={() => allProps.setCategory("All")}
+                    >
+                      <span className="remove-tag icon-close"></span>{" "}
+                      Catégorie : {activeCategoryLabel}
+                    </span>
+                  ) : (
+                    ""
+                  )}
                   {availability != "All" ? (
                     <span
                       className="filter-tag"
                       onClick={() => allProps.setAvailability("All")}
                     >
                       <span className="remove-tag icon-close"></span>{" "}
-                      Availability: {availability ? "In Stock" : "Unavailable"}
+                      Disponibilité : {availability ? "En stock" : "Épuisé"}
                     </span>
                   ) : (
                     ""
@@ -230,7 +343,7 @@ export default function Products1({
                         className="remove-tag icon-close"
                         data-filter="brand"
                       />
-                      Brand: {brands}
+                      Collection : {brands}
                     </span>
                   ) : (
                     ""
@@ -244,7 +357,7 @@ export default function Products1({
                         className="remove-tag icon-close"
                         data-filter="price"
                       />
-                      Price: ${price[0]} - ${price[1]}
+                      Prix : {price[0]} € - {price[1]} €
                     </span>
                   ) : (
                     ""
@@ -258,7 +371,7 @@ export default function Products1({
                         className="remove-tag icon-close"
                         data-filter="color"
                       />
-                      Color: {color}
+                      Couleur : {color}
                     </span>
                   ) : (
                     ""
@@ -272,27 +385,19 @@ export default function Products1({
                         className="remove-tag icon-close"
                         data-filter="size"
                       />
-                      Size: {size}
+                      Taille : {size}
                     </span>
                   ) : (
                     ""
                   )}
                 </div>
-                {availability != "All" ||
-                brands != "All" ||
-                price.join("-") != [0, 300].join("-") ||
-                color != "All" ||
-                size != "All" ? (
-                  <button
-                    id="remove-all"
-                    className="remove-all-filters"
-                    onClick={allProps.clearFilter}
-                  >
-                    <i className="icon icon-close" /> Clear all filter
-                  </button>
-                ) : (
-                  ""
-                )}
+                <button
+                  id="remove-all"
+                  className="remove-all-filters"
+                  onClick={allProps.clearFilter}
+                >
+                  <i className="icon icon-close" /> Effacer tous les filtres
+                </button>
               </div>
             )}
 

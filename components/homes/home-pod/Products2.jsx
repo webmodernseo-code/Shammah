@@ -48,24 +48,6 @@ export default function Products2() {
               Des pièces d’exception confectionnées pour proclamer et porter la Parole avec élégance.
             </p>
           </div>
-          <div className="d-flex align-items-center gap-2">
-            <div
-              className="swiper-button-prev nav-swiper nav-prev-hot"
-              aria-label="Précédent"
-            >
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10 13L5 8L10 3" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <div
-              className="swiper-button-next nav-swiper nav-next-hot"
-              aria-label="Suivant"
-            >
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 13L11 8L6 3" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-          </div>
         </div>
 
         <div className="flat-animate-tab flat-controltab-nav overflow-visible">
@@ -163,8 +145,8 @@ export default function Products2() {
                               <span className="icon icon-cart2" />
                               <span className="tooltip">
                                 {isAddedToCartProducts(product.id)
-                                  ? "Already Added"
-                                  : "Add to Cart"}
+                                  ? "Déjà au panier"
+                                  : "Ajouter au panier"}
                               </span>
                             </a>
                           </li>
@@ -186,8 +168,8 @@ export default function Products2() {
                               />
                               <span className="tooltip">
                                 {isAddedtoWishlist(product.id)
-                                  ? "Remove Wishlist"
-                                  : "Add to Wishlist"}
+                                  ? "Retirer des favoris"
+                                  : "Ajouter aux favoris"}
                               </span>
                             </a>
                           </li>
@@ -199,7 +181,7 @@ export default function Products2() {
                               className="hover-tooltip tooltip-left box-icon quickview"
                             >
                               <span className="icon icon-view" />
-                              <span className="tooltip">Quick View</span>
+                              <span className="tooltip">Aperçu rapide</span>
                             </a>
                           </li>
                           <li className="compare">
@@ -213,8 +195,8 @@ export default function Products2() {
                               <span className="icon icon-compare" />
                               <span className="tooltip">
                                 {isAddedtoCompareItem(product.id)
-                                  ? "Already compared"
-                                  : "Add to Compare"}
+                                  ? "Déjà comparé"
+                                  : "Comparer"}
                               </span>
                             </a>
                           </li>
@@ -236,11 +218,11 @@ export default function Products2() {
                         </Link>
                         <p className="price-wrap fw-medium">
                           <span className="price-new text-primary">
-                            ${product.price.toFixed(2)}
+                            {product.price.toFixed(2)} €
                           </span>{" "}
                           {product.oldPrice && (
                             <span className="price-old">
-                              ${product.oldPrice.toFixed(2)}
+                              {product.oldPrice.toFixed(2)} €
                             </span>
                           )}
                         </p>

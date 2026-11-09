@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useContextElement } from "@/context/Context";
 import CountdownTimer from "../common/Countdown";
 import Image from "next/image";
+
 export default function ProductCard1({
   product,
   styleClass = "style-1",
@@ -27,6 +28,8 @@ export default function ProductCard1({
     setCurrentImage(product.imgSrc);
   }, [product]);
 
+  const hoverImage = product.imgHover || product.imageHover || product.imgSrc;
+
   return (
     <div
       className={`card-product ${
@@ -37,7 +40,7 @@ export default function ProductCard1({
         <Link href={`/product-detail/${product.id}`} className="product-img">
           <Image
             className="img-product lazyload"
-            alt="image-product"
+            alt={product.title || "Produit Shammah"}
             src={currentImage}
             width={513}
             height={729}
@@ -45,9 +48,9 @@ export default function ProductCard1({
           />
           <Image
             className="img-hover lazyload"
-            data-src={product.imgHover}
-            alt="image-product"
-            src={product.imgHover}
+            data-src={hoverImage}
+            alt={product.title || "Produit Shammah"}
+            src={hoverImage}
             width={513}
             height={729}
             sizes="(max-width: 767px) 50vw, (max-width: 1199px) 33vw, 25vw"
@@ -60,7 +63,7 @@ export default function ProductCard1({
         )}
         {product.isTrending && (
           <div className="on-sale-wrap">
-            <span className="on-sale-item trending">Trending</span>
+            <span className="on-sale-item trending">Tendance</span>
           </div>
         )}
         {product.countdownTimer && (
@@ -84,8 +87,8 @@ export default function ProductCard1({
                     <span className="icon icon-cart2" />
                     <span className="tooltip">
                       {isAddedToCartProducts(product.id)
-                        ? "Already Added"
-                        : "Add to Cart"}
+                        ? "Déjà au panier"
+                        : "Ajouter au panier"}
                     </span>
                   </a>
                 </li>
@@ -107,10 +110,9 @@ export default function ProductCard1({
                     } `}
                   />
                   <span className="tooltip">
-                    {" "}
                     {isAddedtoWishlist(product.id)
-                      ? "Remove Wishlist"
-                      : "Add to Wishlist"}
+                      ? "Retirer des favoris"
+                      : "Ajouter aux favoris"}
                   </span>
                 </a>
               </li>
@@ -122,7 +124,7 @@ export default function ProductCard1({
                   className={`hover-tooltip tooltip-${tooltipDirection} box-icon quickview`}
                 >
                   <span className="icon icon-view" />
-                  <span className="tooltip">Quick View</span>
+                  <span className="tooltip">Aperçu rapide</span>
                 </a>
               </li>
               <li className="compare">
@@ -134,10 +136,9 @@ export default function ProductCard1({
                 >
                   <span className="icon icon-compare" />
                   <span className="tooltip">
-                    {" "}
                     {isAddedtoCompareItem(product.id)
-                      ? "Already compared"
-                      : "Add to Compare"}
+                      ? "Déjà comparé"
+                      : "Comparer"}
                   </span>
                 </a>
               </li>
@@ -152,10 +153,9 @@ export default function ProductCard1({
                 >
                   <span className="icon icon-cart2" />
                   <span className="text-md fw-medium">
-                    {" "}
                     {isAddedToCartProducts(product.id)
-                      ? "Already Added"
-                      : "Add to Cart"}{" "}
+                      ? "Déjà au panier"
+                      : "Ajouter au panier"}
                   </span>
                 </a>
               </div>
@@ -183,11 +183,11 @@ export default function ProductCard1({
           <span
             className={`price-new ${product.oldPrice ? "text-primary" : ""} `}
           >
-            ${product.price.toFixed(2)}
+            {product.price.toFixed(2)} €
           </span>{" "}
           {product.oldPrice && (
             <span className="price-old text-dark">
-              ${product.oldPrice.toFixed(2)}
+              {product.oldPrice.toFixed(2)} €
             </span>
           )}{" "}
         </p>
@@ -210,7 +210,7 @@ export default function ProductCard1({
                 <Image
                   className="lazyload"
                   data-src={color.img}
-                  alt="image-product"
+                  alt={color.label || "Couleur"}
                   src={color.img}
                   width="684"
                   height="972"

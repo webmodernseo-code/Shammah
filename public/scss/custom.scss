@@ -1065,6 +1065,11 @@ del,
 .nav-next-cls,
 .shammah-nav-prev,
 .shammah-nav-next {
+  position: relative !important;
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
   width: 40px !important;
   height: 40px !important;
   min-width: 40px !important;
@@ -1424,6 +1429,146 @@ del,
           transform: translateY(-2px) !important;
         }
       }
+    }
+  }
+}
+
+/* ========================================================
+   💎 BANNIÈRE ÉDITORIALE "JESUS — QUEL CRÉATEUR EXTRAORDINAIRE"
+   - Fond noir profond (#000000) fusionné avec le visuel
+   - Bouton sobre et contrasté pour explorer la collection
+   ======================================================== */
+.shammah-creator-banner {
+  background-color: #000000;
+  padding: 36px 0 56px;
+  position: relative;
+  overflow: hidden;
+
+  @media (max-width: 767px) {
+    padding: 24px 0 40px;
+  }
+
+  .shammah-creator-banner-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .shammah-creator-visual {
+    width: 100%;
+    max-width: 1024px;
+    margin: 0 auto;
+
+    .shammah-creator-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+  }
+
+  .shammah-creator-actions {
+    margin-top: 8px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .shammah-creator-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #ffffff;
+    color: #09090b !important;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 14px 32px;
+    border-radius: 999px;
+    border: 1.5px solid #ffffff;
+    text-decoration: none !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+    svg {
+      transition: transform 0.2s ease;
+    }
+
+    &:hover {
+      background-color: transparent;
+      color: #ffffff !important;
+      border-color: #ffffff;
+      transform: translateY(-2px);
+
+      svg {
+        transform: translateX(4px);
+      }
+    }
+  }
+}
+
+/* ========================================================
+   💎 BARRE DE FILTRES DE CATÉGORIES (COLLECTION UNIQUE)
+   - Pilules tactiles avec mini-vignettes produits (28x28px)
+   ======================================================== */
+.shammah-category-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f1f5f9;
+
+  .shammah-cat-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 16px 6px 8px;
+    border-radius: 999px;
+    border: 1px solid #e2e8f0;
+    background-color: #ffffff;
+    color: #18181b;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+
+    &:first-child {
+      padding: 9px 18px;
+    }
+
+    .shammah-cat-pill-thumb {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      overflow: hidden;
+      background-color: #ffffff;
+      border: 1px solid #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+
+      img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+      }
+    }
+
+    &:hover {
+      border-color: #09090b;
+      background-color: #f8fafc;
+    }
+
+    &.active {
+      background-color: #09090b;
+      border-color: #09090b;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(9, 9, 11, 0.16);
     }
   }
 }

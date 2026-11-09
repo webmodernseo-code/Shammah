@@ -13,52 +13,90 @@ export default function FilterModal({ allProps }) {
     >
       <div className="canvas-wrapper">
         <div className="canvas-header">
-          <span className="title">Filter</span>
+          <span className="title">Filtres</span>
           <button
             className="icon-close icon-close-popup"
             data-bs-dismiss="offcanvas"
-            aria-label="Close"
+            aria-label="Fermer"
           />
         </div>
         <div className="canvas-body">
           <div className="widget-facet">
+            <div className="facet-title text-xl fw-medium mb-2">
+              <span>Catégories</span>
+            </div>
             <ul className="list-categories shammah-sidebar-collections current-scrollbar">
               <li className="cate-item">
-                <Link className="text-sm link shammah-sidebar-cat-link" href={`/shop-default`}>
+                <button
+                  type="button"
+                  onClick={() => allProps.setCategory("All")}
+                  data-bs-dismiss="offcanvas"
+                  className={`text-sm link shammah-sidebar-cat-link w-100 border-0 bg-transparent text-start ${
+                    allProps.category === "All" ? "active fw-bold text-dark" : ""
+                  }`}
+                >
                   <span>Tous les produits</span>
-                </Link>
+                </button>
               </li>
               <li className="cate-item">
-                <Link className="text-sm link shammah-sidebar-cat-link" href={`/shop-default?category=t-shirts`}>
+                <button
+                  type="button"
+                  onClick={() => allProps.setCategory("t-shirts")}
+                  data-bs-dismiss="offcanvas"
+                  className={`text-sm link shammah-sidebar-cat-link w-100 border-0 bg-transparent text-start ${
+                    allProps.category === "t-shirts" ? "active fw-bold text-dark" : ""
+                  }`}
+                >
                   <span className="shammah-sidebar-cat-thumb">
                     <Image src="/images/cls-categories/pod/t-shirts-jesus.jpg" alt="T-shirts" width={36} height={36} />
                   </span>
                   <span>T-shirts</span>
-                </Link>
+                </button>
               </li>
               <li className="cate-item">
-                <Link className="text-sm link shammah-sidebar-cat-link" href={`/shop-default?category=sweats`}>
+                <button
+                  type="button"
+                  onClick={() => allProps.setCategory("sweats")}
+                  data-bs-dismiss="offcanvas"
+                  className={`text-sm link shammah-sidebar-cat-link w-100 border-0 bg-transparent text-start ${
+                    allProps.category === "sweats" ? "active fw-bold text-dark" : ""
+                  }`}
+                >
                   <span className="shammah-sidebar-cat-thumb">
                     <Image src="/images/cls-categories/pod/sweat-vert-jesus.jpg" alt="Sweats à capuche" width={36} height={36} />
                   </span>
                   <span>Sweats à capuche</span>
-                </Link>
+                </button>
               </li>
               <li className="cate-item">
-                <Link className="text-sm link shammah-sidebar-cat-link" href={`/shop-default?category=casquettes`}>
+                <button
+                  type="button"
+                  onClick={() => allProps.setCategory("casquettes")}
+                  data-bs-dismiss="offcanvas"
+                  className={`text-sm link shammah-sidebar-cat-link w-100 border-0 bg-transparent text-start ${
+                    allProps.category === "casquettes" ? "active fw-bold text-dark" : ""
+                  }`}
+                >
                   <span className="shammah-sidebar-cat-thumb">
                     <Image src="/images/cls-categories/pod/bonnets-casquettes.jpg" alt="Casquettes" width={36} height={36} />
                   </span>
                   <span>Casquettes</span>
-                </Link>
+                </button>
               </li>
               <li className="cate-item">
-                <Link className="text-sm link shammah-sidebar-cat-link" href={`/shop-default?category=accessoires`}>
+                <button
+                  type="button"
+                  onClick={() => allProps.setCategory("accessoires")}
+                  data-bs-dismiss="offcanvas"
+                  className={`text-sm link shammah-sidebar-cat-link w-100 border-0 bg-transparent text-start ${
+                    allProps.category === "accessoires" ? "active fw-bold text-dark" : ""
+                  }`}
+                >
                   <span className="shammah-sidebar-cat-thumb">
                     <Image src="/images/cls-categories/pod/accessories-mug.jpg" alt="Accessoires" width={36} height={36} />
                   </span>
                   <span>Accessoires</span>
-                </Link>
+                </button>
               </li>
             </ul>
           </div>
@@ -71,7 +109,7 @@ export default function FilterModal({ allProps }) {
               aria-expanded="true"
               aria-controls="availability"
             >
-              <span>Availability</span>
+              <span>Disponibilité</span>
               <span className="icon icon-arrow-up" />
             </div>
             <div id="availability" className="collapse show">
@@ -89,7 +127,7 @@ export default function FilterModal({ allProps }) {
                     checked={allProps.availability == true}
                   />
                   <label className="label">
-                    <span>In stock</span>&nbsp;
+                    <span>En stock</span>&nbsp;
                     <span className="count">(20)</span>
                   </label>
                 </li>
@@ -106,7 +144,7 @@ export default function FilterModal({ allProps }) {
                     readOnly
                   />
                   <label className="label">
-                    <span>Out of stock</span>&nbsp;
+                    <span>Épuisé</span>&nbsp;
                     <span className="count">(3)</span>
                   </label>
                 </li>
@@ -122,7 +160,7 @@ export default function FilterModal({ allProps }) {
               aria-expanded="true"
               aria-controls="price"
             >
-              <span>Price</span>
+              <span>Prix</span>
               <span className="icon icon-arrow-up" />
             </div>
             <div id="price" className="collapse show">
@@ -131,23 +169,23 @@ export default function FilterModal({ allProps }) {
                   className="price-val-range"
                   id="price-value-range"
                   data-min={0}
-                  data-max={500}
+                  data-max={300}
                 >
                   <Slider
                     value={allProps.price}
                     onChange={(price) => allProps.setPrice(price)}
                     range
                     min={0}
-                    max={500}
+                    max={300}
                   />
                 </div>
                 <div className="box-value-price">
-                  <span className="text-sm">Price:</span>
+                  <span className="text-sm">Prix :</span>
                   <div className="price-box">
                     <div
                       className="price-val"
                       id="price-min-value"
-                      data-currency="$"
+                      data-currency="€"
                     >
                       {allProps.price[0]}
                     </div>
@@ -155,7 +193,7 @@ export default function FilterModal({ allProps }) {
                     <div
                       className="price-val"
                       id="price-max-value"
-                      data-currency="$"
+                      data-currency="€"
                     >
                       {allProps.price[1]}
                     </div>
@@ -173,33 +211,36 @@ export default function FilterModal({ allProps }) {
               aria-expanded="true"
               aria-controls="color"
             >
-              <span>Color</span>
+              <span>Couleur</span>
               <span className="icon icon-arrow-up" />
             </div>
             <div id="color" className="collapse show">
               <div className="collapse-body filter-color-box flat-check-list">
                 {[
-                  { bgClass: "bg-yellow", name: "Yellow", hasLine: false },
-                  { bgClass: "bg-dark", name: "Black", hasLine: false },
-                  { bgClass: "bg-white", name: "White", hasLine: true },
-                  { bgClass: "bg-purple-3", name: "Purple", hasLine: false },
+                  { bgClass: "bg-yellow", name: "Yellow", label: "Jaune", hasLine: false },
+                  { bgClass: "bg-dark", name: "Black", label: "Noir", hasLine: false },
+                  { bgClass: "bg-white", name: "White", label: "Blanc", hasLine: true },
+                  { bgClass: "bg-purple-3", name: "Purple", label: "Violet", hasLine: false },
                   {
                     bgClass: "bg-light-orange",
                     name: "Light Orange",
+                    label: "Beige / Sable",
                     hasLine: false,
                   },
                   {
                     bgClass: "bg-light-pink-4",
                     name: "Light Pink",
+                    label: "Rose poudré",
                     hasLine: false,
                   },
-                  { bgClass: "bg-pink", name: "Pink", hasLine: false },
+                  { bgClass: "bg-pink", name: "Pink", label: "Rose", hasLine: false },
                   {
                     bgClass: "bg-dark-green",
                     name: "Dark Green",
+                    label: "Vert forêt",
                     hasLine: false,
                   },
-                  { bgClass: "bg-grey-4", name: "Grey", hasLine: false },
+                  { bgClass: "bg-grey-4", name: "Grey", label: "Gris", hasLine: false },
                 ].map((item, index) => (
                   <div
                     key={index}
@@ -209,7 +250,7 @@ export default function FilterModal({ allProps }) {
                     onClick={() => allProps.setColor(item.name)}
                   >
                     <span className={`color ${item.bgClass}`} />
-                    <span className="color-text">{item.name}</span>
+                    <span className="color-text">{item.label}</span>
                   </div>
                 ))}
               </div>
@@ -224,7 +265,7 @@ export default function FilterModal({ allProps }) {
               aria-expanded="true"
               aria-controls="size"
             >
-              <span>Size</span>
+              <span>Taille</span>
               <span className="icon icon-arrow-up" />
             </div>
             <div id="size" className="collapse show">
@@ -244,105 +285,15 @@ export default function FilterModal({ allProps }) {
               </div>
             </div>
           </div>
-          <div className="widget-facet">
-            <div
-              className="facet-title text-xl fw-medium"
-              data-bs-target="#brand"
-              role="button"
-              data-bs-toggle="collapse"
-              aria-expanded="true"
-              aria-controls="brand"
+          <div className="widget-facet pt-2">
+            <button
+              type="button"
+              onClick={allProps.clearFilter}
+              data-bs-dismiss="offcanvas"
+              className="tf-btn btn-line-dark w-100 justify-content-center"
             >
-              <span>Brand</span>
-              <span className="icon icon-arrow-up" />
-            </div>
-            <div id="brand" className="collapse show">
-              <ul className="collapse-body filter-group-check current-scrollbar">
-                {brands.map((brand) => (
-                  <li
-                    key={brand.name}
-                    className="list-item"
-                    onClick={() => allProps.setBrands(brand.name)}
-                  >
-                    <input
-                      type="radio"
-                      className="tf-check"
-                      readOnly
-                      checked={allProps.brands.includes(brand.name)}
-                    />
-                    <label className="label">
-                      <span>{brand.name}</span>&nbsp;
-                      <span className="count">({brand.count})</span>
-                    </label>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          <div className="widget-facet">
-            <div className="facet-title text-xl fw-medium">
-              <span>On sale</span>
-            </div>
-            <ul className="collapse-body list-recent">
-              {products1.slice(0, 2).map((product, i) => (
-                <li key={i}>
-                  <div className="recent-blog-item">
-                    <Link
-                      href={`/product-detail/${product.id}`}
-                      className="img-product"
-                    >
-                      <Image
-                        alt="img"
-                        src={product.imgSrc}
-                        width={113}
-                        height={168}
-                      />
-                    </Link>
-                    <div className="content">
-                      <Link
-                        href={`/product-detail/${product.id}`}
-                        className="title text-md link fw-medium"
-                      >
-                        {product.title}
-                      </Link>
-                      <div className="price text-md fw-medium">
-                        <span className="new-price">
-                          ${product.price.toFixed(2)}
-                        </span>{" "}
-                        {product.oldPrice && (
-                          <span className="old-price">
-                            ${product.oldPrice.toFixed(2)}
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-sm">3 color available</p>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="widget-facet">
-            <div className="sb-banner hover-img">
-              <div className="image img-style">
-                <Image
-                  src="/images/blog/sb-banner.jpg"
-                  alt="banner"
-                  className="lazyload"
-                  width={732}
-                  height={1036}
-                />
-              </div>
-              <div className="banner-content">
-                <p className="title">
-                  Elevate <br />
-                  Your Style
-                </p>
-                <a href="#" className="tf-btn btn-white hover-primary">
-                  Shop Now
-                </a>
-              </div>
-            </div>
+              Réinitialiser les filtres
+            </button>
           </div>
         </div>
       </div>

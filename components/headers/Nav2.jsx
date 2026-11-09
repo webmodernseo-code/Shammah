@@ -33,7 +33,7 @@ export default function Nav2() {
 
       <li className="menu-item menu-item-has-children shammah-nav-collections">
         <Link
-          href="/shop-collection-list"
+          href="/shop-default"
           className={`item-link d-inline-flex align-items-center gap-1.5 ${
             pathname === "/shop-collection-list" || pathname.includes("category=")
               ? "menuActive"
@@ -146,10 +146,10 @@ export default function Nav2() {
 
             <div className="collections-menu-footer">
               <Link
-                href="/shop-collection-list"
+                href="/shop-default"
                 className="view-all-collections-btn"
               >
-                <span>Voir toutes les collections</span>
+                <span>Explorer toute la collection</span>
                 <span className="arrow">→</span>
               </Link>
             </div>

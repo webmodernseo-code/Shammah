@@ -22,24 +22,6 @@ export default function Collections() {
               T-shirts, sweats à capuche, casquettes et accessoires : des pièces uniques conçues pour témoigner avec force et sobriété.
             </p>
           </div>
-          <div className="d-flex align-items-center gap-2">
-            <div
-              className="swiper-button-prev nav-swiper nav-prev-cls"
-              aria-label="Collection précédente"
-            >
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10 13L5 8L10 3" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <div
-              className="swiper-button-next nav-swiper nav-next-cls"
-              aria-label="Collection suivante"
-            >
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 13L11 8L6 3" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-          </div>
         </div>
       </div>
 
