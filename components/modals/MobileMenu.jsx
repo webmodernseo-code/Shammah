@@ -67,23 +67,23 @@ export default function MobileMenu() {
                 <div id="dropdown-mb-collections" className="collapse">
                   <ul className="sub-nav-menu" style={{ paddingLeft: "16px", paddingTop: "8px" }}>
                     <li style={{ marginBottom: "8px" }}>
-                      <Link href="/shop-default?category=homme" className="sub-nav-link" data-bs-dismiss="offcanvas">
-                        Homme (T-shirts & Sweats)
+                      <Link href="/shop-default?category=t-shirts" className="sub-nav-link" data-bs-dismiss="offcanvas">
+                        T-shirts
                       </Link>
                     </li>
                     <li style={{ marginBottom: "8px" }}>
-                      <Link href="/shop-default?category=femme" className="sub-nav-link" data-bs-dismiss="offcanvas">
-                        Femme (Tops & Confection)
+                      <Link href="/shop-default?category=sweats-a-capuche" className="sub-nav-link" data-bs-dismiss="offcanvas">
+                        Sweats à capuche (Hoodies)
                       </Link>
                     </li>
                     <li style={{ marginBottom: "8px" }}>
-                      <Link href="/shop-default?category=enfant" className="sub-nav-link" data-bs-dismiss="offcanvas">
-                        Enfant (Vêtements & Bodys)
+                      <Link href="/shop-default?category=sweats" className="sub-nav-link" data-bs-dismiss="offcanvas">
+                        Sweats (Cols ronds)
                       </Link>
                     </li>
                     <li style={{ marginBottom: "8px" }}>
-                      <Link href="/shop-default?category=accessoires" className="sub-nav-link" data-bs-dismiss="offcanvas">
-                        Accessoires (Mugs, Sacs & Objets de Foi)
+                      <Link href="/shop-default?category=bonnets-casquettes" className="sub-nav-link" data-bs-dismiss="offcanvas">
+                        Bonnets &amp; Casquettes
                       </Link>
                     </li>
                     <li style={{ marginTop: "10px" }}>

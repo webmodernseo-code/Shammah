@@ -59,13 +59,13 @@ export default function Nav2() {
           <div className="collections-menu-wrapper">
             <div className="collections-menu-list">
               <Link
-                href="/shop-default?category=homme"
+                href="/shop-default?category=t-shirts"
                 className="collection-menu-item"
               >
                 <div className="collection-item-bullet" />
                 <div className="collection-item-content">
-                  <span className="collection-item-title">Homme</span>
-                  <span className="collection-item-desc">T-shirts, Sweats & Hoodies</span>
+                  <span className="collection-item-title">T-shirts</span>
+                  <span className="collection-item-desc">Coupes oversize & classiques en coton bio</span>
                 </div>
                 <svg className="collection-item-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -73,13 +73,13 @@ export default function Nav2() {
               </Link>
 
               <Link
-                href="/shop-default?category=femme"
+                href="/shop-default?category=sweats-a-capuche"
                 className="collection-menu-item"
               >
                 <div className="collection-item-bullet" />
                 <div className="collection-item-content">
-                  <span className="collection-item-title">Femme</span>
-                  <span className="collection-item-desc">Tops, Sweats & Créations</span>
+                  <span className="collection-item-title">Sweats à capuche</span>
+                  <span className="collection-item-desc">Hoodies épais au tombé structuré</span>
                 </div>
                 <svg className="collection-item-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -87,13 +87,13 @@ export default function Nav2() {
               </Link>
 
               <Link
-                href="/shop-default?category=enfant"
+                href="/shop-default?category=sweats"
                 className="collection-menu-item"
               >
                 <div className="collection-item-bullet" />
                 <div className="collection-item-content">
-                  <span className="collection-item-title">Enfant</span>
-                  <span className="collection-item-desc">Vêtements & Bodys d'Espérance</span>
+                  <span className="collection-item-title">Sweats</span>
+                  <span className="collection-item-desc">Crewnecks & cols ronds minimalistes</span>
                 </div>
                 <svg className="collection-item-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -101,13 +101,13 @@ export default function Nav2() {
               </Link>
 
               <Link
-                href="/shop-default?category=accessoires"
+                href="/shop-default?category=bonnets-casquettes"
                 className="collection-menu-item"
               >
                 <div className="collection-item-bullet" />
                 <div className="collection-item-content">
-                  <span className="collection-item-title">Accessoires</span>
-                  <span className="collection-item-desc">Mugs, Tote Bags & Objets de Foi</span>
+                  <span className="collection-item-title">Bonnets & Casquettes</span>
+                  <span className="collection-item-desc">Broderies fines & accessoires de tête</span>
                 </div>
                 <svg className="collection-item-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14M12 5l7 7-7 7"/>

@@ -3938,7 +3938,7 @@ export const products28 = [
     ],
     filterBrands: ["Shammah"],
     filterColor: ["White", "Black"],
-    categories: ["femme", "homme"],
+    categories: ["t-shirts", "femme", "homme"],
     inStock: true,
   },
   {
@@ -3957,7 +3957,7 @@ export const products28 = [
     ],
     filterBrands: ["Shammah"],
     filterColor: ["Light Orange", "Grey"],
-    categories: ["homme", "femme"],
+    categories: ["t-shirts", "homme", "femme"],
     inStock: true,
   },
   {
@@ -3975,7 +3975,7 @@ export const products28 = [
     ],
     filterBrands: ["Shammah"],
     filterColor: ["Dark Green", "White"],
-    categories: ["homme", "femme"],
+    categories: ["t-shirts", "homme", "femme"],
     inStock: true,
   },
   {
@@ -3993,7 +3993,7 @@ export const products28 = [
     ],
     filterBrands: ["Shammah"],
     filterColor: ["White"],
-    categories: ["homme", "femme"],
+    categories: ["t-shirts", "homme", "femme"],
     inStock: true,
   },
 ];
@@ -4016,7 +4016,7 @@ export const products29 = [
     ],
     filterBrands: ["Shammah"],
     filterColor: ["White"],
-    categories: ["homme", "femme"],
+    categories: ["t-shirts", "homme", "femme"],
     inStock: true,
   },
   {
@@ -4035,7 +4035,7 @@ export const products29 = [
     ],
     filterBrands: ["Shammah"],
     filterColor: ["Grey"],
-    categories: ["homme", "femme"],
+    categories: ["sweats-a-capuche", "hoodies", "homme", "femme"],
     inStock: true,
   },
   {
@@ -4055,7 +4055,7 @@ export const products29 = [
     ],
     filterBrands: ["Shammah"],
     filterColor: ["Yellow", "White"],
-    categories: ["homme", "femme"],
+    categories: ["sweats", "homme", "femme"],
     inStock: true,
   },
   {
@@ -4073,7 +4073,7 @@ export const products29 = [
     ],
     filterBrands: ["Shammah"],
     filterColor: ["Light Orange"],
-    categories: ["femme", "homme"],
+    categories: ["t-shirts", "femme", "homme"],
     inStock: true,
   },
   {
@@ -4092,7 +4092,7 @@ export const products29 = [
     ],
     filterBrands: ["Shammah"],
     filterColor: ["White"],
-    categories: ["homme", "femme"],
+    categories: ["t-shirts", "homme", "femme"],
     inStock: true,
   },
 ];
@@ -4110,7 +4110,7 @@ export const products30 = [
     filterBrands: ["Shammah"],
     filterColor: ["White"],
     colors: [{ label: "Blanc", value: "bg-white", img: "/images/cls-categories/fashion/kid.jpg" }],
-    categories: ["enfant"],
+    categories: ["t-shirts", "enfant"],
     inStock: true,
   },
   {
@@ -4125,7 +4125,7 @@ export const products30 = [
     filterBrands: ["Shammah"],
     filterColor: ["Grey"],
     colors: [{ label: "Gris", value: "bg-grey-4", img: "/images/cls-categories/fashion/kid.jpg" }],
-    categories: ["enfant"],
+    categories: ["sweats-a-capuche", "hoodies", "enfant"],
     inStock: true,
   },
   {
@@ -4170,7 +4170,7 @@ export const products30 = [
     filterBrands: ["Shammah"],
     filterColor: ["Black"],
     colors: [{ label: "Noir", value: "bg-dark", img: "/images/cls-categories/fashion/accessories.jpg" }],
-    categories: ["accessoires", "gadgets", "homme", "femme"],
+    categories: ["bonnets-casquettes", "accessoires", "gadgets", "homme", "femme"],
     inStock: true,
   },
 ];

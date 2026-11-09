@@ -19,7 +19,7 @@ export default function Collections() {
               Nos Collections
             </h2>
             <p className="text-secondary text-sm mb-0">
-              Homme, Femme, Enfant et Accessoires : des pièces uniques conçues pour témoigner avec force et dignité.
+              T-shirts, sweats à capuche, crewnecks, bonnets et casquettes : des pièces uniques conçues pour témoigner avec force et sobriété.
             </p>
           </div>
           <div className="d-flex align-items-center gap-2">
@@ -74,7 +74,7 @@ export default function Collections() {
           modules={[Pagination, Navigation, Autoplay]}
         >
           {categories11.map((item, index) => {
-            const targetUrl = `/shop-default?category=${item.slug || "homme"}`;
+            const targetUrl = `/shop-default?category=${item.slug || "t-shirts"}`;
             return (
               <SwiperSlide className="swiper-slide" key={index}>
                 <div className="wg-cls rounded-0 style-abs type-3 hover-img">

@@ -25,27 +25,27 @@ export default function FilterModal({ allProps }) {
             <ul className="list-categories current-scrollbar">
               <li className="cate-item">
                 <Link className="text-sm link" href={`/shop-default`}>
-                  <span>Men’s top</span> <span className="count">(20)</span>
+                  <span>Tous les produits</span>
                 </Link>
               </li>
               <li className="cate-item">
-                <Link className="text-sm link" href={`/shop-default`}>
-                  <span>Men</span> <span className="count">(20)</span>
+                <Link className="text-sm link" href={`/shop-default?category=t-shirts`}>
+                  <span>T-shirts</span>
                 </Link>
               </li>
               <li className="cate-item">
-                <Link className="text-sm link" href={`/shop-default`}>
-                  <span>Women</span> <span className="count">(20)</span>
+                <Link className="text-sm link" href={`/shop-default?category=sweats-a-capuche`}>
+                  <span>Sweats à capuche</span>
                 </Link>
               </li>
               <li className="cate-item">
-                <Link className="text-sm link" href={`/shop-default`}>
-                  <span>Kid</span> <span className="count">(20)</span>
+                <Link className="text-sm link" href={`/shop-default?category=sweats`}>
+                  <span>Sweats</span>
                 </Link>
               </li>
               <li className="cate-item">
-                <Link className="text-sm link" href={`/shop-default`}>
-                  <span>T-shirt</span> <span className="count">(20)</span>
+                <Link className="text-sm link" href={`/shop-default?category=bonnets-casquettes`}>
+                  <span>Bonnets &amp; Casquettes</span>
                 </Link>
               </li>
             </ul>

@@ -5,6 +5,38 @@ import React, { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
 const CATEGORY_META = {
+  "t-shirts": {
+    eyebrow: "Essentiels Shammah",
+    title: "Collection T-shirts",
+    crumb: "T-shirts",
+    desc: "T-shirts streetwear chrétiens en coton biologique épais : coupes classiques et oversize pensées pour affirmer votre foi avec sobriété.",
+    heroImage: "/images/collections/hero-collection-homme.jpg",
+    heroAlt: "Collection T-shirts Shammah — Modèle Jésus porté en studio",
+  },
+  "sweats-a-capuche": {
+    eyebrow: "Molleton Lourd",
+    title: "Sweats à capuche",
+    crumb: "Sweats à capuche",
+    desc: "Hoodies haut de gamme au tombé structuré, confectionnés dans un coton molletonné dense et durable.",
+  },
+  hoodies: {
+    eyebrow: "Molleton Lourd",
+    title: "Sweats à capuche",
+    crumb: "Sweats à capuche",
+    desc: "Hoodies haut de gamme au tombé structuré, confectionnés dans un coton molletonné dense et durable.",
+  },
+  sweats: {
+    eyebrow: "Vestiaire Minimaliste",
+    title: "Sweats & Crewnecks",
+    crumb: "Sweats",
+    desc: "Sweatshirts à col rond au style épuré et intemporel, alliant confort absolu et témoignage discret.",
+  },
+  "bonnets-casquettes": {
+    eyebrow: "Broderies Signature",
+    title: "Bonnets & Casquettes",
+    crumb: "Bonnets & Casquettes",
+    desc: "Casquettes structurées et bonnets finement brodés pour parfaire votre tenue au quotidien.",
+  },
   homme: {
     eyebrow: "Vestiaire Masculin",
     title: "Collection Homme",
