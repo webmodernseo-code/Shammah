@@ -57,6 +57,7 @@ body, body.font-option-1 {
         width: 100% !important;
         height: 100% !important;
         object-fit: cover !important;
+        object-position: center 10% !important;
       }
     }
   }
@@ -1156,6 +1157,143 @@ del,
     height: 9px !important;
   }
 }
+
+/* ========================================================
+   💎 HERO ÉDITORIAL COLLECTION (ex: Collection Homme)
+   - Photo studio pleine largeur (fond gris clair studio #dbdbdf)
+   - Typographie sombre nette alignée à gauche avec fil d'Ariane
+   ======================================================== */
+.shammah-collection-hero {
+  position: relative;
+  width: 100%;
+  min-height: 440px;
+  height: 52vh;
+  max-height: 560px;
+  background-color: #dbdbdf;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+  @media (max-width: 991px) {
+    min-height: 380px;
+    height: auto;
+    max-height: none;
+    padding: 56px 0;
+  }
+
+  @media (max-width: 575px) {
+    min-height: 340px;
+    padding: 44px 0;
+  }
+}
+
+.shammah-collection-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  .shammah-collection-hero-img {
+    object-fit: cover;
+    object-position: 75% 12%;
+
+    @media (min-width: 1400px) {
+      object-position: center 12%;
+    }
+
+    @media (max-width: 991px) {
+      object-position: 80% 12%;
+    }
+  }
+
+  .shammah-collection-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(219, 219, 223, 0.72) 0%,
+      rgba(219, 219, 223, 0.35) 45%,
+      rgba(219, 219, 223, 0) 70%
+    );
+
+    @media (max-width: 767px) {
+      background: linear-gradient(
+        90deg,
+        rgba(219, 219, 223, 0.92) 0%,
+        rgba(219, 219, 223, 0.78) 60%,
+        rgba(219, 219, 223, 0.35) 100%
+      );
+    }
+  }
+}
+
+.shammah-collection-hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.shammah-collection-hero-content {
+  max-width: 540px;
+
+  .shammah-collection-breadcrumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    margin-bottom: 18px;
+
+    .crumb-link {
+      color: #52525b !important;
+      text-decoration: none !important;
+      transition: color 0.15s ease;
+
+      &:hover {
+        color: #09090b !important;
+      }
+    }
+
+    .crumb-sep {
+      color: #a1a1aa;
+      font-size: 0.75rem;
+    }
+
+    .crumb-current {
+      color: #09090b;
+      font-weight: 600;
+    }
+  }
+
+  .shammah-collection-eyebrow {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #52525b;
+    margin-bottom: 10px;
+  }
+
+  .shammah-collection-title {
+    font-size: clamp(2.1rem, 3.8vw, 3.25rem);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    color: #09090b !important;
+    margin: 0 0 14px 0;
+  }
+
+  .shammah-collection-desc {
+    font-size: clamp(0.92rem, 1.05vw, 1.02rem);
+    line-height: 1.65;
+    color: #3f3f46;
+    font-weight: 400;
+    margin: 0;
+    max-width: 460px;
+  }
+}
+
 
 
 
