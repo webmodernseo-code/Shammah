@@ -119,6 +119,16 @@ export default function Newsletter() {
             position: "relative",
           }}
         >
+          <div className="shammah-welcome-visual" aria-hidden="true">
+            <Image
+              src="/images/banner/jesus-createur.jpg"
+              alt=""
+              width={1024}
+              height={572}
+              className="shammah-welcome-img"
+              priority
+            />
+          </div>
           <button
             type="button"
             className="icon icon-close btn-hide-popup shammah-welcome-close"
@@ -127,7 +137,7 @@ export default function Newsletter() {
             aria-label="Fermer"
             style={{
               position: "absolute",
-              top: "10px",
+              top: "8px",
               right: "10px",
               width: "26px",
               height: "26px",

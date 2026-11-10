@@ -14,6 +14,7 @@ import QuestionModal from "@/components/modals/QuestionModal";
 import ShareModal from "@/components/modals/ShareModal";
 import DbSidebar from "@/components/modals/DbSidebar";
 import ScrollTop from "@/components/common/ScrollTop";
+import CookieConsent from "@/components/common/CookieConsent";
 
 export default function ClientShell({ children }) {
   const pathname = usePathname();
@@ -44,6 +45,7 @@ export default function ClientShell({ children }) {
       <ShareModal />
       <DbSidebar />
       <ScrollTop />
+      <CookieConsent />
     </Context>
   );
 }
