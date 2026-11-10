@@ -94,7 +94,7 @@ export default function Nav2() {
               >
                 <div className="collection-item-thumb">
                   <Image
-                    src="/images/cls-categories/pod/bonnets-casquettes.jpg"
+                    src="/images/cls-categories/pod/casquette-jesus.jpg"
                     alt="Casquettes"
                     width={44}
                     height={44}

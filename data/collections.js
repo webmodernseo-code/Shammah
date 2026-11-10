@@ -473,7 +473,7 @@ export const categories11 = [
     itemCount: "Hoodies & sweats en molleton lourd",
   },
   {
-    imgSrc: "/images/cls-categories/pod/bonnets-casquettes.jpg",
+    imgSrc: "/images/cls-categories/pod/casquette-jesus.jpg",
     width: 696,
     height: 696,
     label: "Casquettes",
@@ -635,7 +635,7 @@ export const categories14 = [
   {
     id: 3,
     name: "Casquettes",
-    image: "/images/cls-categories/pod/bonnets-casquettes.jpg",
+    image: "/images/cls-categories/pod/casquette-jesus.jpg",
     items: "Casquettes brodées signature",
     slug: "casquettes",
   },

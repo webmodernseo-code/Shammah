@@ -35,7 +35,7 @@ const QUICK_CATEGORIES = [
     slug: "casquettes",
     title: "Casquettes",
     desc: "Broderies fines",
-    thumb: "/images/cls-categories/pod/bonnets-casquettes.jpg",
+    thumb: "/images/cls-categories/pod/casquette-jesus.jpg",
   },
   {
     slug: "accessoires",

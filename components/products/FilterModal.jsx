@@ -78,7 +78,7 @@ export default function FilterModal({ allProps }) {
                   }`}
                 >
                   <span className="shammah-sidebar-cat-thumb">
-                    <Image src="/images/cls-categories/pod/bonnets-casquettes.jpg" alt="Casquettes" width={36} height={36} />
+                    <Image src="/images/cls-categories/pod/casquette-jesus.jpg" alt="Casquettes" width={36} height={36} />
                   </span>
                   <span>Casquettes</span>
                 </button>

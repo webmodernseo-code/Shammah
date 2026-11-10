@@ -26,7 +26,7 @@ export const SHAMMAH_CATEGORY_FILTERS = [
   {
     slug: "casquettes",
     label: "Casquettes",
-    thumb: "/images/cls-categories/pod/bonnets-casquettes.jpg",
+    thumb: "/images/cls-categories/pod/casquette-jesus.jpg",
   },
   {
     slug: "accessoires",

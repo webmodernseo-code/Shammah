@@ -30,14 +30,20 @@ export default function About() {
           </div>
         </div>
 
-        <div className="image radius-16 overflow-hidden mb-5" style={{ borderRadius: "20px" }}>
+        <div
+          className="image radius-16 overflow-hidden mb-5 mx-auto"
+          style={{ borderRadius: "20px", maxWidth: "1024px" }}
+        >
           <Image
             src="/images/section/about-shammah.jpg"
             alt="L'Atelier Shammah - Confection textile chrétienne écoresponsable"
-            className="w-100 object-fit-cover"
-            width={1440}
-            height={960}
-            style={{ maxHeight: "680px", objectPosition: "center" }}
+            className="w-100 d-block"
+            width={1024}
+            height={682}
+            sizes="(max-width: 1056px) calc(100vw - 32px), 1024px"
+            style={{ height: "auto" }}
+            quality={100}
+            unoptimized
             priority
           />
         </div>
