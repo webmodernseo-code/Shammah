@@ -2,7 +2,6 @@ import React from "react";
 import {
   RotateCcw,
   Users,
-  HelpCircle,
   Store,
   KeyRound,
   Mail,
@@ -17,7 +16,6 @@ import {
   SaaSCouponIcon,
   SaaSProductsIcon,
   SaaSStocksIcon,
-  SaaSReviewIcon,
 } from "@/components/common/saas-icons";
 
 export type NavItem = {
@@ -82,11 +80,6 @@ export const navItems: NavItem[] = [
         href: "/products/stocks",
         icon: <SaaSStocksIcon className="size-4.5" />,
       },
-      {
-        label: "Avis & témoignages",
-        href: "/products/review",
-        icon: <SaaSReviewIcon className="size-4.5" />,
-      },
     ],
   },
   {
@@ -97,11 +90,6 @@ export const navItems: NavItem[] = [
         label: "Clients & utilisateurs",
         href: "/admin-users",
         icon: <Users className="size-4.5" strokeWidth={1.8} />,
-      },
-      {
-        label: "FAQ & assistance",
-        href: "/faq",
-        icon: <HelpCircle className="size-4.5" strokeWidth={1.8} />,
       },
     ],
   },
