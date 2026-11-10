@@ -79,7 +79,7 @@ const organizationSchema = {
   name: "Shammah",
   legalName: "Shammah",
   url: SITE_URL,
-  logo: `${SITE_URL}/images/logo/shammah-logo-black.png`,
+  logo: `${SITE_URL}/images/logo/logo.svg`,
   image: `${SITE_URL}/images/slider/pod/slider-pod.jpg`,
   email: "contact@shammah.eu",
   description:

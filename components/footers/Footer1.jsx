@@ -52,12 +52,11 @@ export default function Footer1({
                 <Image
                   className="logo"
                   alt="logo"
-                  src="/images/logo/shammah-logo-black.png"
-                  width={2134}
-                  height={737}
+                  src="/images/logo/logo.svg"
+                  width={150}
+                  height={38}
                   sizes="200px"
                   style={{ width: "200px", height: "auto" }}
-                  unoptimized
                 />
               </Link>
             </div>
