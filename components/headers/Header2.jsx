@@ -33,9 +33,12 @@ export default function Header2({
               <Image
                 alt="Shammah"
                 className="logo"
-                src="/images/logo/logo.svg"
-                width={150}
-                height={36}
+                src="/images/logo/shammah-logo-black.png"
+                width={2134}
+                height={737}
+                sizes="(max-width: 1199px) 160px, 190px"
+                style={{ width: "190px", height: "auto" }}
+                unoptimized
                 priority
               />
             </Link>
